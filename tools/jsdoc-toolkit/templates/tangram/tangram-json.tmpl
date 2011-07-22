@@ -1,0 +1,43 @@
+{!
+function parse(str){
+	return str.replace(/[\r\n\']/g, function(m){
+		return m == '\r' || m == '\n' ? '' : '\\' + m;
+	});
+}
+
+function getJson(item){
+    var array = [], options = [], methods = [], returns = [];
+    item.name && array.push("name: '" + item.name + "'");
+    item.type && array.push("type: '" + item.type + "'");
+    item.desc && array.push("desc: '" + parse(item.desc) + "'");
+    if(item.params && item.params.length > 0){
+        item.params.forEach(function(it){
+            options.push(getJson(it));
+        });
+        array.push('options: [' + options.join(', ') + ']');
+    }
+    if(item.methods && item.methods.length > 0){
+        item.methods.forEach(function(it){
+            methods.push(getJson(it));
+        });
+        array.push('methods: [' + methods.join(', ') + ']');
+    }
+    if(item.returns && item.returns.length > 0){
+    	item.returns.forEach(function(it){
+    		returns.push(getJson(it));
+    	});
+    	array.push('returns: [' + returns.join(', ') + ']');
+    }
+    return '{' + array.join(', ') + '}';
+}
+var nameSpaceArray = [],
+	docMapArray = [];
+data.list.forEach(function(item){
+	nameSpaceArray.push( '\'' + item.alias + '\'');
+	item.desc && docMapArray.push('\'' + item.alias + '\': ' +getJson(item));
+});
+!}
+var {+ data.ident +} = {
+	nameSpace: [{+ nameSpaceArray.join(', ') +}],
+	docMap: {{+ docMapArray.join(', ') +}}
+}
