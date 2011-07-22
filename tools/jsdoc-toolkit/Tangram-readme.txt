@@ -1,0 +1,2 @@
+运行命令:#java -jar jsrun.jar app/run.js -a -t=templates/jsdoc -d=../../www/js mycode/tangram-base.js
+说明：-d=是输出目录，mycdoe/tangram-base.js是需要被解析的js文件，程序会根据文件名中带有mobile或是base或是component等字样来判别该次生成是base或是component
