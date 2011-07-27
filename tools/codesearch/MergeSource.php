@@ -3,7 +3,7 @@
 //define("MY_DIR", realpath("../src/"));
 //define("REC_DIR", realpath("../rec"));
 
-define("MY_DIR", realpath("tangram-code/"));
+define("MY_DIR", realpath("../../source/src"));
 define("REC_DIR", realpath("../rec"));
 
 class MergeSource {
