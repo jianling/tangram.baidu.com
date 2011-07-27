@@ -1,0 +1,1 @@
+java -jar jsdoc-toolkit/jsrun.jar jsdoc-toolkit/app/run.js -a -t=templates/tangram -d=../../www/js ../tmp/tangram-full.js
