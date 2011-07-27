@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -37,16 +37,3 @@
 		</div>
 	</div>
 	<div id="main">
-		<div class="main-header"><span>Tangram Library</span><span class="shadow">Tangram Library</span></div>
-		<div class="main-body">
-			这个可是首页
-		</div>
-		<div class="main-footer">Copyright &copy; 2011  Baidu</div>
-	</div>
-	<div id="footer"></div>
-</div>
-
-<script type="text/javascript" src="js/flyscript.js"></script>
-<script type="text/javascript" src="js/main.js"></script>
-</body>
-</html>

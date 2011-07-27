@@ -7,10 +7,10 @@
 
 void function(){
 
+	// 布署顶部导航栏
 	FlyScript.load("js/lichee", function(Lichee){
 		var E = Lichee.Element, Q = Lichee.queryElement;
 
-		// 布署顶部导航菜单
 		var template = new Lichee.Template(
 			"<div class='item' id='@{id}'></div>");
 		var navHighlights = E(Q("#nav-cont .nav-highlights")[0]);
@@ -41,6 +41,11 @@ void function(){
 		texts.forEach(function(element, index){
 			var sp = slippages[index];
 			element.addEvents({
+				click: function(){
+					var href = E(this).attr("href");
+					if(href)
+						location.href = href;
+				},
 				mouseover: function(){
 					sp.change(1);
 					element.addClass("hl");
@@ -80,6 +85,7 @@ void function(){
 		});
 	});
 
+	// 布署顶部导航的下拉菜单
 	setTimeout(function(){
 		FlyScript.load("js/simplemenu", "js/lichee", function(simplemenu, Lichee){
 			var E = Lichee.Element, Q = Lichee.queryElement;
