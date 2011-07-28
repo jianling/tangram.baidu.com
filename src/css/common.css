@@ -291,6 +291,11 @@ html{
 	height: 35px;
 }
 
+div.article a.variable{
+	text-decoration: none;
+	color: #333;
+}
+
 /* downloadpage */
 div.downloadpage h5{
 	color: #3c70a5;
@@ -330,4 +335,24 @@ div.downloadpage .cdn-input{
 	font-family: Arial;
 	border: 1px solid #ccc;
 	color: #666;
+}
+
+div.downloadpage .an{
+	position: relative;
+	border: 1px solid #e0e0e0;
+	font-size: 12px;
+	width: 570px;
+	padding: 8px;
+	background-color: #fffcf5;
+	display: none;
+}
+
+div.downloadpage .an a.arr{
+	position: absolute;
+	left: 50px;
+	top: -6px;
+	width: 9px;
+	height: 6px;
+	overflow: hidden;
+	background-image: url(../images/tip-arr.gif);
 }

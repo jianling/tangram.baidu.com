@@ -151,4 +151,14 @@ void function(){
 			moreMenu.render();
 		});
 	}, 0);
+
+	// 变量替换处理
+	FlyScript.load("js/variable");
+
+	// 加载页面逻辑
+	if(pageConfig.script){
+		FlyScript.load(pageConfig.script, function(page){
+			page.start();
+		});
+	}
 }();

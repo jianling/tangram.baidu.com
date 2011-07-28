@@ -1,0 +1,12 @@
+update_server.sh用来从github上取得最新的分散源文件
+脚本中，
+rawpath和basepath两个变量用来修改存放路径
+
+update_ant.sh用来把分散文件生成tangram-base.js和tangram-component.js两个合成文件，
+这两个文件只要提供给js-doc使用
+
+update_ant.sh使用ant打包，ant需要export.xml和export.jar两个文件
+打开export.xml
+其中srcPath用来配置tangram-base的源文件目录
+其中uiSrcPath用来配置tangram-component的源文件目录
+outputPath用来配置文件的生成目录

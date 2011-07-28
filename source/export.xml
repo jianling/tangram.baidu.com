@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="project" default="release" basedir=".">
+    <taskdef name='export' classname="com.baidu.tangram.BaseExportTask" classpath="export.jar" />
+	<target name="release">
+        <export srcPath="github/nightly/Tangram-base/src" outputPath="src" uiSrcPath="github/nightly/Tangram-component/src"/>
+	</target>
+</project>

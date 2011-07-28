@@ -6,7 +6,7 @@
  * contact: ucren.com
  * change logs:
  *
- * 2011-07-27 新加 ul li 图片样式
+ * 2011-07-27 新加 ul li 图片样式，调整 a:hover 基本样式
  * 2011-06-24 新增 em,strong 的定义
  * 2011-06-21 又调整 pre>code 样式
  * 2011-06-20 调整 pre>code 样式，并强制换行
@@ -71,6 +71,7 @@ div.article img{ margin: 5px; padding: 0; border: 0; }
 
 /* 链接 */
 div.article a{ color: #00f; text-decoration: underline; }
+div.article a:hover{ color: #900; }
 
 /* 缩进样式 m1, m2, m3, m4 */
 div.article .m1{ margin-left: 2em; }
