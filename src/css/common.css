@@ -296,6 +296,26 @@ div.article a.variable{
 	color: #333;
 }
 
+/* indexpage */
+div.indexpage div.article ul.ok li{
+	background-image: url(../images/ok.gif);
+	line-height: 30px;
+}
+
+div.indexpage .content{
+	float: left;
+	width: 650px;
+}
+
+div.indexpage .content p.desc{
+	color: #333;
+}
+
+div.indexpage .sidebar{
+	float: left;
+	width: 200px;
+}
+
 /* downloadpage */
 div.downloadpage h5{
 	color: #3c70a5;
