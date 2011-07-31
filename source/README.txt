@@ -1,12 +1,8 @@
-update_server.shÓÃÀ´´ÓgithubÉÏÈ¡µÃ×îĞÂµÄ·ÖÉ¢Ô´ÎÄ¼ş
-½Å±¾ÖĞ£¬
-rawpathºÍbasepathÁ½¸ö±äÁ¿ÓÃÀ´ĞŞ¸Ä´æ·ÅÂ·¾¶
-
-update_ant.shÓÃÀ´°Ñ·ÖÉ¢ÎÄ¼şÉú³Étangram-base.jsºÍtangram-component.jsÁ½¸öºÏ³ÉÎÄ¼ş£¬
-ÕâÁ½¸öÎÄ¼şÖ»ÒªÌá¹©¸øjs-docÊ¹ÓÃ
-
-update_ant.shÊ¹ÓÃant´ò°ü£¬antĞèÒªexport.xmlºÍexport.jarÁ½¸öÎÄ¼ş
-´ò¿ªexport.xml
-ÆäÖĞsrcPathÓÃÀ´ÅäÖÃtangram-baseµÄÔ´ÎÄ¼şÄ¿Â¼
-ÆäÖĞuiSrcPathÓÃÀ´ÅäÖÃtangram-componentµÄÔ´ÎÄ¼şÄ¿Â¼
-outputPathÓÃÀ´ÅäÖÃÎÄ¼şµÄÉú³ÉÄ¿Â¼
+github_update.shè¯´æ˜
+1.å½“å­˜åœ¨ç¬¬ä¸€å‚æ•°ä¸ºnogithubæ—¶ï¼Œè¡¨ç¤ºä¸éœ€è¦ä»githubä¸Šæ›´æ–°ï¼Œ
+2.å½“ç”¨githubæ›´æ–°æ—¶ä¼šåœ¨å½“å‰ç›®å½•æ–°å»ºgithubç›®å½•ï¼Œå¹¶åœ¨è¯¥githubç›®å½•ä¸‹ç”Ÿæˆä¸‰ä¸ªæ–‡ä»¶å¤¹åˆ†åˆ«æ˜¯master, dev-0.2, mobile
+3.è¯¥è„šæœ¬çš„ä¸»è¦åŠŸèƒ½æ˜¯å®Œæˆä»¥ä¸‹äº›äº‹æƒ…ï¼š
+	<a ä»githubä¸Šæ‹¿ç¢ç‰‡æ–‡ä»¶
+	<b æ‰§è¡ŒQAçš„releaseç”Ÿæˆå¤§æ–‡ä»¶
+	<c æ‹·èƒŒç¢ç‰‡æ–‡ä»¶åˆ°www/js/fragmentç›®å½•ä¸‹ç»™codesearchä½¿ç”¨
+	<d ç”Ÿæˆç‰ˆæœ¬å·å’Œmd5å’Œæ–‡ä»¶å¤§å°çš„æ–‡ä»¶md5.propertiesæ”¾åœ¨å’ŒgithubåŒçº§çš„ç›®å½•ä¸‹
