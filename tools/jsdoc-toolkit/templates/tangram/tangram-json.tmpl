@@ -1,13 +1,14 @@
 {!
 function parse(str){
-	return str.replace(/[\r\n\']/g, function(m){
+	return str.replace(/[\r\n\'\"]/g, function(m){
+		//return m == '\r' || m == '\n' ? '' : '\\' + m;
 		return m == '\r' || m == '\n' ? '' : '\\' + m;
 	});
 }
 
 function getJson(item){
     var array = [], options = [], methods = [], returns = [];
-    item.name && array.push("name: '" + item.name + "'");
+    item.name && array.push("name: '" + parse(item.name) + "'");
     item.type && array.push("type: '" + item.type + "'");
     item.desc && array.push("desc: '" + parse(item.desc) + "'");
     if(item.params && item.params.length > 0){

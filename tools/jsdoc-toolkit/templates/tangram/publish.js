@@ -1,18 +1,16 @@
 /** Called automatically by JsDoc Toolkit. */
 function publish(symbolSet) {
-    var conf = {
-        ext: '.js',
-        outDir: JSDOC.opt.d || SYS.pwd + '../out/jsdoc/',
-        templatesDir: SYS.pwd + '../templates/tangram/'
-    },
-    list = symbolSet.toArray().filter(function(item){
-        return /^(?:T|baidu)\.[^#:_\-]+$/.test(item.alias);
-    }).sort(makeSortby("alias")),
-    template = new JSDOC.JsPlate(conf.templatesDir + 'tangram-json.tmpl'),
-    fileName = getFileName();
-    
-    IO.mkPath(conf.outDir.split('/'));
-    IO.saveFile(conf.outDir, fileName + conf.ext, template.process({ident: fileName, list: list}));
+    IO.include('../templates/tangram/JsDocFile.js');
+    var file = new JsDocFile();
+    if(String(JSDOC.opt.srcFiles).lastIndexOf('empty.js') > -1){
+        file.createTangramBaseFile();
+        file.createTangramUIFile();
+//        file.createTangramMobileFile();
+    }else{
+//        file.createDocJsonFile(symbolSet);
+        
+    }
+    file.createPageJsonFile();
 }
 /** Make a symbol sorter by some attribute. */
 function makeSortby(attribute) {
@@ -29,7 +27,7 @@ function makeSortby(attribute) {
 /** */
 function getFileName(){
     var fileName = 'tangram#{mobile}#{base}#{component}', json = {};
-    JSDOC.opt.srcFiles.toString().replace(/mobile|base|component/g, function(matcher){
+    String(JSDOC.opt.srcFiles).replace(/mobile|base|component/g, function(matcher){
         matcher = matcher.toLowerCase();
         json[matcher] = 1;
     });
