@@ -70,7 +70,7 @@ JsDocFile.prototype = {
             fileName = this.getFileName(),
             list = symbolSet.toArray().filter(function(item){
 		        return /^(?:T|baidu)\.[^#:_\-]+$/.test(item.alias);
-		    }).sort(makeSortby("alias"));
+		    }).sort(this.makeSortby("alias"));
         IO.mkPath(conf.tangram_docjson_out.split('/'));
         IO.saveFile(conf.tangram_docjson_out, fileName + '.js', template.process({ident: fileName, list: list}));
     },
@@ -106,8 +106,6 @@ JsDocFile.prototype = {
         IO.saveFile(conf.tangram_pagejson_out, 'conf.js', template.process(json));
     },
     
-    
-    
     getFileName: function(){
         var fileName = 'tangram#{mobile}#{base}#{component}', json = {};
 	    String(JSDOC.opt.srcFiles).replace(/mobile|base|component/g, function(matcher){
@@ -117,5 +115,18 @@ JsDocFile.prototype = {
 	    return fileName.replace(/#\{([^#]+)\}/g, function(m0, m1){
 	        return json[m1] ? '_' + m1 : '';
 	    });
-    }
+    },
+
+	/** Make a symbol sorter by some attribute. */
+	makeSortby: function(attribute) {
+		return function(a, b) {
+			if (a[attribute] != undefined && b[attribute] != undefined) {
+				a = a[attribute].toLowerCase();
+				b = b[attribute].toLowerCase();
+				if (a < b) return -1;
+				if (a > b) return 1;
+				return 0;
+			}
+        }
+	}
 };

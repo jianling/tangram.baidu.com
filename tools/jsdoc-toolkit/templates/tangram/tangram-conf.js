@@ -15,7 +15,7 @@ var conf = {
     tangram_conf_out: '',
     tangram_conf_fileName: '',
     
-    tangram_docjson_out: SYS.userDir + '/out',
+    tangram_docjson_out: JSDOC.opt.d || SYS.userDir + '/out',
     tangram_docjson_template: SYS.userDir + '/templates/tangram/tangram-json.tmpl',
     
     tangram_pagejson_in: SYS.userDir + '/../../source/md5.properties',
