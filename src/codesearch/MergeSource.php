@@ -3,7 +3,7 @@
 //define("MY_DIR", realpath("../src/"));
 //define("REC_DIR", realpath("../rec"));
 
-define("MY_DIR", realpath("../../source/src"));
+define("MY_DIR", realpath("../js/fragment"));
 define("REC_DIR", realpath("../rec"));
 
 class MergeSource {
@@ -72,7 +72,7 @@ class MergeSource {
 				 return "/* UI BASE: $module */";
 			}
 
-            $realpath = $this->filePathJoin(MY_DIR, $this->version, $module);
+            $realpath = $this->filePathJoin(MY_DIR, $this->version.'/src', $module);
 			
 			
 			

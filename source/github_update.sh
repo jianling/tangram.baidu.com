@@ -61,7 +61,8 @@ function createMD5(){
 	fileName=("all_release.js" "all_release_src.js" "core_release.js" "core_release_src.js")
 	echo "version="$tangramVersion";">$md5Path"/md5.properties"
 	for item in ${fileName[*]}; do
-		echo ${item}"="$(md5sum $item|awk '{print $1}')","$(du -b $item|awk '{print $1}')";">>$md5Path"/md5.properties"
+		gzip -c $item>$item".gz"
+		echo ${item}"="$(md5sum $item|awk '{print $1}')","$(du -b $item|awk '{print $1}')","$(du -b $item".gz"|awk '{print $1}')";">>$md5Path"/md5.properties"
 	done
 }
 
