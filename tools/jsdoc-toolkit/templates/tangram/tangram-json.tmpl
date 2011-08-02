@@ -1,9 +1,6 @@
-
 {!
-//print('FFFFF');
 function parse(str){
 	return str.replace(/[\r\n\'\"]/g, function(m){
-		//return m == '\r' || m == '\n' ? '' : '\\' + m;
 		return m == '\r' || m == '\n' ? '' : '\\' + m;
 	});
 }
