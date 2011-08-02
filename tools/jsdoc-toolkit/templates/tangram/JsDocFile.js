@@ -91,14 +91,16 @@ JsDocFile.prototype = {
             var c = item.split('='),
                 key = dis[c[0]];
                 val = key && c[1].split(','),
-                fileSize = 0;
+                fileSize = 0,
+                gzFileSize = 0;
             if(key){
                 c[0] == 'version' && (json[key] = val);
                 if(val.length > 1){
-                    fileLen = parseInt(val[1])/1024;
+                    fileSize = parseInt(val[1])/1024;
+                    gzFileSize = parseInt(val[2])/1024;
                     json[key + 'Md5'] = val[0];
-                    json[key + 'Size'] = fileLen.toFixed(1);
-                    json[key + 'GzipSize'] = '0';
+                    json[key + 'Size'] = fileSize.toFixed(1);
+                    json[key + 'GzipSize'] = gzFileSize.toFixed(1);
                 }
             }
         });

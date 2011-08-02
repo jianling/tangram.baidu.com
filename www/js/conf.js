@@ -1,15 +1,11 @@
 module.declare({
-	fullVersionSize: "20.0k",
-	fullVersionGzipSize: "12.0k",
-
-	coreVersionSize: "10.0k",
-	coreVersionGzipSize: "5.0k",
-
-	fullVersionMd5: "637e08a2aa40d47f5981d5ca22919341",
-	fullVersionSrcMd5: "0bd421a3f7530bcc86d554b757a82ba6",
-
-	coreVersionMd5: "b7b8b83f12c216917689da69ab28662c",
-	coreVersionSrcMd5: "9cb8f9651180bfe27318986f6954ded7",
-
-	tangramLatestVersion: "1.3.9.5"
+	fullVersionSize: '79.1k',
+	fullVersionGzipSize: '0k',
+	coreVersionSize: '26.0k',
+	coreVersionGzipSize: '0k',
+	fullVersionMd5: '59cb2a5fecd9fac0ce2724a15f826596',
+	fullVersionSrcMd5: '7b11e21bd33a0dd007cd4c2d62227ae3',
+	coreVersionMd5: 'b7b8b83f12c216917689da69ab28662c',
+	coreVersionSrcMd5: '9cb8f9651180bfe27318986f6954ded7',
+	tangramLatestVersion: '1.3.9'
 });
