@@ -1,3 +1,147 @@
-{include reset.css}
+﻿{include reset.css}
 {include common.css}
-{include article.css}
+{include article.css}	
+
+
+/**
+ * 	@import "./reset.css";
+ * 	@import "./common.css";
+ * 	@import "./article.css";
+ */
+
+
+/* by chengyang*/
+a,
+div.article a {
+	color: #0056A9;
+}
+div.article .tangram-desc ul {
+	margin-left:2em;
+}
+div.article .tangram-desc li {
+	list-style-image: url("../images/ok.jpg");
+}
+
+.tangram-member {
+	float: left;
+	margin: 20px 0;
+}
+.content .box {
+	float:left;
+	width:310px;
+	margin-right:10px;
+	font-size:12px;
+	border:1px solid #E1E1E1;
+	border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	-moz-box-shadow: 0px 0px 5px #E1E1E1;
+  	-webkit-box-shadow: 0px 0px 5px #E1E1E1;
+	box-shadow: 0px 0px 5px #E1E1E1;
+}
+.content .box h3 {
+	color: #4782BF;
+    font-size: 16px;
+    font-weight: bold;
+    height: 18px;
+    line-height: 18px;
+    padding: 8px 0 8px 17px;
+}
+.content .box p {
+	text-align:center;
+}
+.content .box a.doc-link {
+	line-height:38px;
+	display:block;
+	margin:0 auto;
+	color:#FFF;
+	text-decoration:none;
+	font-size:14px;
+	width:169px;
+	background:url("../images/doc-btn.png") no-repeat 0 0;
+	text-indent:0;
+}
+.content .box a.doc-link:hover {
+	background-position:0 -39px;
+}
+div.article p.project-list {
+	clear:both;
+	padding-left: 20px;
+	background: url("../images/title_bg.gif") no-repeat 0 8px;
+	text-indent: 0;
+}
+.project-list a {
+	margin-right:5px;
+}
+div.article p.user-list {
+	background: url("../images/title_bg.gif") no-repeat 0 center;
+	text-indent: 0;
+	padding-left: 20px;
+}
+div.article p.user-list a,
+div.article p.user-list span {
+	display: inline-block;
+    vertical-align: middle;
+}
+div.article p.user-list img {
+	margin:0 0 0 10px;
+}
+
+.sidebar {
+	padding:2em 0;
+	font-size: 12px;
+}
+.download {
+	padding-top:12px;
+}
+.download h4 {
+	font-weight: bold;
+	font-size: 12px;
+	
+}
+.download a.download-btn {
+    display: block;
+    height: 39px;
+    line-height: 39px;
+    width:169px;
+    text-align: center;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 14px;
+    text-decoration: none;
+    margin: 10px 0;
+    background: url("../images/doc-btn.png") no-repeat 0 0;
+}
+.download a.download-btn:hover {
+	background-position: 0 -39px;
+}
+.sidebar h3 {
+	border: 1px solid #C7DDF4;
+	background-color: #E9F2F9;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	line-height:22px;
+	padding-left:10px;
+	margin:20px 0 10px;
+	color: #567EA7;
+    font-size: 14px;
+    font-weight: bold;
+}
+.tangram-trends ul {
+	margin-left:6px;
+}
+.tangram-trends li {
+	font-size: 12px;
+	line-height:2em;
+	margin-left:10px;
+	list-style-type: circle;
+}
+.tangram-qucklink li {
+	line-height: 2em;
+	margin-left: 10px;
+}
+.tangram-treaty p {
+	margin-left:10px;
+	line-height: 2em;
+}

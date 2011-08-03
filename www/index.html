@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width; height=device-height; user-scalable=no; initial-scale=1.0; maximum-scale=1.0;"/>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="stylesheet" href="css/common.css" type="text/css" media="all" />
+<link rel="stylesheet" href="./css/common.css" type="text/css" media="all" />
 <title>Tangram - 七巧板 百度开源项目</title>
 </head>
 <body>
@@ -37,24 +37,92 @@
 		</div>
 	</div>
 	<div id="main">
+<!--include file="./header.inc" -->
 		<script type="text/javascript">
 			var pageConfig = { name: "index" };
 		</script>
 		<div class="main-header"><span>Tangram Library</span><span class="shadow">Tangram Library</span></div>
 		<div class="main-body indexpage clearfix">
 			<div class="content article">
-				<p class="desc">抽象出细粒度的 JavaScript 接口，你可以基于她快速构建出高度互动的 web 应用程序，简单而且高效，这就是 Tangram，一个中国最具潜力的 web 前端开发框架！</p>
-				<ul class="img ok">
-					<li>可通过定制创建最适合的轻量级版本</li>
-					<li>多种机制实现扩展，良好的插件支持</li>
-					<li>丰富的中文文档以及案例，容易上手</li>
-					<li>全浏览器跨平台兼容</li>
-					<li>平滑的版本升级体验</li>
-				</ul>
+				<div class="tangram-desc">
+					<p>抽象出细粒度的 JavaScript 接口，你可以基于她快速构建出高度互动的 web 应用程序，简单而且高效，这就是 Tangram，一个中国最具潜力的 web 前端开发框架！</p>
+					<ul>
+						<li>可通过定制创建最适合的轻量级版本</li>
+						<li>多种机制实现扩展，良好的插件支持</li>
+						<li>丰富的中文文档以及案例，容易上手</li>
+						<li>全浏览器跨平台兼容</li>
+						<li>平滑的版本升级体验</li>
+					</ul>
+				</div>
+				<div class="tangram-member">
+					<div class="box">
+						<h3>Tangram Base - 基础库</h3>
+						<ul>
+	                        <li>提供了开发时常用功能的封装，是核心的工具库。</li>
+	                        <li>最新版本为<a class="variable" name="tangramLatestVersion"></a></li>
+	                        <li>
+	                        	<a href="download.html">下载tangram</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="doc-tutorial.html">Tangram新手入门</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="more-faq.html">FAQ</a>
+	                        </li>
+	                    </ul>
+	                    <p><a href="#" class="doc-link">查看Tangram文档</a></p>
+					</div>
+					<div class="box">
+						<h3>Tangram Component - 组件库</h3>
+						<ul>
+	                        <li>包含UI组件和动画特效组件。</li>
+	                        <li>现在<strong>仍处于beta状态</strong>，最新版本为<a class="variable" name="tangramLatestVersion"></a></li>
+	                        <li><a href="codesearch/codesearch.html">下载component</a></li>
+	                    </ul>
+	                    <p><a href="#" class="doc-link">查看component文档</a></p>
+					</div>
+				</div>
+				<p class="project-list">
+					<span>Tangram旗下开源项目:</span>
+                	<a target="_blank" href="../ecui/index.html">ECUI</a>
+                   	<a href="https://github.com/erik168/er">ER</a>
+	                <a href="https://github.com/CatChen/jsHelpers">jsHelper</a>
+	                <a target="_blank" href="http://www.marmotu.com/">marmotu</a>
+	                <a target="_blank" href="http://www.qwrap.com">Qwrap</a>
+	                <a target="_blank" href="doc-base.html">Tangram-base</a>
+	                <a target="_blank" href="doc-component.html">Tangram-component</a>
+                </p>
+                <p class="user-list">
+                	<span>Tangram用户:</span>
+	                <a target="_blank" href="http://www.baidu.com"><img src="http://www.baidu.com/search/img/logo.gif" height="25"></a>
+	                <a target="_blank" href="http://youa.baidu.com"><img src="http://co.youa.baidu.com/picture/r/mall/css/090518/lg_pt1.gif" height="25"></a>
+	                <a target="_blank" href="http://www.hao123.com"><img src="http://hao123.com/logo.gif" height="25"></a>
+                </p>
 			</div>
 			<div class="sidebar">
-				<div class="widget">
-					<h3></h3>
+				<div class="download">
+					<h4>Tangram 完整版 <span class="version">(<a class="variable" name="tangramLatestVersion"></a>)</span></h4>
+					<p><a target="_blank" href="download/tangram_1.3.9.zip" class="download-btn">Download</a></p>
+					<p><a href="codesearch/codesearch.html" class="custom-tailor">定制Tangram</a></p>
+				</div>
+				<div class="tangram-trends">
+					<h3>动态</h3>
+					<ul>
+	                    <li>百度内部工具ECUI，火麒麟，Qwrap等正式成为Tangram旗下开源项目。</li>
+						<li>Tangram1.3.9已发布。</li>
+						<li>Base中新增resizable函数，支持用户调整一个DOM元素的大小。</li>
+						<li><a href="toolplugin.html">vim下的tangram插件。</a></li>
+					</ul>
+				</div>
+				<div class="tangram-qucklink">
+					<h3>快速链接</h3>
+					<ul>
+                        <li><a href="https://github.com/BaiduFE/Tangram-base">Base源代码（github）</a></li>
+                        <li><a href="https://github.com/BaiduFE/Tangram-component">Component源代码（github）</a></li>
+                        <li><a href="changelog-base.html">Base changelog</a></li>
+                        <li><a href="changelog-component.html">Component changelog</a></li>
+                        <li><a href="short.html">快捷方式</a></li>
+                        <li><a href="more-faq.html">FAQ</a></li>
+                        <li><a href="http://ueditor.baidu.com/">UEditor编辑器</a></li>
+                    </ul>
+				</div>
+				<div class="tangram-treaty">
+					<h3>授权协议</h3>
+					<p>本项目在<a href="license.html">BSD协议</a>下发布，允许自由修改和使用代码。</p>
 				</div>
 			</div>
 		</div>
@@ -63,7 +131,8 @@
 	<div id="footer"></div>
 </div>
 
-<script type="text/javascript" src="js/flyscript.js"></script>
-<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="./js/flyscript.js"></script>
+<script type="text/javascript" src="./js/main.js"></script>
 </body>
 </html>
+<!--include file="footer.inc" -->

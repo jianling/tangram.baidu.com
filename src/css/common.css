@@ -1,5 +1,7 @@
-{include base-css/index.css}
-
+﻿{include base-css/index.css}
+/*
+ * @import "./base-css/index.css";
+*/
 html{
 	background: #5088ae url(../images/bg_02.gif) repeat-x 0 0;
 }

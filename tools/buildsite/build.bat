@@ -24,6 +24,9 @@ rmdir /S /Q %output%\css\base-css
 
 rmdir /s /q "%building%\"
 
+"%bin%\replaz" "%output%\docs\" "{ROOTPATH}" "../"
+"%bin%\replaz" "%output%\" "{ROOTPATH}" "./"
+
 if "%1"=="debug" (goto end)
 
 	for /F "usebackq" %%i in (`dir /A-D /S /B "%output%\js\*.js"`) do (

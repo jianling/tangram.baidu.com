@@ -3,7 +3,7 @@
 	<div id="footer"></div>
 </div>
 
-<script type="text/javascript" src="js/flyscript.js"></script>
-<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="{ROOTPATH}js/flyscript.js"></script>
+<script type="text/javascript" src="{ROOTPATH}js/main.js"></script>
 </body>
 </html>
