@@ -19,6 +19,6 @@ var conf = {
     tangram_docjson_template: SYS.userDir + '/templates/tangram/tangram-json.tmpl',
     
     tangram_pagejson_in: SYS.userDir + '/../../source/md5.properties',
-    tangram_pagejson_out: SYS.userDir + '/../../www/js',
+    tangram_pagejson_out: JSDOC.opt.d || SYS.userDir + '/../../src/js',
     tangram_pagejson_template: SYS.userDir + '/templates/tangram/tangram-page-conf.tmpl'
 };
