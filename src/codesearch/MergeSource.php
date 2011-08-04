@@ -1,10 +1,6 @@
 <?php
-
-//define("MY_DIR", realpath("../src/"));
-//define("REC_DIR", realpath("../rec"));
-
 define("MY_DIR", realpath("../js/fragment"));
-define("REC_DIR", realpath("../rec"));
+define("REC_DIR", realpath("../../source/github/"));
 
 class MergeSource {
     private $patten = "/\/\/\/\s*import\s+([^;]+);*/";
@@ -16,23 +12,27 @@ class MergeSource {
     public $nobase;
     
     public function __construct(){
+		$this->VERDIR['tangram-component_stable'] = 'nightly/Tangram-component/resources';
     }
     
     public function merge($version, $src, $nobase,$nouibase = false,$isResource = false) {
 	
         $this->version = $version;
-        $this->src = $src;
         $this->nobase = $nobase;
         $this->nouibase = $nouibase;
 		$this->mergedFile = array();
 		$this->isLite = $_REQUEST["isLite"] ? 1 :0 ;
 		$this->allMods = array();
+		$this->src = $src;
 		
-		
+		if( $this->version == 'tangram-mobile' && !$this->isLite  ){
+			$this->src = str_replace('$','',$this->src);
+		}
 		
 		$re['code'] = preg_replace_callback($this->patten, array($this, 'mergeCallback'), $src);
 		$re['file'] = $this->mergedFile;
 		//	如果是mobile则更新其代码
+
 		if( $this->version == 'tangram-mobile' || 0 ){
 			$re['code'] = $this->getMobileCode();
 		}
@@ -47,6 +47,7 @@ class MergeSource {
     public function mergeCallback($match) {
 	
         $module = trim($match[1]);
+        # mobile 专用逻辑
 		if($this->isLite){
 			$liteModule =  preg_replace("/(.+)(\.)(\w+)$/i", '$1$2\$$3',$module);
 			$liteFile = $this->filePathJoin(MY_DIR, $this->version, str_replace(".", "/",$liteModule ) . ".js") ;
@@ -59,30 +60,36 @@ class MergeSource {
         if (empty($this->mergedCode[$module])) {
             $this->mergedCode[$module] = true;
             $module = str_replace(".", "/", $module) . ".js";
+            # 生成文件路径
+            $filePath = $this->filePathJoin(MY_DIR, $this->version.'/src',$module);
             
-            $filePath = $this->filePathJoin(MY_DIR, $this->version ,$module);
-            
-			//@todo 2011-05-10 filter nobase ==>baidu.ui.base.js by XZH
-            if ($this->nobase && !preg_match ("/(baidu\/)(ui|fx|widget|data|i18n|tools)(.*)/i", $module) ) {
-				return "/* BASE: $module */";
-            }
-			//@todo 2011-05-23 filter nouibase ==>baidu.ui.base.js by XZH
-			//@todo 2011-05-31 filter nouibase ==>baidu.ui.createUI.js by XZH
+			#	选择了NO UI BASE的处理
 			if ( $this->nouibase && preg_match ("/(baidu\/)(ui)\/(base|createUI)(.*)/i", $module) ){
 				 return "/* UI BASE: $module */";
 			}
 
-            $realpath = $this->filePathJoin(MY_DIR, $this->version.'/src', $module);
+            $realpath = $this->filePathJoin(MY_DIR, $this->version.'/src',$module);
+			//die( $realpath);
 			
 			
-			
-            if (!file_exists($realpath)) {
-				if( $GLOBALS['viewSource'] ){
-					return $this->indexUpLevelFile($module);
-				}else{
+
+            
+        	#	如果文件不存在 并且 开启了 base 选项，则从附属库中去查找
+            if ( !file_exists($realpath) && $this->nobase ) {
+					$realpath = $this->filePathJoin(MY_DIR, $_REQUEST['slavelib'].'/src', $module);
+			}
+			#	还是找不到文件的话就 返回错误信息；
+			 if ( !file_exists($realpath)) {
 					return "//NOT found $module \n";
-				}
-            }
+			}
+            
+            
+            
+            
+            
+            
+            
+            
             
             return $this->mergeFile($realpath);            
         }
@@ -254,7 +261,10 @@ class MergeSource {
 	
 	//	添加资源文件到返回值
 	public function getResource($match){
-		$path = $this->filePathJoin(REC_DIR, $this->version, $match[1]);
+		$file = split('\.',$match[1]);
+		$ext = array_pop($file);
+		$fp =  join('/',$file ).'.'.$ext ;
+		$path = $this->filePathJoin(REC_DIR, $this->VERDIR[$this->version],$fp);
 		if( file_exists($path) ){
 			array_push($this->mergedFile,$path);
 		}

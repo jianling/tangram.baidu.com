@@ -1,7 +1,6 @@
 <?php
 include "MergeSource.php";
-include "JSPacker.php";
-include "JSMin.php";
+include "ziplib.php";
 
 
 /*	合并 请求的方法及引用方法 所有文件	的源代码	
@@ -115,7 +114,7 @@ $version = $_REQUEST["version"];
 //选取的方法列表
 $src = $_REQUEST["src"];
 //NoBase、NoUIBase
-$nobase = !isset($_REQUEST["nobase"]) || strtolower($_REQUEST["nobase"]) == "false" ? false : true;
+$nobase = $_REQUEST["nobase"] ? true : false;
 $nouibase = !isset($_REQUEST["nouibase"]) || strtolower($_REQUEST["nouibase"]) == "false" ? false : true;
 //压缩类型  yui  mini  pack  其他值为不压缩
 $compress = $_REQUEST["compress"];
@@ -131,7 +130,31 @@ $code = do_merge($version, $src, $nobase, $compress, $viewSource,$nouibase,$isRe
 
 /*	资源包模式	*/
 if($isResource){
-	get_zipFile('../downloadZip/','tangram.zip',$code);
+
+
+	$timeMark = preg_replace("/(\.)(\d+)\s(\d+)/","$3$2", microtime()."");
+	$jsFile = 'zipFile/'.$timeMark.'/tangram.js';
+	$zipFile = 'zipFile/'.$timeMark.'.zip';
+	$files = $code['file'];
+	$files[] = $jsFile;
+	//	将代码保存在临时文件中
+	mkdir('zipFile/'.$timeMark);
+	file_put_contents($jsFile,$code['code']) ;
+	
+	$z = new PHPZip();
+	$z->Zip($files, $zipFile);
+	//	删除代码临时文件
+	unlink($jsFile);
+	rmdir('zipFile/'.$timeMark);
+	//	将zip包输出
+	$fso = fopen($zipFile,"r");
+	header("Content-type: application/octet-stream");
+	header("Accept-Ranges: bytes");
+	header("Accept-Length: ".filesize($zipFile)); 
+	header("Content-Disposition: attachment; filename=tangram.zip" );
+	echo fread($fso,filesize($zipFile));
+	//	删除zip包
+	unlink($zipFile);
 	die();
 }
 
