@@ -63,13 +63,7 @@ class MergeSource {
             # 生成文件路径
             $filePath = $this->filePathJoin(MY_DIR, $this->version.'/src',$module);
             
-            
-			//@todo 2011-05-10 filter nobase ==>baidu.ui.base.js by XZH
-            if ($this->nobase && !preg_match ("/(baidu\/)(ui|fx|widget|data|i18n|tools)(.*)/i", $module) ) {
-				return "/* BASE: $module */";
-            }
-			//@todo 2011-05-23 filter nouibase ==>baidu.ui.base.js by XZH
-			//@todo 2011-05-31 filter nouibase ==>baidu.ui.createUI.js by XZH
+			#	选择了NO UI BASE的处理
 			if ( $this->nouibase && preg_match ("/(baidu\/)(ui)\/(base|createUI)(.*)/i", $module) ){
 				 return "/* UI BASE: $module */";
 			}
@@ -78,13 +72,24 @@ class MergeSource {
 			//die( $realpath);
 			
 			
-            if (!file_exists($realpath)) {
-				if( $GLOBALS['viewSource'] ){
-					return $this->indexUpLevelFile($module);
-				}else{
+
+            
+        	#	如果文件不存在 并且 开启了 base 选项，则从附属库中去查找
+            if ( !file_exists($realpath) && $this->nobase ) {
+					$realpath = $this->filePathJoin(MY_DIR, $_REQUEST['slavelib'].'/src', $module);
+			}
+			#	还是找不到文件的话就 返回错误信息；
+			 if ( !file_exists($realpath)) {
 					return "//NOT found $module \n";
-				}
-            }
+			}
+            
+            
+            
+            
+            
+            
+            
+            
             
             return $this->mergeFile($realpath);            
         }

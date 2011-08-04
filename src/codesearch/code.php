@@ -114,7 +114,7 @@ $version = $_REQUEST["version"];
 //选取的方法列表
 $src = $_REQUEST["src"];
 //NoBase、NoUIBase
-$nobase = !isset($_REQUEST["nobase"]) || strtolower($_REQUEST["nobase"]) == "false" ? false : true;
+$nobase = $_REQUEST["nobase"] ? true : false;
 $nouibase = !isset($_REQUEST["nouibase"]) || strtolower($_REQUEST["nouibase"]) == "false" ? false : true;
 //压缩类型  yui  mini  pack  其他值为不压缩
 $compress = $_REQUEST["compress"];
