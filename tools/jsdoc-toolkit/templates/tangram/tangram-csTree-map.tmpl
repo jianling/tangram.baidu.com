@@ -12,7 +12,7 @@ for(var i in depend){
 
 
 !}
-var {+ data.type +} = {
+var {+ data.type.replace('.', '') +} = {
 	packages: [{+ packages.join(',') +}],
 	docMap: {{+ docMap.join(',') +}}
 };
