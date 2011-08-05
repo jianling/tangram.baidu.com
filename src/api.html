@@ -42,10 +42,10 @@
 					<p id="J_apiAyntax" class="api-ayntax"><span>T.ajax.form(form[, options])</span></p>
 					<p class="quck-link">快速跳转：<a href="#anchor-option">option参数</a><b></b><a href="#anchor-method">方法</a><b></b><a href="#anchor-event">事件</a><b></b><a href="#anchor-plugin">扩展插件</a><b></b><a href="#">DEMO</a></p>
 					<h3 id="anchor-option">参数</h3>
-					<div class="parameter-area">
-						<p>&lt;<i>Boolean</i>&gt;<span class="definition">options.async</span>是否异步请求。默认为true（异步）</p>
-						<p>&lt;<i>Boolean</i>&gt;<span class="definition">options.async</span>是否异步请求。默认为true（异步）</p>
-					</div>
+					<ul class="parameter-area">
+						<li>&lt;<i>Boolean</i>&gt;<span class="definition">options.async</span>是否异步请求。默认为true（异步）</li>
+						<li>&lt;<i>Boolean</i>&gt;<span class="definition">options.async</span>是否异步请求。默认为true（异步）</li>
+					</ul>
 					<h3 id="anchor-method">方法</h3>
 					<div class="method-area">
 						<p class="method-item" title="点击展开参数列表">&lt;<i>void</i>&gt;<span class="definition">render</span>(target)    渲染滚动组件到参数指定的容器中</p>
@@ -83,36 +83,34 @@
 							<i class="hide-btn">X</i>
 						</div>
 					</div>
-					<h3 id="anchor-plugin">扩展插件</h3>
-					<br /><br /><br />
 					<div id="J_demo"></div>
 				</div>
 			</div>
 		</div>
 		<script type="text/javascript">
 			var D = T.dom;
-			for(key in tangram_base.docMap){
-				// console.log(key);
-			}
-			
-			
-			function renderHTML(apiKey){
+
+			var renderHTML = function(apiKey){
 				var value = tangram_component.docMap[apiKey];
 				var html = '<h2 id="J_apiName">' + apiKey + '</h2>' + 
 							'<p id="J_apiDesc" class="desc">' + value.desc + '</p>' +
 							'<p id="J_apiAyntax" class="api-ayntax"><span>T.ajax.form(form[, options])</span></p>' +
-							'<p class="quck-link">快速跳转：<a href="#anchor-option">option参数</a><b></b><a href="#anchor-method">方法</a><b></b><a href="#anchor-event">事件</a><b></b><a href="#anchor-plugin">扩展插件</a><b></b><a href="#">DEMO</a></p>' +
+							'<p class="quck-link">快速跳转：<a href="#anchor-option">option参数</a><b></b><a href="#anchor-method">方法</a><b></b><a href="#J_demo">DEMO</a></p>' +
 							'<h3 id="anchor-option">参数</h3>' +
-							'<div class="parameter-area">';
+							'<ul class="parameter-area">';
 				for(var i=1, options=value.options; i<options.length; i++){
-					html += '<p>&lt;<i>' + options[i].type + '</i>&gt;<span class="definition">' + options[i].name + '</span>' + options[i].desc + '</p>';
+					html += '<li>&lt;<i>' + options[i].type + '</i>&gt;<span class="definition">' + options[i].name + '</span>' + options[i].desc + '</li>';
 				}
-				html += '</div>' +
+				html += '</ul>' +
 					'<h3 id="anchor-method">方法</h3>' +
 					'<div class="method-area">';
 				for(var i=0, methods=value.methods; i<methods.length; i++){
-						html += '<p class="method-item" title="点击展开参数列表">&lt;<i>' + methods[i].type + '</i>&gt;<span class="definition">' + methods[i].name + '</span>()    ' + methods[i].desc + '</p>' +
-						'<div class="method-param">' +
+						if(methods[i].type){
+							html += '<p class="method-item" title="点击展开参数列表">&lt;<i>' + methods[i].type + '</i>&gt;<span class="definition">' + methods[i].name + '</span>()    ' + methods[i].desc + '</p>'
+						}else{
+							html += '<p class="method-item" title="点击展开参数列表"><span class="definition">' + methods[i].name + '</span>()    ' + methods[i].desc + '</p>';
+						}
+						html += '<div class="method-param">' +
 							'参数：<br />';
 							if(methods[i].options){
 								html += '<ul>';
@@ -126,44 +124,35 @@
 						'</div>';
 				}
 				
-				
 				html += '</div>';
-				// if(value.events){
-					// html += '<h3 id="anchor-event">事件</h3>' +
-					// '<div class="event-area">';
-					// for(var i=0, events=value.events; i<events.length; i++){
-							// html += '<p class="event-item" title="点击展开参数列表">&lt;<i>' + events[i].type + '</i>&gt;<span class="definition">' + events[i].name + '</span>()    ' + events[i].desc + '</p>' +
-							// '<div class="event-param">' +
-								// 'event参数：<br />';
-								// if(events[i].options){
-									// html += '<ul>';
-									// for(var j=0, options=events[i].options; i<options.length; i++){
-										// html += '<li>&lt;<i>' + options[i].type + '</i>&gt;<span class="definition">' + options[i].name + '</span>  ' + options[i].desc + '</li>';
-									// }
-									// html += '</ul>';
-								// }
-								// html += '返回值：<i>无</i>' +
-								// '<i class="hide-btn">X</i>' +
-							// '</div>';
-					// }
-					// html += '</div>';
-				// } 
-				html += '<h3 id="anchor-plugin">扩展插件</h3>' +
-					'<br /><br /><br />' +
-					'<div id="J_demo"></div>';
+				html += '<div id="J_demo"></div>';
 				
-				
-				D.query('.main-wrap')[0].innerHTML = html;
 				return html;
-			}
-			console.log(renderHTML('baidu.ui.Button'));
+			};
 			
+	        
+	        var ontreeChange = function(apiName){
+	        	//解除事件
+	        	T.array.each(D.query('h3'), function(item){
+	        		T.un(item, "click");
+	        	});
+	        	var methodItems = D.query('.method-item'),
+					eventItems = D.query('.event-item'),
+					items = methodItems.concat(eventItems);
+				T.array.each(items, function(item){
+					T.un(item, "click");
+				});
+				
+				var hideBtns = D.query('.hide-btn');
+				T.array.each(hideBtns, function(item){
+					T.un(item, "click");
+				});
+	        	//更新页面HTML
+	        	D.query('.main-wrap')[0].innerHTML = renderHTML('baidu.ui.Button');
 			
-			D.ready(function(){
-    			var handlers = D.query('h3');
-    			T.array.each(handlers, function(item){
-    				T.on(item, "click", function(){
-    					var that = this;
+				T.array.each(D.query('h3'), function(item){
+					T.on(item, "click", function(){
+						var that = this;
 	    				var className = that.className;
 	    				D.toggleClass(that, "tree-off");
 	    				if(!D.next(that))
@@ -174,33 +163,34 @@
 	    					D.hide(D.next(that));
 	    				}
 	    			});
-    			});
-    			
-    			var methodItems = D.query('.method-item'),
-    				eventItems = D.query('.event-item'),
-    				items = methodItems.concat(eventItems);
-    			T.array.each(items, function(item){
-    				T.on(item, "click", function(){
-    					var nextSibling = D.next(this);
-    					if(/-param/.test(nextSibling.className)){
-    						D.getStyle(nextSibling, "display") == 'block' ? D.hide(nextSibling) : D.show(nextSibling);
-    					}
-    				});
-    			});
-    			
-    			var hideBtns = D.query('.hide-btn');
-    			T.array.each(hideBtns, function(item){
-    				T.on(item, "click", function(){
-    					var that = this;
-    					var paramContainer = D.getAncestorBy(that, function(ancestor){
-    						return D.hasClass(ancestor, "method-param") || D.hasClass(ancestor, "event-param")
-    					});
-    					D.hide(paramContainer);
-    				});
-    			});
-			});
-			var options = {
-	            items: [
+				});
+				
+				var methodItems = D.query('.method-item'),
+					eventItems = D.query('.event-item'),
+					items = methodItems.concat(eventItems);
+				T.array.each(items, function(item){
+					T.on(item, "click", function(){
+						var nextSibling = D.next(this);
+						if(/-param/.test(nextSibling.className)){
+							D.getStyle(nextSibling, "display") == 'block' ? D.hide(nextSibling) : D.show(nextSibling);
+						}
+					});
+				});
+				
+				var hideBtns = D.query('.hide-btn');
+				T.array.each(hideBtns, function(item){
+					T.on(item, "click", function(){
+						var that = this;
+						var paramContainer = D.getAncestorBy(that, function(ancestor){
+							return D.hasClass(ancestor, "method-param") || D.hasClass(ancestor, "event-param")
+						});
+						D.hide(paramContainer);
+					});
+				});
+				
+				//获取demo的HTML片段
+				var options = {
+		            items: [
 	                        {
 	                            head: "Demo",
 	                            body: "Demo<br />Demo<br />Demo<br />Demo<br />"
@@ -210,10 +200,12 @@
 	                            body: "CSS<br />CSS<br />CSS<br />CSS<br />CSS<br />"
 	                        }
 	                    ],
-	            switchType: "click"
-	        };
-	        var tab = new T.ui.Tab(options);
-	        tab.render("J_demo");
+		            switchType: "click"
+		        };
+		        var tab = new T.ui.Tab(options);
+		        tab.render("J_demo");
+	        }//ontreeChange
+	        
 		</script>
 <!-- {include footer.inc} -->
 <!--#include file="footer.inc" -->
