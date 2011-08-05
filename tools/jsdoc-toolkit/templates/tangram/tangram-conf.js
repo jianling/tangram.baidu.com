@@ -20,5 +20,10 @@ var conf = {
     
     tangram_pagejson_in: SYS.userDir + '/../../source/md5.properties',
     tangram_pagejson_out: JSDOC.opt.d || SYS.userDir + '/../../src/js',
-    tangram_pagejson_template: SYS.userDir + '/templates/tangram/tangram-page-conf.tmpl'
+    tangram_pagejson_template: SYS.userDir + '/templates/tangram/tangram-page-conf.tmpl',
+    
+    tangram_csTreeMap_in: SYS.userDir + '/../../source/github',
+    tangram_csTreeMap_out: JSDOC.opt.d || SYS.userDir + '/../../src/js',
+    tangram_csTreeMap_template: SYS.userDir + '/templates/tangram/tangram-csTree-map.tmpl'
+    
 };

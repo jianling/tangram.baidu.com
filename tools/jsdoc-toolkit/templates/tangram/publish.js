@@ -6,6 +6,7 @@ function publish(symbolSet) {
         file.createTangramBaseFile();
         file.createTangramUIFile();
         file.createTangramMobileFile();
+        file.createCodeSearchTreeMapFile();
     }else{
         file.createDocJsonFile(symbolSet);
     }
