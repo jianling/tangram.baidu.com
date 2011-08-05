@@ -108,18 +108,18 @@
 					html += '<h3 id="anchor-method">方法</h3>' +
 							'<div class="method-area">';
 					for(var i=0, methods=value.methods; i<methods.length; i++){
-						methods[i].type = (methods[i].type == undefined ? '' : '&lt;<i>' + methods[i].type + '</i>&gt;');
-						methods[i].desc = (methods[i].desc == undefined ? '' : methods[i].desc);
+						var type = (methods[i].type == undefined ? '' : '&lt;<i>' + methods[i].type + '</i>&gt;');
+						var desc = (methods[i].desc == undefined ? '' : methods[i].desc);
 						
-						html += '<p class="method-item" title="点击展开参数列表">' + methods[i].type + '<span class="definition">' + methods[i].name + '</span>()    ' + methods[i].desc + '</p>'
+						html += '<p class="method-item" title="点击展开参数列表">' + type + '<span class="definition">' + methods[i].name + '</span>()    ' + desc + '</p>'
 						html += '<div class="method-param">' +
 							'参数：<br />';
 							if(methods[i].options){
 								html += '<ul>';
 								for(var j=0, options=methods[i].options; i<options.length; i++){
-									options[i].type = (options[i].type == undefined ? '' : '&lt;<i>' + options[i].type + '</i>&gt;');
-									options[i].desc = (options[i].desc == undefined ? '' : options[i].desc);
-									html += '<li>' + options[i].type + '<span class="definition">' + options[i].name + '</span>  ' + options[i].desc + '</li>';
+									var type = (options[i].type == undefined ? '' : '&lt;<i>' + options[i].type + '</i>&gt;');
+									var desc = (options[i].desc == undefined ? '' : options[i].desc);
+									html += '<li>' + type + '<span class="definition">' + options[i].name + '</span>  ' + desc + '</li>';
 								}
 								html += '</ul>';
 							}
