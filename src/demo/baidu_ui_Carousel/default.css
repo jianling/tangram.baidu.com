@@ -1,0 +1,16 @@
+/*核心css*/
+.tangram-carousel{
+    overflow: hidden;
+    border: red solid 1px;
+}
+.tangram-carousel-scroll {
+    
+}
+.tangram-carousel-item {
+    float: left;
+    width: 100px;
+    height: 50px;
+}
+.tangram-carousel-item-focus {
+    background: yellow;
+}
