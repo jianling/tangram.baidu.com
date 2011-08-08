@@ -1,11 +1,14 @@
 var conf = {
     clazz: {
         type: 'method',
-        'class': 'baidu.string.format'
+        'method': 'baidu.string.format'
     },
+    
     demoType: [{key: 'default', val: 'baidu.string.format'}],
     'default': {
-        html: '<div id="mydiv">#{content_1}何时了，</br>往事知#{content_2}；</div>',
+        pageConf: {
+            html: '<div id="mydiv">#{content_1}何时了，</br>往事知#{content_2}；</div>'
+        },
         param0: {
             type: 'text',
             defaultValue: '春花秋月',
