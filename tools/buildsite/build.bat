@@ -31,7 +31,7 @@ if "%1"=="debug" (goto end)
 
 	for /F "usebackq tokens=* delims=" %%i in (`dir /A-D /S /B "%output%\js\*.js"`) do (
 		echo compressing... %%i
-		java -jar %YUICmprssr% --type js --charset utf-8 -o "%%i" --nomunge "%%i"
+		java -jar "%YUICmprssr%" --type js --charset utf-8 -o "%%i" --nomunge "%%i"
 	)
 
 	echo.
@@ -39,7 +39,7 @@ if "%1"=="debug" (goto end)
 
 	for /F "usebackq tokens=* delims=" %%i in (`dir /A-D /S /B "%output%\css\*.css"`) do (
 		echo compressing... %%i
-		java -jar %YUICmprssr% --type css --charset utf-8 -o "%%i" "%%i"
+		java -jar "%YUICmprssr%" --type css --charset utf-8 -o "%%i" "%%i"
 	)
 
 :end
