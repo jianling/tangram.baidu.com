@@ -1,0 +1,18 @@
+{!
+var packages = [],
+	docMap = [],
+	depend = data.depend;
+data.packages.forEach(function(item){
+	/* packages.push("{n: '" + item.name + "', p: '" + item.par + "'}"); */
+	packages.push("{n: '" + item.name + "', p: " + (item.par ? ("'"+item.par+"'") : null) + "}");
+});
+for(var i in depend){
+	docMap.push("'" +i+ "': ['"+ depend[i].join("','") +"']");
+}
+
+
+!}
+var {+ data.type.replace('.', '') +} = {
+	nameSpace: [{+ packages.join(',') +}],
+	docMap: {{+ docMap.join(',') +}}
+};

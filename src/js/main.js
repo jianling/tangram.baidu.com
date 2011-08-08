@@ -7,8 +7,17 @@
 
 void function(){
 
+	var getpath = function(){
+		var rootPath = "";
+		if(pageConfig.prepath)
+			rootPath = pageConfig.prepath.replace(/\w+/g, "..");
+		return function(path){
+			return rootPath + path;
+		};
+	}();
+
 	// 布署顶部导航栏
-	FlyScript.load("js/lichee", function(Lichee){
+	FlyScript.load(getpath("js/lichee"), function(Lichee){
 		var E = Lichee.Element, Q = Lichee.queryElement;
 
 		var template = new Lichee.Template(
@@ -44,7 +53,7 @@ void function(){
 				click: function(){
 					var href = E(this).attr("href");
 					if(href)
-						location.href = href;
+						location.href = getpath(href);
 				},
 				mouseover: function(){
 					sp.change(1);
@@ -87,7 +96,7 @@ void function(){
 
 	// 布署顶部导航的下拉菜单
 	setTimeout(function(){
-		FlyScript.load("js/simplemenu", "js/lichee", function(simplemenu, Lichee){
+		FlyScript.load(getpath("js/simplemenu"), getpath("js/lichee"), function(simplemenu, Lichee){
 			var E = Lichee.Element, Q = Lichee.queryElement;
 
 			var docMenu = new simplemenu({
@@ -153,7 +162,7 @@ void function(){
 	}, 0);
 
 	// 变量替换处理
-	FlyScript.load("js/variable");
+	FlyScript.load(getpath("js/variable"));
 
 	// 加载页面逻辑
 	if(pageConfig.script){

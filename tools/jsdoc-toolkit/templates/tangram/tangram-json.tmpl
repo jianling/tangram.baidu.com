@@ -33,7 +33,9 @@ function getJson(item){
 var nameSpaceArray = [],
 	docMapArray = [];
 data.list.forEach(function(item){
-	nameSpaceArray.push( '\'' + item.alias + '\'');
+	var index = item.alias.lastIndexOf('.'),
+		par = index > -1 ? item.alias.substring(0, index) : null;
+	nameSpaceArray.push("{n: '"+ item.alias +"', p: '" +par+ "'}");
 	item.desc && docMapArray.push('\'' + item.alias + '\': ' +getJson(item));
 });
 !}

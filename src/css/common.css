@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * {include base-css/reset.css}
  * {include base-css/article.css}
@@ -10,6 +11,11 @@ html, body{
 	height: 100%;
 }
 html {
+=======
+﻿{include base-css/index.css}
+
+html{
+>>>>>>> 25d3a851ab93d3903af13a83679eb499f8d793a8
 	background: #5088ae url(../images/bg_02.gif) repeat-x 0 0;
 }
 .clearfix:after{

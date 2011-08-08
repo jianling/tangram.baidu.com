@@ -7,43 +7,51 @@ JsDocFile.prototype = {
         return /\.js$/i.test(file.getName());
     },
     
-    _importRecursion: function(packAge, resultSet){
-        if(resultSet.hash[packAge]){return;}
-        var array = [],
-            content = IO.readFile(this._conf[resultSet.type + '_in'] + '/' + packAge + '.js')
+    _recursionImport: function(file, entity, resultSet){
+        if(resultSet.hash[entity.name]){return;}
+        var _this = this,
+            array = [],
+            packages = entity.name.replace(/\./g, '/') + '.js';
+            content = IO.readFile(this._conf[resultSet.type + '_in'] + '/' + packages)
                 .replace(/\/\/\/import\s([^;]+);/g, function(mc, c){
-                    array.push(c.replace(/\./g, '/'));
+                    array.push(c);
                     return '';//replace ///import to ''
                 });
-        for(var i = 0; i < array.length; i++){
-            this._importRecursion(array[i], resultSet);
-        }
-        resultSet.hash[packAge] = packAge;
-        resultSet.list.push(packAge);
+        array.forEach(function(item){
+            _this._recursionImport(null, {name: item}, resultSet);
+        });
+        resultSet.hash[entity.name] = entity.name;
         resultSet.content.push(content);
     },
     
-    _fileRecursion: function(file, resultSet){
-        var path = file.getPath();
+    _recursion: function(file, resultSet, opt){
+        var _this = this;
         if(file.isFile()){
-            if(!this.isJsFile(file)
-                || file.getName() == 'import.js'){return;}
-            var packAge = String(path.substring(path.lastIndexOf('baidu'), path.length() - 3));
-            this._importRecursion(packAge.replace(/\\/g, '/'), resultSet);
+            if(!this.isJsFile(file) || file.getName() == 'import.js'){return;}
+            //
+            var fileName = String(file.getName()),
+                parent = String(file.getParent()),
+                index = parent.lastIndexOf('baidu'),
+                entity;
+            fileName = fileName.replace(/\.js$/, '');
+            parent = index > -1 ? parent.substring(index, parent.length).replace(/[\/\\]/g, '.') : null;
+            entity = {name:(parent ? parent + '.' + fileName : fileName), par: parent};
+            resultSet.packages.push(entity);
+//            opt && opt.fileHandler && opt.fileHanldler.call(_this, file, entity);
+            opt && opt.fileHandler && opt.fileHandler.apply(_this, [file, entity, resultSet]);
         }else{
-            var fileList = file.list(),
-                len = fileList.length;
-            for(var i = 0; i < len; i++){
-                this._fileRecursion(new File(path + '/' + fileList[i]), resultSet);
-            }
+            var fileList = file.list();
+            fileList.forEach(function(item){
+                _this._recursion(new File(file.getPath() + '/' + item), resultSet, opt);
+            });
         }
     },
     
     createTangramBaseFile: function(){
-        var file = new File(this._conf.tangram_base_in),
-            conf = this._conf,
-            resultSet = {type: 'tangram_base', list: [], hash: {}, content: []};
-        this._fileRecursion(file, resultSet);
+        var conf = this._conf,
+            file = new File(conf.tangram_base_in),
+            resultSet = {type: 'tangram_base', packages: [], hash: {}, content: []};
+        this._recursion(file, resultSet, {fileHandler: this._recursionImport});
         IO.mkPath(conf.tangram_base_out.split('/'));
         IO.saveFile(conf.tangram_base_out, conf.tangram_base_fileName, resultSet.content.join('\n'));
     },
@@ -51,11 +59,12 @@ JsDocFile.prototype = {
     createTangramUIFile: function(){
         var file = new File(this._conf.tangram_base_in),
             conf = this._conf,
-            resultSet = {type: 'tangram_base', list: [], hash: {}, content: []};
-        this._fileRecursion(file, resultSet);
+            resultSet = {type: 'tangram_base', packages: [], hash: {}, content: []};
+        this._recursion(file, resultSet, {fileHandler: this._recursionImport});
         file = new File(this._conf.tangram_ui_in);
         resultSet.type = 'tangram_ui';
-        this._fileRecursion(file, resultSet);
+        resultSet.content = [];
+        this._recursion(file, resultSet, {fileHandler: this._recursionImport});
         IO.mkPath(conf.tangram_ui_out.split('/'));
         IO.saveFile(conf.tangram_ui_out, conf.tangram_ui_fileName, resultSet.content.join('\n'));
     },
@@ -107,6 +116,42 @@ JsDocFile.prototype = {
         IO.mkPath(conf.tangram_pagejson_out.split('/'));
         IO.saveFile(conf.tangram_pagejson_out, 'conf.js', template.process(json));
     },
+    
+    
+    createCodeSearchTreeMapFile: function(){
+        var _this = this,
+            conf = this._conf,
+            template = new JSDOC.JsPlate(conf.tangram_csTreeMap_template),
+            file = new File(conf.tangram_csTreeMap_in),
+            path = file.getPath(),
+            resultSet;
+            
+        function depend(file, entity, resultSet){
+            var array = [],
+                content = IO.readFile(file)
+                .replace(/\/\/\/import\s([^;]+);/g, function(mc, c){
+                    array.push(c);
+                    return '';//replace ///import to ''
+                });
+            resultSet.depend[entity.name] = array;
+        }
+        
+        resultSet = {packages: [], depend: {}};
+        _this._recursion(new File(path + '/' + file.list()[0]+ '/' + 'src'),
+            resultSet,
+            {fileHandler: depend});
+        file.list().forEach(function(item){
+            resultSet = {type: item.toLowerCase().replace('-', '_') + '_csmap', packages: [], depend: {}};
+            _this._recursion(new File(path + '/' + item+ '/' + 'src'),
+                resultSet,
+                {fileHandler: depend});
+            IO.mkPath(conf.tangram_csTreeMap_out.split('/'));
+            IO.saveFile(conf.tangram_csTreeMap_out, resultSet.type + '.js', template.process(resultSet));
+        });
+    },
+    
+    
+    
     
     getFileName: function(){
         var fileName = 'tangram#{mobile}#{base}#{component}', json = {};

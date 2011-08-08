@@ -88,129 +88,130 @@
 			</div>
 		</div>
 		<script type="text/javascript">
-			var D = T.dom;
-
-			var renderHTML = function(apiKey){
-				var value = tangram_component.docMap[apiKey];
-				var html = '<h2 id="J_apiName">' + apiKey + '</h2>' + 
-							'<p id="J_apiDesc" class="desc">' + value.desc + '</p>' +
-							'<p id="J_apiAyntax" class="api-ayntax"><span>T.ajax.form(form[, options])</span></p>' +
-							'<p class="quck-link">快速跳转：<a href="#anchor-option">option参数</a><b></b><a href="#anchor-method">方法</a><b></b><a href="#J_demo">DEMO</a></p>';
-				if(value.options){
-					html += '<h3 id="anchor-option">参数</h3>' +
-							'<ul class="parameter-area">';
-					for(var i=1, options=value.options; i<options.length; i++){
-						html += '<li>&lt;<i>' + options[i].type + '</i>&gt;<span class="definition">' + options[i].name + '</span>' + options[i].desc + '</li>';
-					}
-					html += '</ul>';
-				}
-				if(value.methods){
-					html += '<h3 id="anchor-method">方法</h3>' +
-							'<div class="method-area">';
-					for(var i=0, methods=value.methods; i<methods.length; i++){
-						var type = (methods[i].type == undefined ? '' : '&lt;<i>' + methods[i].type + '</i>&gt;');
-						var desc = (methods[i].desc == undefined ? '' : methods[i].desc);
-						
-						html += '<p class="method-item" title="点击展开参数列表">' + type + '<span class="definition">' + methods[i].name + '</span>()    ' + desc + '</p>'
-						html += '<div class="method-param">' +
-							'参数：<br />';
-							if(methods[i].options){
-								html += '<ul>';
-								for(var j=0, options=methods[i].options; i<options.length; i++){
-									var type = (options[i].type == undefined ? '' : '&lt;<i>' + options[i].type + '</i>&gt;');
-									var desc = (options[i].desc == undefined ? '' : options[i].desc);
-									html += '<li>' + type + '<span class="definition">' + options[i].name + '</span>  ' + desc + '</li>';
-								}
-								html += '</ul>';
-							}
-							html += '返回值：<i>无</i>' +
-							'<i class="hide-btn">X</i>' +
-						'</div>';
-					}
-					html += '</div>';
-				}
-				
-				html += '<div id="J_demo"></div>';
-				
-				return html;
-			};
-			
-	        
-	        var ontreeChange = function(apiName){
-	        	//解除事件
-	        	T.array.each(D.query('h3'), function(item){
-	        		T.un(item, "click");
-	        	});
-	        	var methodItems = D.query('.method-item'),
-					eventItems = D.query('.event-item'),
-					items = methodItems.concat(eventItems);
-				T.array.each(items, function(item){
-					T.un(item, "click");
-				});
-				
-				var hideBtns = D.query('.hide-btn');
-				T.array.each(hideBtns, function(item){
-					T.un(item, "click");
-				});
-	        	//更新页面HTML
-	        	D.query('.main-wrap')[0].innerHTML = renderHTML(apiName);
-			
-				T.array.each(D.query('h3'), function(item){
-					T.on(item, "click", function(){
-						var that = this;
-	    				var className = that.className;
-	    				D.toggleClass(that, "tree-off");
-	    				if(!D.next(that))
-	    					return;
-	    				if(className == "tree-off"){
-	    					D.show(D.next(that));
-	    				}else {
-	    					D.hide(D.next(that));
-	    				}
-	    			});
-				});
-				
-				var methodItems = D.query('.method-item'),
-					eventItems = D.query('.event-item'),
-					items = methodItems.concat(eventItems);
-				T.array.each(items, function(item){
-					T.on(item, "click", function(){
-						var nextSibling = D.next(this);
-						if(/-param/.test(nextSibling.className)){
-							D.getStyle(nextSibling, "display") == 'block' ? D.hide(nextSibling) : D.show(nextSibling);
+			(function(){
+				var D = T.dom;
+	
+				var renderHTML = function(apiKey){
+					var value = tangram_component.docMap[apiKey];
+					var html = '<h2 id="J_apiName">' + apiKey + '</h2>' + 
+								'<p id="J_apiDesc" class="desc">' + value.desc + '</p>' +
+								'<p id="J_apiAyntax" class="api-ayntax"><span>T.ajax.form(form[, options])</span></p>' +
+								'<p class="quck-link">快速跳转：<a href="#anchor-option">option参数</a><b></b><a href="#anchor-method">方法</a><b></b><a href="#J_demo">DEMO</a></p>';
+					if(value.options){
+						html += '<h3 id="anchor-option">参数</h3>' +
+								'<ul class="parameter-area">';
+						for(var i=1, options=value.options; i<options.length; i++){
+							html += '<li>&lt;<i>' + options[i].type + '</i>&gt;<span class="definition">' + options[i].name + '</span>' + options[i].desc + '</li>';
 						}
-					});
-				});
+						html += '</ul>';
+					}
+					if(value.methods){
+						html += '<h3 id="anchor-method">方法</h3>' +
+								'<div class="method-area">';
+						for(var i=0, methods=value.methods; i<methods.length; i++){
+							var type = (methods[i].type == undefined ? '' : '&lt;<i>' + methods[i].type + '</i>&gt;');
+							var desc = (methods[i].desc == undefined ? '' : methods[i].desc);
+							
+							html += '<p class="method-item" title="点击展开参数列表">' + type + '<span class="definition">' + methods[i].name + '</span>()    ' + desc + '</p>'
+							html += '<div class="method-param">' +
+								'参数：<br />';
+								if(methods[i].options){
+									html += '<ul>';
+									for(var j=0, options=methods[i].options; i<options.length; i++){
+										var type = (options[i].type == undefined ? '' : '&lt;<i>' + options[i].type + '</i>&gt;');
+										var desc = (options[i].desc == undefined ? '' : options[i].desc);
+										html += '<li>' + type + '<span class="definition">' + options[i].name + '</span>  ' + desc + '</li>';
+									}
+									html += '</ul>';
+								}
+								html += '返回值：<i>无</i>' +
+								'<i class="hide-btn">X</i>' +
+							'</div>';
+						}
+						html += '</div>';
+					}
+					
+					html += '<div id="J_demo"></div>';
+					
+					return html;
+				};
 				
-				var hideBtns = D.query('.hide-btn');
-				T.array.each(hideBtns, function(item){
-					T.on(item, "click", function(){
-						var that = this;
-						var paramContainer = D.getAncestorBy(that, function(ancestor){
-							return D.hasClass(ancestor, "method-param") || D.hasClass(ancestor, "event-param")
+		        
+		        window["ontreeChange"] = function(apiName){
+		        	//解除事件
+		        	T.array.each(D.query('h3'), function(item){
+		        		T.un(item, "click");
+		        	});
+		        	var methodItems = D.query('.method-item'),
+						eventItems = D.query('.event-item'),
+						items = methodItems.concat(eventItems);
+					T.array.each(items, function(item){
+						T.un(item, "click");
+					});
+					
+					var hideBtns = D.query('.hide-btn');
+					T.array.each(hideBtns, function(item){
+						T.un(item, "click");
+					});
+		        	//更新页面HTML
+		        	D.query('.main-wrap')[0].innerHTML = renderHTML(apiName);
+				
+					T.array.each(D.query('h3'), function(item){
+						T.on(item, "click", function(){
+							var that = this;
+		    				var className = that.className;
+		    				D.toggleClass(that, "tree-off");
+		    				if(!D.next(that))
+		    					return;
+		    				if(className == "tree-off"){
+		    					D.show(D.next(that));
+		    				}else {
+		    					D.hide(D.next(that));
+		    				}
+		    			});
+					});
+					
+					var methodItems = D.query('.method-item'),
+						eventItems = D.query('.event-item'),
+						items = methodItems.concat(eventItems);
+					T.array.each(items, function(item){
+						T.on(item, "click", function(){
+							var nextSibling = D.next(this);
+							if(/-param/.test(nextSibling.className)){
+								D.getStyle(nextSibling, "display") == 'block' ? D.hide(nextSibling) : D.show(nextSibling);
+							}
 						});
-						D.hide(paramContainer);
 					});
-				});
-				
-				//获取demo的HTML片段
-				var options = {
-		            items: [
-	                        {
-	                            head: "Demo",
-	                            body: "Demo<br />Demo<br />Demo<br />Demo<br />"
-	                        },
-	                        {
-	                            head: "CSS",
-	                            body: "CSS<br />CSS<br />CSS<br />CSS<br />CSS<br />"
-	                        }
-	                    ],
-		            switchType: "click"
-		        };
-		        var tab = new T.ui.Tab(options);
-		        tab.render("J_demo");
-	        }//ontreeChange
-	        
+					
+					var hideBtns = D.query('.hide-btn');
+					T.array.each(hideBtns, function(item){
+						T.on(item, "click", function(){
+							var that = this;
+							var paramContainer = D.getAncestorBy(that, function(ancestor){
+								return D.hasClass(ancestor, "method-param") || D.hasClass(ancestor, "event-param")
+							});
+							D.hide(paramContainer);
+						});
+					});
+					
+					//获取demo的HTML片段
+					var options = {
+			            items: [
+		                        {
+		                            head: "Demo",
+		                            body: "Demo<br />Demo<br />Demo<br />Demo<br />"
+		                        },
+		                        {
+		                            head: "CSS",
+		                            body: "CSS<br />CSS<br />CSS<br />CSS<br />CSS<br />"
+		                        }
+		                    ],
+			            switchType: "click"
+			        };
+			        var tab = new T.ui.Tab(options);
+			        tab.render("J_demo");
+		        }//ontreeChange
+	        })();
 		</script>
 <!-- {include footer.inc} -->
 <!--#include file="footer.inc" -->
