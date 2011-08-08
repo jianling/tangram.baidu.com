@@ -1,0 +1,126 @@
+/**
+ * 文章页通用样式表 v 1.2.0
+ * filename: article.css
+ * author: dron
+ * date: 2008-4-13
+ * contact: ucren.com
+ * change logs:
+ *
+ * 2011-07-27 新加 ul li 图片样式，调整 a:hover 基本样式
+ * 2011-06-24 新增 em,strong 的定义
+ * 2011-06-21 又调整 pre>code 样式
+ * 2011-06-20 调整 pre>code 样式，并强制换行
+ * 2010-08-11 加入列表项目
+ * 2010-08-09 设置 p 的 margin，使之在 reset.css 也能段落隔开
+ * 2010-07-22 新增表格的默认样式，调整 code 的行高
+ * 2010-04-26 修改 h4, h5, h6 字号，使其间隔更大，并对 h1-h6 加行高
+ */
+
+/* 文章块 */
+div.article{ padding: 2em; border: 0; width: auto; font-size: 14px; font-weight: normal; font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif; color: #333; line-height: 23px; }
+
+/* 一些标签 */
+div.article em{ font-style: italic; }
+div.article strong{ font-weight: 700; }
+
+/* 初始化 h1 到 h6 的样式 */
+div.article h1,
+div.article h2,
+div.article h3,
+div.article h4,
+div.article h5,
+div.article h6{ margin: 0; padding: 0; border: 0; font-size: 14px; font-weight: normal; color: #000; }
+
+/* 文章的主标题 */
+div.article h1{ font-size: 24px; font-weight: 700; line-height: 47px; }
+
+/* 文章的副标题 */
+div.article h2{ font-size: 20px; font-weight: 700; line-height: 39px; }
+
+/* 文章的信息栏 */
+div.article h3{ font-size: 12px; }
+
+/* 一级子标题 */
+div.article h4{ font-size: 22px; font-weight: 700; line-height: 35px; }
+
+/* 二级子标题 */
+div.article h5{ font-size: 18px; font-weight: 700; line-height: 31px; }
+
+/* 三级子标题 */
+div.article h6{ font-weight: 700; }
+
+/* 文章正文段落 */
+div.article p{ margin: 1em auto; padding: 0; border: 0; text-indent: 2em; display: block; word-break: break-all; word-wrap: break-word; }
+div.article p.noi{ text-indent: 0; }
+
+/* 代码框 */
+div.article pre{
+	display: block;
+	background-color: #000;
+	padding: 4px 10px;
+	white-space: pre-wrap;       /* CSS-3 */
+	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+	white-space: -pre-wrap;      /* Opera 4-6 */
+	white-space: -o-pre-wrap;    /* Opera 7 */
+	word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+div.article pre code{ display: block; font-family: "Courier New", Tahoma, Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 22px; color: #000; }
+
+/* 图片 */
+div.article img{ margin: 5px; padding: 0; border: 0; }
+
+/* 链接 */
+div.article a{ color: #00f; text-decoration: underline; }
+div.article a:hover{ color: #900; }
+
+/* 缩进样式 m1, m2, m3, m4 */
+div.article .m1{ margin-left: 2em; }
+div.article .m2{ margin-left: 4em; }
+div.article .m3{ margin-left: 6em; }
+div.article .m4{ margin-left: 8em; }
+
+/* 排列样式 al, ac, ar */
+div.article .al{ text-align: left; }
+div.article .ac{ text-align: center; }
+div.article .ar{ text-align: right; }
+
+/* 浮动样式 */
+div.article .fl{ float: left; }
+div.article .fr{ float: right; }
+div.article .fc{ width: 0; height: 0; overflow: hidden; display: block; clear: both; }
+
+/* 颜色样式 cr, cb, cg */
+div.article .cr{ color: red; }
+div.article .cb{ color: blue; }
+div.article .cg{ color: green; }
+div.article .ca{ color: #808080; }
+
+/* 字体样式 */
+div.article .pb{ font-weight: 700; color: #000; }
+div.article .pi{ font-style: italic; }
+div.article .pu{ text-decoration: underline; }
+
+/* 字号管理 */
+div.article .p12{ font-size: 12px; line-height: 23px; }
+div.article .p14{ font-size: 14px; line-height: 27px; }
+div.article .p16{ font-size: 16px; line-height: 31px; }
+div.article .p18{ font-size: 18px; line-height: 35px; }
+div.article .p20{ font-size: 20px; line-height: 39px; }
+div.article .p22{ font-size: 22px; line-height: 43px; }
+
+/* 表格 */
+div.article table{ border-collapse: collapse; margin: 0; padding: 0; }
+div.article table th, td{ padding: 5px; border: 1px solid #ccc; border-collapse: collapse; text-align: left; }
+div.article table th{ font-weight: 700; background-color: #f6f6f6; }
+
+/* 列表 */
+div.article ul, div.article ol, div.article li{ margin: 0; padding: 0; border: 0; }
+div.article ul, div.article ol{ padding-left: 2em; }
+div.article ul li{ list-style-type: disc; }
+div.article ol li{ list-style-type: decimal; }
+
+div.article ul.img{ margin: 10px 3px; }
+div.article ul.img li{ list-style-type: none; line-height: 20px; padding-left: 20px; background: url(../images/dot.gif) no-repeat -1px 2px; }
+
+/* 其它 */
+div.article hr{ width: 100%; height: 1px; border: 0; background-color: #808080; margin: 0; padding: 0; }

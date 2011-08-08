@@ -3,9 +3,14 @@ var conf = {
         type: 'class',//class|method|field
         'class': 'baidu.ui.Carousel'
     },
-    demoType: [{key: 'default', val: 'Carousel核心例子'}, {key: 'Carousel$btn', val: 'Carousel按钮例子'}, {key: 'Carousel$cycle', val: 'Carousel循环'}],
+    demoType: [{key: 'default', val: 'Carousel核心例子'}, {key: 'Carousel$btn', val: 'Carousel按钮例子'}],
     'default': {
-        options: '{contentText: [{content: "text~0"}, {content: "text~1"}, {content: "text~2"}, {content: "text~3"}], supportTable: false, isCycle: false, isAutoScroll: false, showButton: false}',
+        pageConf: {
+            options: '{contentText: [{content: "text~0"}, {content: "text~1"}, {content: "text~2"}, {content: "text~3"}], supportTable: false, isCycle: false, isAutoScroll: false, showButton: false}',
+//            target: 'x',
+            html: '<div id="x" style="width:100px; height:100px; border:red solid 1px;"></div>',
+            jsCode: 'var x = 1'
+        },
         currentIndex: {
             type: 'button',
             defaultValue: 'getCurrentIndex()',
@@ -40,19 +45,21 @@ var conf = {
             event: {
                 eventName: 'onclick',
                 handler: function(c){
-                    alert(this.getItem(c).innerHTML);
+                    var item = this.getItem(c);
+                    item ? alert(item.innerHTML)
+                        : alert(c + '对于节点还未滚动到可视区');
                 }
             }
         },
         scrollIndex: {
             type: 'text',
-            defaultValue: '0',
+            defaultValue: '2',
             size: 1,
             maxlength: 1
         },
         scrollOffset: {
             type: 'text',
-            defaultValue: '0',
+            defaultValue: '1',
             size: 1,
             maxlength: 1
         },
@@ -124,19 +131,12 @@ var conf = {
     
     
     'Carousel$btn': {
-        parameter: '',
-        'a': {type: 'select', defaultValue: 'c', data: {key: ['a', 'b', 'c'], val: ['a', 'b', 'c']}, event: {eventName: 'onchange', handler: ''}},
-        'b': {type: 'button', defaultValue: 'x', event: {eventName: 'onclick', handler: ''}}
-    },
-    'Carousel$cycle': {
-        paramenter: '',
-        'c': {type: 'checkbox', defaultValue: 'a', data: {key: ['a', 'b', 'c'], val: ['a', 'b', 'c']}, event: {eventName: 'onchange', handler: ''}},
-        'd': {type: 'button', defaultValue: 'x', event: {eventName: 'onclick', handler: ''}}
+        pageConf: {
+            options: '{contentText: [{content: "text~0"}, {content: "text~1"}, {content: "text~2"}, {content: "text~3"}], supportTable: false, isCycle: false, isAutoScroll: false, showButton: true}'
+        }
     },
     
     groups: {
-        'default': [['currentIndex', 'totalCount'], ['itemParam', 'item'], ['scrollIndex', 'scrollOffset', 'scrollDirection', 'scrollTo'], ['prev', 'next'], ['isFirst', 'isLast'], ['focusIndex', 'focus']],
-        'Carousel$btn': ['a', 'b'],
-        'Carousel$cycle': ['c', 'd']
+        'default': [['currentIndex', 'totalCount'], ['itemParam', 'item'], ['scrollIndex', 'scrollOffset', 'scrollDirection', 'scrollTo'], ['prev', 'next'], ['isFirst', 'isLast'], ['focusIndex', 'focus']]
     }
 };

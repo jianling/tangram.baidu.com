@@ -1,4 +1,4 @@
-<tr></tr><!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -31,7 +31,7 @@
     text-align: center;
     margin: 5px;
     padding: 5px;
-    border: yellow dotted 1px;
+    border: blue dotted 1px;
 }
 
 .tangram-democonsole-combobox {
@@ -47,7 +47,7 @@
 
 
 </style>
-<script type='text/javascript' src='../js/download/tangram-1.3.9.core.js'></script>
+<script type='text/javascript' src='../js/download/tangram-1.3.9.js'></script>
 <script type='text/javascript'>
 (function(){
     var array = [],
@@ -63,7 +63,13 @@
 </head>
 <body>
 <div id='demConsole' style='width:80%; height:500px; border:red solid 1px;'></div>
+
+<input type='button' value='getCode()' onclick='alert(demo.getCode());'/>
+
 </body>
+<script id='demoScript' type='text/javascript'>
+    
+</script>
 <script type='text/javascript'>
 var demo = new baidu.ui.DemoConsole(conf);
     demo.render('demConsole');

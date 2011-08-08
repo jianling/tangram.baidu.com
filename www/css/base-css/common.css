@@ -1,0 +1,28 @@
+html, body{
+	font: 12px/1.5 Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	width: 100%;
+	height: 100%;
+}
+
+.clearfix:after{
+	content: "/20";
+	display: block;
+	height: 0;
+	overflow: hidden;
+	clear: both;
+}
+
+.clearfix{
+	zoom: 1;
+}
+
+.Licheelite-basicslippage-layer{
+	overflow: hidden;
+	line-height: 0;
+}
+.Licheelite-basicslippage-inner{
+	text-decoration: none;
+	text-align: center;
+	font-size: 14px;
+	display: block;
+}
