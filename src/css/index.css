@@ -1,16 +1,6 @@
-﻿{include reset.css}
-{include common.css}
-{include article.css}	
-
-
 /**
- * 	@import "./reset.css";
- * 	@import "./common.css";
- * 	@import "./article.css";
+ * 	首页样式
  */
-
-
-/* by chengyang*/
 a,
 div.article a {
 	color: #0056A9;
@@ -63,6 +53,7 @@ div.article .tangram-desc li {
 }
 .content .box a.doc-link:hover {
 	background-position:0 -39px;
+	color: #FFF;
 }
 div.article p.project-list {
 	clear:both;
