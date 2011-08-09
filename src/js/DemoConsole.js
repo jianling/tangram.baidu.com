@@ -8,7 +8,7 @@
         uiType: 'democonsole',
         tplDOM: '<div id="#{id}" class="#{class}"><div id="#{consoleId}" class="#{consoleClass}"><div align="center" class="#{comboboxClass}"><select id="#{demoType}" class="#{demoTypeClass}" onchange="#{handler}">#{content}</select></div>#{defaultContent}</div><div id="#{panelId}" class="#{panelClass}"></div></div>',
         tplHTML: '<!DOCTYPE html>\n<html>\n<head>\n<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">\n<title>#{packages}</title>\n<link type="text/css" rel="stylesheet" href="#{cssPath}/default.css"/>\n<script type="text/javascript" src="../js/download/tangram-1.3.9.core.js"></script>\n<script type="text/javascript" src="../js/fragment/Tangram-component/src/import.php?f=#{packages}.*"></script>\n</head>\n<body>\n#{content}\n</body>\n<script type="text/javascript">\n#{jscode}\n</script>\n</html>',
-        
+
         getString: function(){
             var me = this,
                 demoType = me.demoType,
@@ -32,7 +32,7 @@
                 defaultContent: me.getDemoString(demoType[0].key)
             });
         },
-        
+
         getEntityString: function(typeId, key){
             var me = this,
                 entity = me[typeId][key],
@@ -67,8 +67,8 @@
                 foot: is ? '</select>' : ''
             }) : array.join('&nbsp;');
         },
-        
-        
+
+
         getDemoString: function(typeId){
             var me = this,
                 groups = me.groups[typeId],
@@ -89,7 +89,7 @@
                 content: array.join('')
             });
         },
-        
+
         _createInstance: function(typeId){
             var me = this,
                 clazz = eval(me.clazz[me.clazz.type]),
@@ -103,7 +103,7 @@
                 me._instance.render(pageConf.target || container);
             }
         },
-        
+
         _disposeInstance: function(){
             var me = this,
                 tplPanel = '<div id="#{panelId}" class="#{panelClass}"></div>';
@@ -120,7 +120,7 @@
                 me.getPanelContainer().innerHTML = '';
             }
         },
-        
+
         render: function(target){
             var me = this, script;
             if (!target || me.getMain()) {return;}
@@ -132,7 +132,7 @@
             baidu.dom.insertHTML(me.renderMain(target), 'beforeEnd', me.getString());
             me._createInstance(me.demoType[0].key);
         },
-        
+
         _onChangeHandler: function(){
             var me = this,
                 defaultKey = me.demoType[0].key,
@@ -146,7 +146,7 @@
             me._disposeInstance();
             me._createInstance(val);
         },
-        
+
         _onEntityHandler: function(evt, typeId, key){
             var me = this,
                 entity = me[typeId][key],
@@ -161,27 +161,27 @@
             });
             fn.apply(me._instance, param);
         },
-        
+
         getDemoInstance: function(){
             return this._instance;
         },
-        
+
         getSelect: function(){
             return baidu.dom.g(this.getId('demoType'));
         },
-        
+
         getPanelContainer: function(){
             return baidu.dom.g(this.getId('panel'));
         },
-        
+
         getConsoleContainer: function(){
             return baidu.dom.g(this.getId('console'));
         },
-        
+
         getScript: function(){
             return baidu.dom.g(this.getId('demoScript'));
         },
-        
+
         getCode: function(){
             var me = this,
                 packages = me.clazz[me.clazz.type],

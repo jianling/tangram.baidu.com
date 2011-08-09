@@ -1,0 +1,20 @@
+{include base-css/tree.css}
+
+div.custompage .content{
+	float: left;
+	width: 650px;
+}
+
+div.custompage .sidebar{
+	float: left;
+	width: 200px;
+}
+
+#filetree{
+	margin: 0;
+	line-height: 20px;
+}
+
+#filetree a{
+	font-size: 14px;
+}

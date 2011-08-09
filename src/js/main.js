@@ -99,6 +99,19 @@ void function(){
 		FlyScript.load(getpath("js/simplemenu"), getpath("js/lichee"), function(simplemenu, Lichee){
 			var E = Lichee.Element, Q = Lichee.queryElement;
 
+			var downMenu = new simplemenu({
+				referrerElement: "menu-down",
+				direction: "down",
+				datas: [
+					{ name: "常规下载", link: "download.html", target: "_self" },
+					{ name: "自定义下载", link: "custom.html", target: "_self" }
+				],
+				handle: function(conf){
+					window.open(conf.link, conf.target);
+				}
+			});
+			downMenu.render();
+
 			var docMenu = new simplemenu({
 				referrerElement: "menu-doc",
 				direction: "down",

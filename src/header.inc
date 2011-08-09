@@ -30,7 +30,7 @@
 			</div>
 			<div class="nav-texts nav-dropmenu">
 				<div class="item" href="index.html"><span>首 页</span><span class="shadow">首 页</span></div>
-				<div class="item" href="download.html"><span>下 载</span><span class="shadow">下 载</span></div>
+				<div class="item" href="download.html" id="menu-down"><a></a><span>下 载</span><span class="shadow">下 载</span></div>
 				<div class="item" href="documentation.html" id="menu-doc"><a></a><span>文 档</span><span class="shadow">文 档</span></div>
 				<div class="item" id="menu-more"><a></a><span>更 多</span><span class="shadow">更 多</span></div>
 			</div>
