@@ -107,7 +107,7 @@ module.declare(function(require, exports, module){
 				});
 
 				this.disposeEvent();
-				this.disposeSubMenus(subMenus);
+				this.disposeSubMenus(subMenus, this.handle);
 
 				this.rendered = true;
 			},
@@ -167,9 +167,10 @@ module.declare(function(require, exports, module){
 //					this.referrerElement.delClass("simplemenu-item-expanded");
 			},
 
-			disposeSubMenus: function(subMenus){
+			disposeSubMenus: function(subMenus, handle){
 				this.subMenus = {};
 				Lichee.each(subMenus, function(conf, id){
+				    conf.handle = handle;
 					this.subMenus[id] = new simplemenu(conf);
 					this.subMenus[id].setParent(this);
 				}.bind(this));
