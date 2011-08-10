@@ -81,6 +81,7 @@ function copyFiles(){
 	cp $basePath"/Tangram-base/release/core_release_src.js" $downloadFolder"/tangram-"$tangramVersion".core.source.js"
 	cp $basePath"/Tangram-base/release/core_release.js" $downloadFolder"/tangram-"$tangramVersion".core.js"
 	cp $basePath"/Tangram-base/release/tangram_all.js" $downloadFolder"/tangram-all.js"
+	cp $basePath"/Tangram-base/release/all_release.js" $downloadFolder"/tangram.js"
 	cd -
 }
 
