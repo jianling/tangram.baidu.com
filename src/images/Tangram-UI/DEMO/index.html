@@ -1,0 +1,93 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+        <title>UI使用教程</title> 
+        <script type="text/javascript" src="tangram.js" charset="utf-8"></script> 
+        <link type='text/css' rel='stylesheet' href='Silder.css'/> 
+        <style type="text/css">
+			
+			body{
+				background:#333;
+				font-size:14px;color:#FFF;
+			}
+			.container{
+				/* 中间内容盒子 */
+				width:800px;height:400px;background:#D00;
+				position:absolute;
+				margin:-200px 0px 0px -400px;
+				left:50%;top:50%;
+				overflow:hidden;
+			}
+			.silder{
+				/*	 滑条容器	*/
+				width:800px;height:30px;/*background:#D00;*/
+				position:absolute;
+				margin:210px 0px 0px -400px;
+				left:50%;top:50%;
+			}
+			
+			.panel{
+				/*	图片容器面板的父容器	*/
+				width:800px;height:auto;min-height:400px;background:#CCC;
+				position:absolute;
+				top:0px;left:0px;
+			}
+			.panel .imgs{
+				/*	图片容器面板	*/
+				width:100%;height:400px;position:relative;
+			}
+			#info{
+				width:100%;height;20px;line-height:20px;text-align:center;position:absolute;left:0px;bottom:-20px;
+			}
+			.bgc00{background:#c00}
+			.bg0c0{background:#0c0}
+			.bg00c{background:#00c}
+			.bgcc0{background:#cc0}
+			.bg0cc{background:#0cc}
+
+        </style> 
+    </head> 
+    <body>
+		<div class="container" id="Parent">
+			<div class="panel" id="Panel">
+				<div class="imgs bgc00">1</div>
+				<div class="imgs bg0c0">2</div>
+				<div class="imgs bg00c">3</div>
+				<div class="imgs bgcc0">4</div>
+				<div class="imgs bg0cc">5</div>
+			</div>
+		</div>
+		<div class="silder">
+			 <div id="SilderRender"></div>
+			 <div id="info">info</div>
+		</div>
+		<script type="text/javascript">
+			var slider = new T.ui.Slider({
+				skin: "tangram-decorator",
+				decorator: [
+					{
+						type: "box",
+						tpl: {
+							box: "<div #{class}></div><div #{class} id='#{innerWrapId}'></div><div #{class}></div>"
+						}
+					}
+				],
+				onslideclick: function(e){
+					this.update();
+					updatePanel(this.value);
+				},
+				onslidestop: function(e){
+					updatePanel(this.value);
+				}
+			});
+			function updatePanel(v){
+				var y_pro = ( T.g('Panel').clientHeight - T.g('Parent').clientHeight ) / 100 ;
+				var m_y = -(v*y_pro);
+				T.fx.moveTo('Panel',[0,m_y])
+				T.g('info').innerHTML = parseInt(v)+'/100'
+			}
+			slider.render("SilderRender");
+        </script>
+	</body> 
+</html> 
