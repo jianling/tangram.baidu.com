@@ -197,10 +197,12 @@
                 pageConf = demoConf.pageConf,
                 jsCode = [],
                 param = [],
-                code;
+                opts, code;
             pageConf.jsCode && jsCode.push(pageConf.jsCode);
             if(me.clazz.type == 'class'){
-                jsCode.push('var c = new '+ me.clazz[me.clazz.type] +'('+ (pageConf.options || '{}') +');\n c.render("'+ (pageConf.target || 'demoId') +'")');
+                opts = pageConf.options ? eval('(' + pageConf.options + ')') : {};
+                jsCode.push('var c = new '+ me.clazz[me.clazz.type] +'('+ (pageConf.options || '{}') +');');
+                !opts.autoRender && jsCode.push('c.render("'+ (pageConf.target || 'demoId') +'");');
             }else{
                 baidu.object.each(demoConf, function(item, key){
                     if(item.event){
