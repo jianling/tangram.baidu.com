@@ -1,0 +1,98 @@
+{include ../header.inc}
+<!--include file="./header.inc"-->
+<script src="../js/download/tangram.js" charset="utf-8"></script>
+<script src="../js/CodeStyle.js" charset="utf-8"></script>
+		<script type="text/javascript">
+			var pageConfig = { name: "download", prepath: "docs/" };
+		</script>
+		<div class="main-header"><span>Tangram-Component Behavior</span><span class="shadow">Tangram-Component Behavior</span></div>
+		<div class="main-body articlepage article">	
+
+			
+			<h1 class="ac">Tangram-Component Behavior</h1>
+<h2>1 Behavior简介</h2>
+<p>用户在人机交互中，会存在这么一类操作，这类操作可能会经常出现在不同的UI组件中。我们把这一类经常性的在UI组件中重复出现的操作抽象并定义为行为。比如：draggable，拖拽行为，它可能会出现在Dialog组件中被用于组件的拖拽，也可以出现在Tree组件中用于Tree节点的拖拽，他们共同用来描述一种用户的拖拽行为；statable，状态行为，它可能出现在Button组件中用来实现按钮的各种状态，也可以出现在Table组件中用来实现各行列的鼠标状态，他们共同描述的是用户的鼠标行为给UI组件带来的状态变化。</p>
+<h2>2 createUI和Behavior的关系</h2>
+<p>baidu.ui.createUI接口作为UI组件构造函数的生成器，主要功能就是对用户传入的构造函数进行封装并返回出新构造器，该新构造器继承自baidu.lang.Class，baidu.ui.Base，还有用户指定的Behavior接口。所以，当需要创建一个新的UI构造器时，都推荐使用createUI接口来建立。</p>
+<h2>3 在UI组件中如何使用behavior</h2>
+<p>该小节的内容主要是总括性的讲述一下behavior在UI组件的使用，由于目前的behavior抽象出来的行为功能各不相同，设计原理也不尽相同，比较难以抽象成为一种统一的表述方式。所以对该节内容，重点是关注使用的方法，至于各个行为的功能和设计原理就需要靠经验来理解了。</p>
+<p>关于如何使用behavior，其实比较简单，只需要通过baidu.ui.createUI接口创建一个UI组件，定义一个名称和某个行为的名称一样的成员变量，并且赋一个boolean值就可以，这样的定义在createUI接口中处理行为的程序中会自动的将该行为对应的接口复制到UI组件中，最后包装出来的UI组件便有了行为的所有接口，当然，由于这个过程是一个复制的过程，所以在新定义的UI组件中，应当尽量避免后来声明的接口名称和行为接口名称一致的情况，定义一致的名称，将会导致行为的接口被UI组件后来定义的接口覆盖，那将会导致程序的执行结果出错或是达不到预期的效果了。</p>
+<p>当behavior被继承到新的UI组件以后，它依据程序设计的不同，可以有不同的运行方式，比如初始化的运行方式，这种方式一般是在UI组件被创建以后，通过onload事件来触发行为的功能，例如draggable描述的是拖拽行为，当UI组件被实例化时，onload事件被触发，对应的拖拽的功能也被附加到DOM元素上，这样该元素就绑定了拖拽行为了。另一种方式是行为只提供接口，通过直接调用接口来完成功能，例如statable，提供一系列的事件名称和接口，可以通过直接调用接口来更改元素的状态，或是通过接口将更改状态的功能注册到DOM元素上，依据在dom元素上的鼠标事件来触发状态的更改。</p><h2>4 一个简单的例子</h2>
+<p>以下使用一个statable的行为例子来描述一下使用过程。例如，我们打算开发这样一个按钮组件：</p>
+<ul>
+  <li>	组件以一个div容器来模拟一个按钮；  </li>
+
+      <li> 按钮需要有鼠标的移入移出，鼠标按钮按下，鼠标按钮抬起等一般的状态；</li>
+      <li> 按钮需要额外加入一个双击触发的事件。 </li>
+</ul>
+<p>分析以上的需求，我们可以使用statable来轻松完成关于所有的状态变化的功能，statable已经内置了关于鼠标的移入移出和鼠标按钮的按下抬起的状态处理，因此可以设计几个关键点：</p>
+<ul>
+  <li>	使用statable的_getStateHandlerString内部方法来为按钮注册各种默认的鼠标状态；</li>
+  <li> 关于双击事件在默认的statable中没有被定义，可以通过addState接口来添加一个双击事件。 </li>
+</ul>
+明确了以上几个关键点，则这个组件大体可以做成以下这个样子：
+
+
+
+					
+<table width="640" border="0" cellpadding="5" cellspacing="1">
+  <tr>
+    <th align="left" scope="col">  </th>
+  </tr>
+  <tr>
+    <td bgcolor="#DDDDDD" class="CodeStyle" type="js"><p>baidu.ui.Button = baidu.ui.createUI(function(options){
+		  <br>//这里是构造函数<br>
+		  }).extend({<br>
+		  uiType: 'button',<br>
+		  statable: true,//启用statable<br>
+		  label: 'Button',//默认显示在按钮上的标签文字<br>
+		  <br>
+		  getString: function(){<br>
+		  var me = this,<br>
+		  tpl = '&lt;div id=&quot;#{divId}&quot; class=&quot;#{class}&quot; #{handler}&gt;&lt;span id=&quot;#{labelId}&quot;&gt;#{content}&lt;/span&gt;&lt;/div&gt;';<br>
+		  return baidu.string.format(tpl, {<br>
+		  divId: me.getId(),//通过一个<br>
+		  labelId: me.getId('label'),<br>
+		  'class': me.getClass(),<br>
+		  content: me.label,<br>
+		  handler: me._getStateHandlerString()<br>
+		  });<br>
+		  },</p>
+		<p> _mouseHandler: function(type){<br>
+		  var me = this,<br>
+		  cssName = (type == 'mouseover'<br>
+		  || type == 'mouseout') ? 'over' : 'click';<br>
+		  (type == 'mouseover'<br>
+		  || type == 'mousedown') ? baidu.dom.addClass(me.getBody(), me.getClass(cssName))<br>
+		  : baidu.dom.removeClass(me.getBody(), me.getClass(cssName));<br>
+		  me.dispatchEvent(type);<br>
+		  },</p>
+		<p> _onDblclick: function(evt){//双击时的处理函数<br>
+		  alert('dblclick trigger');<br>
+		  },</p>
+		<p> setLabel: function(content){<br>
+		  baidu.dom.g(this.getId('label')).innerHTML = content;<br>
+		  },</p>
+		<p> render: function(target){<br>
+		  var me = this;<br>
+		  if (!target || me.getMain()) {return;}<br>
+		  me.addState('dblclick', 'dblclick', me._onDblclick);//使用行为的接口自定义一个双击事件<br>
+		  baidu.dom.insertHTML(me.renderMain(target), 'beforeEnd', me.getString());<br>
+		  }<br>
+		  });<br>
+		  var btn = new baidu.ui.Button();<br>
+		  btn.render('componentId');<br>
+		</p>
+
+
+</td>
+</tr>
+</table>
+
+
+<br/>
+<input type='button' value='运行代码' onclick='window.open("../images/Tangram-Component-Behavior/doc-demo.html", "_blank");'>
+
+</div>
+{include ../footer.inc}
+<!-- include file="footer.inc" -->

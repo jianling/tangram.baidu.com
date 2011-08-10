@@ -1,0 +1,270 @@
+{include ../header.inc}
+<!--include file="./header.inc"-->
+<script src="../js/download/tangram.js" charset="utf-8"></script>
+<script src="../js/CodeStyle.js" charset="utf-8"></script>
+		<script type="text/javascript">
+			var pageConfig = { name: "download", prepath: "docs/" };
+		</script>
+		<div class="main-header"><span>Tangram Component 入门指南教程</span><span class="shadow">Tangram Component 入门指南教程</span></div>
+		<div class="main-body articlepage article">	
+<h1 class="ac">Tangram Component 入门指南教程 </h1>
+<h2>1 Tangram Component简介 </h2>
+<p>Tangram是一个使用简单，功能丰富的Javascrip框架，她分为Component和Base两部分。Component主要包含了UI组件和FX动画特效，本教程的目标是使用Component中的组件快速构建一个应用，本文要求读者了解HTML(DOM)和CSS的一些常识。 </p>
+<p><img  src="../images/Tangram-Component/image001.jpg"></p>
+<h2>2 设计一个案例需求</h2>
+<h3>2.1 页面效果</h3>
+<p>我们从百度图片搜索中看到这样一个页面，然后尝试分析这个页面应用到效果的。页面效果如图：</p>
+<p><img  src="../images/Tangram-Component/image002.jpg" /></p>
+<p>忽略页面中的搜索、查看原图等无关信息，着重关注页面的特效，也就是将搜索结果以可滚动的缩略展现，并且单击缩略图的时候，左侧区域将显示对应的大图。</p>
+<h3>2.2 归纳需求点</h3>
+<p>简要需求点归纳如下：</p>
+<ul>
+  <li>定义一组数据，模拟搜索结果 </li>
+  <li>展示搜索结果在右侧边成为一个可以滚动的缩略图列表 </li>
+  <li>当单击某个缩略图的时候左侧的原有内容将替换成缩略图相对应的大图。 </li>
+</ul>
+<h2>3 案例规划</h2>
+<h3>3.1 布局设计</h3>
+<p>根据需求点中的需求，对页面的布局做出设计设计：</p>
+<p><img  src="../images/Tangram-Component/image003.jpg" /> </p>
+<p>Tangram Component UI中的Carousel组件可以支持直接显示红色区域内的效果，所以，布局设计不需要考虑红色区域内的内容。</p>
+<h3>3.2 效果功能规划</h3>
+<p>红色区域内的效果Carousel组件，在进行实例化后（具体代码请参阅本文4.3节），传入的参数中可以加入名为“onitemclick”的参数，值类型为function；该参数定义当成员被单击后进行回调的函数。该回调函数传入参数evt 触发事件的对象。根据evt可以获得当前的Carousel组建的成员列表信息、当前点击的成员序号，据此我们可以修改左侧内容。</p>
+<h3>3.3 素材资源</h3>
+<p>归纳我们需要哪些素材资源，清单如下：</p>
+<table width="580" border="0" cellpadding="0" cellspacing="1" bgcolor="#000000">
+  <tr>
+    <th width="30" height="30" align="center" bgcolor="#FFFFFF" scope="col">&nbsp;</th>
+    <th width="190" bgcolor="#FFFFFF" scope="col"> 文件 </th>
+    <th bgcolor="#FFFFFF" scope="col"> 说明 </th>
+  </tr>
+  <tr>
+    <td height="30" align="center" bgcolor="#FFFFFF">1</td>
+    <td bgcolor="#FFFFFF"> /index.html </td>
+    <td bgcolor="#FFFFFF"> 布局的<span lang="EN-US" xml:lang="EN-US">HTML</span>代码、<span lang="EN-US" xml:lang="EN-US">CSS</span>代码 </td>
+  </tr>
+  <tr>
+    <td height="30" align="center" bgcolor="#FFFFFF">2</td>
+    <td bgcolor="#FFFFFF"> /tangram.js </td>
+    <td bgcolor="#FFFFFF"> 包含<span lang="EN-US" xml:lang="EN-US">Carousel</span>组件的<span lang="EN-US" xml:lang="EN-US">Tangram</span>框架脚本文件 </td>
+  </tr>
+  <tr>
+    <td height="30" align="center" bgcolor="#FFFFFF">3</td>
+    <td bgcolor="#FFFFFF"> /Carousel.css </td>
+    <td bgcolor="#FFFFFF"> 包含<span lang="EN-US" xml:lang="EN-US">Carousel</span>组件需要用到的样式 </td>
+  </tr>
+  <tr>
+    <td height="30" align="center" bgcolor="#FFFFFF">4</td>
+    <td bgcolor="#FFFFFF"> /Carousel.png </td>
+    <td bgcolor="#FFFFFF"> 包含<span lang="EN-US" xml:lang="EN-US">Carousel</span>组件需要用到的图片素材（<span lang="EN-US" xml:lang="EN-US">sprit</span>处理） </td>
+  </tr>
+  <tr>
+    <td height="30" align="center" bgcolor="#FFFFFF">5</td>
+    <td bgcolor="#FFFFFF"> /echi/*.jpg </td>
+    <td bgcolor="#FFFFFF"> 展示图片的资源文件，<span lang="EN-US" xml:lang="EN-US">[01~12]. jpg 12</span>个图片资源 </td>
+  </tr>
+</table>
+<h2>4 实施</h2>
+<h3>4.1 Carousel组件资源</h3>
+<h4>4.1.1 Carousel组件的脚本文件</h4>
+<p>方法一： </p>
+<ul>
+  <li> 输入<a href="http://tangram.baidu.com/codesearch/codesearch.html#tangram-component_stable|modules;baidu.ui.Carousel.Carousel$autoScroll;baidu.ui.Carousel.Carousel$btn;baidu.ui.Carousel.Carousel$cycle;baidu.ui.Carousel.Carousel$fx;baidu.ui.Carousel.Carousel$splice;baidu" target="_blank">URL</a>导出</li>
+  <li> 然后单击导出，将文件下载到本地。 </li>
+</ul>
+<p>方法二：</p>
+<ul>
+  <li>打开<a href="http://tangram.baidu.com/codesearch/codesearch.html" target="_blank">CodeSearch</a>页面</li>
+  <li> 在左侧的代码树上勾选baidu.ui.Carousel；Carousel是一个包，实际勾选则会勾选内部所有的文件，文件中带有 ”$” 符号的是这个组件支持的插件，可选。同时一些其他组件被勾选为黄色的方块，通常这表明当前组件需要依赖这些代码。</li>
+</ul>
+<p><img  src="../images/Tangram-Component/image004.jpg"></p>
+<h4>4.1.2 Carousel组件样式</h4>
+<p>Carousel.css文件定义了tangram.ui.Carousel组件的公共样式，以及自定义的vertical皮肤内容，文件内容从此示例页面中修改而来，具体代码如下： </p>
+<table width="640" border="0" cellpadding="5" cellspacing="1">
+  <tr>
+    <th align="left" scope="col">Carousel.css</th>
+  </tr>
+  <tr>
+    <td bgcolor="#DDDDDD" class="CodeStyle">/*tangram.ui.Carousel*/<br />
+      /*public*/<br />
+      .tangram-carousel{<br />
+      position : relative;<br />
+      overflow : hidden;<br />
+      }<br />
+      .tangram-carousel-scroll {<br />
+      position : absolute;<br />
+      }<br />
+      .tangram-carousel-item{<br />
+      cursor : pointer;<br />
+      margin: 5px 0 5px 5px;<br />
+      _margin: 5px 10px 5px 10px;<br />
+      padding: 9px; <br />
+      border: 1px solid #CCCCCC;<br />
+      background-color: white;<br />
+      }<br />
+      .tangram-carousel-item-focus {<br />
+      border: red solid 1px;<br />
+      }<br />
+      .tangram-carousel-btn-base{<br />
+      background: url(Carousel.png);<br />
+      width: 95px;<br />
+      height:26px;<br />
+      text-align: center;<br />
+      font-size: 0px;<br />
+      -webkit-text-size-adjust: none;<br />
+      font-size:1px;<br />
+      }<br />
+      /* vertical皮肤 */<br />
+      .tangram-carousel-vertical-btn-prev{<br />
+      display:block;<br />
+      margin:0px auto;<br />
+      background-position: 0 0;<br />
+      }<br />
+      .tangram-carousel-vertical-btn-next{<br />
+      display:block;<br />
+      margin:0px auto;<br />
+      background-position: 0 -26px;<br />
+      }<br />
+      a.tangram-carousel-vertical-btn-prev:hover{<br />
+      background-position: 0px -50px;<br />
+      }<br />
+      a.tangram-carousel-vertical-btn-next:hover{<br />
+      background-position: 0px -76px;<br />
+      }</td>
+  </tr>
+</table>
+<h4>4.1.3 Carousel组件图片素材</h4>
+<p>上文Carousel.css中btn-base的样式定义了一个Carousel.png图片文件为背景，即：上下滚动按钮的背景图片。图片素材经过Sprit处理后如下： </p>
+<p><img  src="../images/Tangram-Component/image005.gif"></p>
+<h3>4.2 页面布局</h3>
+<p>根据案例规划中的布局设计图，我们编写出相应的HTML和CSS代码，同时引入Carouse资源文件。代码如下：</p>
+<table width="640" border="0" cellpadding="5" cellspacing="1">
+  <tr>
+    <th align="left" scope="col">index.html（不包括特效代码）</th>
+  </tr>
+  <tr>
+    <td bgcolor="#DDDDDD" class="CodeStyle">&lt;!DOCTYPE html&gt; <br />
+        &lt;html&gt; <br />
+        &lt;head&gt; <br />
+        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt; <br />
+        &lt;title&gt;用Tangram Component的Carousle组件编写一个幻灯片应用&lt;/title&gt; <br />
+        &lt;script type=&quot;text/javascript&quot; src=&quot;tangram.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt; <br />
+        &lt;link type='text/css' rel='stylesheet' href='Carousel.css'/&gt; <br />
+        &lt;style type=&quot;text/css&quot;&gt; <br />
+        body{<br />
+        background:#333<br />
+        }<br />
+        .container{<br />
+        /* 中间内容盒子，浮动居中 */<br />
+        width:620px;height:600px;background:#EEE;<br />
+        position:absolute;<br />
+        margin:-300px 0px 0px -400px;<br />
+        left:50%;top:50%;<br />
+        padding-right:180px;<br />
+        }<br />
+        .img-con{<br />
+        /* 左侧展示大图容器 */<br />
+        width:600px;height:580px;background:#FFF;<br />
+        text-align:center;<br />
+        position:relative;<br />
+        margin:10px 0 0 10px;<br />
+        }<br />
+        .img-con img{<br />
+        /* 左侧展示图样左 */<br />
+        width:590px;height:570px;<br />
+        border:5px solid #FFF<br />
+        }<br />
+        .carousel-con{<br />
+        /* 右侧缩略图列表容器 */<br />
+        width:174px;<br />
+        height:590px;<br />
+        position:absolute;<br />
+        top:20px;right:5px;<br />
+        }<br />
+        .carousel-con img{<br />
+        /* 定义缩略图中图像的大小 */<br />
+        width: 140px; height: 140px; <br />
+        padding:0px;margin:0px<br />
+        }
+      <p> &lt;/style&gt; <br />
+        &lt;/head&gt; <br />
+        &lt;body&gt;<br />
+        &lt;div class=&quot;container&quot;&gt;<br />
+        <br />
+        &lt;div id=&quot;viewImg&quot; class=&quot;img-con&quot;&gt; <br />
+        <br />
+        &lt;/div&gt;<br />
+        <br />
+        &lt;div id=&quot;CarouselId&quot; class=&quot;carousel-con&quot;&gt;&lt;/div&gt; <br />
+        <br />
+        &lt;/div&gt;<br />
+        <br />
+        &lt;/body&gt;</p>
+      <p>&lt;/html&gt;</p>
+	  </td></tr>
+	  </table>
+	  
+      <h3>4.3 嵌入特效代码</h3>
+       <p> 以下内容是本特效的关键，下面的代码描述了如何使用Carousel组件，请注意代码中的注释，另外，我们应把代码插入body标签结束之前。具体代码如下：
+      </p>
+	  
+<table width="640" border="0" cellpadding="5" cellspacing="1">
+  <tr>
+    <th align="left" scope="col">index.html（body标签结束之前插入该段Script）</th>
+  </tr>
+  <tr><td bgcolor="#DDDDDD" class="CodeStyle"><p> &lt;script type=&quot;text/javascript&quot;&gt;<br />
+        var options = { <br />
+        skin: &quot;tangram-carousel-vertical&quot;,      //    定义 Carousel 组件的皮肤<br />
+        <br />
+        contentText: [ <br />
+        {content: &quot;&lt;img src='echi/01.jpg'  /&gt;&quot;}, <br />
+        {content: &quot;&lt;img src='echi/02.jpg'  /&gt;&quot;}, <br />
+        {content: &quot;&lt;img src='echi/03.jpg'  /&gt;&quot;},<br />
+        {content: &quot;&lt;img src='echi/04.jpg'  /&gt;&quot;}, <br />
+        {content: &quot;&lt;img src='echi/05.jpg'  /&gt;&quot;}, <br />
+        {content: &quot;&lt;img src='echi/06.jpg'  /&gt;&quot;}, <br />
+        {content: &quot;&lt;img src='echi/07.jpg'  /&gt;&quot;}, <br />
+        {content: &quot;&lt;img src='echi/08.jpg'  /&gt;&quot;}, <br />
+        {content: &quot;&lt;img src='echi/09.jpg'  /&gt;&quot;}, <br />
+        {content: &quot;&lt;img src='echi/10.jpg'  /&gt;&quot;}, <br />
+        {content: &quot;&lt;img src='echi/11.jpg'  /&gt;&quot;}, <br />
+        {content: &quot;&lt;img src='echi/12.jpg'  /&gt;&quot;}<br />
+        ],                            // 定义滚动列表的内容</p>
+      <p> orientation: &quot;vertical&quot;,    // 排列方式<br />
+        isCycle: false,               // 是否循环滚动 <br />
+        pageSize: 3, <br />
+        element: &quot;CarouselId&quot;,       //    加载到元素的ID<br />
+        autoRender: true, <br />
+        supportTable: false,         // 禁用Table插件<br />
+        isAutoScroll: false,<br />
+        onload:function(){            //    渲染完毕后，修改focus事件<br />
+        T.g('viewImg').innerHTML = this.contentText[0].content;</p>
+      <p> var s = this.focus;<br />
+        this.focus = function(){<br />
+        s.apply(this,arguments);<br />
+        T.g('viewImg').innerHTML = this.contentText[arguments[0]].content<br />
+        }<br />
+        }<br />
+        }; <br />
+        var carousel = new T.ui.Carousel(options);<br />
+      &lt;/script&gt;</td>
+  </tr>
+</table>
+<h3>4.4 效果图截图</h3>
+<p>HTML布局设计效果预览：</p>
+<p><img  src="../images/Tangram-Component/image006.jpg"></p>
+<p>实际效果图预览：</p>
+<p><img  src="../images/Tangram-Component/image007.jpg"></p>
+<p>文件资源截图：</p>
+<p><img  src="../images/Tangram-Component/image008.jpg"></p>
+<h2>5 总结</h2>
+<p>首先我们通过设计一个页面特效应用的需求，然后对特效应用列出功能点、规划效果功能所需要的资源，然后进行实际的代码编写。完成了使用Tangran Component中UI中的Carousel组件，快速构建了一个“幻灯片”效果的应用。</p>
+<p>操作页面元素我们使用了Base中的一些方法配合，比如T.g；在Component中除了UI组件外，还有FX动画效果，多方配合可以使得网站应用的功能更加易用用户体验更佳。</p>
+<ul>
+	<li><a href="../images/Tangram-Component/DEMO/index.html" target="_blank">幻灯片图片切换演示地址</a></li>
+
+	<li><a href="../images/Tangram-Component/DEMO/Tangram-Component-DEMO.rar">DEMO打包下载</a></li>
+</ul>
+ </div>
+{include ../footer.inc}
+<!-- include file="footer.inc" -->
