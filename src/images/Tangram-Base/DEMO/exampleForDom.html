@@ -1,0 +1,34 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+        <title> exampleForDom </title> 
+  <script  type="text/javascript" src="http://img.baidu.com/js/tangram-base-1.3.9.js"></script> 
+    </head> 
+    <body>
+        <p>测试元素span</p>
+        <p id="test">测试元素#test</p>
+        <p class="test">1测试元素.test</p>
+        <p class="test">2测试元素.test</p>
+        <input type="button" value="设置所有p元素字体为绿色" onclick="setAP();">
+        <input type="button" value="设置ID为test的元素字体为红色" onclick="setIdP();">
+        <input type="button" value="设置样式类为test的元素字体为黄色" onclick="setClassP();">
+        <script type="text/javascript">
+            function setAP(){
+               T.object.each(T.dom.query('p'),function(v){
+                    T.dom.setStyles( v,{ 'color':'green' } )
+               })
+         // T.dom.query 返回的是一个元素的数组，这里用 T.object.each 方法遍历处理
+            }
+            function setIdP(){
+                T.dom.setStyles( T.g('test'),{ 'color':'red' } )
+            }
+            function setClassP(){
+               T.object.each(T.dom.query('.test'),function(v){
+                    T.dom.setStyles( v,{ 'color':'yellow' } )
+               })
+            }
+        </script>
+
+     </body>
+</html>
