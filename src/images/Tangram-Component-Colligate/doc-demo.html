@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DEMO</title>
+<style type='text/css'>
+.tangram-popup{
+	cursor: pointer;
+	background: #eee;
+	border: solid 1px black;
+	width: 320px;
+	height: 240px;
+}
+</style>
+<script type='text/javascript' src='http://img.baidu.com/js/tangram-base-1.3.9.js'></script>
+<script type='text/javascript' src='tangram-UI.js'></script>
+</head>
+<body>
+<div id='componentId' style='position:absolute; border:red solid 1px;'></div>
+</body>
+<script type='text/javascript'>
+baidu.ui.Popup = baidu.ui.createUI(function(options){
+	//这里是构造函数
+}).extend({
+	uiType: 'popup',
+	content: 'default content',
+	
+	getString: function(){
+		var me = this,
+			tpl = '<div id="#{id}" class="#{class}">#{content}</div>';
+		return baidu.string.format(tpl, {
+			id: me.getId(),
+			'class': me.getClass(),
+			content: me.content
+		});
+	},
+
+	setText: function(txt){
+		me.getBody().innerHTML = txt;
+	},
+
+	render: function(target){
+		var me = this;
+        if (!target || me.getMain()) {return;}
+		baidu.dom.insertHTML(me.renderMain(target), 'beforeEnd', me.getString());
+		me.dispatchEvent('onload');
+	}
+});
+
+
+//以下是插件,本来应该考虑放在另一个js文件中，这里为了实现功能就先这样放着了
+baidu.ui.Popup.register(function(me){
+	//ondragend是draggable提供的拖拽结束处理事件接口
+	me.addEventListener('ondragend', function(evt){
+		me._onDragEndHandler();
+	});
+});
+baidu.ui.Popup.extend({
+	draggable: true,
+
+	_onDragEndHandler: function(){
+		var me = this;
+		//这里派发一个onafterdrag事件提供给用户使用
+		me.dispatchEvent('onafterdrag', baidu.dom.getPosition(me.getMain()));
+	}
+});
+
+//创建实例
+var popup = new baidu.ui.Popup({
+	//定义onafterdrag时需要做的事情
+	onafterdrag: function(evt){
+		alert('left: ' + evt.left + 'px; top: ' + evt.top + 'px;');
+	}
+});
+popup.render('componentId');
+</script>
+</html>
