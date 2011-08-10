@@ -1,15 +1,24 @@
-var conf = {
+function getItems(){
+    var tplItem = '{content: "<img src=\'#{src}\'/>"}',
+        array = [];
+    for(var i = 0; i < 9; i++){
+        array.push(baidu.string.format(tplItem, {
+            src: 'baidu_ui_Carousel/' + i + '.png'
+        }));
+    }
+    return 'contentText: [' + array.join(',') + ']';
+}
+var conf= {
     clazz: {
         type: 'class',//class|method|field
         'class': 'baidu.ui.Carousel'
     },
-    demoType: [{key: 'default', val: 'Carousel核心例子'}, {key: 'Carousel$btn', val: 'Carousel按钮例子'}],
+    demoType: [{key: 'default', val: 'Carousel核心例子'}],
     'default': {
         pageConf: {
-            options: '{contentText: [{content: "text~0"}, {content: "text~1"}, {content: "text~2"}, {content: "text~3"}], supportTable: false, isCycle: false, isAutoScroll: false, showButton: false}',
-//            target: 'x',
-            html: '<div id="x" style="width:100px; height:100px; border:red solid 1px;"></div>',
-            jsCode: 'var x = 1'
+            options: '{'+ getItems() +', supportTable: false, isCycle: false, isAutoScroll: false, showButton: true, btnLabel: {prev: "&nbsp;", next: "&nbsp;"}}',
+            target: 'carouselId',
+            html: '<div id="carouselId" style="width:520px; height:150px; padding: 50px;"></div>'
         },
         currentIndex: {
             type: 'button',
@@ -65,10 +74,10 @@ var conf = {
         },
         scrollDirection: {
             type: 'select',
-            defaultValue: 'next',
+            defaultValue: '',
             data: {
-                key: ['next', 'prev'],
-                val: ['next', 'prev']
+                key: ['自动', 'next', 'prev'],
+                val: ['', 'next', 'prev']
             }
         },
         scrollTo: {
@@ -126,13 +135,6 @@ var conf = {
                 eventName: 'onclick',
                 handler: 'focus'
             }
-        }
-    },
-    
-    
-    'Carousel$btn': {
-        pageConf: {
-            options: '{contentText: [{content: "text~0"}, {content: "text~1"}, {content: "text~2"}, {content: "text~3"}], supportTable: false, isCycle: false, isAutoScroll: false, showButton: true}'
         }
     },
     
