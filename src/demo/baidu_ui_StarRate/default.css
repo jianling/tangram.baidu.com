@@ -1,0 +1,13 @@
+.tangram-starrate-on{
+	display:inline-block;
+	background-image: url("tangram-starRate.gif");
+	background-position: left bottom;
+	width: 20px;
+	height: 20px;
+}
+.tangram-starrate-off{
+	display:inline-block;
+	background-image: url("tangram-starRate.gif");
+	width: 20px;
+	height: 20px;
+}      

@@ -1,0 +1,81 @@
+.tangram-toolbar{ 
+width: 400px; 
+height: 30px; 
+border: 1px solid #E6E6E6; 
+padding: 15px; 
+background-color: #F8F8F8; 
+} 
+.tangram-combox .family{ 
+width: 90px; 
+} 
+.tangram-combox .size{ 
+width: 65px; 
+} 
+.tangram-combox-input{ 
+background-image: url(tangram-toolbar.png); 
+height: 22px; 
+border: 0;   
+padding-left: 5px;        
+} 
+.family-input{ 
+background-position: -58px -12px; 
+width: 90px; 
+} 
+.size-input{ 
+background-position: -158px -12px; 
+width: 65px; 
+}         
+.family-hover .tangram-combox-input{ 
+background-position: -240px -14px;           
+} 
+.size-hover .tangram-combox-input{ 
+background-position: -340px -14px;           
+} 
+.tangram-menubar-root{ 
+border: 1px solid #ababab; 
+padding: 0; 
+margin: 0; 
+list-style-type: none;             
+} 
+.tangram-menubar-item { 
+color: #222222;  
+display: block; 
+text-decoration: none;   
+padding: 5px; 
+height: 14px; 
+font-size: 12px;  
+background-color: white;       
+} 
+.tangram-menubar-item-hover{ 
+background-color: #BED730; 
+} 
+.tangram-button{ 
+background-image: url(tangram-toolbar.png);  
+width: 23px; 
+height: 23px; 
+border: 1px solid #F8F8F8;   
+} 
+.tangram-button-hover{ 
+background-color: #FFF2B2; 
+border: 1px solid #C19440; 
+} 
+.boldBtn{ 
+background-position: -60px -41px;            
+} 
+.italicBtn{ 
+background-position: -86px -41px; 
+} 
+.underlineBtn{    
+background-position: -111px -41px; 
+} 
+.colorBtn{ 
+width: 32px;    
+background-position: -135px -41px; 
+} 
+.backColorBtn{ 
+width: 32px; 
+background-position: -168px -41px; 
+} 
+.linkBtn{ 
+background-position: -204px -41px; 
+} 

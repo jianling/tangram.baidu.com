@@ -1,0 +1,30 @@
+/*baidu.ui.Table*/
+.tangram-table-title {
+    font-size : 12px;
+    height : 25px;
+    border : #ccc solid 1px;
+    border-right : none;
+    background : #eee;
+}
+.tangram-table-title-row td {
+    
+    border-left : #f6f6f6 solid 1px;
+    border-right : #ccc solid 1px;
+}
+.tangram-table {
+    border : #ededed solid 1px;
+    border-bottom : none;
+    width : 500px;
+    font-size : 12px;
+}
+.tangram-table-row{
+    background : white;
+}
+.tangram-table-row-hover{
+    background : #FFFAEE;
+}
+.tangram-table-row td{
+    padding:2px;
+    height : 21px;
+    border-bottom : #ededed solid 1px;
+}

@@ -1,0 +1,14 @@
+/*baidu.ui.Tooltip*/
+.tangram-tooltip {
+    background : #FFF7DB;
+    border : 1px solid #BEA06E;
+    color : #333;
+    cursor : default;
+    line-height : 19px;
+    padding : 5px;
+    font-size:12px;
+}
+
+
+
+

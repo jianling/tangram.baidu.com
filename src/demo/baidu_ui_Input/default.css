@@ -1,0 +1,11 @@
+/*baidu.ui.Input*/
+.tangram-input{
+    border : 1px solid #7E9DB9;
+    height : 20px;
+}
+.tangram-input-hover{
+    border : 1px solid #edbb72;
+}
+.tangram-input-focus {
+    background-color : #FEFBBD;
+}
