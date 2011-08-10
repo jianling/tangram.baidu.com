@@ -1,0 +1,9 @@
+/*baidu.ui.Popup*/
+.tangram-popup {
+    border : 1px solid #BEA06E;
+    background : #FFF7DB;
+    padding : 5px;
+    line-height : 19px;
+    font-size :12px;
+    cursor : pointer;
+}

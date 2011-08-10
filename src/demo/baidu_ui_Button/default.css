@@ -1,0 +1,40 @@
+/*baidu.ui.Button*/
+.tangram-button,.tangram-button-label {
+    background : url("tangram-button.png");
+    position : relative;
+    display : inline;
+    float : left;
+}
+.tangram-button {
+    cursor : pointer;
+    background-position : left 0px;
+    margin-right : 5px;/*当多个按钮并列时的之间的间隔距离*/
+    padding-left : 5px;
+}
+.tangram-button-label {
+    background-position : right 0px;
+    margin-right : -5px;
+    width : 50px;/*按钮宽度*/
+    height : 20px;
+    padding-right : 5px;
+    font-size : 12px;
+    font-weight : bold;
+    color : #35608C;
+    line-height : 20px;
+    text-align : center;
+}
+.tangram-button-hover {
+    background-position : left -20px;
+}
+.tangram-button-hover .tangram-button-label {
+    background-position : right -20px;
+}
+.tangram-button-press {
+    background-position : left -40px;
+}
+.tangram-button-press .tangram-button-label {
+    background-position : right -40px;
+}
+.tangram-button-disabled .tangram-button-label {
+    color : #808080;
+}

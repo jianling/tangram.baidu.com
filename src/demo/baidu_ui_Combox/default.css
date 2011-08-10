@@ -1,0 +1,42 @@
+/*baidu.ui.Combox*/
+.tangram-combox {
+    border : 1px solid #A4BED4;
+    width : 166px;
+    height : 16px;
+    padding : 1px;
+}
+.tangram-combox-input {
+    float : left;
+    margin : 0px;
+    padding : 0px;
+    width : 150px;
+    height : 16px;
+    border : 0 none;
+    font-size : 12px;
+}
+.tangram-combox-arrow {
+    background : url(tangram-combox.png) no-repeat 0 0;
+    cursor : pointer;
+    font-size : 0px;
+    float : left;
+    height : 16px;
+    width : 16px;
+}
+.tangram-combox-hover{
+    border-color : #edbb72;
+}
+.tangram-combox-hover .tangram-combox-arrow {
+    background-position : -16px 0;
+}
+.tangram-combox-press .tangram-combox-arrow {
+    background-position : -32px 0;
+}
+.tangram-menubar-root{
+	padding:0px;margin:0px;background:#FFF;
+	list-style:none;
+}
+.tangram-menubar-item{
+	display:block;font-size:12px;color:#336699;
+	height:25px;line-height:25px;text-decoration:none;
+	background:#FFF;
+}

@@ -1,0 +1,50 @@
+/*baidu.ui.Slider*/
+.tangram-slider {
+background : url(tangram-slider-bg.gif) repeat-x 0px center;
+}
+.tangram-slider-thumb {
+width : 22px;
+height : 23px;
+z-index : 3000;
+}
+.tangram-progressbar-bar {
+height : 23px;
+}
+
+
+/*skin tangram-decorator*/
+.tangram-decorator-box-main { 
+position : relative; 
+width : 445px; 
+height : 23px; 
+} 
+.tangram-decorator-box-lt { 
+position : absolute; 
+z-index : 2; 
+width : 5px; 
+height : 23px; 
+background : url(tangram-slider-side.gif) no-repeat 0px center; 
+} 
+.tangram-decorator-box-rt { 
+position : absolute; 
+top : 0px; 
+right: 0px!important; 
+right : -1px;/*ie下需要设成-1*/ 
+width : 5px; 
+height : 23px; 
+background : url(tangram-slider-side.gif) no-repeat -5px center; 
+} 
+.tangram-slider { 
+width : 445px; 
+height : 23px; 
+} 
+.tangram-slider-thumb{ 
+filter : progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="tangram-slider-thumb-blue.png"); 
+background:url(tangram-slider-thumb-blue.png) no-repeat!important; 
+background:none; 
+} 
+.tangram-progressbar-bar{ 
+background:url(tangram-slider-fg-blue.gif) repeat-x 0 center; 
+} 
+
+
