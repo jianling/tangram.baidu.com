@@ -108,12 +108,13 @@
                 clazz = eval(me.clazz[me.clazz.type]),
                 container = me.getPanelContainer(),
                 pageConf = me[typeId].pageConf,
+                opts = pageConf.options ? eval('('+ pageConf.options +')') : {},
                 target;
             pageConf.jsCode && (me.getScript().text = pageConf.jsCode);
             pageConf.html && (container.innerHTML = pageConf.html);
             if(me.clazz.type == 'class'){
-                me._instance = new clazz(pageConf.options ? eval('('+ pageConf.options +')') : {});
-                me._instance.render(pageConf.target || container);
+                me._instance = new clazz(opts);
+                !opts.autoRender && me._instance.render(pageConf.target || container);
             }
         },
 
