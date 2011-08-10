@@ -1,0 +1,46 @@
+/*tangram.ui.Carousel*/
+/*public*/
+.tangram-carousel{
+    position : relative;
+    overflow : hidden;
+}
+.tangram-carousel-scroll {
+    position : absolute;
+}
+.tangram-carousel-item{
+    cursor : pointer;
+	margin: 5px 0 5px 5px;
+	_margin: 5px 10px 5px 10px;
+	padding: 9px; 
+    border: 1px solid #CCCCCC;
+	background-color: white;
+}
+.tangram-carousel-item-focus {
+    border: red solid 1px;
+}
+.tangram-carousel-btn-base{
+    background: url(Carousel.png);
+    width: 95px;
+    height:26px;
+    text-align: center;
+    font-size: 0px;
+    -webkit-text-size-adjust: none;
+    font-size:1px;
+}
+/*vertical*/
+.tangram-carousel-vertical-btn-prev{
+    display:block;
+    margin:0px auto;
+    background-position: 0 0;
+}
+.tangram-carousel-vertical-btn-next{
+    display:block;
+    margin:0px auto;
+    background-position: 0 -26px;
+}
+a.tangram-carousel-vertical-btn-prev:hover{
+    background-position: 0px -50px;
+}
+a.tangram-carousel-vertical-btn-next:hover{
+    background-position: 0px -76px;
+}
