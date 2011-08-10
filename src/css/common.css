@@ -201,6 +201,7 @@ html{
 .simplemenu-main,
 .simplemenu-bottom{
 	width: 126px;
+	background-color: #fff;
 	background-image: url(../images/simplemenu.gif);
 }
 

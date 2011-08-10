@@ -9,9 +9,11 @@ module.declare(function(require, exports, module){
 		data.forEach(function(item, index){
 			var p;
 			item.childs = [];
+			item.checked = 0;
 			if(item.p){
 				if(p = dataItemStates[item.p]){
 					p.childs.push(item);
+					dataItemStates[item.p].nodeType = "folder";
 				}else if(p = undefinedParentChilds[item.p]){
 					p.push(item);
 				}else{
@@ -21,13 +23,56 @@ module.declare(function(require, exports, module){
 				formatedData.push(item);
 			}
 
+			item.nodeType = "normal";
 			dataItemStates[item.n] = item;
 			if(undefinedParentChilds[item.n]){
 				item.childs = undefinedParentChilds[item.n].concat(item.childs);
+				item.nodeType = "folder";
 				delete undefinedParentChilds[item.n];
 			}
 		});
-		return formatedData;
+		return [formatedData, dataItemStates];
+	};
+
+	var updateCheckStates = function(dataMapping, dataItem, value, _dire){ // _dire: 1 向外 0 向里
+		dataItem.checked = value;
+
+		// 向里
+		var inwards = function(){
+			if(value == .5)return ;
+			dataItem.childs.forEach(function(dataItem){
+				updateCheckStates(dataMapping, dataItem, value, 0);
+			});
+		};
+
+		// 向外
+		var forth = function(){
+			var p, c, sum;
+			if(p = dataItem.p){
+				p = dataMapping[p];
+				c = p.childs;
+				sum = c.reduce(function(sum, dataItem){
+					return sum + dataItem.checked;
+				}, 0);
+				if(sum === 0){
+					p.checked = 0;
+				}else if(sum === c.length){
+					p.checked = 1;
+				}else{
+					p.checked = .5;
+				}
+				updateCheckStates(dataMapping, p, p.checked, 1);
+			}
+		};
+
+		if(_dire === 0){
+			inwards();
+		}else if(_dire === 1){
+			forth();
+		}else{
+			inwards();
+			forth();
+		}
 	};
 
 	var nodeTemplate = new Lichee.Template(
@@ -51,7 +96,7 @@ module.declare(function(require, exports, module){
 			this.childsData = conf.childsData;
 			this.tree = conf.tree;
 			this.expanded = !! conf.expanded;
-			this.checked = 0; // 0, 0.5, 1
+			this.checked = 0;
 			this.tree.nodes.push(this);
 		},
 
@@ -84,20 +129,20 @@ module.declare(function(require, exports, module){
 			},
 
 			expand: function(){
-
 				if(!this.hasExpanded && this.childsData.length){
 					this.hasExpanded = true;
-					this.renderChilds(this.childsData);
-					if(this.checked === 0 || this.checked == 1){
-						this.updateSubsCheckState();
-					}
+					this.renderChilds(this.childsData, function(){
+						this.tree.updateListLastNodes();
+						this.tree.updateNodeCheckStates(this);
+						this.expand();
+					}.bind(this));
+					return ;
 				}
 
 				if(!this.dropDownLayer)return ;
 				this.dropDownLayer.display(true);
 				E(this.expandedViewerId).style("backgroundPosition", "0 -20px");
 				this.expanded = true;
-				this.tree.updateListLastNodes();
 				this.tree.fixRelativeEls();
 			},
 
@@ -109,58 +154,9 @@ module.declare(function(require, exports, module){
 				this.tree.fixRelativeEls();
 			},
 
-			setCheck: function(value, _dire){ // _dire 1: 向外 0: 向里
-				this.checked = value;
-				var checkinput = E(this.checkinputId, true);
-				switch(value){
-					case 0:
-						checkinput.disabled = false;
-						checkinput.checked = false;
-						break;
-					case .5:
-						checkinput.disabled = true;
-						checkinput.checked = true;
-						break;
-					case 1:
-						checkinput.checked = true;
-						checkinput.disabled = false;
-						break;
-				}
-
-				if(_dire === 1 && this.parent){
-					var updateCheckState = this.parent.updateCheckState;
-					updateCheckState && updateCheckState.defer(this.parent, 0);
-
-				}else if(_dire === 0 && this.childs){
-					this.updateSubsCheckState.defer(this, 0);
-				}else{
-					this.childs && this.updateSubsCheckState();
-					if(this.parent){
-						var updateCheckState = this.parent.updateCheckState;
-						updateCheckState && updateCheckState.defer(this.parent, 0);
-					}
-				}
-			},
-
-			updateCheckState: function(){
-				var childs = this.childs;
-				var sum = childs.reduce(function(sum, node){
-					return sum + node.checked;
-				}, 0);
-				if(sum == 0){
-					this.setCheck(0, 1);
-				}else if(sum == childs.length){
-					this.setCheck(1, 1);
-				}else{
-					this.setCheck(.5, 1);
-				}
-			},
-
-			updateSubsCheckState: function(){
-				var checked = this.checked;
-				this.childs.forEach(function(node){
-					node.setCheck(checked, 0);
-				});
+			setCheck: function(value){
+				updateCheckStates(this.tree.dataMapping, this.tree.dataMapping[this.name], value);
+				this.tree.updateNodeCheckStates(this);
 			},
 
 			setHidden: function(bool){
@@ -182,32 +178,59 @@ module.declare(function(require, exports, module){
 			},
 
 			// privates
-			renderChilds: function(childsData){
+			renderChilds: function(childsData, callback){
 				var dropDownLayer = this.dropDownLayer;
-
-				var subContainerIds = [];
-				var subContainers = [];
-				childsData.forEach(function(item, index){
-					subContainerIds[index] = Lichee.id();
-					subContainers[index] = "<div id='" + subContainerIds[index] + "' class='node clearfix'></div>";
-				});
-				dropDownLayer.html(subContainers.join(""));
-
-				var list = [];
-				childsData.forEach(function(item, index){
-					var nodeItem = new node({
-						container: subContainerIds[index],
-						name: item.n,
-						childsData: item.childs,
-						tree: this.tree,
-						expanded: item.expanded
+				dropDownLayer.html("loading..");
+				dropDownLayer.display(true);
+				void function(){
+					dropDownLayer.html("");
+					dropDownLayer.display(false);
+					var subContainerIds = [];
+					var subContainers = [];
+					childsData.forEach(function(item, index){
+						subContainerIds[index] = Lichee.id();
+						subContainers[index] = "<div id='" + subContainerIds[index] + "' class='node clearfix'></div>";
 					});
-					nodeItem.parent = this;
-					nodeItem.render();
-					list.push(nodeItem);
-				}.bind(this));
-				this.tree.lists.push(list);
-				this.childs = list;
+					dropDownLayer.html(subContainers.join(""));
+					var list = [];
+					childsData.forEach(function(item, index){
+						var nodeItem = new node({
+							container: subContainerIds[index],
+							name: item.n,
+							childsData: item.childs,
+							tree: this.tree,
+							expanded: item.expanded
+						});
+						nodeItem.parent = this;
+						nodeItem.render();
+						list.push(nodeItem);
+					}.bind(this));
+					this.tree.lists.push(list);
+					this.childs = list;
+					callback && callback();
+				}.defer(this, 0);
+			},
+
+			setViewChecked: function(){
+				var checkinput = E(this.checkinputId, true);
+				var checkedValue = this.tree.dataMapping[this.name].checked;
+				if(checkedValue == this.checked)
+					return ;
+				this.checked = checkedValue;
+				switch(checkedValue){
+					case 0:
+						checkinput.disabled = false;
+						checkinput.checked = false;
+						break;
+					case .5:
+						checkinput.disabled = true;
+						checkinput.checked = true;
+						break;
+					case 1:
+						checkinput.checked = true;
+						checkinput.disabled = false;
+						break;
+				}
 			},
 
 			disposeEvent: function(){
@@ -258,7 +281,7 @@ module.declare(function(require, exports, module){
 
 				checkClicker.addEvents({
 					click: function(){
-						var checkValue = this.checked;
+						var checkValue = this.tree.dataMapping[this.name].checked;
 						switch(checkValue){
 							case 0:
 							case .5:
@@ -286,9 +309,12 @@ module.declare(function(require, exports, module){
 		/* constructor */ function(conf){
 			this.container = E(conf.container);
 			this.data = conf.data;
-			this.formatedData = formatData(conf.data);
 			this.nodes = [];
 			this.lists = [];
+
+			var formatedData = formatData(conf.data);
+			this.formatedData = formatedData[0];
+			this.dataMapping = formatedData[1];
 		},
 
 		/* methods */ {
@@ -322,6 +348,29 @@ module.declare(function(require, exports, module){
 				this.updateListLastNodes();
 			},
 
+			getCheckedData: function(){
+
+			},
+
+			updateNodeCheckStates: function(obj){
+				var nodes = [obj], p = obj;
+				var inwards = function(node){
+					if(node.childs){
+						nodes.push.apply(nodes, node.childs);
+						node.childs.forEach(function(node){
+							if(node.expanded)
+								inwards(node);
+						});
+					}
+				};
+				inwards(p);
+				while(p = p.parent)
+					nodes.push(p);
+				nodes.forEach(function(node, index){
+					node.setViewChecked && node.setViewChecked();
+				});
+			},
+
 			// privates
 			updateListLastNodes: function(){
 				var lists = this.lists;
@@ -342,22 +391,16 @@ module.declare(function(require, exports, module){
 				});
 			},
 
-			updateSubsCheckState: function(){
-				var checked = this.checked;
-				this.childs.forEach(function(node){
-					node.setCheck(this.checked, 0);
-				});
-			},
-
 			fixRelativeEls: function(){
-				this.nodes.forEach(function(node){
+				var nodes = this.nodes;
+				nodes.forEach(function(node){
 					node.fixRelativeEls(1);
 				});
 				setTimeout(function(){
-					this.nodes.forEach(function(node){
+					nodes.forEach(function(node){
 						node.fixRelativeEls(2);
 					});
-				}.bind(this), 0);
+				}, 0);
 			}
 		}
 	);
