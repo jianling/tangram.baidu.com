@@ -6,9 +6,18 @@
         me._instance = null;//
     }).extend({
         uiType: 'democonsole',
-        tplDOM: '<div id="#{id}" class="#{class}"><div id="#{consoleId}" class="#{consoleClass}"><div align="center" class="#{comboboxClass}"><select id="#{demoType}" class="#{demoTypeClass}" onchange="#{handler}">#{content}</select></div>#{defaultContent}</div><div id="#{panelId}" class="#{panelClass}"></div></div>',
+        tplPanel: '<div id="#{panelId}" class="#{panelClass}"></div>',
+        tplDOM: '<div id="#{id}" class="#{class}"><div id="#{consoleId}" class="#{consoleClass}"><div align="center" class="#{comboboxClass}"><select id="#{demoType}" class="#{demoTypeClass}" onchange="#{handler}">#{content}</select></div>#{defaultContent}</div>#{panelContent}<div class="#{btnClass}"><input type="button" value="code" onclick="#{codeHandler}"/>&nbsp;<input type="button" value="#{infoWinVal}" onclick="#{infoWinHandler}"/></div></div>',
         tplHTML: '<!DOCTYPE html>\n<html>\n<head>\n<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">\n<title>#{packages}</title>\n<link type="text/css" rel="stylesheet" href="#{cssPath}/default.css"/>\n<script type="text/javascript" src="../js/download/tangram-1.3.9.core.js"></script>\n<script type="text/javascript" src="../js/fragment/Tangram-component/src/import.php?f=#{packages}.*"></script>\n</head>\n<body>\n#{content}\n</body>\n<script type="text/javascript">\n#{jscode}\n</script>\n</html>',
-
+        
+        getPanelString: function(){
+            var me = this;
+            return baidu.string.format(me.tplPanel, {
+                panelId: me.getId('panel'),
+                panelClass: me.getClass('panel')
+            });
+        },
+        
         getString: function(){
             var me = this,
                 demoType = me.demoType,
@@ -25,11 +34,14 @@
                 comboboxClass: me.getClass('combobox'),
                 demoType: me.getId('demoType'),
                 demoTypeClass: me.getClass('demoTypeClass'),
-                content: array.join(''),
                 handler: me.getCallString('_onChangeHandler'),
-                panelId: me.getId('panel'),
-                panelClass: me.getClass('panel'),
-                defaultContent: me.getDemoString(demoType[0].key)
+                content: array.join(''),
+                defaultContent: me.getDemoString(demoType[0].key),
+                panelContent: me.getPanelString(),
+                btnClass: me.getClass('btn'),
+                codeHandler: me.getCallString('getCode'),
+                infoWinVal: unescape('%u5728%u65B0%u7A97%u53E3%u6253%u5F00'),
+                infoWinHandler: ''
             });
         },
 
@@ -39,7 +51,7 @@
                 data = entity.data,
                 event = entity.event,
                 is = entity.type == 'select',
-                tpl = '#{des}<#{target} id="#{id}" name="#{name}" #{type} #{size} #{maxlength} value="#{val}" #{checked} #{handler}>#{content}#{foot}',
+                tpl = '#{des}<#{target} id="#{id}" name="#{name}" class="#{class}" #{type} #{size} #{maxlength} value="#{val}" #{checked} #{handler}>#{content}#{foot}',
                 array = [];
             data && baidu.array.each(data.key, function(item, index){
                 array.push(baidu.string.format(tpl, {
@@ -58,6 +70,7 @@
                 des: entity.label ? '<label for="'+ key +'">'+ entity.label +'</label>' : '',
                 target: is ? 'select' : 'input',
                 id: key,
+                'class': me.getClass('form' + entity.type),
                 type: is ? '' : 'type="' + entity.type + '"',
                 size: baidu.lang.isNumber(entity.size) ? 'size="'+ entity.size +'"' : '',
                 maxlength: baidu.lang.isNumber(entity.maxlength) ? 'maxlength="'+ entity.maxlength +'"' : '',
@@ -105,17 +118,11 @@
         },
 
         _disposeInstance: function(){
-            var me = this,
-                tplPanel = '<div id="#{panelId}" class="#{panelClass}"></div>';
+            var me = this;
             if(me._instance){
                 me._instance.dispose();
                 me._instance = null;
-                baidu.dom.insertHTML(me.getBody(),
-                    'beforeEnd',
-                    baidu.string.format(tplPanel, {
-                        panelId: me.getId('panel'),
-                        panelClass: me.getClass('panel')
-                    }));
+                baidu.dom.insertHTML(me.getConsoleContainer(), 'afterEnd', me.getPanelString());
             }else{
                 me.getPanelContainer().innerHTML = '';
             }
@@ -188,7 +195,8 @@
                 demoConf = me[me.getSelect().value],
                 pageConf = demoConf.pageConf,
                 jsCode = [],
-                param = [];
+                param = [],
+                code;
             pageConf.jsCode && jsCode.push(pageConf.jsCode);
             if(me.clazz.type == 'class'){
                 jsCode.push('var c = new '+ me.clazz[me.clazz.type] +'('+ (pageConf.options || '{}') +');\n c.render("'+ (pageConf.target || 'demoId') +'")');
@@ -203,12 +211,13 @@
                     }
                 });
             }
-            return baidu.string.format(me.tplHTML, {
+            code = baidu.string.format(me.tplHTML, {
                 packages: packages,
                 cssPath: packages.replace(/\./g, '_'),
                 content: pageConf.html || '<div id="demoId"></div>',
                 jscode: jsCode.join('\n')
             });
+            alert(code);
         }
     });
 })();
