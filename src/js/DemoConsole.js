@@ -4,11 +4,14 @@
         var me = this;
         me._toggleId = null;//
         me._instance = null;//
+        if(me.clazz.dependPackages){
+            document.writeln('<script type="text/javascript" src="../js/fragment/Tangram-component/src/import.php?f='+ me.clazz.dependPackages.join(',') +'"></script>');
+        }
     }).extend({
         uiType: 'democonsole',
         tplPanel: '<div id="#{panelId}" class="#{panelClass}"></div>',
         tplDOM: '<div id="#{id}" class="#{class}"><div id="#{consoleId}" class="#{consoleClass}"><div align="center" class="#{comboboxClass}"><select id="#{demoType}" class="#{demoTypeClass}" onchange="#{handler}">#{content}</select></div>#{defaultContent}</div>#{panelContent}<div class="#{btnClass}"><input type="button" value="code" onclick="#{codeHandler}"/>&nbsp;<input type="button" value="#{infoWinVal}" onclick="#{infoWinHandler}"/></div></div>',
-        tplHTML: '<!DOCTYPE html>\n<html>\n<head>\n<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">\n<title>#{packages}</title>\n<link type="text/css" rel="stylesheet" href="#{cssPath}/default.css"/>\n<script type="text/javascript" src="../js/download/tangram-1.3.9.core.js"></script>\n<script type="text/javascript" src="../js/fragment/Tangram-component/src/import.php?f=#{packages}.*"></script>\n</head>\n<body>\n#{content}\n</body>\n<script type="text/javascript">\n#{jscode}\n</script>\n</html>',
+        tplHTML: '<!DOCTYPE html>\n<html>\n<head>\n<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">\n<title>#{packages}</title>\n<link type="text/css" rel="stylesheet" href="#{cssPath}/default.css"/>\n<script type="text/javascript" src="../js/download/tangram-1.3.9.core.js"></script>\n<script type="text/javascript" src="../js/fragment/Tangram-component/src/import.php?f=#{packages}"></script>\n</head>\n<body>\n#{content}\n</body>\n<script type="text/javascript">\n#{jscode}\n</script>\n</html>',
         
         getPanelString: function(){
             var me = this;
@@ -55,14 +58,14 @@
                 array = [];
             data && baidu.array.each(data.key, function(item, index){
                 array.push(baidu.string.format(tpl, {
-                    des: is ? '' : '<label for="'+ (key + index) +'">'+ item +'</label>',
+                    des: is ? '' : '<label for="'+ (key + index) +'">'+ data.val[index] +'</label>',
                     target: is ? 'option' : 'input',
                     id: is ? '' : (key + index),
                     name: is ? '' : key,
                     type: is ? '' : 'type="'+ entity.type +'"',
-                    val: data.val[index],
+                    val: data.key[index],
                     checked: data.val[index] == entity.defaultValue ? (is ? 'selected' : 'checked') : '',
-                    content: is ? item : '',
+                    content: is ? data.val[index] : '',
                     foot: is ? '</options>' : ''
                 }));
             });
@@ -108,12 +111,13 @@
                 clazz = eval(me.clazz[me.clazz.type]),
                 container = me.getPanelContainer(),
                 pageConf = me[typeId].pageConf,
+                opts = pageConf.options ? eval('('+ pageConf.options +')') : {},
                 target;
             pageConf.jsCode && (me.getScript().text = pageConf.jsCode);
             pageConf.html && (container.innerHTML = pageConf.html);
             if(me.clazz.type == 'class'){
-                me._instance = new clazz(pageConf.options ? eval('('+ pageConf.options +')') : {});
-                me._instance.render(pageConf.target || container);
+                me._instance = new clazz(opts);
+                !opts.autoRender && me._instance.render(pageConf.target || container);
             }
         },
 
@@ -196,10 +200,12 @@
                 pageConf = demoConf.pageConf,
                 jsCode = [],
                 param = [],
-                code;
+                opts, code;
             pageConf.jsCode && jsCode.push(pageConf.jsCode);
             if(me.clazz.type == 'class'){
-                jsCode.push('var c = new '+ me.clazz[me.clazz.type] +'('+ (pageConf.options || '{}') +');\n c.render("'+ (pageConf.target || 'demoId') +'")');
+                opts = pageConf.options ? eval('(' + pageConf.options + ')') : {};
+                jsCode.push('var c = new '+ me.clazz[me.clazz.type] +'('+ (pageConf.options || '{}') +');');
+                !opts.autoRender && jsCode.push('c.render("'+ (pageConf.target || 'demoId') +'");');
             }else{
                 baidu.object.each(demoConf, function(item, key){
                     if(item.event){
@@ -212,7 +218,7 @@
                 });
             }
             code = baidu.string.format(me.tplHTML, {
-                packages: packages,
+                packages: me.clazz.dependPackages ? [packages].concat(me.clazz.dependPackages).join(',') : packages,
                 cssPath: packages.replace(/\./g, '_'),
                 content: pageConf.html || '<div id="demoId"></div>',
                 jscode: jsCode.join('\n')

@@ -68,7 +68,7 @@ html,body{
     array.push('<link type="text/css" rel="stylesheet" href="'+ path +'/default.css"\/>');
     array.push('<script type="text/javascript" src="'+ path +'/conf.js"><\/script>');
     array.push('<script type="text/javascript" src="../js/fragment/Tangram-component/src/import.php?f=baidu.ui.createUI,'+
-        packages + ',' + packages + '.*"><\/script>');
+        packages + '"><\/script>');
     document.writeln(array.join('\n'));
 })();
 </script>
@@ -79,6 +79,8 @@ html,body{
 </body>
 <script type='text/javascript'>
 var demo = new baidu.ui.DemoConsole(conf);
+baidu.event.on(window, 'load', function(){
     demo.render('demConsole');
+}); 
 </script>
 </html>

@@ -2,12 +2,12 @@
 
 div.custompage .content{
 	float: left;
-	width: 650px;
+	width: 590px;
 }
 
 div.custompage .sidebar{
 	float: left;
-	width: 200px;
+	width: 240px;
 }
 
 #filetree{
@@ -17,4 +17,90 @@ div.custompage .sidebar{
 
 #filetree a{
 	font-size: 14px;
+}
+
+div.custompage h2{
+	font-size: 14px;
+	text-indent: 5px;
+}
+
+div.custompage h3{
+	width: 210px;
+	height: 30px;
+	background-image: url(../images/custom-box-title.gif);
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 30px;
+	text-indent: 7px;
+}
+
+div.custompage .sidebar .box{
+}
+
+div.custompage .sidebar .box .box-top,
+div.custompage .sidebar .box .box-main,
+div.custompage .sidebar .box .box-bottom{
+	background: transparent url(../images/custom-box.gif) repeat-y 0 0;
+	width: 230px;
+}
+
+div.custompage .sidebar .box .box-top{
+	height: 11px;
+	overflow: hidden;
+}
+
+div.custompage .sidebar .box .box-main{
+	background-position: -230px 0;
+	width: 210px;
+	padding: 0 10px;
+}
+
+div.custompage .sidebar .box .box-main p{
+	padding-left: 5px;
+}
+
+div.custompage .sidebar .box .box-main select{
+	width: 180px;
+}
+
+div.custompage .sidebar .box .box-bottom{
+	height: 11px;
+	background-position: -460px 0;
+	overflow: hidden;
+}
+
+#export{
+	font-weight: 700;
+}
+
+.export{
+	width: 90px;
+	height: 30px;
+	border: 0;
+	font-size: 14px;
+	background: transparent url(../images/custom-btn.gif) no-repeat 0 0;
+}
+
+.viewcode{
+	width: 90px;
+	height: 30px;
+	border: 0;
+	font-size: 14px;
+	background: transparent url(../images/custom-btn.gif) no-repeat 0 0;
+}
+
+.btn{
+	width: 90px;
+	height: 30px;
+	border: 0;
+	font-size: 14px;
+	background: transparent url(../images/custom-btn.gif) no-repeat 0 0;
+}
+
+.btn-over{
+	background-position: 0 -30px;
+}
+
+.btn-down{
+	background-position: 0 -60px;
 }
