@@ -1,5 +1,6 @@
 ﻿{include base-css/reset.css}
 {include base-css/article.css}
+
 html, body{
 	font: 12px/1.5 Tahoma, Verdana, Arial, Helvetica, sans-serif;
 	width: 100%;
@@ -330,8 +331,8 @@ div.indexpage div.article ul.ok li{
 div.indexpage .content{
 	float: left;
 	width: 650px;
-	_width: 706px;
-	padding:28px;
+	/* _width: 706px;
+	padding:28px; */
 }
 
 div.indexpage .content p.desc{

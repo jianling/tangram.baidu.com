@@ -2,6 +2,7 @@ module.declare(function(require, exports, module){
 	var Lichee = require("./lichee.js");
 	var E = Lichee.Element, Q = Lichee.queryElement;
 
+	// 格式化数据，输入扁平数据，产生树状数据和 dataMapping
 	var formatData = function(data){
 		var formatedData = [];
 		var dataItemStates = {};
@@ -34,6 +35,7 @@ module.declare(function(require, exports, module){
 		return [formatedData, dataItemStates];
 	};
 
+	// 根据数据节点的状态，关联更新其它数据节点（与界面无关）
 	var updateCheckStates = function(dataMapping, dataItem, value, _dire){ // _dire: 1 向外 0 向里
 		dataItem.checked = value;
 
@@ -157,6 +159,7 @@ module.declare(function(require, exports, module){
 			setCheck: function(value){
 				updateCheckStates(this.tree.dataMapping, this.tree.dataMapping[this.name], value);
 				this.tree.updateNodeCheckStates(this);
+				this.tree.fireEvent("nodeCheck", [this.name, value]);
 			},
 
 			setHidden: function(bool){
@@ -239,10 +242,6 @@ module.declare(function(require, exports, module){
 				var checkinput = E(this.checkinputId);
 				var checkClicker = E(this.checkClickerId);
 
-//				if(this.name == "baidu.tools"){
-//					checkClicker.style("backgroundColor", "red");
-//				}
-
 				nameEl.addEvents({
 					focus: function(){
 						nameEl.addClass("focus");
@@ -295,6 +294,7 @@ module.declare(function(require, exports, module){
 				});
 			},
 
+			// 修正 checkClicker 位置偏差问题
 			fixRelativeEls: function(step){
 				if(step == 1){
 					E(this.checkClickerId).style("top", "0");
@@ -352,20 +352,34 @@ module.declare(function(require, exports, module){
 
 			},
 
+			// 只更新 dataMapping 中某个节点的选中状态（会自动关联更新其它节点的更新状态），但界面上不作更新
+			setNodeCheckWithoutUpdate: function(name, value){
+				var dataMapping = this.dataMapping;
+				var dataItem = dataMapping[name];
+				updateCheckStates(dataMapping, dataItem, value);
+			},
+
+			// 根据 dataMapping 中记录的选中状态，更新界面，obj 为参考的节点实例，会根据 obj 来自动找出需要更新的节点的界面
+			// 如果没有 obj 参数，则更新所有已渲染的节点
 			updateNodeCheckStates: function(obj){
-				var nodes = [obj], p = obj;
-				var inwards = function(node){
-					if(node.childs){
-						nodes.push.apply(nodes, node.childs);
-						node.childs.forEach(function(node){
-							if(node.expanded)
-								inwards(node);
-						});
-					}
-				};
-				inwards(p);
-				while(p = p.parent)
-					nodes.push(p);
+				if(obj){
+					var nodes = [obj], p = obj;
+					var inwards = function(node){
+						if(node.childs){
+							nodes.push.apply(nodes, node.childs);
+							node.childs.forEach(function(node){
+								if(node.expanded)
+									inwards(node);
+							});
+						}
+					};
+					inwards(p);
+					while(p = p.parent)
+						nodes.push(p);
+				}else{
+					nodes = this.nodes;
+				}
+
 				nodes.forEach(function(node, index){
 					node.setViewChecked && node.setViewChecked();
 				});
@@ -391,6 +405,7 @@ module.declare(function(require, exports, module){
 				});
 			},
 
+			// 修正 checkClicker 位置偏差问题
 			fixRelativeEls: function(){
 				var nodes = this.nodes;
 				nodes.forEach(function(node){
