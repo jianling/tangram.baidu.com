@@ -1,0 +1,27 @@
+/*baidu.ui.Suggestion*/
+.tangram-suggestion{
+    cursor : default;
+    border : #7F9DB9 solid 1px;
+	background:#FFF;
+}
+.tangram-suggestion table{
+    cursor : default;
+    width : 100%;
+    font-size : 14px;
+}
+.tangram-suggestion-current{
+    background : #C7DEED;
+    color : #fff;
+}
+.tangram-suggestion-prepend{
+    padding:2px;
+    color:#c0c0c0;
+    font:12px verdana;
+}
+.tangram-suggestion-append{
+    padding:2px;
+    color:#c0c0c0;
+    font:12px verdana;
+    text-align:right;
+}
+

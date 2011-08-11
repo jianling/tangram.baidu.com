@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DEMO</title>
+<style type='text/css'>
+.tangram-button {
+	width: 120px;
+	height: 28px;
+	cursor: pointer;
+	text-align: center;
+	border:red solid 1px;
+}
+.tangram-button-hover{
+	background: pink;
+}
+.tangram-button-press{
+	background: blue;
+}
+</style>
+<script type='text/javascript' src='http://img.baidu.com/js/tangram-base-1.3.9.js'></script>
+<script type='text/javascript' src='tangram-UI.js'></script>
+</head>
+<body>
+<div id='componentId'></div>
+</body>
+<script type='text/javascript'>
+baidu.ui.Button = baidu.ui.createUI(function(options){
+	//这里是构造函数
+}).extend({
+	uiType: 'button',
+	statable: true,//启用statable
+	label: 'Button',//默认显示在按钮上的标签文字
+	
+	getString: function(){
+		var me = this,
+			tpl = '<div id="#{divId}" class="#{class}" #{handler}><span id="#{labelId}">#{content}</span></div>';
+		return baidu.string.format(tpl, {
+			divId: me.getId(),//通过一个
+			labelId: me.getId('label'),
+			'class': me.getClass(),
+			content: me.label,
+			handler: me._getStateHandlerString()
+		});
+	},
+
+	_mouseHandler: function(type){
+		var me = this,
+			cssName = (type == 'mouseover'
+						|| type == 'mouseout') ? 'over' : 'click';
+		(type == 'mouseover'
+			|| type == 'mousedown') ? baidu.dom.addClass(me.getBody(), me.getClass(cssName))
+				: baidu.dom.removeClass(me.getBody(), me.getClass(cssName));
+		me.dispatchEvent(type);
+	},
+
+	_onDblclick: function(evt){//双击时的处理函数
+		alert('dblclick trigger');
+	},
+
+	setLabel: function(content){
+		baidu.dom.g(this.getId('label')).innerHTML = content;
+	},
+
+	render: function(target){
+		var me = this;
+        if (!target || me.getMain()) {return;}
+		me.addState('dblclick', 'dblclick', me._onDblclick);//使用行为的接口自定义一个双击事件
+		baidu.dom.insertHTML(me.renderMain(target), 'beforeEnd', me.getString());
+	}
+});
+var btn = new baidu.ui.Button();
+btn.render('componentId');
+</script>
+</html>

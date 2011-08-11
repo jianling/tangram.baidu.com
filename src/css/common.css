@@ -1,21 +1,12 @@
-<<<<<<< HEAD
-/**
- * {include base-css/reset.css}
- * {include base-css/article.css}
-*/
-@import "./base-css/reset.css";
-@import "./base-css/article.css";
+{include base-css/reset.css}
+{include base-css/article.css}
+
 html, body{
 	font: 12px/1.5 Tahoma, Verdana, Arial, Helvetica, sans-serif;
 	width: 100%;
 	height: 100%;
 }
-html {
-=======
-﻿{include base-css/index.css}
-
 html{
->>>>>>> 25d3a851ab93d3903af13a83679eb499f8d793a8
 	background: #5088ae url(../images/bg_02.gif) repeat-x 0 0;
 }
 .clearfix:after{
@@ -211,6 +202,7 @@ html{
 .simplemenu-main,
 .simplemenu-bottom{
 	width: 126px;
+	background-color: #fff;
 	background-image: url(../images/simplemenu.gif);
 }
 
@@ -339,8 +331,8 @@ div.indexpage div.article ul.ok li{
 div.indexpage .content{
 	float: left;
 	width: 650px;
-	_width: 706px;
-	padding:28px;
+	/* _width: 706px;
+	padding:28px; */
 }
 
 div.indexpage .content p.desc{

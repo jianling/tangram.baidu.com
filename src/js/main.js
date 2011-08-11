@@ -99,6 +99,19 @@ void function(){
 		FlyScript.load(getpath("js/simplemenu"), getpath("js/lichee"), function(simplemenu, Lichee){
 			var E = Lichee.Element, Q = Lichee.queryElement;
 
+			var downMenu = new simplemenu({
+				referrerElement: "menu-down",
+				direction: "down",
+				datas: [
+					{ name: "常规下载", link: "download.html", target: "_self" },
+					{ name: "自定义下载", link: "custom.html", target: "_self" }
+				],
+				handle: function(conf){
+					window.open(conf.link, conf.target);
+				}
+			});
+			downMenu.render();
+
 			var docMenu = new simplemenu({
 				referrerElement: "menu-doc",
 				direction: "down",
@@ -128,21 +141,24 @@ void function(){
 						{ name: "本地存储" }
 					] },
 					{ name: "tangram 最佳实践", datas: [
-						{ name: "Base 入门" },
-						{ name: "Component 入门" },
-						{ name: "UI 使用指导" },
-						{ name: "UI 组件体系" },
-						{ name: "UIBase" },
-						{ name: "UI 组件开发" },
-						{ name: "Component 插件" },
-						{ name: "Behavior" }
+						{ name: "Base 入门", link: getpath('docs/Tangram-Base.html'), target: '_self' },
+						{ name: "Component 入门", link: getpath('docs/Tangram-Component.html'), target: '_self' },
+						{ name: "UI 使用指导", link: getpath('docs/Tangram-UI.html'), target: '_self' },
+						{ name: "UI 组件体系", link: getpath('docs/Tangram-Component-UISys.html'), target: '_self' },
+						{ name: "UIBase", link: getpath('docs/Tangram-Component-UIBase.html'), target: '_self' },
+						{ name: "UI 组件开发", link: getpath('docs/Tangram-Component-Colligate.html'), target: '_self' },
+						{ name: "Component 插件", link: getpath('docs/Tangram-Component-Plugins.html'), target: '_self' },
+						{ name: "Behavior", link: getpath('docs/Tangram-Component-Behavior.html'), target: '_self' }
 					] },
 					{ name: "新手入门" },
 					{ name: "快捷方式" },
 					{ name: "Base 文档" },
 					{ name: "component 文档" },
 					{ name: "mobile 文档" }
-				]
+				],
+				handle: function(conf){
+					window.open(conf.link, conf.target);
+				}
 			});
 			docMenu.render();
 

@@ -1,0 +1,68 @@
+{include ../header.inc}
+<!--include file="./header.inc"-->
+
+		<script type="text/javascript">
+			var pageConfig = { name: "download", prepath: "docs/" };
+		</script>
+		<div class="main-header"><span>Tangram 入门指南 - 高级篇</span><span class="shadow">Tangram 入门指南 - 高级篇</span></div>
+		<div class="main-body articlepage article">
+        <h1 class="ac">Tangram 入门指南 - 高级篇</h1>
+        <h2>事件中心</h2>
+        <p>JavaScript语言没有原生的面向对象机制，对此，tangram框架做了扩展。 可以通过下面的方法获取一个类的实例：<br>
+          <pre><code>var instance = new T.lang.Class();</code></pre><br>
+          tangram框架的每个实例都有一个guid属性，这是该实例的唯一标识。可以通过T.lang.instance(guid)的方法获取该实例。<br>
+          除此之外，每个实例都有三个方法： addEventListener，removeEventListener， dispatchEvent。这组方法是事件机制的一个典型实现。 <br>
+        <ol>
+          <li>1.注册事件监听<br>
+            <pre><code>instance.addEventListener("物价", function(event){
+            if(event.status == "上涨")alert("啊！");});</code></pre></li>
+          <li>2.派发事件<br>
+            <pre><code>instance.dispatchEvent("物价",{
+            status : "上涨"});</code></pre></li>
+          <li>3.取消事件监听<br>
+            <pre><code>instance.removeEventListener("物价");</code></pre><br>
+            每个tangram对象都可以作为一个事件中心，可以通过事件的方式来解开两个模块之间的耦合，这是复杂应用经常采用的方式。 </li>
+        </ol>
+        <h2>简单模板</h2>
+        <p>模板是WEB开发中常见的实现方式，我们经常需要将一些动态变量拼装到固定的字符串中。 此时 T.string.format是一个轻量级的选择。 <br>
+          比如我们预留了一个节点模板如下：<br>
+          <pre><code>var template = "&lt;div id="#{
+          id}" class="#{
+          class}"&gt;#{
+          content}&lt;/div&gt;";</code></pre><br>
+          当需要一个id为aId， class为aClass，content为空的DIV时，可以调用：<br>
+          <pre><code>var htmlA = T.string.format(template,{
+          id:"aId",class:"aClass"});</code></pre><br>
+          同样，当需要id为bId，class为bClass， content为bContent的DIV时，可以调用：<br>
+          <pre><code>var htmlB = T.string.format(template,{
+          id:"aId",class:"bClass",content:"bContent"});</code></pre></p>
+        <h2>操作cookie</h2>
+        <p>用Tangram操作cookie是件十分简单的事，就像操作一个键值对映射的对象一样。可以简单的用 T.cookie.set(key, value) 去设置， T.cookie.get(key)去获取。如果需要过期时间，域等设置，请移步 T.cookie.set。</p>
+        <h2>生成url参数</h2>
+        <p>拼接url也是一件繁琐反复的事情，不过Tangram已经为你安排好了。 尝试用:T.url.jsonToQuery，你会习惯上它的。</p>
+        <h2>Flash、 JSON、date等等</h2>
+        <p>Tangram还有许多实用的工具包，比如生成各浏览器兼容的的flash标签并获取： T.swf； 比如json变量和字符串之间的互换： T.json； 比如支持"yyyy年MM月dd日"这种中文日期格式的转换：T.date； 再比如各种浏览器的嗅探T.browser；还有许多，详情请参考API文档。</p>
+        <h2>特色</h2>
+        <p>如果觉得以上很多功能和你所使用的框架是重复的，没有关系，你也可以尝尝下面的特色小菜。 <br>
+          Tangram代码支持函数级别的定制，你即可以选择全部打包，也可以只点上几碟小菜。</p>
+        <h4>getMousePosition</h4>
+        <p>想在任意时刻获取当前鼠标的位置而不限于事件响应之中，没问题!
+          你可以随时调用 T.page.getMousePosition 获取当前鼠标位置。<br>
+        </p>
+        <h4>draggable</h4>
+        <p>想让DOM节点支持拖拽功能，你可能会考虑在mousedown时如何如何，在mousemove时如何如何，在mouseup时如何如何，然后借助Tangram，这也就是一行代码的事：<br>
+          <pre><code>T.dom.draggable(element);</code></pre><br>
+          对应的， T.dom.droppable(element)可以让节点变成可接纳拖拽节点的容器。 </p>
+        <h4>intersect</h4>
+        <p>计算两个元素是否在页面上有交集，是不是一件繁琐的事？不光要找出来位置，还需要用到计算两个矩形是否相交的算法。用Tangram，也是那么一行代码的事：<br>
+          <pre><code>T.dom.intersect(element1, element2);</code></pre></p>
+        <h2>接下来</h2>
+        <p>恭喜你已经基本了解了Tangram的使用方法，在实践中,你可以尝试更多。<br>
+          下面的文档将成为进一步工作中不可或缺的一部分，去了解一下吧。 </p>
+				
+		</div>
+		<div class="main-footer">Copyright &copy; 2011  Baidu</div>
+	</div>
+{include ../footer.inc}
+<!-- include file="footer.inc" -->
+

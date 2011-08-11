@@ -1,10 +1,10 @@
 var conf = {
     clazz: {
         type: 'method',
-        'method': 'baidu.sio.callByBrowser'
+        'method': 'baidu.sio.callByServer'
     },
     
-    demoType: [{key: 'default', val: 'baidu.sio.callByBrowser'}],
+    demoType: [{key: 'default', val: 'baidu.sio.callByServer'}],
     'default': {
         pageConf: {
             html: '<p>服务器返回"var responseName = tom;"</p><div id="resultArea"></div>'
@@ -15,7 +15,7 @@ var conf = {
             event: {
             	eventName: 'onclick',
             	handler: function(){
-            		baidu.sio.callByBrowser('./baidu_sio_callByServer/request.php', 'localFunction');
+            		baidu.sio.callByServer('./baidu_sio_callByServer/request.php', 'localFunction');
             		window['localFunction'] = function(){
             			T.g('resultArea').innerHTML = 'responseName=' + responseName;
             		}

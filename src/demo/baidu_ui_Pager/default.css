@@ -1,0 +1,31 @@
+/*baidu.ui.Pager*/
+.tangram-pager {
+    font-size : 12px;
+}
+.tangram-pager a {
+    /*color : #2E6AB1;*/
+    color : #333;
+    padding : 0 5px;
+    cursor : pointer;
+    text-decoration : none;
+}
+.tangram-pager a:hover{
+    padding : 0 5px;
+    color : orange;
+}
+.tangram-pager-previous{
+    padding:0 5px;
+}
+.tangram-pager-next{
+    padding:0 5px;
+}
+.tangram-pager-first{
+    padding:0 5px;
+}
+.tangram-pager-last{
+    padding:0 5px;
+}
+.tangram-pager-current{
+    font-weight : bold;
+}
+

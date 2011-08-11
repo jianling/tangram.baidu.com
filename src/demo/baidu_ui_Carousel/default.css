@@ -1,16 +1,42 @@
 /*核心css*/
 .tangram-carousel{
     overflow: hidden;
+    margin: 10px;
+    float: left;
     border: red solid 1px;
 }
 .tangram-carousel-scroll {
     
 }
 .tangram-carousel-item {
+    cursor: pointer;
     float: left;
-    width: 100px;
-    height: 50px;
+    width: 120px;
+    height: 120px;
+    padding: 5px;
+    border: green solid 1px;
 }
 .tangram-carousel-item-focus {
     background: yellow;
+}
+
+.tangram-carousel-btn-base {
+    float: left;
+    width: 47px;
+    height: 47px;
+    text-decoration: none;
+    margin-top: 55px;
+    background: url(default.png)
+}
+.tangram-carousel-btn-prev {
+    background-position: 0 0;
+}
+.tangram-carousel-btn-next {
+    background-position: -50px 0;
+}
+a.tangram-carousel-btn-prev:hover {
+    background-position: 0 -50px;
+}
+a.tangram-carousel-btn-next:hover {
+    background-position: -50px -50px;
 }

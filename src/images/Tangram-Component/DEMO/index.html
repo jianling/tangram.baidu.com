@@ -1,0 +1,93 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+        <title>用Tangram Component的Carousle组件编写一个幻灯片应用</title> 
+        <script type="text/javascript" src="tangram.js" charset="utf-8"></script> 
+        <link type='text/css' rel='stylesheet' href='Carousel.css'/> 
+        <style type="text/css"> 
+			body{
+				background:#333
+			}
+			.container{
+				/* 中间内容盒子，浮动居中 */
+				width:620px;height:600px;background:#EEE;
+				position:absolute;
+				margin:-300px 0px 0px -400px;
+				left:50%;top:50%;
+				padding-right:180px;
+			}
+			.img-con{
+				/* 左侧展示大图容器 */
+				width:600px;height:580px;background:#FFF;
+				text-align:center;
+				position:relative;
+				margin:10px 0 0 10px;
+			}
+			.img-con img{
+				/* 左侧展示图样左 */
+				width:590px;height:570px;
+				border:5px solid #FFF
+			}
+			.carousel-con{
+				/* 右侧缩略图列表容器 */
+				width:174px;
+				height:590px;
+				position:absolute;
+				top:20px;right:5px;
+			}
+            .carousel-con img{
+				/* 定义缩略图中图像的大小 */
+                width: 140px; height: 140px; 
+				padding:0px;margin:0px
+            }
+
+        </style> 
+    </head> 
+    <body>
+		<div class="container">
+			
+			<div id="viewImg" class="img-con"> 
+				
+			</div>
+			
+			<div id="CarouselId" class="carousel-con"></div> 
+			
+		</div>
+		
+        <script type="text/javascript">
+            var options = { 
+                skin: "tangram-carousel-vertical",  	//	定义 Carousel 组件的皮肤
+				
+                contentText: [ 	
+                     {content: "<img src='echi/01.jpg'  />"},
+                     {content: "<img src='echi/02.jpg'  />"},
+                     {content: "<img src='echi/03.jpg'  />"},
+                     {content: "<img src='echi/04.jpg'  />"},
+                     {content: "<img src='echi/05.jpg'  />"}, 
+                     {content: "<img src='echi/06.jpg'  />"},
+                     {content: "<img src='echi/07.jpg'  />"},
+                     {content: "<img src='echi/08.jpg'  />"},
+                     {content: "<img src='echi/09.jpg'  />"}, 
+                     {content: "<img src='echi/10.jpg'  />"}, 
+                     {content: "<img src='echi/11.jpg'  />"}, 
+                     {content: "<img src='echi/12.jpg'  />"}
+                ],							// 定义滚动列表的内容
+				
+                orientation: "vertical",    // 排列方式
+                isCycle: false,             // 是否循环滚动 
+                pageSize: 3, 
+                element: "CarouselId", 		//	加载到元素的ID
+                autoRender: true, 
+                supportTable: false, 		// 禁用Table插件
+                isAutoScroll: false,
+				onitemclick:function(evt){	// 侦听缩略图单击事件
+					//console.log(this)
+					var e = evt.target
+					T.g('viewImg').innerHTML = e.contentText[e.scrollIndex].content;
+				}
+            }; 
+            var carousel = new T.ui.Carousel(options); 
+        </script> 
+    </body> 
+</html> 

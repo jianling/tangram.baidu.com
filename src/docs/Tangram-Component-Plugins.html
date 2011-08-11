@@ -1,0 +1,95 @@
+{include ../header.inc}
+<!--include file="./header.inc"-->
+<script src="../js/download/tangram.js" charset="utf-8"></script>
+<script src="../js/CodeStyle.js" charset="utf-8"></script>
+		<script type="text/javascript">
+			var pageConfig = { name: "download", prepath: "docs/" };
+		</script>
+		<div class="main-header"><span>Tangram-Component 插件</span><span class="shadow">Tangram-Component 插件</span></div>
+		<div class="main-body articlepage article">	
+
+		
+		
+		<h1>Tangram-Component 插件</h1>
+
+
+<h2>1 UI插件简介</h2>
+<p>设计一个通用性较强的UI的组件，总是存在着扩展性的问题，比如，难以确定当前开发完成的UI组件是否可以满足将来的需求，或是突然有新的功能需要在当前的基础上的增加，如果直接将功能一一添加到UI组件的中，又会造成UI组件的体积过于庞大。其次，功能齐全的UI组件中难免一些功能对于个别用户来说，是不必要的，那么用户加载了这部分功能，显然是一种浪费，完全违背了Tangram可定制的设计思路，因此，UI体系中设计了一套插件体系来解决这样的问题，UI组件的插件，可以理解为UI组件功能的扩展，以Button组件为例，作为按钮最简单的功能，他只实现了最基础的按钮功能，在这样的基础上，我们可以通过插件扩展其它功能，如：可轮徇的按钮，capture按钮等等，可能通过下面的示图来理解。</p>
+<p> <img  src="../images/Tangram-Component-Plugins/image001.gif" /></p>
+<h2>2 插件的原理</h2>
+<p>作为UI组件的插件，它必须是低耦合的，并且具备相当的灵活性，同时要在核心程序的基础上可扩展，它需要能掌控到核心程序所构造出来的各个页面元素。因此，对于插件程序，首先应该是可以侵入到构造函数层次的。其次，应该是可以任意扩展各种接口的。而这样的插件和核心程序的关系是一对多的关系，也就是说，插件是可以被注册多个的。Tangram UI插件机制的实现原理是采用UI组件的静态数组来保存每个插件的执行函数，通过提供一个对外注册接口来将插件函数注册到静态数组中，在该UI组件的构造函数的执行过程中，通过遍历静态数组来执行插件函数，以达到在构造函数中就可以执行插件函数的目的。</p><h2>3 如何注册一个插件</h2>
+<p>UI插件的相关实现是在baidu.ui.createUI接口中完成的，所以任何通过该接口创建的UI组件，都会自动挂载register和extend两个接口。通过register接口，可以方便的注册一个插件函数，extend接口可以方便的在该UI组件上加入成员方法，具体的用法可以能过下面的例子来理解。</p>
+
+<h2>4 一个简单的例子</h2>
+<p>以下通过一个简单的例子来描述在一个UI组件开发过程中，如何使用插件来扩展一个功能，例如，我们需要完成以下这样的一些功能：</p>
+<ul>
+  <li>创建一个普通的Button组件；</li>
+  <li> 通过插件的形式为该Button组件增加一个双击的功能，并且在双击时触发插件自己的双击侦听器。  </li>
+    分析以上的需求，我们可以大概得出以下的实现关键点：
+      <li>创建一个普通的按钮，可以为该接钮加入statable行为来完成普通按钮应该具有的功能</li>
+      <li> 通过核心程序的register接口可以扩插件的功能，通过核心程序的extend接口可以扩展插件的双击侦听器。 </li>
+</ul>
+明确了以上几个关键点，则这个组件大体可以做成以下这个样子：
+
+
+<table width="640" border="0" cellpadding="5" cellspacing="1">
+  <tr>
+    <th align="left" scope="col">  </th>
+  </tr>
+  <tr>
+    <td bgcolor="#DDDDDD" class="CodeStyle" type="js"><p>baidu.ui.Button = baidu.ui.createUI(function(options){<br>
+  //这里是构造函数<br>
+  }).extend({<br>
+  uiType: 'button',<br>
+  statable: true,//启用statable<br>
+  label: 'Button',//默认显示在按钮上的标签文字<br>
+  <br>
+  getString: function(){<br>
+  var me = this,<br>
+  tpl = '&lt;div id=&quot;#{divId}&quot; class=&quot;#{class}&quot; #{handler}&gt;&lt;span id=&quot;#{labelId}&quot;&gt;#{content}&lt;/span&gt;&lt;/div&gt;';<br>
+  return baidu.string.format(tpl, {<br>
+  divId: me.getId(),//通过一个<br>
+  labelId: me.getId('label'),<br>
+  'class': me.getClass(),<br>
+  content: me.label,<br>
+  handler: me._getStateHandlerString()<br>
+  });<br>
+  },</p>
+<p> _mouseHandler: function(type){<br>
+  var me = this,<br>
+  cssName = (type == 'mouseover'<br>
+  || type == 'mouseout') ? 'over' : 'click';<br>
+  (type == 'mouseover'<br>
+  || type == 'mousedown') ? baidu.dom.addClass(me.getBody(), me.getClass(cssName))<br>
+  : baidu.dom.removeClass(me.getBody(), me.getClass(cssName));<br>
+  me.dispatchEvent(type);<br>
+  },</p>
+<p> _onDblclick: function(evt){//双击时的处理函数<br>
+  alert('dblclick trigger');<br>
+  },</p>
+<p> setLabel: function(content){<br>
+  baidu.dom.g(this.getId('label')).innerHTML = content;<br>
+  },</p>
+<p> render: function(target){<br>
+  var me = this;<br>
+  if (!target || me.getMain()) {return;}<br>
+  me.addState('dblclick', 'dblclick', me._onDblclick);//使用行为的接口自定义一个双击事件<br>
+  baidu.dom.insertHTML(me.renderMain(target), 'beforeEnd', me.getString());<br>
+  }<br>
+  });<br>
+  var btn = new baidu.ui.Button();<br>
+  btn.render('componentId');<br>
+</p>
+
+
+
+</td>
+</tr>
+</table>
+		<br/>
+<input type='button' value='运行代码' onclick='window.open("../images/Tangram-Component-Plugins/doc-demo.html", "_blank");'>
+			
+               
+</div>
+{include ../footer.inc}
+<!-- include file="footer.inc" -->

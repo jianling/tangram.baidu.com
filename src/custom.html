@@ -1,0 +1,52 @@
+{include header.inc}
+		<link rel="stylesheet" href="css/custom.css" type="text/css" />
+		<script type="text/javascript">
+			var pageConfig = { name: "custom", script: "js/custom" };
+		</script>
+		<div class="main-header"><span>自定义 Tangram</span><span class="shadow">自定义 Tangram</span></div>
+		<div class="main-body custompage clearfix">
+			<div class="content article">
+				<p class="noi">提示：勾选需要的模块后，点击右边的“导出”按钮。</p>
+				<div id="filetree"></div>
+			</div>
+			<div class="sidebar article">
+				<div class="box">
+					<div class="box-top"></div>
+					<div class="box-main">
+						<h2>附加选项</h2>
+						<h3>版本</h3>
+						<p class="noi">
+							<select>
+								<option>Tangram-component</option>
+								<option>Tangram-base</option>
+								<option>Tangram-component dev0.2</option>
+								<option>Tangram-Mobile</option>
+							</select>
+						</p>
+
+						<h3>依赖选项</h3>
+						<p class="noi">
+							<input type="checkbox" id="includeBase" disabled="disabled" checked="checked" /> <label for="includeBase">包含Base代码</label><br />
+							<input type="checkbox" id="includeUIBase" disabled="disabled" checked="checked" /> <label for="includeUIBase">包含UI Base代码</label><br />
+							<input type="checkbox" id="includeResource" /> <label for="includeResource">包含资源文件</label>
+						</p>
+
+						<h3>压缩</h3>
+							<p class="noi">
+								<input type="radio" id="yuicompress" checked="checked" name="compress" value="yui" /> <label for="yuicompress">YUICompressor 压缩</label><br />
+								<input type="radio" id="nocompress" name="compress" value="yui" /> <label for="nocompress">源代码 (utf-8)</label>
+							</p>
+
+							<p class="noi">
+								<input type="button" id="export" class="export" value="导 出" />
+								<input type="button" id="viewcode" class="viewcode" value="查看源码" />
+							</p>
+						<h3>已选模块</h3>
+					</div>
+					<div class="box-bottom"></div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/tangram_base_csmap.js"></script>
+		<script type="text/javascript" src="js/tangram_component_csmap.js"></script>
+{include footer.inc}

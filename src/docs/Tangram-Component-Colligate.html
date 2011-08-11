@@ -1,0 +1,104 @@
+{include ../header.inc}
+<!--include file="./header.inc"-->
+<script src="../js/download/tangram.js" charset="utf-8"></script>
+<script src="../js/CodeStyle.js" charset="utf-8"></script>
+		<script type="text/javascript">
+			var pageConfig = { name: "download", prepath: "docs/" };
+		</script>
+		<div class="main-header"><span>Tangram UI组件开发综合范例</span><span class="shadow">Tangram UI组件开发综合范例</span></div>
+		<div class="main-body articlepage article">	
+
+
+
+<h1 class="ac">Tangram UI组件开发综合范例</h1>
+<h2>UI组件综合开发简介</h2>
+<p>Tangram的UI体系以UIBase作为基础，由此引申出了behavior（行为机制），插件机制和事件机制，开发一个UI组件，总是免不了需要经历这几个环节，但是由于各个环节之间的功能相对独立，所以，一个UI组件，它并非总是所有的机制都需要被使用，到底需要使用哪些机制，这个由UI组件的功能决定。以下，为了方便讲述所有机制，将一个使用所有机制的完整例子来表述。</p>
+
+<h2>功能分析和解决思路</h2>
+<p>假如，我们需要开发一个简单的信息提示窗口的组件，他大体可以分解为以下的几个功能点：
+<ul>
+<li>信息提示窗口以一个div作为容器；</li>
+<li>信息窗口可以动态更改提示内容；</li>
+<li>当用户选择了加载插件时就会拥有了拖拽功能；</li>
+<li>当信息窗口是可被拖拽时，在拖拽结束以后触发一个事件来通知使用者当前信息窗口所处的页面位置。</li>
+</ul>
+						分析以上的需求，我们可以得出以下几个实现关键点：
+<ul>
+<li>组件需要通过createUI接口来创建构造；</li>
+<li>提供setText接口来给提示窗口动态设置内容；</li>
+<li>设计一个插件来让用户选择是否支持拖拽功能，该插件可以设计在一个独立的js文件中；</li>
+<li>拖拽功能可以通过拖拽行为draggable来完成；</li>
+<li>使用事件机制完成在拖拽时派发事件并把信息窗口的坐标派发给使用者。</li>
+</ul>
+						可以使用以下的图例来大体理解一个具体的实现结构：<br/><br/>
+<img src='../images/Tangram-Component-Colligate/doc-pic.jpg'/><br/><br/>
+明确了以上几个关键点，则这个组件大体可以做成以下这个样子：
+</p>
+
+
+
+<table width="640" border="0" cellpadding="5" cellspacing="1">
+<tr>
+<th align="left" scope="col">  </th>
+</tr>
+<tr>
+<td bgcolor="#DDDDDD" class="CodeStyle" type="js"><p>baidu.ui.Popup = baidu.ui.createUI(function(options){<br>
+//这里是构造函数<br>
+}).extend({<br>
+uiType: 'popup',<br>
+content: 'default content',<br>
+<br>
+getString: function(){<br>
+var me = this,<br>
+tpl = '&lt;div id=&quot;#{id}&quot; class=&quot;#{class}&quot;&gt;#{content}&lt;/div&gt;';<br>
+return baidu.string.format(tpl, {<br>
+id: me.getId(),<br>
+'class': me.getClass(),<br>
+content: me.content<br>
+});<br>
+},</p>
+<p> setText: function(txt){<br>
+me.getBody().innerHTML = txt;<br>
+},</p>
+<p> render: function(target){<br>
+var me = this;<br>
+if (!target || me.getMain()) {return;}<br>
+baidu.dom.insertHTML(me.renderMain(target), 'beforeEnd', me.getString());<br>
+me.dispatchEvent('onload');<br>
+}<br>
+});<br>
+</p>
+<p>//以下是插件,本来应该考虑放在另一个js文件中，这里为了实现功能就先这样放着了<br>
+baidu.ui.Popup.register(function(me){<br>
+//ondragend是draggable提供的拖拽结束处理事件接口<br>
+me.addEventListener('ondragend', function(evt){<br>
+me._onDragEndHandler();<br>
+});<br>
+});<br>
+baidu.ui.Popup.extend({<br>
+draggable: true,</p>
+<p> _onDragEndHandler: function(){<br>
+var me = this;<br>
+//这里派发一个onafterdrag事件提供给用户使用<br>
+me.dispatchEvent('onafterdrag', baidu.dom.getPosition(me.getMain()));<br>
+}<br>
+});</p>
+<p>//创建实例<br>
+var popup = new baidu.ui.Popup({<br>
+//定义onafterdrag时需要做的事情<br>
+onafterdrag: function(evt){<br>
+alert('left: ' + evt.left + 'px; top: ' + evt.top + 'px;');<br>
+}<br>
+});<br>
+popup.render('componentId');</p>
+
+
+</td>
+</tr>
+</table>
+<br/>
+<input type='button' value='运行代码' onclick='window.open("../images/Tangram-Component-Colligate/doc-demo.html", "_blank");'>
+               
+</div>
+{include ../footer.inc}
+<!-- include file="footer.inc" -->

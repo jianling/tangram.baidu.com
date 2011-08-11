@@ -15,13 +15,14 @@ module.declare(function(require, exports, module){
 		"</div>");
 
 	var itemTemplate = new Lichee.Template(
-		"<div class='simplemenu-item@{extendClass}' id='@{id}' hasSubmenu='@{hasSubmenu}'><a href='name:@{name}' title='@{name}' onclick='return false;'>@{text}</a></div>");
+		"<div class='simplemenu-item@{extendClass}' id='@{id}' index='@{index}' hasSubmenu='@{hasSubmenu}'><a href='name:@{name}' title='@{name}' onclick='return false;'>@{text}</a></div>");
 
 	var simplemenu = new Lichee.Class(
 		/* constructor */ function(conf){
 			this.referrerElement = E(conf.referrerElement);
 			this.direction = Lichee.fixString(conf.direction, "right");
 			this.datas = conf.datas;
+			this.handle = conf.handle || function(){};
 		},
 
 		/* methods */ {
@@ -75,6 +76,7 @@ module.declare(function(require, exports, module){
 				var itemsHtml = this.datas.map(function(data, index){
 					var hasSubmenu = 0;
 					itemsId[index] = Lichee.id();
+
 					if(data.datas){
 						hasSubmenu = 1;
 						subMenus[itemsId[index]] = {
@@ -86,6 +88,7 @@ module.declare(function(require, exports, module){
 
 					return itemTemplate.apply({
 						id: itemsId[index],
+						index: index,
 						name: data.name,
 						text: textover(data.name),
 						hasSubmenu: hasSubmenu,
@@ -104,7 +107,7 @@ module.declare(function(require, exports, module){
 				});
 
 				this.disposeEvent();
-				this.disposeSubMenus(subMenus);
+				this.disposeSubMenus(subMenus, this.handle);
 
 				this.rendered = true;
 			},
@@ -130,6 +133,12 @@ module.declare(function(require, exports, module){
 									menu.expand();
 								}
 							}
+						}.bind(this),
+
+						mousedown: function(){
+							var index = item.attr("index");
+							var data = this.datas[index - 0];
+							this.handle(data);
 						}.bind(this)
 					});
 				}.bind(this));
@@ -158,9 +167,10 @@ module.declare(function(require, exports, module){
 //					this.referrerElement.delClass("simplemenu-item-expanded");
 			},
 
-			disposeSubMenus: function(subMenus){
+			disposeSubMenus: function(subMenus, handle){
 				this.subMenus = {};
 				Lichee.each(subMenus, function(conf, id){
+				    conf.handle = handle;
 					this.subMenus[id] = new simplemenu(conf);
 					this.subMenus[id].setParent(this);
 				}.bind(this));

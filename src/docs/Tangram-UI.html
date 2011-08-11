@@ -1,0 +1,332 @@
+{include ../header.inc}
+<!--include file="./header.inc"-->
+<script src="../js/download/tangram.js" charset="utf-8"></script>
+<script src="../js/CodeStyle.js" charset="utf-8"></script>
+		<script type="text/javascript">
+			var pageConfig = { name: "download", prepath: "docs/" };
+		</script>
+		<div class="main-header"><span>UI 使用指导教程</span><span class="shadow">UI 使用指导教程</span></div>
+		<div class="main-body articlepage article">	
+		
+<h1>UI 使用指导教程</h1>
+<h2>1 前言</h2>
+<p>Tangram库不仅仅提供了一系列函数或者方法来提高前端脚本的编程效率、简化交互式应用程序的编写。同时她还具有一个更吸引人的方面：UI组件。这使得我们为编写用户体验增强而创建的一系列脚本编程、界面设计大为简化。我们可以很轻松的根据Tangram中的UI组件直接替换现有的用户体验模式。</p>
+<h2>2 关于UI </h2>
+<p>Tangram主要分为Base和Component两块；其中Component包含了UI组件和FX动画特效。UI中每一个组件都被描述为一个类。命名格式为首字母大写：T.ui.Button。</p>
+<p><img  src="../images/Tangram-UI/image001.jpg" /></p>
+<h3>2.1 继承关系</h3>
+<p>每一个UI组件都继承了T.ui.Base和T.lang.Class这两个类（T等于baidu）。</p>
+<h3>2.2 OO风格编码</h3>
+<p>UI组件的实现代码为OO风格，如创建一个Button对象则代码类似 var btn = new T.ui.Button( options );其中options 为传入的参数对象。btn为返回的实例。拥有Button组件的一系列属性、方法、事件。这是一种通用的格式，每个UI组件都可能使用这样的方法来创建得到实例</p>
+<h2>3 设计一个页应用</h2>
+<p>上文中讲述了用Tangram中的UI组件可以很轻松的替换现有的用户体验模式。接下来我们以百度的<a href="http://image.baidu.com/i?tn=baiduimage&amp;ct=201326592&amp;lm=-1&amp;cl=2&amp;word=echi" target="_blank">图片搜索页面</a>为例。分析其中的翻页效果，然后设计其修改方案。</p>
+<h3>3.1 分析功能</h3>
+<p>首先打开<a href="http://image.baidu.com/i?tn=baiduimage&amp;ct=201326592&amp;lm=-1&amp;cl=2&amp;word=echi" target="_blank">图片搜索页面</a>地址，可以看到如图。</p>
+<p><img  src="../images/Tangram-UI/image002.jpg" /></p>
+<p>重点关注页面底部的翻页功能，尝试翻到下页。</p>
+<p><img  src="../images/Tangram-UI/image003.jpg" /></p>
+<p> 可以看到URL有了变化，搜索结果的内容也变动了。</p>
+<p> 最后分析下这个图片搜索页面的中的翻页功能。</p>
+<ul>
+  <li> 翻页后的页面变化：翻页动作时，页面是无刷的，动态写入/展现内容。</li>
+  <li> 第一次发送搜索请求后的URL http://image.baidu.com/i?tn=baiduimage&ct=201326592&lm=-1&cl=2&word=echi</li>
+  <li> 翻页后的URL http://image.baidu.com/i?tn=baiduimage&ct=201326592&lm=-1&cl=2&word=echi#pn=21</li>
+  <li> 第3页的URL http://image.baidu.com/i?tn=baiduimage&ct=201326592&lm=-1&cl=2&word=echi#pn=42 </li>
+</ul>
+<p>可以看到，整个URL只有hash部分发生了变化。由此，我们可以推断，在第一次发送搜索请求后载入的数据不仅只有一页，当翻页时，只是将hash对应的部分显示出来。</p>
+<h3>3.2 设计修改方案</h3>
+<p>我们打开页面tangram.baidu.com/tangram-component/T_ui_Pager.html，可以看到在UI中也有页面的翻页组件，与本例<a href="http://image.baidu.com/i?tn=baiduimage&amp;ct=201326592&amp;lm=-1&amp;cl=2&amp;word=echi">图片搜索页面</a>的效果相似。但我们要对本例的翻页效果进行修改，增强用户体验。而不是沿用原有的交互模式，我们打开某看图软件 </p>
+<p><img  src="../images/Tangram-UI/image004.jpg" /></p>
+<p>注意这个软件中拖动底部的滚动条上的华滑块，可以切换显示图片的内容。</p>
+<p><img  src="../images/Tangram-UI/image005.jpg" /></p>
+<p>看到上述效果后，使用Tangram是否可以在WEB页面上实现该看图软件的图片显示效果呢？ </p>
+<p>答案是肯定的。</p>
+<h3>3.3 功能需求分析</h3>
+<p>我们将主要分析如何使用滑块替代现有的翻页效果，对于其他的细节将略过。大概的需求如下：</p>
+<ul>
+  <li>输入一个关键词获得数据列表结果</li>
+  <li>将数据分页</li>
+  <li>使用一个滑块来替代翻页效 </li>
+</ul>
+<h3>3.4 功能规划</h3>
+<h4>3.4.1 查找合适的UI组件</h4>
+<p>打开tangram.baidu.com/tangram-component/ 我们查找到了一个<a href="http://tangram.baidu.com/tangram-component/T_ui_Slider.html" target="_blank">silder组件</a>。该组件可以支持显示一个滑块，并且支持onslide（当开始脱拽滑块）、onslidestop（当拖曳滑块结束）、onslideclick（当单击滑块进度条）等事件。</p>
+<p>UI组件我们使用silder即可，切换页面的效果我们将要用到Component中的Fx动画，以及一些Base中的方法函数。列出本文示例代码中可能会使用到的方法函数：</p>
+<ul>
+  <li>baidu.ajax.request —— Ajax获取数据</li>
+  <li>baidu.dom.innerHTML —— 将内容写入HTML</li>
+  <li> baidu.fx.moveTo —— 移动一个元素的位置</li>
+  <li> baidu.ui.Silder —— UI滑块组件</li>
+</ul>
+UI组件文档示例可以参<a href="http://tangram.baidu.com/resource/demo/component/slider3.html" target="_blank">简单滑块应用</a>，<a href="http://tangram.baidu.com/resource/demo/component/slider3.html" target="_blank">复杂滑块应用</a>。
+
+<h4>3.4.2 页面设计</h4>
+<p>图片将被放置在“图片容器面板”中，我们忽略“图片容器面板”内的具体图片数据，下图简单的示意了滑块滚动时，图片容器面板的切换：</p>
+<p><img  src="../images/Tangram-UI/image006.jpg" /></p>
+详细设计如图：
+<p><img  src="../images/Tangram-UI/image007.jpg" /></p>
+
+<h4>3.4.3 业务逻辑</h4>
+<ul>
+  <li>	根据返回的数据，图片序列内容被切割为若干个“图片容器面板”。</li>
+  <li>页面设计详图中，蓝色区域为HTML内容区域。红色区域与滑块区域平级，同时，红色区域设置overflow:hidden，将不显示超过本容器的内容。灰色半透明区域在红色区域内漂浮，内部子元素列表为“图片容器面板”，图片容器面板的高度为红色区域。</li>
+  <li>将“图片容器面板”的数量作为滑块可以移动的格数，移动滑块的时候，设置灰色半透明区域的top为相应的值。    </li>
+  <li>首先设置滑块的总宽度，然后获得每次滑块移动结束后的当前位置数值，最后根据总宽度的值，与当前位置的值的关系调整灰色半透明区域的top，完成使用UI组件替代原有的功能效果的过程——拖曳滑块显示某页的内容。 </li>
+</ul>
+
+<h2>4 代码实施</h2>
+<p>至此我们已经有了页面的设计图，以及特效应用的业务逻辑，接下去我们先准备好HTML页面、含有Silder及其他相关函数方法的Tangram框架js、Silder组件相关的图片、CSS。</p>
+<p>然后就是结合HTML页面，利用用Silder组建编写实际的业务逻辑代码了。</p>
+<h3>4.1 准备资源</h3>
+<h4>4.1.1 HTML页面：</h4>
+<p>HTML页面DOM结构如下</p>
+<table border="0" cellpadding="5" cellspacing="1" bgcolor="#CCCCCC">
+  <tr>
+    <td  valign="top" bgcolor="#FFFFFF"><ul>
+      <li>BODY
+          <ul>
+            <li>div .container                    
+              <ul>
+                <li>div .panel                  
+                  <ul>
+                    <li>div .imgs …       </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>div .Silder
+                <ul>
+                  <li>div #SilderRender</li>
+                  <li>div #info</li>
+                </ul>
+            </li>
+          </ul>
+      </li>
+    </ul></td>
+    <td valign="top" bgcolor="#FFFFFF"><p> BODY </p>
+        <ul>
+          <li>【内容区域】                    
+            <ul>
+                <li>【图片列表容器的父容器，浮动于内容容器】                  
+                  <ul>
+                      <li>【图片列表容器，重复】<br />                          </li>
+                  </ul>
+                </li>
+            </ul>
+          </li>
+          <li>【滑块区域】
+            <ul>
+                <li>【滑块加载容器】<br />
+              </li>
+              <li>【显示当前页数信息】<br />
+              </li>
+            </ul>
+          </li>
+        </ul></td>
+  </tr>
+</table>
+
+<h4>4.1.2 	CSS资源</h4>
+<p>	打开tangram.baidu.com/resource/demo/component/slider.html，获取HTML代码中HEAD部分的STYLE标签的内容。</p>
+<h4>4.1.3 	样式图片资源</h4>
+<p>根据tangram.baidu.com/resource/demo/component/slider.html页面中的Silder效果，将CSS中指向的图片资源存回本地</p>
+<h4>4.1.4 	Tangram框架脚本文件</h4>
+<ol>
+  <li>打开CodeSearch页，手工勾选实际需要的函数方法，然后导出。</li>
+  <li> 打开根据功能规划中涉及的相关方法函数已经在CodeSearch页中选好了模块的链接，然后导出。 </li>
+</ol>
+<p><img  src="../images/Tangram-UI/image008.jpg" /></p>
+<h4>4.1.5 资源总览</h4>
+<p><img  src="../images/Tangram-UI/image009.jpg" /></p>
+<h3>4.2 实际编码</h3>
+<h4>4.2.1 HTML页</h4>
+<p>index.html的页面布局代码， #Panel 内的 .imgs 为模拟的图片分页展示数据的面板。可以为多个。其中.Silder的红色背景在实际页面中应是不存在的，此处为了与效果图一致没有注释掉。</p>
+<p>注意： .imgs 必须与 #Parent 的高相同。</p>
+<table width="640" border="0" cellpadding="5" cellspacing="1">
+  <tr>
+    <th align="left" scope="col">index.html</th>
+  </tr>
+  <tr>
+    <td bgcolor="#DDDDDD" class="CodeStyle"><p>&lt;!DOCTYPE html&gt; <br />
+      &lt;html&gt; <br />
+  &lt;head&gt; <br />
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt; <br />
+  &lt;title&gt;UI使用教程&lt;/title&gt; <br />
+  &lt;script type=&quot;text/javascript&quot; src=&quot;tangram.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt; <br />
+  &lt;link type='text/css' rel='stylesheet' href='Silder.css'/&gt; <br />
+  &lt;style type=&quot;text/css&quot;&gt;<br />
+  <br />
+      body{<br />
+      background:#333;<br />
+      font-size:14px;color:#FFF;<br />
+      }<br />
+      .container{<br />
+      /* 中间内容盒子 */<br />
+      width:800px;height:400px;background:#D00;<br />
+      position:absolute;<br />
+      margin:-200px 0px 0px -400px;<br />
+      left:50%;top:50%;<br />
+      overflow:hidden;<br />
+      }<br />
+      .silder{<br />
+      /*     滑条容器    */<br />
+      width:800px;height:30px; background:#D00;<br />
+      position:absolute;<br />
+      margin:210px 0px 0px -400px;<br />
+      left:50%;top:50%;<br />
+      }<br />
+  <br />
+      .panel{<br />
+      /*    图片容器面板的父容器    */<br />
+      width:800px;height:auto;min-height:400px;background:#CCC;<br />
+      position:absolute;<br />
+      top:0px;left:0px;<br />
+      }<br />
+      .panel .imgs{<br />
+      /*    图片容器面板    */<br />
+      width:100%;height:400px;position:relative;<br />
+      }<br />
+      #info{<br />
+      width:100%;height;20px;line-height:20px;text-align:center;position:absolute;left:0px;bottom:-20px;<br />
+      }<br />
+      .bgc00{background:#c00}<br />
+      .bg0c0{background:#0c0}<br />
+      .bg00c{background:#00c}<br />
+      .bgcc0{background:#cc0}<br />
+      .bg0cc{background:#0cc}</p>
+      <p> &lt;/style&gt; <br />
+  &lt;/head&gt; <br />
+  &lt;body&gt;<br />
+  &lt;div class=&quot;container&quot; id=&quot;Parent&quot;&gt;<br />
+  &lt;div class=&quot;panel&quot; id=&quot;Panel&quot;&gt;<br />
+  &lt;div class=&quot;imgs bgc00&quot;&gt;1&lt;/div&gt;<br />
+  &lt;div class=&quot;imgs bg0c0&quot;&gt;2&lt;/div&gt;<br />
+  &lt;div class=&quot;imgs bg00c&quot;&gt;3&lt;/div&gt;<br />
+  &lt;div class=&quot;imgs bgcc0&quot;&gt;4&lt;/div&gt;<br />
+  &lt;div class=&quot;imgs bg0cc&quot;&gt;4&lt;/div&gt;<br />
+  &lt;/div&gt;<br />
+  &lt;/div&gt;<br />
+  &lt;div class=&quot;silder&quot;&gt;<br />
+  &lt;div id=&quot;SilderRender&quot;&gt;&lt;/div&gt;<br />
+  &lt;div id=&quot;info&quot;&gt;info&lt;/div&gt;<br />
+  &lt;/div&gt;<br />
+  &lt;/body&gt; <br />
+  &lt;/html&gt;<br />
+      </p>
+    <br /></td>
+  </tr>
+  <tr>
+    <td align="center" bgcolor="#DDDDDD"><img  src="../images/Tangram-UI/image010.jpg" /></td>
+  </tr>
+</table>
+<h4>4.2.2 Silser组件样式</h4>
+<p>此文件内定义了Silser组件所需要的样式。</p>
+<table width="640" border="0" cellpadding="5" cellspacing="1">
+  <tr>
+    <th align="left" scope="col">Silder.css</th>
+  </tr>
+  <tr>
+    <td bgcolor="#DDDDDD" class="CodeStyle"><p>/*baidu.ui.Slider*/<br />
+      .tangram-slider {<br />
+      background : url(imgs/tangram-slider-bg.gif) repeat-x 0px center;<br />
+      }<br />
+      .tangram-slider-thumb {<br />
+      width : 22px;<br />
+      height : 23px;<br />
+      z-index : 3000;<br />
+      }<br />
+      .tangram-progressbar-bar {<br />
+      height : 23px;<br />
+      }<br />
+      /* 自定义皮肤 */<br />
+      .tangram-decorator-box-main {<br />
+      position : relative;<br />
+      width : 445px;<br />
+      height : 23px;<br />
+      }<br />
+      .tangram-decorator-box-lt {<br />
+      position : absolute;<br />
+      z-index : 2;<br />
+      width : 5px;<br />
+      height : 23px;<br />
+      background : url(imgs/tangram-slider-side.gif) no-repeat 0px center;<br />
+      }<br />
+      .tangram-decorator-box-rt {<br />
+      position : absolute;<br />
+      top : 0px;<br />
+      right: 0px!important;<br />
+      right : -1px;/*ie下需要设成-1*/<br />
+      width : 5px;<br />
+      height : 23px;<br />
+      background : url(imgs/tangram-slider-side.gif) no-repeat -5px center;<br />
+      }<br />
+      /* 重定义 */<br />
+      .tangram-slider {width : 100%;height : 23px;}</p>
+      <p>.tangram-slider-thumb{<br />
+        filter : progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src=&quot;imgs/tangram-slider-thumb-blue.png&quot;);<br />
+        background:url(imgs/tangram-slider-thumb-blue.png) no-repeat!important;<br />
+        background:none;<br />
+        }<br />
+        .tangram-progressbar-bar{<br />
+        background:url(imgs/tangram-slider-fg-blue.gif) repeat-x 0 center;</p>
+      <p>}<br />
+    </p></td>
+  </tr>
+</table>
+<h4>4.2.3 Silder组件应用业务逻辑</h4>
+<p>代码应加在body标签结束之前，实际效果图中 .silder 处的CSS背景颜色应被注释掉。</p>
+<p>此段代码定义了 Silder 组件的进度条被单击时，或者滑块被拖曳结束时，执行一个更新panel的函数，传入一个参数，此参数为进度条的当前进度（0~100）。</p>
+<table width="640" border="0" cellpadding="5" cellspacing="1">
+  <tr>
+    <th align="left" scope="col">&lt;script&gt;</th>
+  </tr>
+  <tr>
+    <td bgcolor="#DDDDDD" class="CodeStyle">&lt;script type=&quot;text/javascript&quot;&gt;<br />
+var slider = new T.ui.Slider({<br />
+/*     定义皮肤    */<br />
+skin: &quot;tangram-decorator&quot;,<br />
+decorator: [<br />
+{<br />
+type: &quot;box&quot;,<br />
+tpl: {<br />
+box: &quot;&lt;div #{class}&gt;&lt;/div&gt;&lt;div #{class} id='#{innerWrapId}'&gt;&lt;/div&gt;&lt;div #{class}&gt;&lt;/div&gt;&quot;<br />
+}<br />
+}<br />
+],<br />
+/*     当单击进度条时    */<br />
+onslideclick: function(e){<br />
+this.update();<br />
+updatePanel(this.value);<br />
+},<br />
+/*     当拖曳滑块结束时    */<br />
+onslidestop: function(e){<br />
+updatePanel(this.value);<br />
+}<br />
+});<br />
+/*     使用动画更新Panel以及Info    */<br />
+function updatePanel(v){<br />
+var y_pro = ( T.g('Panel').clientHeight - T.g('Parent').clientHeight ) / 100 ;<br />
+var m_y = -(v*y_pro);<br />
+T.fx.moveTo('Panel',[0,m_y])<br />
+T.g('info').innerHTML = parseInt(v)+'/100'<br />
+}<br />
+slider.render(&quot;SilderRender&quot;);<br />
+&lt;/script&gt;<br /></td>
+  </tr>
+  <tr>
+    <td align="center" bgcolor="#DDDDDD"><img  src="../images/Tangram-UI/image011.jpg" /><br />
+<img  src="../images/Tangram-UI/image012.jpg" /><br />
+<img  src="../images/Tangram-UI/image013.jpg" /></td>
+  </tr>
+</table>
+<h2>5 结语
+</h2><p>至此，虽然我们没有完全完成图片搜索页的完全效果，但是本文的目标已经达到——使用一个UI组件完成对翻页功能的改造。</p>
+<p>效果内的div.imgs元素可以视作一个分页，如果要完善该效果，应该包括，读取数据，设置分页、还有对Silder的改造，以页数为单位对页面进行滑动，而不是百分比。</p>
+<p>在此例中，主要使用了Silder与Fx相互配合，实际上在Tangram中还有许多的UI，这些UI同样使用简单。如果熟悉了tangram.baidu.com中UI的相关文档，我们可以很容易的通过现有的UI组件去制作一个非常具有交互性的页面应用。</p>
+
+<ul>
+	<li><a href="../images/Tangram-UI/DEMO/index.html" target="_blank">Silder切换图片演示地址</a></li>
+	<li><a href="../images/Tangram-UI/DEMO/Tangram-UI-DEMO.rar">DEMO打包下载</a></li>
+</ul></div>
+{include ../footer.inc}
+<!-- include file="footer.inc" -->

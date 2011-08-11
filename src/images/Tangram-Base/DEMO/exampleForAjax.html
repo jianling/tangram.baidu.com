@@ -1,0 +1,19 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+        <title> exampleForAjax </title> 
+  <script  type="text/javascript" src="http://img.baidu.com/js/tangram-base-1.3.9.js"></script> 
+    </head> 
+    <body>
+        <div id="msg" style="border:1px solid #9CC;background:#FFF;padding:10px"></div>
+        <input type="button" value="发送ajax请求" onclick="send()"/><a href="msg.txt" target="_blank">msg.txt内容</a>
+        <script type="text/javascript">
+            function send(){
+               T.ajax.get('msg.txt', function(xhr,msg){          
+                      T.g("msg").innerHTML += "<p>状态:"+xhr.status+"<br />返回消息:"+msg+'</p>';
+                })
+            }
+        </script>
+     </body>
+</html>

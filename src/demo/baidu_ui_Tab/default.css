@@ -1,0 +1,50 @@
+/*baidu.ui.Tab*/
+.tangram-tab {
+    width : 400px;
+    height : 61px;
+    text-align : center;
+}
+.tangram-tab-head-container {
+    height : 28px;
+    padding : 3px 0 0 0;
+    margin : 0;
+    list-style : none;
+    background : url(tangram-tab.png) repeat-x 0 -54px;
+}
+.tangram-tab-head {
+    float : left;
+    margin : 1px;
+    bottom : 0px;
+}
+.tangram-tab-head a {
+    width : 90px;
+    height : 22px;
+    padding-top : 5px;
+    color : white;
+    font-size : 12px;
+    font-weight : bold;
+    display : block;
+    text-decoration : none;
+    background : url(tangram-tab.png) no-repeat 90px 0;
+    outline : medium none;
+}
+.tangram-tab-head a:hover {
+    background-position : 0 0;
+}
+.tangram-tab-current a{
+    color : #35608c;
+    background-position : 0 -27px!important;
+}
+.tangram-tab-body-container {
+    height : 30px;
+    background : url(tangram-tab.png) repeat-x 0 -85px;
+}
+.tangram-tab-body {
+    clear : both;
+}
+.tangram-tab-body p{
+    font-size : 14px;
+    font-weight : bold;
+    color : #3377AA;
+    margin : 0px;
+}

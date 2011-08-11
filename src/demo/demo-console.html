@@ -2,76 +2,85 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Tangram demo console</title>
 <style type='text/css'>
-.tangram-democonsole {
+html,body{
     height: 100%;
-    border: green solid 1px;
+	margin: 0px;
+}
+
+
+.tangram-democonsole {
+    position: relative;
+    height: 100%;
 }
 
 .tangram-democonsole-console {
     width: 35%;
     height: 100%;
     float: left;
-    background: #eee;
+    background: gainsboro;
 }
 .tangram-democonsole-panel {
     width: 65%;
     height: 100%;
     float: right;
-    background: gray;
-}
-
-.tangram-democonsole-consolegroup {
-    margin: 5px;
-    padding: 5px;
-    border-bottom: red dotted 1px;
-}
-.tangram-democonsole-consolegroup div {
-    text-align: center;
-    margin: 5px;
-    padding: 5px;
-    border: blue dotted 1px;
+    background: white;
 }
 
 .tangram-democonsole-combobox {
+    margin: 3px;
     padding: 10px;
-    font-size: 12px;
+    border: white outset 2px;
+    background: #ddd;
+}
+
+.tangram-democonsole-consolegroup {
+    margin: 3px;
+    padding: 3px;
+    background: #eee;
+    border: white outset 2px;
+}
+.tangram-democonsole-consolegroup div {
+    text-align: center;
+    margin: 3px;
+    padding: 5px;
+    border: lightsteelblue solid 1px;
+}
+.tangram-democonsole-btn {
+    position: absolute;
+    clear: both;/*ie6必要*/
+    right: 10px;
+    top: 10px;
 }
 
 
-
-.tangram-democonsole-default {
-    background: yellow
+.tangram-democonsole-formbutton {
+    
 }
-
-
 </style>
-<script type='text/javascript' src='../js/download/tangram-1.3.9.js'></script>
+<script type='text/javascript' src='../js/download/tangram.js'></script>
 <script type='text/javascript'>
 (function(){
     var array = [],
-        packages = baidu.url.getQueryValue(location.href, 'package').replace(/\./g, '_');
-    array.push('<link type="text/css" rel="stylesheet" href="'+ packages +'/default.css"\/>');
-    array.push('<script type="text/javascript" src="'+ packages +'/conf.js"><\/script>');
+        packages = baidu.url.getQueryValue(location.href, 'package'),
+        path = packages.replace(/\./g, '_');
+    array.push('<link type="text/css" rel="stylesheet" href="'+ path +'/default.css"\/>');
+    array.push('<script type="text/javascript" src="'+ path +'/conf.js"><\/script>');
     array.push('<script type="text/javascript" src="../js/fragment/Tangram-component/src/import.php?f=baidu.ui.createUI,'+
-        baidu.url.getQueryValue(location.href, 'package') + '.*"><\/script>');
+        packages + '"><\/script>');
     document.writeln(array.join('\n'));
 })();
 </script>
 <script type='text/javascript' src='../js/DemoConsole.js'></script>
 </head>
 <body>
-<div id='demConsole' style='width:80%; height:500px; border:red solid 1px;'></div>
-
-<input type='button' value='getCode()' onclick='alert(demo.getCode());'/>
-
+<div id='demConsole' style='width:100%; height:100%;'></div>
 </body>
-<script id='demoScript' type='text/javascript'>
-    
-</script>
 <script type='text/javascript'>
 var demo = new baidu.ui.DemoConsole(conf);
+baidu.event.on(window, 'load', function(){
     demo.render('demConsole');
+}); 
 </script>
 </html>

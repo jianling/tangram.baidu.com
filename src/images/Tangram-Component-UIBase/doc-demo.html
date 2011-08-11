@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DEMO</title>
+<style type='text/css'>
+.tangram-button {
+	width: 120px;
+	height: 28px;
+	cursor: pointer;
+	text-align: center;
+	border:red solid 1px;
+}
+.tangram-button-hover{
+	background: pink;
+}
+.tangram-button-press{
+	background: blue;
+}
+</style>
+<script type='text/javascript' src='http://img.baidu.com/js/tangram-base-1.3.9.js'></script>
+<script type='text/javascript' src='tangram-UI.js'></script>
+</head>
+<body>
+<div id='componentId'></div>
+</body>
+<script type='text/javascript'>
+baidu.ui.Button = baidu.ui.createUI(function(options){
+    //这里是构造函数
+}).extend({
+    uiType: 'button',
+    label: 'Button',//默认显示在按钮上的标签文字
+    /**
+     * 取得一个页面元素的字符串拼接
+     * @return {String}
+     */
+    getString: function(){
+        var me = this,
+            tpl = '<div id="#{divId}" class="#{class}" onmouseover="#{mouseoverHandler}" onmouseout="#{mouseoutHandler}" onmousedown="#{mousedownHandler}" onmouseup="#{mouseupHandler}"><span id="#{labelId}">#{content}</span></div>';
+        return baidu.string.format(tpl, {
+            divId: me.getId(),//通过一个
+            labelId: me.getId('label'),
+            'class': me.getClass(),
+            content: me.label,
+            mouseoverHandler: me.getCallString('_mouseHandler', 'mouseover'),
+            mouseoutHandler:  me.getCallString('_mouseHandler', 'mouseout'),
+            mousedownHandler: me.getCallString('_mouseHandler', 'mousedown'),
+            mouseupHandler:   me.getCallString('_mouseHandler', 'mouseup')
+        });
+    },
+    
+    /**
+     * 鼠标的事件侦听器
+     * @param {String} type 鼠标事件的类型
+     * @private
+     */
+    _mouseHandler: function(type){
+        var me = this,
+            cssName = (type == 'mouseover'
+                        || type == 'mouseout') ? 'hover' : 'press';
+        (type == 'mouseover'
+            || type == 'mousedown') ? baidu.dom.addClass(me.getBody(), me.getClass(cssName))
+                : baidu.dom.removeClass(me.getBody(), me.getClass(cssName));
+        me.dispatchEvent(type);
+    },
+    
+    /**
+     * 设置按钮的标签
+     * @param {String} content 标签内容
+     */
+    setLabel: function(content){
+        baidu.dom.g(this.getId('label')).innerHTML = content;
+    },
+    
+    /**
+     * 渲染组件
+     * @param {HTMLElement} target 指定一个容器用来渲染元素
+     */
+    render: function(target){
+        var me = this;
+        if (!target || me.getMain()) {return;}
+        baidu.dom.insertHTML(me.renderMain(target), 'beforeEnd', me.getString());
+    }
+});
+
+//创建实例
+var btn = new baidu.ui.Button();
+btn.render('componentId');
+</script>
+</html>
