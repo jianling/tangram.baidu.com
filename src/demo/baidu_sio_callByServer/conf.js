@@ -11,7 +11,7 @@ var conf = {
         },
         btn1: {
             type: 'button',
-            defaultValue: '点击发送log',
+            defaultValue: '执行代码',
             event: {
             	eventName: 'onclick',
             	handler: function(){
