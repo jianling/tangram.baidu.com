@@ -1,4 +1,3 @@
-
 var conf = {
     clazz: {
         type: 'method',
