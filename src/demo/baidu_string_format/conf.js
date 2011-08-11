@@ -43,4 +43,4 @@ var conf = {
     groups: {
         'default': [['dateInput1'], ['dateInput2'], ['btn1']]
     }
-};
+};  
