@@ -1,28 +1,28 @@
 var conf = {
     clazz: {
         type: 'method',
-        'method': 'baidu.string.subByte'
+        'method': 'baidu.swf.create'
     },
     
-    demoType: [{key: 'default', val: 'baidu.string.subByte'}],
+    demoType: [{key: 'default', val: 'baidu.swf.create'}],
     'default': {
         pageConf: {
             html: '<div id="resultArea"></div>'
         },
         dateInput: {
-        	label: '输入字符：',
+        	label: '输入配置：',
             type: 'text',
-            defaultValue: 'background-position-x',
-            size: 30
+            defaultValue: "{id: 'flash',url: './baidu_swf_create/test.swf',width:200,height:150}",
+            size: 40
         },
         btn1: {
             type: 'button',
-            defaultValue: '截取',
+            defaultValue: '载入flash',
             depend: ['dateInput'],
             event: {
             	eventName: 'onclick',
             	handler: function(arg0){
-            		T.g('resultArea').innerHTML = '转换后为：' + baidu.string.toCamelCase(arg0);
+            		baidu.swf.create(eval('(' + arg0 + ')'), 'resultArea');
             	}
             }
         }

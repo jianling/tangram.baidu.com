@@ -4,7 +4,7 @@ var conf = {
         'method': 'baidu.string.filterFormat'
     },
     
-    demoType: [{key: 'default', val: 'baidu.json.filterFormat'}],
+    demoType: [{key: 'default', val: 'baidu.string.filterFormat'}],
     'default': {
         pageConf: {
             html: '<div id="resultArea"></div>',

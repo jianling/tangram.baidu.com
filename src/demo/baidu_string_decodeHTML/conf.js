@@ -4,7 +4,7 @@ var conf = {
         'method': 'baidu.string.decodeHTML'
     },
     
-    demoType: [{key: 'default', val: 'baidu.json.decodeHTML'}],
+    demoType: [{key: 'default', val: 'baidu.string.decodeHTML'}],
     'default': {
         pageConf: {
             html: '<div id="resultArea">解码后返回：</div>',
