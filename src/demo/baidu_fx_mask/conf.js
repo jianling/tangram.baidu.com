@@ -3,7 +3,7 @@ var conf = {
     //    class|method|field
     clazz: {
         type: 'method',
-        'class': 'baidu.fx.mask'
+        'method': 'baidu.fx.mask'
     },
     //    定义DEMO可选项
     demoType: [

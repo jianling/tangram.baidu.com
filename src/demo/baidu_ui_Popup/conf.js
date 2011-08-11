@@ -13,18 +13,26 @@ var conf = {
     'default': {
         //    类实例化选项
         pageConf: {
-            options: '{contentText: "这里输入需要显示的信息" }',
-			target:'pop',
-			html:'<input id="pop" type="button" value="点我" />'
+            options: '{contentText: "这里输入需要显示的信息",left:"1%",top:-1,width:"98%"}',
+			html:''
         },
-        disable: {
+        open: {
             type: 'button',
-            defaultValue: 'disable',
+            defaultValue: 'open',
             event: {
                 eventName: 'onclick',
                 handler: function(){
 					this.open();
-					console.log(this)
+				}
+            }
+        },
+        close: {
+            type: 'button',
+            defaultValue: 'close',
+            event: {
+                eventName: 'onclick',
+                handler: function(){
+					this.close();
 				}
             }
         }
@@ -32,7 +40,7 @@ var conf = {
     },    
     groups: {
         'default': [
-            ['disable']
+            ['open','close']
         ]
     }
 };
