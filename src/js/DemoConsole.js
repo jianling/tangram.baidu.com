@@ -4,11 +4,14 @@
         var me = this;
         me._toggleId = null;//
         me._instance = null;//
+        if(me.clazz.dependPackages){
+            document.writeln('<script type="text/javascript" src="../js/fragment/Tangram-component/src/import.php?f='+ me.clazz.dependPackages.join(',') +'"></script>');
+        }
     }).extend({
         uiType: 'democonsole',
         tplPanel: '<div id="#{panelId}" class="#{panelClass}"></div>',
         tplDOM: '<div id="#{id}" class="#{class}"><div id="#{consoleId}" class="#{consoleClass}"><div align="center" class="#{comboboxClass}"><select id="#{demoType}" class="#{demoTypeClass}" onchange="#{handler}">#{content}</select></div>#{defaultContent}</div>#{panelContent}<div class="#{btnClass}"><input type="button" value="code" onclick="#{codeHandler}"/>&nbsp;<input type="button" value="#{infoWinVal}" onclick="#{infoWinHandler}"/></div></div>',
-        tplHTML: '<!DOCTYPE html>\n<html>\n<head>\n<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">\n<title>#{packages}</title>\n<link type="text/css" rel="stylesheet" href="#{cssPath}/default.css"/>\n<script type="text/javascript" src="../js/download/tangram-1.3.9.core.js"></script>\n<script type="text/javascript" src="../js/fragment/Tangram-component/src/import.php?f=#{packages}.*"></script>\n</head>\n<body>\n#{content}\n</body>\n<script type="text/javascript">\n#{jscode}\n</script>\n</html>',
+        tplHTML: '<!DOCTYPE html>\n<html>\n<head>\n<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">\n<title>#{packages}</title>\n<link type="text/css" rel="stylesheet" href="#{cssPath}/default.css"/>\n<script type="text/javascript" src="../js/download/tangram-1.3.9.core.js"></script>\n<script type="text/javascript" src="../js/fragment/Tangram-component/src/import.php?f=#{packages}"></script>\n</head>\n<body>\n#{content}\n</body>\n<script type="text/javascript">\n#{jscode}\n</script>\n</html>',
         
         getPanelString: function(){
             var me = this;
@@ -215,7 +218,7 @@
                 });
             }
             code = baidu.string.format(me.tplHTML, {
-                packages: packages,
+                packages: me.clazz.dependPackages ? [packages].concat(me.clazz.dependPackages).join(',') : packages,
                 cssPath: packages.replace(/\./g, '_'),
                 content: pageConf.html || '<div id="demoId"></div>',
                 jscode: jsCode.join('\n')
