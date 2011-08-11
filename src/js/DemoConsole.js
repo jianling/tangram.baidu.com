@@ -55,14 +55,14 @@
                 array = [];
             data && baidu.array.each(data.key, function(item, index){
                 array.push(baidu.string.format(tpl, {
-                    des: is ? '' : '<label for="'+ (key + index) +'">'+ item +'</label>',
+                    des: is ? '' : '<label for="'+ (key + index) +'">'+ data.val[index] +'</label>',
                     target: is ? 'option' : 'input',
                     id: is ? '' : (key + index),
                     name: is ? '' : key,
                     type: is ? '' : 'type="'+ entity.type +'"',
-                    val: data.val[index],
+                    val: data.key[index],
                     checked: data.val[index] == entity.defaultValue ? (is ? 'selected' : 'checked') : '',
-                    content: is ? item : '',
+                    content: is ? data.val[index] : '',
                     foot: is ? '</options>' : ''
                 }));
             });

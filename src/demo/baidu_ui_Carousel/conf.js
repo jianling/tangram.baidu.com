@@ -76,8 +76,8 @@ var conf= {
             type: 'select',
             defaultValue: '',
             data: {
-                key: ['自动', 'next', 'prev'],
-                val: ['', 'next', 'prev']
+                key: ['', 'next', 'prev'],
+                val: ['自动', 'next', 'prev']
             }
         },
         scrollTo: {
