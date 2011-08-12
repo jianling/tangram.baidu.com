@@ -36,6 +36,14 @@ var conf = {
 					alert(this.getDate())
 				}
             }
+        },	
+		dispose: {
+            type: 'button',
+            defaultValue: '销毁dispose()',
+            event: {
+                eventName: 'onclick',
+                handler: 'dispose'
+            }
         },		
 		getToday: {
             type: 'button',
@@ -141,7 +149,8 @@ var conf = {
             ['nextMonth','prevMonth','getDate','getToday'],
             ['setDateVal','setDateBtn'],
             ['newKey','newVal','newBtn'],
-            ['expweekStart','expinitDate','exphighlightDates','expdisableDates','expflipContent','explanguage','exponclickdate']
+            ['expweekStart','expinitDate','exphighlightDates','expdisableDates','expflipContent','explanguage','exponclickdate'],
+			['dispose']
         ]
     }
 };

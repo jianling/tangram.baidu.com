@@ -17,21 +17,67 @@ var conf = {
 			target:'inputContent',
 			html:'<div id="inputContent"></div>'
         },
-        disable: {
+    //	控制台输出调试项
+        console: {
             type: 'button',
-            defaultValue: 'disable',
+            defaultValue: 'console.log',
             event: {
                 eventName: 'onclick',
-                handler: function(){
-					console.log(this)
-				}
+                handler: function(){if(console && console.log){console.log(window.t=this)}}
             }
-        }
-        
-    },    
+        },
+		disable: {
+			type: 'button',
+			defaultValue: '禁用disable()',
+			event: {
+				eventName: 'onclick',
+				handler: 'disable'
+			}
+		},
+		enable: {
+			type: 'button',
+			defaultValue: '启用enable()',
+			event: {
+				eventName: 'onclick',
+				handler: 'enable'
+			}
+		},
+		dispose: {
+			type: 'button',
+			defaultValue: '销毁dispose()',
+			event: {
+				eventName: 'onclick',
+				handler: 'dispose'
+			}
+		},
+		isDisabled: {
+			type: 'button',
+			defaultValue: '是否禁用 isDisabled()',
+			event: {
+				eventName: 'onclick',
+				handler: function(){
+					var s = this.isDisabled();
+					alert( s );
+				}
+			}
+		},
+		getText: {
+			type: 'button',
+			defaultValue: '获得input文字 getText()',
+			event: {
+				eventName: 'onclick',
+				handler: function(){
+					alert( this.getText() );
+				}
+			}
+		}
+    },
+    
     groups: {
         'default': [
-            ['disable']
+            ['console'],
+            ['enable','disable','isDisabled','getText'],
+			['dispose']
         ]
     }
 };

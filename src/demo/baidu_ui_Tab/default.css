@@ -1,7 +1,7 @@
 /*baidu.ui.Tab*/
 .tangram-tab {
     width : 400px;
-    height : 61px;
+    height : 200px;
     text-align : center;
 }
 .tangram-tab-head-container {
@@ -36,8 +36,8 @@
     background-position : 0 -27px!important;
 }
 .tangram-tab-body-container {
-    height : 30px;
-    background : url(tangram-tab.png) repeat-x 0 -85px;
+    height : 200px;
+    background : #eee;
 }
 .tangram-tab-body {
     clear : both;

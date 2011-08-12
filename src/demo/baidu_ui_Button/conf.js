@@ -23,12 +23,9 @@ var conf = {
             defaultValue: 'console.log',
             event: {
                 eventName: 'onclick',
-                handler: function(){if(console && console.log){console.log(window.tmp=this)}}
+                handler: function(){if(console && console.log){console.log(window.t=this)}}
             }
         },
-       
-
-
 		disable: {
 			type: 'button',
 			defaultValue: '禁用disable()',
@@ -111,9 +108,10 @@ var conf = {
     groups: {
         'default': [
             ['console'],
-            ['disable','enable','dispose','isDisabled'],
+            ['disable','enable','isDisabled'],
             ['newKey','newVal','newBtn'],
-            ['expcontent','expdisable','expevent']
+            ['expcontent','expdisable','expevent'],
+			['dispose']
         ]
     }
 };
