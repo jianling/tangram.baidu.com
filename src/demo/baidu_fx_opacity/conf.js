@@ -2,20 +2,20 @@ var conf = {
     //    定义包类型
     //    class|method|field
     clazz: {
-        type: 'class',
-        'class': 'baidu.ui.Tooltip'
+        type: 'method',
+        'method': 'baidu.fx.opacity'
     },
     //    定义DEMO可选项
     demoType: [
-        {key: 'default', val: 'Tooltip核心示例'}
+        {key: 'default', val: 'opacity示例'}
     ],
     //    默认可选项的配置
     'default': {
         //    类实例化选项
         pageConf: {
-            options: '{type: "click",target:"toolTip",autoRender:true,content: "<div style=\'width:300px;height:100px\'>显示的信息，信息内容可以自己设定，可以是文字也可以是html代码。</div>" }',
-			target:'',
-			html:' <input type="button" id="toolTip" value="点此弹出消息框" />'
+            options: '',
+			html:' <div id="clown"><img src="images/fx1.jpg" id="doEl"></div><input type="button" value="运行" onclick="run()" /><div id="log"></div>',
+			jsCode:'function run(){ T.fx.opacity(baidu.dom.g("doEl"), {from:0.1,to:0.9,onbeforestart:log,onafterfinish:log}) }function log(evt){  baidu.dom.g("log").innerHTML += new Date().getTime()+" - 事件 "+evt.type+" 触发<br />" }'
         },
         disable: {
             type: 'button',
@@ -23,16 +23,15 @@ var conf = {
             event: {
                 eventName: 'onclick',
                 handler: function(){
-					this.open(baidu.dom.g('toolTip'))
-					console.log(this)
 				}
             }
         }
         
+		
     },    
     groups: {
         'default': [
-            ['disable']
+            //['disable']
         ]
     }
 };
