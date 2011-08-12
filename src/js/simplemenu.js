@@ -15,7 +15,7 @@ module.declare(function(require, exports, module){
 		"</div>");
 
 	var itemTemplate = new Lichee.Template(
-		"<div class='simplemenu-item@{extendClass}' id='@{id}' index='@{index}' hasSubmenu='@{hasSubmenu}'><a href='name:@{name}' title='@{name}' onclick='return false;'>@{text}</a></div>");
+		"<div class='simplemenu-item@{extendClass}' id='@{id}' index='@{index}' hasSubmenu='@{hasSubmenu}'><a@{hrefattr} title='@{name}' onclick='return false;'>@{text}</a></div>");
 
 	var simplemenu = new Lichee.Class(
 		/* constructor */ function(conf){
@@ -92,7 +92,8 @@ module.declare(function(require, exports, module){
 						name: data.name,
 						text: textover(data.name),
 						hasSubmenu: hasSubmenu,
-						extendClass: hasSubmenu ? " simplemenu-arrow" : ""
+						extendClass: hasSubmenu ? " simplemenu-arrow" : "",
+						hrefattr: Lichee.isIe ? " href=''" : ""
 					});
 				});
 
@@ -135,10 +136,11 @@ module.declare(function(require, exports, module){
 							}
 						}.bind(this),
 
-						mousedown: function(){
+						mousedown: function(e){
 							var index = item.attr("index");
 							var data = this.datas[index - 0];
 							this.handle(data);
+							return false;
 						}.bind(this)
 					});
 				}.bind(this));

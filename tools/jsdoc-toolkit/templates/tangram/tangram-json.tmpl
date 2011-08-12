@@ -1,7 +1,24 @@
 {!
 function parse(str){
-	return str.replace(/[\r\n\'\"]/g, function(m){
-		return m == '\r' || m == '\n' ? '' : '\\' + m;
+	return str.replace(/[\r\n\'\"\/]|\\/g, function(m){
+		var val = '';
+		switch(m){
+		    case '\r':
+		    case '\n':
+		      val = '';
+		      break;
+		    case '\'':
+		    case '"':
+		      val = "\\" + m;
+		      break;
+		    case "\\":
+		      val = "\\\\";
+		      break;
+		    default:
+		   	  val = m;
+		      break;
+		}
+		return val;
 	});
 }
 
