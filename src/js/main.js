@@ -116,30 +116,30 @@ void function(){
 				referrerElement: "menu-doc",
 				direction: "down",
 				datas: [
-					{ name: "mobile 开发系列", datas: [
-						{ name: "mobile web 的未来" },
-						{ name: "需要 jquery 吗" },
-						{ name: "链式调用" },
-						{ name: "常用技巧" },
-						{ name: "移动浏览器的 viewport" },
-						{ name: "iframe 的问题" },
-						{ name: "基础方法" },
-						{ name: "UI 组件" },
-						{ name: "事件处理", datas: [
-							{ name: "事件处理(一)" },
-							{ name: "事件处理(二)" },
-							{ name: "事件处理(三)" }
-						] },
-						{ name: "动画效果", datas: [
-							{ name: "动画效果(一)" },
-							{ name: "动画效果(二)" }
-						] },
-						{ name: "离线存储", datas: [
-							{ name: "离线存储(一)" },
-							{ name: "离线存储(二)" }
-						] },
-						{ name: "本地存储" }
-					] },
+//					{ name: "mobile 开发系列", datas: [
+//						{ name: "mobile web 的未来" },
+//						{ name: "需要 jquery 吗" },
+//						{ name: "链式调用" },
+//						{ name: "常用技巧" },
+//						{ name: "移动浏览器的 viewport" },
+//						{ name: "iframe 的问题" },
+//						{ name: "基础方法" },
+//						{ name: "UI 组件" },
+//						{ name: "事件处理", datas: [
+//							{ name: "事件处理(一)" },
+//							{ name: "事件处理(二)" },
+//							{ name: "事件处理(三)" }
+//						] },
+//						{ name: "动画效果", datas: [
+//							{ name: "动画效果(一)" },
+//							{ name: "动画效果(二)" }
+//						] },
+//						{ name: "离线存储", datas: [
+//							{ name: "离线存储(一)" },
+//							{ name: "离线存储(二)" }
+//						] },
+//						{ name: "本地存储" }
+//					] },
 					{ name: "tangram 最佳实践", datas: [
 						{ name: "Base 入门", link: getpath('docs/Tangram-Base.html'), target: '_self' },
 						{ name: "Component 入门", link: getpath('docs/Tangram-Component.html'), target: '_self' },
@@ -152,9 +152,8 @@ void function(){
 					] },
 					{ name: "新手入门" },
 					{ name: "快捷方式" },
-					{ name: "Base 文档" },
-					{ name: "component 文档" },
-					{ name: "mobile 文档" }
+					{ name: "API 参考手册", link: getpath("api.html"), target: '_self' }
+//					{ name: "mobile 文档" }
 				],
 				handle: function(conf){
 					window.open(conf.link, conf.target);

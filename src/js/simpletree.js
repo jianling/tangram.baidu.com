@@ -32,6 +32,14 @@ module.declare(function(require, exports, module){
 				delete undefinedParentChilds[item.n];
 			}
 		});
+
+		Lichee.each(undefinedParentChilds, function(childs, name){
+			var item = { n: name, p: "", childs: childs, checked: 0, nodeType: "folder"  };
+			formatedData.push(item);
+			dataItemStates[name] = item;
+//			formatedData.push.apply(formatedData, childs);
+		});
+
 		return [formatedData, dataItemStates];
 	};
 
@@ -88,6 +96,13 @@ module.declare(function(require, exports, module){
 			"<div class='selection-clicker' id='@{checkClickerId}'></div>",
 		"</div>",
 		"<div class='icon' id='@{iconId}'></div>",
+		"<div class='name'><a id='@{namelinkId}' href='' title='@{name}' onclick='return false;'>@{name} </a></div>");
+
+	var nodeTemplate2 = new Lichee.Template(
+		"<div class='relation' id='@{relationId}'>",
+			"<div class='expanded-viewer' id='@{expandedViewerId}'></div>",
+		"</div>",
+		"<div class='icon' id='@{iconId}'></div>",
 		"<div class='name'><a id='@{namelinkId}' href='' onclick='return false;'>@{name} </a></div>");
 
 	var node = new Lichee.Class(
@@ -104,7 +119,10 @@ module.declare(function(require, exports, module){
 
 		/* methods */ {
 			render: function(){
-				this.container.html(nodeTemplate.apply({
+				var enableCheckBox = this.tree.enableCheckBox;
+				var template = enableCheckBox ? nodeTemplate : nodeTemplate2;
+
+				this.container.html(template.apply({
 					name: this.name.htmlEncode(),
 					iconId: this.iconId = Lichee.id(),
 					namelinkId: this.namelinkId = Lichee.id(),
@@ -278,24 +296,27 @@ module.declare(function(require, exports, module){
 					}.bind(this)
 				});
 
-				checkClicker.addEvents({
-					click: function(){
-						var checkValue = this.tree.dataMapping[this.name].checked;
-						switch(checkValue){
-							case 0:
-							case .5:
-								this.setCheck(1);
-								break;
-							case 1:
-								this.setCheck(0);
-								break;
-						}
-					}.bind(this)
-				});
+				if(this.tree.enableCheckBox){
+					checkClicker.addEvents({
+						click: function(){
+							var checkValue = this.tree.dataMapping[this.name].checked;
+							switch(checkValue){
+								case 0:
+								case .5:
+									this.setCheck(1);
+									break;
+								case 1:
+									this.setCheck(0);
+									break;
+							}
+						}.bind(this)
+					});
+				}
 			},
 
 			// 修正 checkClicker 位置偏差问题
 			fixRelativeEls: function(step){
+				if(!this.tree.enableCheckBox)return ;
 				if(step == 1){
 					E(this.checkClickerId).style("top", "0");
 				}else if(step == 2){
@@ -309,6 +330,8 @@ module.declare(function(require, exports, module){
 		/* constructor */ function(conf){
 			this.container = E(conf.container);
 			this.data = conf.data;
+			this.enableCheckBox = typeof conf.enableCheckBox == "boolean" ?
+				conf.enableCheckBox : true;
 			this.nodes = [];
 			this.lists = [];
 
@@ -349,7 +372,7 @@ module.declare(function(require, exports, module){
 			},
 
 			getCheckedData: function(){
-
+				// TODO:
 			},
 
 			// 只更新 dataMapping 中某个节点的选中状态（会自动关联更新其它节点的更新状态），但界面上不作更新

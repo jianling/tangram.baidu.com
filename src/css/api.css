@@ -1,91 +1,22 @@
-/**
- * 	api页面
- */
+{include base-css/tree.css}
 
-.page-api {
-	background-color: #FFF;
-}
-.col-sub {
-	width: 198px;
+.apipage .sidebar{
 	float: left;
+	width: 240px;
+	overflow: hidden;
 }
-.col-main {
-	width: 750px;
+
+.apipage .content{
 	float: left;
+	width: 590px;
 }
-.main-wrap {
-	padding-left: 20px;
+
+#apitree{
+	width: 600px;
+	margin: 0;
+	line-height: 20px;
 }
-.main-wrap h2 {
-	font-size: 16px;
-	font-weight: bold;
-	margin: 15px 0 10px;
-	text-indent: -15px;
-}
-.main-wrap h3,
-.main-wrap h3.tree-off{
+
+#apitree a{
 	font-size: 14px;
-	font-weight: bold;
-	margin:15px 0 10px;
-	padding-left: 20px;
-	background: url("../images/tree.png") no-repeat 0 -42px;
-	cursor: pointer;
-}
-.main-wrap h3.tree-off {
-	background-position: 0 7px;
-}
-.main-wrap p.desc {
-	line-height: 2em;
-}
-.main-wrap i {
-	margin: 0 3px;
-}
-p.api-ayntax span {
-	border: 1px solid #333;
-	display: inline-block;
-	padding: 2px 10px;
-	margin: 10px 0;
-}
-p.quck-link a {
-	margin: 0 5px;
-}
-p.quck-link b {
-	display: inline-block;
-	height: 8px;
-	border-left: 1px solid #333;
-}
-span.definition {
-	color: #0000FF;
-	text-decoration: underline;
-	margin: 0 3px;
-}
-div.method-param,
-div.event-param {
-	margin: 10px 0 10px 40px;
-	padding: 10px;
-	width: 500px;
-	background-color: #E6E6E6;
-	position: relative;
-}
-div.method-param ul,
-div.event-param ul {
-	margin: 5px 0 10px 30px;
-}
-div.method-param  .hide-btn,
-div.event-param  .hide-btn {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	cursor: pointer;
-}
-.method-item .definition,
-.event-item .definition {
-	cursor: pointer;
-}
-.parameter-area,
-.method-area {
-	margin-left: 10px;
-}
-#J_demo {
-	padding: 20px;
 }

@@ -1,0 +1,13 @@
+    #container{
+        width:150px;
+        margin:10px 0 10px 0;
+    }
+    .contain{
+        border:2px solid red;
+        padding:10px;
+    }
+    #outer{
+        border:2px solid blue;
+        width:150px;
+        padding:10px;
+    }

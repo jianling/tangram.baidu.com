@@ -230,6 +230,7 @@ html{
 }
 
 .simplemenu-item a{
+	cursor: default;
 	display: block;
 	text-decoration: none;
 	text-indent: 5px;
