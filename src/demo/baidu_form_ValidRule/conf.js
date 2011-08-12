@@ -1,8 +1,7 @@
 var conf = {
     clazz: {
         type: 'method',
-        'method': 'baidu.form.ValidRule',
-        dependPackages: ['baidu.ajax.request']
+        'method': 'baidu.form.ValidRule'
     },
     
     demoType: [{key: 'default', val: 'ValidaRule核心实例'}],

@@ -113,8 +113,8 @@
                 pageConf = me[typeId].pageConf,
                 opts = pageConf.options ? eval('('+ pageConf.options +')') : {},
                 target;
-            pageConf.jsCode && (me.getScript().text = pageConf.jsCode);
             pageConf.html && (container.innerHTML = pageConf.html);
+            pageConf.jsCode && (me.getScript().text = pageConf.jsCode);
             if(me.clazz.type == 'class'){
                 me._instance = new clazz(opts);
                 !opts.autoRender && me._instance.render
