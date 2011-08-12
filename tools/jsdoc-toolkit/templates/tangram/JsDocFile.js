@@ -11,7 +11,7 @@ JsDocFile.prototype = {
         if(resultSet.hash[entity.name]){return;}
         var _this = this,
             array = [],
-            packages = entity.name.replace(/\./g, '/') + '.js';
+            packages = entity.name.replace(/\./g, '/') + '.js',
             content = IO.readFile(this._conf[resultSet.type + '_in'] + '/' + packages)
                 .replace(/\/\/\/import\s([^;]+);/g, function(mc, c){
                     array.push(c);
