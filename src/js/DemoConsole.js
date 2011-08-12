@@ -113,11 +113,12 @@
                 pageConf = me[typeId].pageConf,
                 opts = pageConf.options ? eval('('+ pageConf.options +')') : {},
                 target;
-            pageConf.jsCode && (me.getScript().text = pageConf.jsCode);
             pageConf.html && (container.innerHTML = pageConf.html);
+            pageConf.jsCode && (me.getScript().text = pageConf.jsCode);
             if(me.clazz.type == 'class'){
                 me._instance = new clazz(opts);
-                !opts.autoRender && me._instance.render(pageConf.target || container);
+                !opts.autoRender && me._instance.render
+                    && me._instance.render(pageConf.target || container);
             }
         },
 
@@ -142,6 +143,7 @@
             script = null;
             baidu.dom.insertHTML(me.renderMain(target), 'beforeEnd', me.getString());
             me._createInstance(me.demoType[0].key);
+            me.dispatchEvent('onload');
         },
 
         _onChangeHandler: function(){
@@ -205,10 +207,11 @@
             if(me.clazz.type == 'class'){
                 opts = pageConf.options ? eval('(' + pageConf.options + ')') : {};
                 jsCode.push('var c = new '+ me.clazz[me.clazz.type] +'('+ (pageConf.options || '{}') +');');
-                !opts.autoRender && jsCode.push('c.render("'+ (pageConf.target || 'demoId') +'");');
+                !opts.autoRender && me._instance.render
+                    && jsCode.push('c.render("'+ (pageConf.target || 'demoId') +'");');
             }else{
                 baidu.object.each(demoConf, function(item, key){
-                    if(item.event){
+                    if(item.isMain){
                         item.depend && baidu.array.each(item.depend, function(rsid){
                             param.push('"'+ baidu.dom.g(rsid).value +'"');
                         });
