@@ -1,0 +1,13 @@
+    #holder{
+        width:200px;
+        height:100px;
+        border:2px solid red;
+    }
+    .child{
+        margin:10px;
+        border:2px solid blue;
+        padding:5px;
+    }
+    #prompt{
+        color:#1C86EE;
+    }
