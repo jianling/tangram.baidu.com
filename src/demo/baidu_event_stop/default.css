@@ -1,0 +1,6 @@
+#outer_box {
+	border: 1px solid blue;
+	background-color: #DDD;
+	width: 300px;
+	height: 200px;
+}

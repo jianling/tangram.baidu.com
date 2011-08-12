@@ -1,10 +1,10 @@
 var conf = {
     clazz: {
         type: 'method',
-        'method': 'baidu.fn.methodize'
+        'method': 'baidu.fn.wrapReturnValue'
     },
     
-    demoType: [{key: 'default', val: 'baidu.fn.methodize'}],
+    demoType: [{key: 'default', val: 'baidu.fn.wrapReturnValue'}],
     'default': {
         pageConf: {
             html: '<div id="resultArea"></div>'
@@ -16,11 +16,7 @@ var conf = {
             event: {
             	eventName: 'onclick',
             	handler: function(){
-            		var arr=[1,2,3,4,5];
-					function f(){}
-					var newf=T.fn.multize(f);
-					var output=newf(arr).length;
-					T.g('resultArea').innerHTML = "返回："+output+"<br>";
+            		
             	}
             }
         }

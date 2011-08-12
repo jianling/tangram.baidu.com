@@ -1,13 +1,13 @@
 var conf = {
     clazz: {
         type: 'method',
-        'method': 'baidu.fn.methodize'
+        'method': 'baidu.event.getKeyCode'
     },
     
-    demoType: [{key: 'default', val: 'baidu.fn.methodize'}],
+    demoType: [{key: 'default', val: 'baidu.event.getKeyCode'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea"></div>'
+            html: '<p>请输入任意字符：<input type="text" size="10" id="inputArea" /></p><div id="resultArea"></div>'
         },
         btn1: {
             type: 'button',
@@ -16,11 +16,9 @@ var conf = {
             event: {
             	eventName: 'onclick',
             	handler: function(){
-            		var arr=[1,2,3,4,5];
-					function f(){}
-					var newf=T.fn.multize(f);
-					var output=newf(arr).length;
-					T.g('resultArea').innerHTML = "返回："+output+"<br>";
+            		T.event.on(T.g('inputArea'), "keypress", function(e){
+					   T.g("resultArea").innerHTML += "key code:"+T.event.getKeyCode(e)+"<br>";
+					});
             	}
             }
         }
