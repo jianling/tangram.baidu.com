@@ -1,0 +1,29 @@
+    #drag{
+        background:#fff;
+        border:1px solid #99CCCC;
+        width:150px;
+        height:80px;
+        position:relative;
+        padding:10px;
+        font-size:14px;
+        top:2px;
+        left:2px;
+        text-align:center;
+    }
+    #title{
+        border:1px solid #99CCCC;
+        background:#F2F5F5;
+        padding:5px;
+    }
+    #dragRegion{
+        border:2px solid #CCCCCC;
+        width:400px;
+        height:400px;
+        position:relative;
+        top:48px;
+        left:48px;
+    }
+    .roundCorner{
+    -moz-border-radius:4px 4px 4px 4px;
+    -webkit-border-radius:4px 4px 4px 4px;
+    }
