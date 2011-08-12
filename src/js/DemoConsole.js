@@ -64,7 +64,7 @@
                     name: is ? '' : key,
                     type: is ? '' : 'type="'+ entity.type +'"',
                     val: data.key[index],
-                    checked: data.val[index] == entity.defaultValue ? (is ? 'selected' : 'checked') : '',
+                    checked: data.key[index] == entity.defaultValue ? (is ? 'selected' : 'checked') : '',
                     content: is ? data.val[index] : '',
                     foot: is ? '</options>' : ''
                 }));
@@ -170,7 +170,16 @@
                 param = [];
             //取得参数
             depend && baidu.array.each(depend, function(item){
-                param.push(baidu.dom.g(item).value);
+                var list = document.getElementsByName(item) || baidu.dom.g(item);
+                if(list.length){
+                    var val = [];
+                    for(var i = 0; i < list.length; i++){
+                        list[i].checked && val.push(list[i].value);
+                    }
+                    param.push(val);
+                }else{
+                    param.push(list.value);
+                }
             });
             fn.apply(me._instance, param);
         },
