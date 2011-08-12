@@ -133,13 +133,15 @@ JsDocFile.prototype = {
                     array.push(c);
                     return '';//replace ///import to ''
                 });
+            content.indexOf('@class') > -1/*create (core) node*/
+                && resultSet.packages.push({name: '(core)' + entity.name, par: entity.name});
             resultSet.depend[entity.name] = array;
         }
         
         resultSet = {packages: [], depend: {}};
-        _this._recursion(new File(path + '/' + file.list()[0]+ '/' + 'src'),
-            resultSet,
-            {fileHandler: depend});
+//        _this._recursion(new File(path + '/' + file.list()[0]+ '/' + 'src'),
+//            resultSet,
+//            {fileHandler: depend});
         file.list().forEach(function(item){
             resultSet = {type: item.toLowerCase().replace('-', '_') + '_csmap', packages: [], depend: {}};
             _this._recursion(new File(path + '/' + item+ '/' + 'src'),
