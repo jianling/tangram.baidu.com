@@ -108,13 +108,20 @@ module.declare(function(require, exports, module){
 	var node = new Lichee.Class(
 		/* constructor */ function(conf){
 			this.container = E(conf.container);
-			this.icon = conf.icon || "images/tree/etfolder.gif";
 			this.name = conf.name || "";
 			this.childsData = conf.childsData;
 			this.tree = conf.tree;
 			this.expanded = !! conf.expanded;
 			this.checked = 0;
 			this.tree.nodes.push(this);
+
+			if(conf.icon){
+				this.icon = conf.icon;
+			}else if(this.childsData.length){
+				this.icon = "images/tree/etfolder.gif";
+			}else{
+				this.icon = "images/tree/etfile.gif";
+			}
 		},
 
 		/* methods */ {
@@ -162,6 +169,7 @@ module.declare(function(require, exports, module){
 				if(!this.dropDownLayer)return ;
 				this.dropDownLayer.display(true);
 				E(this.expandedViewerId).style("backgroundPosition", "0 -20px");
+				E(this.iconId).style("backgroundPosition", "0 -20px");
 				this.expanded = true;
 				this.tree.fixRelativeEls();
 			},
@@ -170,6 +178,7 @@ module.declare(function(require, exports, module){
 				if(!this.dropDownLayer)return ;
 				this.dropDownLayer.display(false);
 				E(this.expandedViewerId).style("backgroundPosition", "0 0");
+				E(this.iconId).style("backgroundPosition", "0 0");
 				this.expanded = false;
 				this.tree.fixRelativeEls();
 			},
