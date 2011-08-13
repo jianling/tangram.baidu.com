@@ -4,6 +4,8 @@
 	float: left;
 	width: 240px;
 	overflow: hidden;
+	background-color: #f9f9ff;
+	border-right: 1px solid #e0e0e0;
 }
 
 .apipage .content{
