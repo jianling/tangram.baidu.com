@@ -1,16 +1,128 @@
 {include base-css/tree.css}
 
+.apipage{
+	background: #fff url(../images/api-bg.gif) repeat-y 0 0;
+}
+
 .apipage .sidebar{
 	float: left;
 	width: 240px;
 	overflow: hidden;
-	background-color: #f9f9ff;
-	border-right: 1px solid #e0e0e0;
+	padding: 28px;
 }
 
 .apipage .content{
 	float: left;
 	width: 590px;
+	padding: 28px;
+}
+
+.apipage .content h2{
+	font-size: 24px;
+	font-weight: 700;
+}
+
+.apipage .content p{
+	font-size: 12px;
+	line-height: 24px;
+}
+
+.apipage .content .grammar .left,
+.apipage .content .grammar .center,
+.apipage .content .grammar .right{
+	background-image: url(../images/api-grammar-bg.gif);
+	height: 30px;
+	float: left;
+}
+
+.apipage .content .grammar .left,
+.apipage .content .grammar .right{
+	width: 5px;
+}
+
+.apipage .content .grammar .left{
+
+}
+
+.apipage .content .grammar .center{
+	background-position: 0 -30px;
+	line-height: 30px;
+	color: #333;
+	padding: 0 5px;
+	font-family: "Verdana";
+}
+
+.apipage .content .grammar .right{
+	background-position: 0 -60px;
+}
+
+.apipage .content .grammar{
+	margin-top: 10px;
+}
+
+.apipage .content .group{
+	margin-top: 10px;
+}
+
+.apipage .content .group .group-title{
+	background: transparent url(../images/api-group-switch.gif) no-repeat 0 0;
+	line-height: 23px;
+	text-decoration: none;
+	color: #000;
+	font-size: 14px;
+	font-weight: 700;
+	padding-left: 24px;
+}
+
+.apipage .content .group .group-title-close{
+	background-position: 0 -24px;
+}
+
+.apipage .content .group .group-content{
+	margin-left: 10px;
+}
+
+.apipage .content .group .group-content td{
+	border: 0;
+	padding: 3px;
+}
+
+.apipage .content .group .group-content .type{
+	color: #666;
+	font-style: italic;
+}
+
+.apipage .content .group .group-content .name a{
+	color: #009;
+	font-weight: 700;
+}
+
+.apipage .content .tab{
+	width: auto;
+	margin-top: 10px;
+}
+
+.apipage .content .tab .tab-title{
+	width: auto;
+	height: 35px;
+	border-bottom: 1px solid #9d9e9f;
+	background-color: #e2eaff;
+}
+
+.apipage .content .tab .tab-title .item{
+	text-align: center;
+	font-size: 14px;
+	width: 73px;
+	height: 31px;
+	line-height: 31px;
+	background-image: url(../images/api-tab.gif);
+	position: relative;
+	top: 5px;
+	margin-left: 5px;
+}
+
+.apipage .content .tab .tab-content{
+
 }
 
 #apitree{

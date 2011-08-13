@@ -8,6 +8,26 @@ module.declare(function(require, exports, module){
 	var data = [];
 	var treeInstance;
 
+	var api_name = E("api_name");
+	var api_desc = E("api_desc");
+	var group_options = E("group_options");
+
+	function loadAPI(key){
+		var data = tangram_base_api[key] || tangram_component_api || null;
+		if(!data)return ;
+
+		api_name.html(key);
+		api_desc.html(data.desc);
+
+		if(data.options){
+			group_options.display(true);
+
+		}else{
+			group_options.display(false);
+		}
+
+	}
+
 	function start(){
 
 		if(typeof tangram_base != "undefined")
