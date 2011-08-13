@@ -13,6 +13,7 @@ var conf = {
         btn1: {
             type: 'button',
             defaultValue: '点击执行代码',
+            isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(){

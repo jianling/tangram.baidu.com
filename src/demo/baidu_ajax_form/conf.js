@@ -23,6 +23,7 @@ var conf = {
         btn1: {
             type: 'button',
             defaultValue: 'ajax提交表单',
+            isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(){

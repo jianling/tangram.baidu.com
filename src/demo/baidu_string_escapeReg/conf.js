@@ -20,6 +20,7 @@ var conf = {
             type: 'button',
             defaultValue: '转义字符',
             depend: ['dateInput'],
+            isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(arg0){

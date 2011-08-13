@@ -12,6 +12,7 @@ var conf = {
         btn1: {
             type: 'button',
             defaultValue: '给Flash传递数据',
+            isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(){

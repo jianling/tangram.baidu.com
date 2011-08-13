@@ -25,6 +25,7 @@ var conf = {
             type: 'button',
             defaultValue: '设置影片尺寸',
             depend: ['dateInput1', 'dateInput2'],
+            isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(arg0, arg1){

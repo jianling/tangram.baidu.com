@@ -25,6 +25,7 @@ var conf = {
             type: 'button',
             defaultValue: 'format',
             depend: ['dateInput'],
+            isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(arg0){

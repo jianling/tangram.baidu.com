@@ -13,6 +13,7 @@ var conf = {
             type: 'button',
             depend: [],
             defaultValue: 'GO',
+            isMain: true,
             event: {
                 eventName: 'onclick',
                 handler: function(){

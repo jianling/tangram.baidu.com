@@ -12,6 +12,7 @@ var conf = {
         btn1: {
             type: 'button',
             defaultValue: '载入CSS文件',
+            isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(arg0){

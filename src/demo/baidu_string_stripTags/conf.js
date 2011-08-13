@@ -19,6 +19,7 @@ var conf = {
             type: 'button',
             defaultValue: '去除HTML标签',
             depend: ['dateInput'],
+            isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(arg0){
