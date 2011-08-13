@@ -3,7 +3,7 @@ var conf = {
     //    class|method|field
     clazz: {
         type: 'method',
-        'class': 'baidu.fx.mask'
+        'method': 'baidu.fx.mask'
     },
     //    定义DEMO可选项
     demoType: [
@@ -14,8 +14,8 @@ var conf = {
         //    类实例化选项
         pageConf: {
             options: '',
-			html:' <div id="clown"><img src="images/fx1.jpg" id="doEl"></div><input type="button" value="运行" onclick="run()" />',
-			jsCode:'function run(){ T.fx.mask(baidu.dom.g("doEl"), {  startOrigin: "50% 50%", onafterfinish: changeOk}) }function changeOk(){alert("afterfinish")}'
+			html:' <div id="clown"><img src="images/fx1.jpg" id="doEl"></div><input type="button" value="运行" onclick="run()" /><div id="log"></div>',
+			jsCode:'function run(){ T.fx.mask(baidu.dom.g("doEl"), {startOrigin: "50% 50%",onbeforestart:log,onafterfinish:log}) }function log(evt){  baidu.dom.g("log").innerHTML += new Date().getTime()+" - 事件 "+evt.type+" 触发<br />" }'
         },
         disable: {
             type: 'button',
@@ -23,15 +23,15 @@ var conf = {
             event: {
                 eventName: 'onclick',
                 handler: function(){
-					console.log(this)
 				}
             }
         }
         
+		
     },    
     groups: {
         'default': [
-            ['disable']
+            //['disable']
         ]
     }
 };

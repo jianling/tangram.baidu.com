@@ -3,7 +3,8 @@ var conf = {
     //    class|method|field
     clazz: {
         type: 'class',
-        'class': 'baidu.ui.Login'
+        'class': 'baidu.ui.Login',
+		dependPackages:['baidu.ui.Dialog.Dialog$button','baidu.ui.Dialog.Dialog$closeButton','baidu.ui.Dialog.Dialog$coverable','baidu.ui.Dialog.Dialog$draggable','baidu.ui.Dialog.Dialog$iframe','baidu.ui.Dialog.Dialog$keyboard','baidu.ui.Dialog.Dialog$modal','baidu.ui.Dialog.Dialog$resizable','baidu.ui.Login.*']
     },
     //    定义DEMO可选项
     demoType: [
@@ -15,22 +16,31 @@ var conf = {
         pageConf: {
             options: '{"titleText":"登录窗口"}'
         },
-        disable: {
+        //	控制台输出调试项
+        console: {
             type: 'button',
-            defaultValue: 'disable',
+            defaultValue: 'console.log',
             event: {
                 eventName: 'onclick',
-                handler: function(){
-					this.open();
-					console.log(this)
-				}
+                handler: function(){if(console && console.log){console.log(window.t=this)}}
             }
-        }
+        },
+        open: {
+            type: 'button',
+            defaultValue: '显示open()',
+            event: {
+                eventName: 'onclick',
+                handler: 'open'
+            }
+        },
+		
         
-    },    
+    },
+    
     groups: {
         'default': [
-            ['disable']
+            ['console'],
+            ['open']
         ]
     }
 };
