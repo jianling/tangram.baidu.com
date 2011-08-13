@@ -4,7 +4,7 @@ var conf = {
         'method': 'baidu.string.formatColor'
     },
     
-    demoType: [{key: 'default', val: 'baidu.json.formatColor'}],
+    demoType: [{key: 'default', val: 'baidu.string.formatColor'}],
     'default': {
         pageConf: {
             html: '<div id="resultArea"></div>'

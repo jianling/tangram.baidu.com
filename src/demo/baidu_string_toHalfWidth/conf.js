@@ -4,7 +4,7 @@ var conf = {
         'method': 'baidu.string.toHalfWidth'
     },
     
-    demoType: [{key: 'default', val: 'baidu.json.toHalfWidth'}],
+    demoType: [{key: 'default', val: 'baidu.string.toHalfWidth'}],
     'default': {
         pageConf: {
             html: '<div id="resultArea"></div>'

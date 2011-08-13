@@ -4,7 +4,7 @@ var conf = {
         'method': 'baidu.string.stripTags'
     },
     
-    demoType: [{key: 'default', val: 'baidu.json.stripTags'}],
+    demoType: [{key: 'default', val: 'baidu.string.stripTags'}],
     'default': {
         pageConf: {
             html: '<div id="resultArea"></div>'

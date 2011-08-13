@@ -1,10 +1,10 @@
 var conf = {
     clazz: {
         type: 'method',
-        'method': 'baidu.string.trim'
+        'method': 'baidu.string.wbr'
     },
     
-    demoType: [{key: 'default', val: 'baidu.json.trim'}],
+    demoType: [{key: 'default', val: 'baidu.json.wbr'}],
     'default': {
         pageConf: {
             html: '<div id="resultArea"></div>直接写入效果：<br /><div id="insert"></div>转换后写入效果:<br /><div id="wbrinsert"></div>'

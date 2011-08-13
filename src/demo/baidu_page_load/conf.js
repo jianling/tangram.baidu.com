@@ -21,11 +21,15 @@ var conf = {
 				    var files = [
 								    {
 								        url : "./baidu_page_load/loadJsFileTest.js",
-								        onload: addLog('JS写入DOM并且执行完毕!')
+								        onload: function(){
+								        	addLog('JS写入DOM并且执行完毕!')
+								        }
 								    },
 								    {
 								        url : "./baidu_page_load/loadCssFileTest.css",
-								        onload:  addLog('CSS写入DOM渲染完毕!')
+								        onload:  function(){
+								        	addLog('CSS写入DOM渲染完毕!')
+								        }
 								    }
 								];
 					baidu.page.load(files);

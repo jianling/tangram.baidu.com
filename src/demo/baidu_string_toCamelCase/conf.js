@@ -4,7 +4,7 @@ var conf = {
         'method': 'baidu.string.subByte'
     },
     
-    demoType: [{key: 'default', val: 'baidu.json.subByte'}],
+    demoType: [{key: 'default', val: 'baidu.string.subByte'}],
     'default': {
         pageConf: {
             html: '<div id="resultArea"></div>'
