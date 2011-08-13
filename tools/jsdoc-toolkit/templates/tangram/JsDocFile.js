@@ -81,7 +81,7 @@ JsDocFile.prototype = {
 		        return /^(?:T|baidu)\.[^#:_\-]+$/.test(item.alias);
 		    }).sort(this.makeSortby("alias"));
         IO.mkPath(conf.tangram_docjson_out.split('/'));
-        IO.saveFile(conf.tangram_docjson_out, fileName + '.js', template.process({ident: fileName, list: list}));
+        IO.saveFile(conf.tangram_docjson_out, fileName + '_api.js', template.process({ident: fileName, list: list}));
     },
     
     createPageJsonFile: function(){
@@ -134,7 +134,7 @@ JsDocFile.prototype = {
                     return '';//replace ///import to ''
                 });
             content.indexOf('@class') > -1/*create (core) node*/
-                && resultSet.packages.push({name: '(core)' + entity.name, par: entity.name});
+                && resultSet.packages.push({name: entity.name, par: entity.name});
             resultSet.depend[entity.name] = array;
         }
         
