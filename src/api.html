@@ -5,13 +5,47 @@
 		</script>
 		<div class="main-header"><span>API 参考手册</span><span class="shadow">API 参考手册</span></div>
 		<div class="main-body apipage clearfix">
-			<div class="sidebar article">
+			<div class="sidebar">
 				<div id="apitree"></div>
 			</div>
-			<div class="content article">
-
+			<div class="content">
+				<h2 id="api_name"></h2>
+				<p class="noi" id="api_desc"></p>
+				<div class="grammar clearfix">
+					<div class="left"></div>
+					<div class="center"><!-- xxx --></div>
+					<div class="right"></div>
+				</div>
+				<div class="jump" id="api_jump"></div>
+				<div class="group" id="group_options">
+					<a name="group_options"></a>
+					<a href="#" onclick="return false;" class="group-title">options参数</a>
+					<div class="group-content"></div>
+				</div>
+				<div class="group" id="group_methods">
+					<a name="group_methods"></a>
+					<a href="#" onclick="return false;" class="group-title">方法</a>
+					<div class="group-content"></div>
+				</div>
+				<div class="group" id="group_events">
+					<a name="group_events"></a>
+					<a href="#" onclick="return false;" class="group-title">事件</a>
+					<div class="group-content"></div>
+				</div>
+				<div class="group" id="group_plugs">
+					<a name="group_plugs"></a>
+					<a href="#" onclick="return false;" class="group-title">扩展插件</a>
+					<div class="group-content"></div>
+				</div>
+				<div class="tab">
+					<a name="demo"></a>
+					<div class="tab-title"><div class="item">Demo</div></div>
+					<div class="tab-content">
+						<iframe id="api_demo_iframe" frameborder="no"></iframe>
+					</div>
+				</div>
 			</div>
 		</div>
-		<script type="text/javascript" src="js/tangram_base.js"></script>
-		<script type="text/javascript" src="js/tangram_component.js"></script>
+		<script type="text/javascript" src="js/tangram_base_api.js"></script>
+		<script type="text/javascript" src="js/tangram_component_api.js"></script>
 {include footer.inc}

@@ -4,7 +4,7 @@ var conf = {
         'method': 'baidu.string.decodeHTML'
     },
     
-    demoType: [{key: 'default', val: 'baidu.json.decodeHTML'}],
+    demoType: [{key: 'default', val: 'baidu.string.decodeHTML'}],
     'default': {
         pageConf: {
             html: '<div id="resultArea">解码后返回：</div>',
@@ -20,6 +20,7 @@ var conf = {
             type: 'button',
             defaultValue: '实体符号转义回HTML字符',
             depend: ['dateInput'],
+            isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(arg0){

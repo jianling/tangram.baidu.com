@@ -13,6 +13,7 @@ var conf = {
             type: 'button',
             defaultValue: '执行',
             depend: [],
+            isMain: true,
             event: {
                 eventName: 'onclick',
                 handler: function(arg0, arg1){

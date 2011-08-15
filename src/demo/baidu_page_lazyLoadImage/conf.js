@@ -7,11 +7,22 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.page.lazyLoadImage'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea"><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /></div>',
-            jsCode: 'T.page.lazyLoadImage()'
+            html: '<div id="resultArea"></div>'
+        },
+        btn1: {
+            type: 'button',
+            defaultValue: '执行代码',
+            isMain: true,
+            event: {
+            	eventName: 'onclick',
+            	handler: function(){
+				    T.g('resultArea').innerHTML = '<img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br /><img src="http://img.baidu.com/js/tangram-logo.png"/><br />';
+				    T.page.lazyLoadImage();
+            	}
+            }
         }
     },
     groups: {
-        'default': []
+        'default': [['btn1']]
     }
 };  

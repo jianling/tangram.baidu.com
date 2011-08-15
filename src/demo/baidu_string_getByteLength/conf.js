@@ -4,7 +4,7 @@ var conf = {
         'method': 'baidu.string.getByteLength'
     },
     
-    demoType: [{key: 'default', val: 'baidu.json.getByteLength'}],
+    demoType: [{key: 'default', val: 'baidu.string.getByteLength'}],
     'default': {
         pageConf: {
             html: '<div id="resultArea"></div>'
@@ -19,6 +19,7 @@ var conf = {
             type: 'button',
             defaultValue: '计算长度',
             depend: ['dateInput'],
+            isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(arg0){

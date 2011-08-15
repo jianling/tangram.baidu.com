@@ -1,70 +1,145 @@
 /*   baidu.ui.scrollbar*/ 
 .tangram-scrollbar{ 
-	width:100%; 
-	height:100%; 
+width:100%; 
+height:100%; 
 } 
 .tangram-scrollbar-track{ 
-	overflow:hidden; 
-	width:100%; 
-	height:100%; 
+overflow:hidden; 
+width:100%; 
+height:100%; 
 } 
 .tangram-scrollbar-slider{ 
-	width:100%; 
-	height:100%; 
+width:100%; 
+height:100%; 
 } 
 .tangram-scrollbar-slider-thumb{ 
-	width:100%; 
-	height:100%; 
-   background:gray; 
+width:100%; 
+height:100%; 
+background:gray; 
 } 
 .tangram-scrollbar-prev,.tangram-scrollbar-next,.tangram-scrollbar-thumb-btn{ 
-	font-size: 0px; 
+font-size: 0px; 
 } 
 .scrollbar-a{ 
-	background:url(scrollbar-v.gif) repeat-y -105px 0; 
+background:url(scrollbar-v.gif) repeat-y -105px 0; 
 } 
 .scrollbar-a-prev{ 
-	width: 15px; 
-	height: 15px; 
-	background: url(scrollbar-v.gif) no-repeat 0 0; 
+width: 15px; 
+height: 15px; 
+background: url(scrollbar-v.gif) no-repeat 0 0; 
 } 
 .scrollbar-a-prev-hover{ 
-	background-position:-15px 0; 
+background-position:-15px 0; 
 } 
 .scrollbar-a-prev-press{ 
-	background-position:-30px 0; 
+background-position:-30px 0; 
 } 
 .scrollbar-a-next{ 
-	width: 15px; 
-	height: 15px; 
-	background: url(scrollbar-v.gif) no-repeat 0 -15px; 
+width: 15px; 
+height: 15px; 
+background: url(scrollbar-v.gif) no-repeat 0 -15px; 
 } 
 .scrollbar-a-next-hover{ 
-	background-position:-15px -15px; 
+background-position:-15px -15px; 
 } 
 .scrollbar-a-next-press{ 
-	background-position:-30px -15px; 
+background-position:-30px -15px; 
 } 
 .scrollbar-a-thumb-btn{ 
-	position:relative; 
-	width:100%; 
-	height:100%; 
-	background:url(scrollbar-v.gif) repeat-y -60px 0; 
+position:relative; 
+width:100%; 
+height:100%; 
+background:url(scrollbar-v.gif) repeat-y -60px 0; 
 } 
 .scrollbar-a-thumb-prev{ 
-	position:absolute; 
-	top:0px; 
-	width:100%; 
-	height:5px; 
-	font-size:0px; 
-	background:url(scrollbar-v.gif) -45px 0; 
+position:absolute; 
+top:0px; 
+width:100%; 
+height:5px; 
+font-size:0px; 
+background:url(scrollbar-v.gif) -45px 0; 
 } 
 .scrollbar-a-thumb-next{ 
-	position:absolute; 
-	bottom:0px!important; 
-	bottom:-1px; 
-	width:100%; 
-	height:5px; 
-	font-size:0px; 
-	background:url(scrollbar-v.gif) -45px -5px; 
+position:absolute; 
+bottom:0px!important; 
+bottom:-1px; 
+width:100%; 
+height:5px; 
+font-size:0px; 
+background:url(scrollbar-v.gif) -45px -5px; 
+}
+
+
+/*scrollbar-b start*/ 
+.scrollbar-b{ 
+background:url(scrollbar-h.gif) repeat-x 0 -75px; 
 } 
+.scrollbar-b-track{ 
+float:left; 
+} 
+.scrollbar-b-prev{ 
+float:left; 
+width: 15px; 
+height: 15px; 
+background: url(scrollbar-h.gif) no-repeat 0 0; 
+} 
+.scrollbar-b-prev-hover{ 
+background-position:-15px 0; 
+} 
+.scrollbar-b-prev-press{ 
+background-position:-30px 0; 
+} 
+.scrollbar-b-next{ 
+float:left; 
+width: 15px; 
+height: 15px; 
+background: url(scrollbar-h.gif) no-repeat 0 -15px; 
+} 
+.scrollbar-b-next-hover{ 
+background-position:-15px -15px; 
+} 
+.scrollbar-b-next-press{ 
+background-position:-30px -15px; 
+} 
+.scrollbar-b-thumb-btn{ 
+position:relative; 
+width:100%; 
+height:100%; 
+background:url(scrollbar-h.gif) repeat-x 0 -30px; 
+} 
+.scrollbar-b-thumb-prev{ 
+position:absolute; 
+left:0px; 
+width:5px; 
+height:100%; 
+font-size:0px; 
+background:url(scrollbar-h.gif) -45px 0; 
+} 
+.scrollbar-b-thumb-next{ 
+position:absolute; 
+right:0px!important; 
+right:-1px; 
+width:5px; 
+height:100%; 
+font-size:0px; 
+background:url(scrollbar-h.gif) -50px 0; 
+} 
+.scrollbar-b-thumb-btn-hover{ 
+background-position:0 -45px; 
+} 
+.scrollbar-b-thumb-btn-hover .scrollbar-b-thumb-prev{ 
+background-position:-45px -15px; 
+} 
+.scrollbar-b-thumb-btn-hover .scrollbar-b-thumb-next{ 
+background-position:-50px -15px; 
+} 
+.scrollbar-b-thumb-btn-press{ 
+background-position:0 -60px; 
+} 
+.scrollbar-b-thumb-btn-press .scrollbar-b-thumb-prev{ 
+background-position:-55px 0; 
+} 
+.scrollbar-b-thumb-btn-press .scrollbar-b-thumb-next{ 
+background-position:-60px 0; 
+} 
+/*scrollbar-b end*/ 

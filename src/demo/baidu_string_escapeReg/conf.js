@@ -4,7 +4,7 @@ var conf = {
         'method': 'baidu.string.escapeReg'
     },
     
-    demoType: [{key: 'default', val: 'baidu.json.escapeReg'}],
+    demoType: [{key: 'default', val: 'baidu.string.escapeReg'}],
     'default': {
         pageConf: {
             html: '<div id="resultArea">转义后返回：</div>',
@@ -20,6 +20,7 @@ var conf = {
             type: 'button',
             defaultValue: '转义字符',
             depend: ['dateInput'],
+            isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(arg0){

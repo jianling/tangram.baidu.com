@@ -150,8 +150,8 @@ void function(){
 						{ name: "Component 插件", link: getpath('docs/Tangram-Component-Plugins.html'), target: '_self' },
 						{ name: "Behavior", link: getpath('docs/Tangram-Component-Behavior.html'), target: '_self' }
 					] },
-					{ name: "新手入门" },
-					{ name: "快捷方式" },
+					{ name: "新手入门",link: getpath('docs/tutorial.html'), target: '_self'  },
+					{ name: "快捷方式",link: getpath('docs/short.html'), target: '_self'  },
 					{ name: "API 参考手册", link: getpath("api.html"), target: '_self' }
 //					{ name: "mobile 文档" }
 				],
@@ -165,12 +165,18 @@ void function(){
 				referrerElement: "menu-more",
 				direction: "down",
 				datas: [
-					{ name: "FAQ" },
-					{ name: "BLOG" },
-					{ name: "社区" },
-					{ name: "关于" },
-					{ name: "贡献" }
-				]
+					{ name: "FAQ"  ,link: getpath('docs/faq.html'), target: '_self'},
+					{ name: "BLOG" ,link: 'http://www.baiduux.com/tag/tangram/', target: '_blank' },
+					{ name: "社区" ,link: 'http://tieba.baidu.com/f?kw=tangram', target: '_blank' },
+					{ name: "关于" ,link: getpath('docs/about.html'), target: '_self'},
+					{ name: "贡献" ,datas:[
+						{ name: "贡献列表" ,link:  getpath('docs/contribution.html'), target: '_self'},
+						{ name: "贡献说明" ,link:  getpath('docs/contribution-notice.html'), target: '_self'}
+					]}
+				],
+				handle: function(conf){
+					window.open(conf.link, conf.target);
+				}
 			});
 			moreMenu.render();
 		});

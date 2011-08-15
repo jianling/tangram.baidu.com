@@ -3,7 +3,9 @@ var conf = {
     //    class|method|field
     clazz: {
         type: 'class',
-        'class': 'baidu.ui.ColorPalette'
+        'class': 'baidu.ui.ColorPalette',
+		dependPackages:['baidu.ui.Button','baidu.ui.Button.*','baidu.ui.Modal']
+
     },
     //    定义DEMO可选项
     demoType: [
@@ -13,26 +15,61 @@ var conf = {
     'default': {
         //    类实例化选项
         pageConf: {
-            options: '{element: "button", autoRender: true, onchosen: function(data){ baidu.dom.setStyle("testdiv", "background-color", data.color); }, more: true} ',
+            options: '{element: "testdiv", autoRender: true} ',
 			target:'',
-			html:'<input type="button" value="高级colorPalette" id="button"/> <div style="width:200px;height:200px;border:1px solid #FFF" id="testdiv">  </div> '
+			html:'<div style="margin:50px;position:relative;width:400px;height:240px;border:5px #DDD solid;background:#FFF" id="testdiv">  </div> '
         },
-        disable: {
+         //	控制台输出调试项
+        console: {
             type: 'button',
-            defaultValue: 'disable',
+            defaultValue: 'console.log',
+            event: {
+                eventName: 'onclick',
+                handler: function(){if(console && console.log){console.log(window.t=this)}}
+            }
+        },
+		
+		getColor: {
+            type: 'button',
+            defaultValue: '取得颜色 getColor()',
             event: {
                 eventName: 'onclick',
                 handler: function(){
-					console.log(this)
+					alert(this.getColor());
 				}
             }
+        },
+		
+		getHue: {
+            type: 'button',
+            defaultValue: '取得色相hue、饱和度saturation、明度brightness',
+            event: {
+                eventName: 'onclick',
+                handler: function(){
+					alert('色相:'+this.hue+',饱和度:'+this.saturation+',明度:'+this.brightness);
+				}
+            }
+        },
+		
+		
+		dispose: {
+            type: 'button',
+            defaultValue: '销毁dispose()',
+            event: {
+                eventName: 'onclick',
+                handler: 'dispose'
+            }
         }
-        
+		
     },
+
+	
     
     groups: {
         'default': [
-            ['disable']
+            ['console'],
+            ['getColor','getHue'],
+			['dispose']
         ]
     }
 };

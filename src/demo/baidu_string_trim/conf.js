@@ -4,7 +4,7 @@ var conf = {
         'method': 'baidu.string.trim'
     },
     
-    demoType: [{key: 'default', val: 'baidu.json.trim'}],
+    demoType: [{key: 'default', val: 'baidu.string.trim'}],
     'default': {
         pageConf: {
             html: '<div id="resultArea"></div>'
@@ -19,6 +19,7 @@ var conf = {
             type: 'button',
             defaultValue: '截取',
             depend: ['dateInput'],
+            isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(arg0){

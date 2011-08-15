@@ -4,7 +4,7 @@ var conf = {
         'method': 'baidu.string.filterFormat'
     },
     
-    demoType: [{key: 'default', val: 'baidu.json.filterFormat'}],
+    demoType: [{key: 'default', val: 'baidu.string.filterFormat'}],
     'default': {
         pageConf: {
             html: '<div id="resultArea"></div>',
@@ -26,6 +26,7 @@ var conf = {
             type: 'button',
             defaultValue: '格式化',
             depend: ['dateInput1','dateInput2'],
+            isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(arg0, arg1){

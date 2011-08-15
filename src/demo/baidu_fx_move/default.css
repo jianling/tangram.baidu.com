@@ -1,0 +1,16 @@
+#clown{ 
+	border:1px solid #000000; 
+	width:400px; 
+	height:200px;  
+	margin-bottom:10px; 
+	-webkit-box-shadow: 5px 5px 7px #999; 
+	border:none;
+	position:relative;
+} 
+img{ 
+	position:absolute;  
+	width:400px; 
+} 
+#log{
+	background:#EEE;border:1px solid #CCC;color:#333;font-size:12px;line-height:20px;padding:5px;width:98%;margin:0px auto;
+}

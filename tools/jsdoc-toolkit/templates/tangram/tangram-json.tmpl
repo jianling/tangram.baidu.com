@@ -56,7 +56,7 @@ data.list.forEach(function(item){
 	item.desc && docMapArray.push('\'' + item.alias + '\': ' +getJson(item));
 });
 !}
-var {+ data.ident +} = {
+var {+ data.ident +}_api = {
 	nameSpace: [{+ nameSpaceArray.join(', ') +}],
 	docMap: {{+ docMapArray.join(', ') +}}
 }

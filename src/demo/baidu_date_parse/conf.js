@@ -33,6 +33,7 @@ var conf = {
             type: 'button',
             defaultValue: 'parse',
             depend: ['date1'],
+            isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(arg0){

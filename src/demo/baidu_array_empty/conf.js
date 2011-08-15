@@ -18,6 +18,7 @@ var conf = {
             type: 'button',
             defaultValue: '清空',
             depend: ['param0'],
+            isMain: true,
             event: {
                 eventName: 'onclick',
                 handler: function(arg0){

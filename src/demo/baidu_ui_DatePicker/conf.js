@@ -17,21 +17,49 @@ var conf = {
 			target:'showPicker',
 			html:'<h5>input获得焦点时弹出DatePicker，点击日期后更新input的属性</h5>  <input name="showpicker" id="showPicker" /> '
         },
-        disable: {
+		//	控制台输出调试项
+        console: {
             type: 'button',
-            defaultValue: 'disable',
+            defaultValue: 'console.log',
+            event: {
+                eventName: 'onclick',
+                handler: function(){if(console && console.log){console.log(window.t=this)}}
+            }
+        },
+        dispose: {
+            type: 'button',
+            defaultValue: '销毁dispose()',
+            event: {
+                eventName: 'onclick',
+                handler: 'dispose'
+            }
+        },
+        show: {
+            type: 'button',
+            defaultValue: '显示日历show()',
             event: {
                 eventName: 'onclick',
                 handler: function(){
-					console.log(this)
+					var op = this;
+					setTimeout(function(){op.show()},1);
 				}
             }
-        }
+        },
+        hide: {
+            type: 'button',
+            defaultValue: '隐藏日历hide()',
+            event: {
+                eventName: 'onclick',
+                handler: 'hide'
+            }
+        },
         
     },    
     groups: {
         'default': [
-            ['disable']
+            ['console'],
+            ['show','hide'],
+            ['dispose']
         ]
     }
 };
