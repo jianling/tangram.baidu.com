@@ -110,6 +110,7 @@ module.declare(function(require, exports, module){
 		}
 
 		setJump(data);
+		E("api_demo_iframe").attr("src", "demo/demo-console.html?package=" + key);
 	}
 
 	function start(){
