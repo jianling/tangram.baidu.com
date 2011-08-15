@@ -1,6 +1,8 @@
 function JsDocFile(){
     IO.include('../templates/tangram/tangram-conf.js');
+    IO.include('../templates/tangram/tangram-filter.js');
     this._conf = conf;
+    this._filter = packageFilter;
 }
 JsDocFile.prototype = {
     isJsFile: function(file){
@@ -139,14 +141,14 @@ JsDocFile.prototype = {
         }
         
         resultSet = {packages: [], depend: {}};
-//        _this._recursion(new File(path + '/' + file.list()[0]+ '/' + 'src'),
-//            resultSet,
-//            {fileHandler: depend});
         file.list().forEach(function(item){
             resultSet = {type: item.toLowerCase().replace('-', '_') + '_csmap', packages: [], depend: {}};
             _this._recursion(new File(path + '/' + item+ '/' + 'src'),
                 resultSet,
                 {fileHandler: depend});
+            resultSet.packages = resultSet.packages.filter(function(item){
+                return !_this._filter.hasOwnProperty(item.name);
+            });
             IO.mkPath(conf.tangram_csTreeMap_out.split('/'));
             IO.saveFile(conf.tangram_csTreeMap_out, resultSet.type + '.js', template.process(resultSet));
         });
