@@ -1,0 +1,59 @@
+/**
+ * 	搜索结果页面
+ */
+.page-search {
+	background-color: #FFFFFF;
+}
+h1 {
+	background: url("../images/title_bg.gif") no-repeat scroll 0 50% transparent;
+    border-bottom: 1px dotted #CDCDCD;
+    color: #3C70A5;
+    font-size: 26px;
+    margin: 20px 0;
+    padding: 15px;
+}
+/*search result*/
+.search-result{
+	padding-left:15px;
+}
+.search-result h1 a{
+   font-size:12px;
+   font-weight:normal;
+}
+.search-result h2 {
+    margin:10px 0;
+    padding:8px 0;
+    color:#d76262;
+    border-bottom:1px solid #e4e7e7;
+    font-size:20px;
+}
+.search-result h3 {
+    margin:10px 0;
+    padding:8px 0;
+    color:#06c;
+    font:bold 16px/16px "Arial";
+}
+.search-result h3 small {
+    font-weight:normal;
+}
+.search-result h3 small a:link,.search-result  h3 small a:visited {
+    text-decoration:underline;
+    color:green;
+}
+.search-result h3 a,.search-result h3 a:link,.search-result h3 a:visited{
+   text-decoration:underline
+}
+.search-result h3 u,.search-result  h3 a u,.search-result h3 a:link u,.search-result h3 a:visited u {
+    font-weight:normal;
+    text-decoration:none;
+    font-size:14px;
+    color:#666;
+}
+.search-result p {
+    color:#4c5656;
+    font:normal 14px/20px "Arial";
+    margin:6px 10px;
+}
+span.key-match {
+	color: red;
+}
