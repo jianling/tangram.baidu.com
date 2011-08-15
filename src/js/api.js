@@ -123,12 +123,16 @@ module.declare(function(require, exports, module){
 		treeInstance = new tree({
 			container: apitree,
 			data: data,
-			enableCheckBox: false
+			enableCheckBox: false,
+			clickHandler: function(key){
+				loadAPI(key);
+			}
 		});
 
 		treeInstance.render();
+		treeInstance.getRoot().expand();
 
-		loadAPI("baidu.ui.Carousel");
+//		loadAPI("baidu.ui.Carousel");
 
 	}
 });
