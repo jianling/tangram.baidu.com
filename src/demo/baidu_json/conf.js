@@ -30,6 +30,7 @@ var conf = {
             type: 'button',
             defaultValue: 'decode',
             depend: ['dateInput'],
+            isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(arg0){

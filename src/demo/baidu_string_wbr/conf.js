@@ -19,6 +19,7 @@ var conf = {
             type: 'button',
             defaultValue: '转换',
             depend: ['dateInput'],
+            isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(arg0){

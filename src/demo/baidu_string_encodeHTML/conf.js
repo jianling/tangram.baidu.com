@@ -20,6 +20,7 @@ var conf = {
             type: 'button',
             defaultValue: '将HTML字符转义为实体符',
             depend: ['dateInput'],
+            isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(arg0){

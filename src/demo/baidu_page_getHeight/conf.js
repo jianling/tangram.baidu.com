@@ -12,6 +12,7 @@ var conf = {
         btn1: {
             type: 'button',
             defaultValue: '获取页面高度',
+            isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(arg0){

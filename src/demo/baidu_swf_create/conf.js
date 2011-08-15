@@ -19,6 +19,7 @@ var conf = {
             type: 'button',
             defaultValue: '载入flash',
             depend: ['dateInput'],
+            isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(arg0){

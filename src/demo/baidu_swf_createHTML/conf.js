@@ -19,6 +19,7 @@ var conf = {
             type: 'button',
             defaultValue: '生成HTML片段',
             depend: ['dateInput'],
+            isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(arg0){

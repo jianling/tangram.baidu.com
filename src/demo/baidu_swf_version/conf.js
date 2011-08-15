@@ -12,6 +12,7 @@ var conf = {
         btn1: {
             type: 'button',
             defaultValue: '获取当前浏览器的FLASH插件版本号',
+            isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(arg0){

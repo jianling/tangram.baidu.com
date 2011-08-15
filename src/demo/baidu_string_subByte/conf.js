@@ -25,6 +25,7 @@ var conf = {
             type: 'button',
             defaultValue: '截取',
             depend: ['dateInput', 'dateInput1'],
+            isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(arg0, arg1){

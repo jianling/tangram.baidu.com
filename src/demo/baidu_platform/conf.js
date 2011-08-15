@@ -13,6 +13,7 @@ var conf = {
             type: 'button',
             defaultValue: '判断平台',
             depend: [],
+            isMain: true,
             event: {
                 eventName: 'onclick',
                 handler: function(){

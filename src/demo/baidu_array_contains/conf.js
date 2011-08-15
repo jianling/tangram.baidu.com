@@ -23,6 +23,7 @@ var conf = {
             type: 'button',
             defaultValue: '求值',
             depend: ['param0', 'param1'],
+            isMain: true,
             event: {
                 eventName: 'onclick',
                 handler: function(arg0, arg1){

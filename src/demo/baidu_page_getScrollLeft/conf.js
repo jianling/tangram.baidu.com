@@ -12,6 +12,7 @@ var conf = {
         btn1: {
             type: 'button',
             defaultValue: '点击获取页面横向滚动量',
+            isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(){

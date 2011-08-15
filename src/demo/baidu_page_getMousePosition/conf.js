@@ -13,6 +13,7 @@ var conf = {
         btn1: {
             type: 'button',
             defaultValue: '点击页面获取鼠标坐标',
+            isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(){
