@@ -114,6 +114,7 @@ module.declare(function(require, exports, module){
 			this.expanded = !! conf.expanded;
 			this.checked = 0;
 			this.tree.nodes.push(this);
+			this.clickHandler = conf.clickHandler || function(){};
 
 			if(conf.icon){
 				this.icon = conf.icon;
@@ -229,7 +230,8 @@ module.declare(function(require, exports, module){
 							name: item.n,
 							childsData: item.childs,
 							tree: this.tree,
-							expanded: item.expanded
+							expanded: item.expanded,
+							clickHandler: this.clickHandler
 						});
 						nodeItem.parent = this;
 						nodeItem.render();
@@ -292,6 +294,7 @@ module.declare(function(require, exports, module){
 						if(!this.expanded){
 							this.expand();
 						}
+						this.clickHandler(this.name);
 					}.bind(this)
 				});
 
@@ -341,6 +344,7 @@ module.declare(function(require, exports, module){
 			this.data = conf.data;
 			this.enableCheckBox = typeof conf.enableCheckBox == "boolean" ?
 				conf.enableCheckBox : true;
+			this.clickHandler = conf.clickHandler || function(){};
 			this.nodes = [];
 			this.lists = [];
 
@@ -369,7 +373,8 @@ module.declare(function(require, exports, module){
 						name: item.n,
 						childsData: item.childs,
 						tree: this,
-						expanded: item.expanded
+						expanded: item.expanded,
+						clickHandler: this.clickHandler
 					});
 					nodeItem.parent = this;
 					nodeItem.render();
@@ -382,6 +387,10 @@ module.declare(function(require, exports, module){
 
 			getCheckedData: function(){
 				// TODO:
+			},
+
+			getRoot: function(){
+				return this.nodes[0];
 			},
 
 			// 只更新 dataMapping 中某个节点的选中状态（会自动关联更新其它节点的更新状态），但界面上不作更新
