@@ -10,7 +10,7 @@
     }).extend({
         uiType: 'democonsole',
         tplPanel: '<div id="#{panelId}" class="#{panelClass}"></div>',
-        tplDOM: '<div id="#{id}" class="#{class}"><div id="#{consoleId}" class="#{consoleClass}"><div align="center" class="#{comboboxClass}"><select id="#{demoType}" class="#{demoTypeClass}" onchange="#{handler}">#{content}</select></div>#{defaultContent}</div>#{panelContent}<div class="#{btnClass}"><input type="button" value="code" onclick="#{codeHandler}"/>&nbsp;<input type="button" value="#{infoWinVal}" onclick="#{infoWinHandler}"/></div></div>',
+        tplDOM: '<div id="#{id}" class="#{class}"><div id="#{consoleId}" class="#{consoleClass}"><div align="center" class="#{comboboxClass}"><select id="#{demoType}" class="#{demoTypeClass}" onchange="#{handler}">#{content}</select></div>#{defaultContent}</div>#{panelContent}</div>',
         tplHTML: '<!DOCTYPE html>\n<html>\n<head>\n<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">\n<title>#{packages}</title>\n<link type="text/css" rel="stylesheet" href="#{cssPath}/default.css"/>\n<script type="text/javascript" src="../js/download/tangram-1.3.9.core.js"></script>\n<script type="text/javascript" src="../js/fragment/Tangram-component/src/import.php?f=#{packages}"></script>\n</head>\n<body>\n#{content}\n</body>\n<script type="text/javascript">\n#{jscode}\n</script>\n</html>',
         
         getPanelString: function(){
@@ -40,11 +40,11 @@
                 handler: me.getCallString('_onChangeHandler'),
                 content: array.join(''),
                 defaultContent: me.getDemoString(demoType[0].key),
-                panelContent: me.getPanelString(),
-                btnClass: me.getClass('btn'),
-                codeHandler: me.getCallString('getCode'),
-                infoWinVal: unescape('%u5728%u65B0%u7A97%u53E3%u6253%u5F00'),
-                infoWinHandler: ''
+                panelContent: me.getPanelString()
+//                btnClass: me.getClass('btn'),
+//                codeHandler: me.getCallString('getCode'),
+//                infoWinVal: unescape('%u5728%u65B0%u7A97%u53E3%u6253%u5F00'),
+//                infoWinHandler: ''
             });
         },
 

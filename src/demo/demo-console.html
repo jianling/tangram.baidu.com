@@ -16,15 +16,16 @@ html,body{
 }
 
 .tangram-democonsole-console {
+    position: absolute;
+    left: 0px;
     width: 35%;
     height: 100%;
-    float: left;
     background: gainsboro;
 }
 .tangram-democonsole-panel {
-    width: 65%;
+    position: absolute;
+    left: 35%;
     height: 100%;
-    float: right;
     background: white;
 }
 
@@ -47,12 +48,27 @@ html,body{
     padding: 5px;
     border: lightsteelblue solid 1px;
 }
-.tangram-democonsole-btn {
-    position: absolute;
-    clear: both;/*ie6必要*/
+.code {
+    position: fixed;
     right: 10px;
     top: 10px;
 }
+
+
+* html .code{
+	position: absolute;
+	bottom: auto;
+    width: 185px;
+	top: expression(eval(document.documentElement.scrollTop + 10));
+    left: expression(eval(document.documentElement.scrollLeft + document.documentElement.clientWidth - this.offsetWidth - 10));
+}
+
+
+
+
+
+
+
 
 
 .tangram-democonsole-formbutton {
@@ -66,7 +82,7 @@ html,body{
         packages = baidu.url.getQueryValue(location.href, 'package'),
         path = packages.replace(/\./g, '_');
     array.push('<link type="text/css" rel="stylesheet" href="'+ path +'/default.css"\/>');
-    array.push('<script type="text/javascript" src="'+ path +'/conf.js"><\/script>');
+    array.push('<script type="text/javascript" src="../../src/demo/'+ path +'/conf.js"><\/script>');
     array.push('<script type="text/javascript" src="../js/fragment/Tangram-component/src/import.php?f=baidu.ui.createUI,'+
         packages + '"><\/script>');
     document.writeln(array.join('\n'));
@@ -76,6 +92,7 @@ html,body{
 </head>
 <body>
 <div id='demConsole' style='width:100%; height:100%;'></div>
+<div id='code' class='code'><input type='button' value='code'/>&nbsp;<input type='button' value='在新窗口中打开'/></div>
 </body>
 <script type='text/javascript'>
 var demo = new baidu.ui.DemoConsole(conf);
