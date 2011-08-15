@@ -85,10 +85,15 @@
 .apipage .content .group .group-content td{
 	border: 0;
 	padding: 3px;
+	vertical-align: top;
+}
+
+.apipage .content .group .group-content tr.dark td{
+	background-color: #f6f6f6;
 }
 
 .apipage .content .group .group-content .type{
-	color: #666;
+	color: #999;
 	font-style: italic;
 }
 
