@@ -16,6 +16,7 @@ var conf = {
             maxlength: 80
         },
         formatBtn: {
+			isMain: true,
             type: 'button',
             defaultValue: 'JSON到Query',
             depend: ['param0'],

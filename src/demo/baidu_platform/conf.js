@@ -10,6 +10,7 @@ var conf = {
             html: '<div id="mydiv">判断是何种平台[Windows,Android,iPad,iPhone,Macintosh,X11]</div><div id="result"></div>'
         },
         formatBtn: {
+			isMain: true,
             type: 'button',
             defaultValue: '判断平台',
             depend: [],

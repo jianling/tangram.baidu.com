@@ -24,6 +24,7 @@ var conf = {
             maxlength: 80
         },
         formatBtn: {
+			isMain: true,
             type: 'button',
             defaultValue: '生成随机数',
             depend: ['param0', 'param1'],

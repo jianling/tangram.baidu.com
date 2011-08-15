@@ -16,6 +16,7 @@ var conf = {
             maxlength: 80
         },
         formatBtn: {
+			isMain: true,
             type: 'button',
             defaultValue: '字符转义',
             depend: ['param0'],

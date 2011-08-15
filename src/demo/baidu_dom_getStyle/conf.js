@@ -10,6 +10,7 @@ var conf = {
             html: '<div id="resultTextarea">获取目标元素的指定样式</div><div id="test1" class="big red opacity">demo1</div><div id="test2" class="big display">demo2</div><div id="test3" class="big float">demo3</div><div id="test4" class="big textoverflow">demo4</div>'
 		},
         formatBtn0: {
+			isMain: true,
             type: 'button',
             defaultValue: '获取样式1',
             depend: [],

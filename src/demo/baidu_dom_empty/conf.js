@@ -11,6 +11,7 @@ var conf = {
 			jsCode: 'T.g("resultTextarea").innerHTML="<b>holder\'s children elements:</b>" + T.dom.children("holder")+"<br>"; '
 		},
         formatBtn: {
+			isMain: true,
             type: 'button',
             defaultValue: 'empty',
             depend: [],

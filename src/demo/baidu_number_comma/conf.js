@@ -16,6 +16,7 @@ var conf = {
             maxlength: 80
         },
         formatBtn: {
+			isMain: true,
             type: 'button',
             defaultValue: '逗号分隔',
             depend: ['param0'],

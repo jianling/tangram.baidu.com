@@ -10,6 +10,7 @@ var conf = {
             html: '<div id="resultTextarea">获取目标元素的value属性</div><input id="test" type="text" size="30" value="被测试的元素" >'
 		},
         formatBtn: {
+			isMain: true,
             type: 'button',
             defaultValue: '获取目标元素的value属性',
             depend: [],
