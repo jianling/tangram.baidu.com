@@ -172,7 +172,7 @@
             depend && baidu.array.each(depend, function(item){
                 var list = document.getElementsByName(item);
 					list.length <= 0 && (list = baidu.dom.g(item));
-                if(list.length){
+                if(!list.tagName && list.length){
                     var val = [];
                     for(var i = 0; i < list.length; i++){
                         list[i].checked && val.push(list[i].value);
