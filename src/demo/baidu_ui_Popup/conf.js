@@ -69,10 +69,11 @@ var conf = {
 		newBtn:{
 			type:'button',
 			defaultValue: '更新',
-			depend:  ['newKey','newVal'],
 			event: {
 				eventName: 'onclick',
-				handler: function(k,v){
+				handler: function(){
+					var k = newKey.value;
+					var v = newVal.value;
 					var opt={};opt[k]=v;
 					try{
 						var s = eval('s = '+v);

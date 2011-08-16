@@ -13,8 +13,9 @@ var conf = {
     'default': {
         //    类实例化选项
         pageConf: {
-            options: '{element: "buttonContent", content: "<span class=\'tangram-button-label\' style=\'width: 60px;\'><strong>确定</strong></span>"}',
-			html:'<div id="log"></div>',
+            options: '{content: "<span class=\'tangram-button-label\' style=\'width: 60px;\'><strong>确定</strong></span>"}',
+			target: 'buttonContent',
+			html:'<div id="buttonContent" style="margin:50px;;width:200px;height:120px;"></div><div id="log"></div>',
 			jsCode: 'function log(s){ document.getElementById("log").innerHTML += "<br />"+s }'
         },
 		//	控制台输出调试项
@@ -73,33 +74,46 @@ var conf = {
 		newVal:{
 			type:'text',size:35
 		},
+		
+		ch: {
+			type: 'checkbox',
+			data: {
+				key: ['1', '2', '3', '4'],
+				val: ['a', 'b', 'c', 'd']
+			}
+		},
+		
 		newBtn:{
 			type:'button',
 			defaultValue: '更新',
-			depend:  ['newKey','newVal'],
+			depend:  ['ch', 'newKey','newVal'],
 			event: {
 				eventName: 'onclick',
 				handler: function(k,v){
+					alert(k);
+					/*
 					var opt={};opt[k]=v;
 					try{
 						var s = eval('s = '+v);
 						if(typeof s=='function' || typeof s=='boolean'){opt[k]=s};
 					}catch(e){}
 					this.update(opt)
+					console.log(opt)
+					*/
 				}
 			}
 		},
 
 
-		expcontent: {label:'格式-内容 HTML：',defaultValue: '<span class=\'tangram-button-label\'>不确定</span>',type:'text',size:50,
+		expcontent: {label:'格式-内容：',defaultValue: '<span class=\'tangram-button-label\'>不确定</span>',type:'text',size:50,
 			event: {eventName: 'onclick',handler:function(){ newVal.value = expcontent.value }}
 		},
-		expdisable: {label:'格式-禁用状态：',defaultValue: 'false',type:'text',size:50,
+		expdisable: {label:'<br />格式-禁用状态：',defaultValue: 'false',type:'text',size:50,
 			event: {eventName: 'onclick',handler:function(){ newVal.value = expdisable.value }}
 		},
-		expevent: {label:'格式-事件设置：',defaultValue: 'function(){ alert(\'Something happened!\') }',type:'text',size:50,
+		expevent: {label:'<br />格式-事件设置：',defaultValue: 'function(){ alert(\'Something happened!\') }',type:'text',size:50,
 			event: {eventName: 'onclick',handler:function(){ newVal.value = expevent.value }}
-		},
+		}
 		
         
         
@@ -109,7 +123,7 @@ var conf = {
         'default': [
             ['console'],
             ['disable','enable','isDisabled'],
-            ['newKey','newVal','newBtn'],
+            ['ch', 'newKey','newVal','newBtn'],
             ['expcontent','expdisable','expevent'],
 			['dispose']
         ]

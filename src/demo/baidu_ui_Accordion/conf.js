@@ -13,9 +13,9 @@ var conf = {
     'default': {
         //    类实例化选项
         pageConf: {
-            options: '{items:[{head :"我的任务", body : "<span>代办事宜1</span>"},{head :"我的任务", body : "<span>代办事宜1</span>"},{head :"我的任务", body : "<span>代办事宜1</span>"} ] }',
+            options: '{items:[{head :"任务0", body : "<span>代办事宜1</span>"},{head :"任务1", body : "<span>代办事宜1</span>"},{head :"任务2", body : "<span>代办事宜1</span>"} ] }',
             target:'accordionId',
-            html:'<div id="accordionId"></div>'
+            html:'<div id="accordionId" style="margin:50px"></div>'
         },
         console: {
             type: 'button',
@@ -75,11 +75,10 @@ var conf = {
         insertItemHTML: {
             type: 'button',
             defaultValue: '插入一个新项',
-            depend: ['itemHTMLHEAD','itemHTMLBODY','itemINDEX'],
             event: {
                 eventName: 'onclick',
                 handler: function(h,b,i){
-                    this.insertItemHTML({head : h, body : b},i-0);
+                    this.insertItemHTML({head : itemHTMLHEAD.value, body : itemHTMLBODY.value},itemINDEX.value-0);
                 }
             }
         }

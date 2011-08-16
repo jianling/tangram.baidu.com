@@ -16,7 +16,7 @@ var conf = {
         pageConf: {
             options: '{container:\'modalCon\'}',
 			target:'',
-			html:'<div id="modalCon" style="width:400px;height:240px;border:5px solid #ddd;background:#0F0;margin:50px;">一个容器#modalCon</div><div id="modalCon2" style="width:200px;height:100px;border:5px solid #ddd;background:#F00;margin:0 50px;">另一个容器#modalCon2</div> '
+			html:'<div id="modalCon" style="width:400px;height:240px;border:5px solid #ddd;background:#0F0;margin:50px;">一个容器#modalCon</div><div id="modalCon2" style="width:200px;height:100px;border:5px solid #ddd;background:#F00;margin:0 50px;display:none">另一个容器#modalCon2</div> '
         },
         //	控制台输出调试项
         console: {
@@ -46,7 +46,7 @@ var conf = {
         },
 		getWindowHandle: {
             type: 'button',
-            defaultValue: 'window.resize & window.scroll 事件调用的函数 getWindowHandle()',
+            defaultValue: 'window的resize、scroll事件调用的函数 getWindowHandle()',
             event: {
                 eventName: 'onclick',
                 handler: function(){
