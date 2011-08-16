@@ -7,11 +7,11 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.array.empty'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea">结果为：</div>'
+            html: '<div id="resultArea">结果为：百科,贴吧,身边,新知</div>'
         },
         param0: {
             type: 'text',
-            defaultValue: "['百度','淘宝','盛大','腾讯']",
+            defaultValue: "['百科','贴吧','身边','新知']",
             size: 20
         },
         formatBtn: {

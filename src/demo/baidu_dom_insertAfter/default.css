@@ -1,0 +1,17 @@
+#resultTextarea{margin:20px;}
+    #existElement{
+       width:100px;
+       height:30px;
+       border:2px solid red;
+       margin:10px;
+    }
+    .newElement{
+       width:100px;
+       height:30px;
+       border:2px solid blue;
+       margin:10px;
+    }
+    .demo{
+      float:left;
+      margin-right:20px;
+    }

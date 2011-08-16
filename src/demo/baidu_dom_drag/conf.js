@@ -10,6 +10,7 @@ var conf = {
             html: '<div id="drag" class="roundCorner"><div id="dragHeader" class="roundCorner"></div><div id="dragContent">单击色条后开始拖拽</div></div>'
 		},
         formatBtn0: {
+			isMain: true,
             type: 'button',
             defaultValue: '创建',
             depend: [],
@@ -28,7 +29,7 @@ var conf = {
 									T.g("dragContent").innerHTML="已放下，单击色条后开始拖拽";
 									T.setStyle("drag", "opacity", "1");
 								},
-								autoStop: false
+								autoStop: true
 							});
 							dragging = true;
 						}

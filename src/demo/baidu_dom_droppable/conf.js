@@ -10,6 +10,7 @@ var conf = {
             html: '<div id="target"></div><div id="drag" class="roundCorner"><div id="title" class="roundCorner">单击此处进行拖拽</div></div>'
 		},
         formatBtn0: {
+			isMain: true,
             type: 'button',
             defaultValue: '创建',
             depend: [],

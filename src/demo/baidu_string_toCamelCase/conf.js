@@ -13,7 +13,7 @@ var conf = {
         	label: '输入字符：',
             type: 'text',
             defaultValue: 'background-position-x',
-            size: 30
+            size: 21
         },
         btn1: {
             type: 'button',

@@ -13,7 +13,7 @@ var conf = {
         	label: '输入配置：',
             type: 'text',
             defaultValue: "{id: 'flash',url: './baidu_swf_createHTML/test.swf',width:200,height:150}",
-            size: 40
+            size: 21
         },
         btn1: {
             type: 'button',
@@ -25,7 +25,7 @@ var conf = {
             	handler: function(arg0){
             		var code = baidu.swf.createHTML(eval('(' + arg0 + ')'));
             		var area = document.createElement('textarea');
-            		area.cols = 50;
+            		area.cols = 46;
             		area.rows = 10;
             		area.value = code;
             		T.g('resultArea').appendChild(area);

@@ -12,7 +12,7 @@ var conf = {
 			},
         formatBtn0: {
             type: 'button',
-            defaultValue: 'T.dom.first(\'holder\')',
+            defaultValue: 'baidu.dom.first(\'holder\')',
             depend: [],
             event: {
                 eventName: 'onclick',
@@ -23,7 +23,7 @@ var conf = {
         },
         formatBtn1: {
             type: 'button',
-            defaultValue: 'T.dom.prev(\'single\')',
+            defaultValue: 'baidu.dom.prev(\'single\')',
             depend: [],
             event: {
                 eventName: 'onclick',
@@ -33,8 +33,9 @@ var conf = {
             }
         },
         formatBtn2: {
+			isMain: true,
             type: 'button',
-            defaultValue: 'T.dom.next(\'single\')',
+            defaultValue: 'baidu.dom.next(\'single\')',
             depend: [],
             event: {
                 eventName: 'onclick',
@@ -45,7 +46,7 @@ var conf = {
         },
         formatBtn3: {
             type: 'button',
-            defaultValue: 'T.dom.last(\'holder\')',
+            defaultValue: 'baidu.dom.last(\'holder\')',
             depend: [],
             event: {
                 eventName: 'onclick',

@@ -10,6 +10,7 @@ var conf = {
             html: '<div id="resultTextarea">获取目标元素相对于整个文档左上角的位置</div><div id="test">目标元素</div>'
 		},
         formatBtn: {
+			isMain: true,
             type: 'button',
             defaultValue: '定位',
             depend: [],
