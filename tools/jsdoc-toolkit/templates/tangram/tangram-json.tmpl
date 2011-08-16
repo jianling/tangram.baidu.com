@@ -27,6 +27,7 @@ function getJson(item){
     item.name && array.push("name: '" + parse(item.name) + "'");
     item.type && array.push("type: '" + item.type + "'");
     item.desc && array.push("desc: '" + parse(item.desc) + "'");
+    item.comment && array.push("grammar: '"+ item.comment.getTag('grammar') +"'");
     if(item.params && item.params.length > 0){
         item.params.forEach(function(it){
             options.push(getJson(it));
