@@ -79,7 +79,12 @@
 }
 
 .apipage .content .grammar{
-	margin-top: 10px;
+	margin: 10px 0;
+}
+
+.apipage .content .grammar .center strong{
+	font-weight: 700;
+	color: #000;
 }
 
 .apipage .content .group{

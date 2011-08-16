@@ -43,7 +43,7 @@ module.declare(function(require, exports, module){
 		"</table>");
 
 	var jump_template = new Lichee.Template(
-		"<a href='#@{name}'>@{text}</a>");
+		"<a href='' onclick='Lichee.Element(\"@{name}\",true).scrollIntoView(true); return false;'>@{text}</a>");
 
 	function setContent(el, data){
 		var groupContent = E(Q(".group-content", el.dom)[0]);
@@ -76,13 +76,13 @@ module.declare(function(require, exports, module){
 		});
 	}
 
-	function setJump(data){
+	function setJump(data, key){
 		var html = [];
-		data.options && html.push(jump_template.apply({ name: "group_options", text: "options参数" }));
-		data.methods && html.push(jump_template.apply({ name: "group_methods", text: "方法" }));
-		data.events && html.push(jump_template.apply({ name: "group_events", text: "事件" }));
-		data.plugins && html.push(jump_template.apply({ name: "group_plugs", text: "扩展插件" }));
-		html.push(jump_template.apply({ name: "demo", text: "demo" }));
+		data.options && html.push(jump_template.apply({ key: key, name: "group_options", text: "options参数" }));
+		data.methods && html.push(jump_template.apply({ key: key, name: "group_methods", text: "方法" }));
+		data.events && html.push(jump_template.apply({ key: key, name: "group_events", text: "事件" }));
+		data.plugins && html.push(jump_template.apply({ key: key, name: "group_plugs", text: "扩展插件" }));
+		html.push(jump_template.apply({ key: key, name: "demo", text: "demo" }));
 		html = "快速跳转：" + html.join(" | ");
 		E("api_jump").html(html);
 	}
@@ -98,7 +98,9 @@ module.declare(function(require, exports, module){
 		api_desc.html(data.desc);
 
 		if(data.grammar){
-			grammar.html(data.grammar.htmlEncode());
+			grammar.html(grammarRenderer(data.grammar, key));
+		}else{
+			grammar.html("<span style='color: #ccc;'>无</span>");
 		}
 
 		if(data.options){
@@ -129,7 +131,7 @@ module.declare(function(require, exports, module){
 			group_plugs.display(false);
 		}
 
-		setJump(data);
+		setJump(data, key);
 		E("api_demo_iframe").attr("src", "demo/demo-console.html?package=" + key);
 	}
 
@@ -161,6 +163,12 @@ module.declare(function(require, exports, module){
 		E("api_list").html(htmls);
 	}
 
+	function grammarRenderer(text, key){
+		text = text.htmlEncode();
+		text = text.replace(key, "<strong>" + key + "</strong>");
+		return text;
+	}
+
 	toShowAPIHandle = Lichee.handle(function(key){
 		treeInstance.focusToKey(key);
 	});
@@ -189,7 +197,7 @@ module.declare(function(require, exports, module){
 		treeInstance.render();
 		treeInstance.getRoot().expand();
 
-		hash(/[^|]+/, function(key){
+		hash(/^[^_]+$/, function(key){
 			var node = treeInstance.dataMapping[key];
 			if(node.nodeType == "folder"){
 				loadAPIList(key);
