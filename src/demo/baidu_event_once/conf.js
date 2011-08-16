@@ -7,7 +7,7 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.event.once'}],
     'default': {
         pageConf: {
-            html: '<p><button id="mybutton">按钮</button></p><div id="resultArea"></div>'
+            html: '<p id="button"><button id="mybutton">按钮</button></p><div id="resultArea"></div>'
         },
         btn1: {
             type: 'button',

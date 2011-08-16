@@ -13,7 +13,7 @@ var conf = {
             type: 'text',
 			label: '要插入的html：',
             defaultValue: '<span>this is span!</span>',
-            size: 60,
+            size: 21,
             maxlength: 80
         },
         formatBtn0: {

@@ -16,10 +16,10 @@ var conf = {
             html: '<div id="resultArea"></div>'
         },
         dateInput: {
-        	label: '输入字符串：',
+        	label: '字符串：',
             type: 'text',
             defaultValue: "{'a' : 1,'b' : [2, 3],'c' : '中文'}",
-            size: 30
+            size: 21
         }
     },
     'decode': {
@@ -69,7 +69,7 @@ var conf = {
         },
     	btn3: {
             type: 'button',
-            defaultValue: 'decode',
+            defaultValue: 'parse',
             depend: ['dateInput'],
             event: {
             	eventName: 'onclick',
@@ -89,7 +89,7 @@ var conf = {
         },
     	btn4: {
             type: 'button',
-            defaultValue: 'decode',
+            defaultValue: 'stringify',
             event: {
             	eventName: 'onclick',
             	handler: function(){

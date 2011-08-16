@@ -1,10 +1,10 @@
 var conf = {
     clazz: {
         type: 'method',
-        'method': 'baidu.element.event'
+        'method': 'baidu.element.events'
     },
     
-    demoType: [{key: 'default', val: 'baidu.element.event'}],
+    demoType: [{key: 'default', val: 'baidu.element.events'}],
     'default': {
         pageConf: {
             html: '<div id="resultArea"><span class="important">点击此处</span><span class="important">点击此处</span></div>'

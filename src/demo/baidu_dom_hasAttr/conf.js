@@ -12,7 +12,7 @@ var conf = {
         formatBtn0: {
 			isMain: true,
             type: 'button',
-            defaultValue: 'baidu.dom.hasAttr(test,type)',
+            defaultValue: 'hasAttr(test,type)',
             depend: [],
             event: {
                 eventName: 'onclick',
@@ -23,7 +23,7 @@ var conf = {
         },
         formatBtn1: {
             type: 'button',
-            defaultValue: 'baidu.dom.hasAttr(test,disabled)',
+            defaultValue: 'hasAttr(test,disabled)',
             depend: [],
             event: {
                 eventName: 'onclick',

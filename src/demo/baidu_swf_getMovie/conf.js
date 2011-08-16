@@ -13,13 +13,13 @@ var conf = {
         	label: '宽：',
             type: 'text',
             defaultValue: "300",
-            size: 5
+            size: 11
         },
         dateInput2: {
         	label: '高：',
             type: 'text',
             defaultValue: "200",
-            size: 5
+            size: 11
         },
         btn1: {
             type: 'button',

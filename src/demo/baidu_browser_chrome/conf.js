@@ -23,7 +23,7 @@ var conf = {
 					    html.push(    '<tr><td>T.browser.'+bs[i]+'</td><td>'+T.browser[bs[i]]+'</td></td>'    )
 					}
 					var html = '<table width="80%">'+html.join(' ')+'</table>'
-					T.g("resultArea").innerHTML=html;
+					T.g("resultArea").innerHTML='结果为：<br>'+html;
                 }
             }
         }

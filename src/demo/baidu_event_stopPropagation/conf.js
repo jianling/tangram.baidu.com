@@ -4,7 +4,7 @@ var conf = {
         'method': 'baidu.event.stopPropagation'
     },
     
-    demoType: [{key: 'default', val: 'baidu.event.stopPropagation'}],
+    demoType: [{key: 'default', val: 'stopPropagation'}],
     'default': {
         pageConf: {
             html: '<div id="outer_box"><a id="mylink" href="http://www.baidu.com" target="_blank">百度一下，你就知道...</a></div><div id="resultArea"></div>'

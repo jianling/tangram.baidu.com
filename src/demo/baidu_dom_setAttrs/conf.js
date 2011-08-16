@@ -13,7 +13,7 @@ var conf = {
             type: 'text',
 			label: 'size:',
             defaultValue: '40',
-            size: 20,
+            size: 11,
             maxlength: 80
         },
         param1: {

@@ -13,14 +13,14 @@ var conf = {
             type: 'text',
 			label: 'top:',
             defaultValue: '100',
-            size: 20,
+            size: 11,
             maxlength: 80
         },
         param1: {
             type: 'text',
 			label: 'left:',
             defaultValue: '100',
-            size: 20,
+            size: 9,
             maxlength: 80
         },
         formatBtn: {

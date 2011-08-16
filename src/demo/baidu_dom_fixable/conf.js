@@ -7,7 +7,7 @@ var conf = {
     },
     //    定义DEMO可选项
     demoType: [
-        {key: 'default', val: 'fixable示例'}
+        {key: 'default', val: 'baidu.dom.fixable'}
     ],
     //    默认可选项的配置
     'default': {
@@ -19,13 +19,13 @@ var conf = {
 			jsCode:''
         },
 		
-		vertival:{type:'text',size:5,label:'垂直方向',defaultValue:'top'},
-		horizontal:{type:'text',size:5,label:'水平方向',defaultValue:'left'},
-		offset:{type:'text',size:10,label:'<br />偏移',defaultValue:'{x:500,y:10}'},
-		autofix:{type:'text',size:5,label:'页面卷动时固定',defaultValue:'true'},
-		onrender:{type:'text',size:40,label:'<br />渲染触发',defaultValue:'function(){ alert(\'when render\') }'},
-		onupdate:{type:'text',size:40,label:'<br />更新触发',defaultValue:'function(){ alert(\'when update\') }'},
-		onrelease:{type:'text',size:40,label:'<br />释触发',defaultValue:'function(){ alert(\'when release\') }'},
+		vertival:{type:'text',size:8,label:'垂直方向',defaultValue:'top'},
+		horizontal:{type:'text',size:8,label:'水平方向',defaultValue:'left'},
+		offset:{type:'text',size:15,label:'偏移',defaultValue:'{x:500,y:10}'},
+		autofix:{type:'text',size:15,label:'固定',defaultValue:'true'},
+		onrender:{type:'text',size:15,label:'渲染',defaultValue:'function(){ alert(\'when render\') }'},
+		onupdate:{type:'text',size:15,label:'更新',defaultValue:'function(){ alert(\'when update\') }'},
+		onrelease:{type:'text',size:15,label:'释放',defaultValue:'function(){ alert(\'when release\') }'},
 		
         fixable: {
             type: 'button',

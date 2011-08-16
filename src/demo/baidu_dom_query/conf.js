@@ -7,7 +7,7 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.dom.query'}],
     'default': {
         pageConf: {
-            html: '<table id="demo"><tr><td><a href="http://tangram.baidu.com">tangram</a></td><td><input type="text" disabled="disabled" /></td><td><input type="text" /></td><td><a href="#">FE</a></td><td><p class="bold">测试元素1</p></td><td><p>测试元素2</p></td></table>',
+            html: '<table id="demo"><tr><td><a href="http://tangram.baidu.com">tangram</a></td></tr><tr><td><input type="text" disabled="disabled" /></td></tr><tr><td><input type="text" /></td></tr><tr><td><a href="#">FE</a></td></tr><tr><td><p class="bold">测试元素1</p></td></tr><tr><td><p>测试元素2</p></td></tr></table>',
 		},
         formatBtn0: {
 			isMain: true,
@@ -60,7 +60,7 @@ var conf = {
         },
         formatBtn3: {
             type: 'button',
-            defaultValue: '查找href为\'http://tangram.baidu.com\'的a标签',
+            defaultValue: '查找href为特定url的a标签',
             depend: [],
             event: {
                 eventName: 'onclick',

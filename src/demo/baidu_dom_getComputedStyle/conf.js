@@ -7,7 +7,7 @@ var conf = {
     },
     //    定义DEMO可选项
     demoType: [
-        {key: 'default', val: 'getComputedStyle示例'}
+        {key: 'default', val: 'getComputedStyle'}
     ],
     //    默认可选项的配置
     'default': {
@@ -20,11 +20,11 @@ var conf = {
         },
 		
 		style:{
-			type:'text',size:35,defaultValue:'width'
+			type:'text',size:21,defaultValue:'width'
 		},
 		getComputedStyle:{
 			type:'button',
-			defaultValue: '获得样式 getComputedStyle()',
+			defaultValue: '获得样式',
 			event: {
 				eventName: 'onclick',
 				handler: function(){

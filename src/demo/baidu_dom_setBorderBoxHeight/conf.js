@@ -4,7 +4,7 @@ var conf = {
         'method': 'baidu.dom.setBorderBoxHeight'
     },
     
-    demoType: [{key: 'default', val: 'baidu.dom.setBorderBoxHeight'}],
+    demoType: [{key: 'default', val: 'setBorderBoxHeight'}],
     'default': {
         pageConf: {
             html: '<div class="contain" id="target"></div>',
@@ -13,13 +13,13 @@ var conf = {
             type: 'text',
 			label: 'height:',
             defaultValue: '100',
-            size: 20,
+            size: 11,
             maxlength: 80
         },
         formatBtn: {
 			isMain: true,
             type: 'button',
-            defaultValue: '设置元素的outerHeight',
+            defaultValue: '设置',
             depend: ['param0'],
             event: {
                 eventName: 'onclick',

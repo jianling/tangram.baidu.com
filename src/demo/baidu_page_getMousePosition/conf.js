@@ -4,7 +4,7 @@ var conf = {
         'method': 'baidu.page.getmousePosition'
     },
     
-    demoType: [{key: 'default', val: 'baidu.page.getMousePosition'}],
+    demoType: [{key: 'default', val: 'getMousePosition'}],
     'default': {
         pageConf: {
             html: '<div id="resultArea"></div>',

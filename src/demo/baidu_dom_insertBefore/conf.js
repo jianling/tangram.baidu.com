@@ -12,7 +12,7 @@ var conf = {
         formatBtn0: {
 			isMain: true,
             type: 'button',
-            defaultValue: 'baidu.dom.insertBefore',
+            defaultValue: 'insertBefore',
             depend: [],
             event: {
                 eventName: 'onclick',
@@ -23,7 +23,7 @@ var conf = {
         },
         formatBtn1: {
             type: 'button',
-            defaultValue: 'baidu.dom.insertAfter',
+            defaultValue: 'insertAfter',
             depend: [],
             event: {
                 eventName: 'onclick',

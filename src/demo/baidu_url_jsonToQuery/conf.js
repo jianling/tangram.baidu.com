@@ -12,7 +12,7 @@ var conf = {
         param0: {
             type: 'text',
             defaultValue: '{name: \'Tom Smith\', age: 20}',
-            size: 60,
+            size: 21,
             maxlength: 80
         },
         formatBtn: {

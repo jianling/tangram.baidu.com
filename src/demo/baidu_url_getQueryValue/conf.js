@@ -12,7 +12,7 @@ var conf = {
         param0: {
             type: 'text',
             defaultValue: 'http://localhost/reg.php?age=20&name=Tom Smith&sex=男',
-            size: 60,
+            size: 21,
             maxlength: 80
         },
         param1: {
