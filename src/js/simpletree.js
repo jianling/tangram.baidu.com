@@ -114,7 +114,9 @@ module.declare(function(require, exports, module){
 			this.expanded = !! conf.expanded;
 			this.checked = 0;
 			this.tree.nodes.push(this);
+			this.tree.nodeMapping[this.name] = this;
 			this.clickHandler = conf.clickHandler || function(){};
+			this.nameRenderer = conf.nameRenderer || function(text){ return text; };
 
 			if(conf.icon){
 				this.icon = conf.icon;
@@ -131,7 +133,7 @@ module.declare(function(require, exports, module){
 				var template = enableCheckBox ? nodeTemplate : nodeTemplate2;
 
 				this.container.html(template.apply({
-					name: this.name.htmlEncode(),
+					name: this.nameRenderer(this.name).htmlEncode(),
 					iconId: this.iconId = Lichee.id(),
 					namelinkId: this.namelinkId = Lichee.id(),
 					expandedViewerId: this.expandedViewerId = Lichee.id(),
@@ -156,13 +158,13 @@ module.declare(function(require, exports, module){
 					this.expand();
 			},
 
-			expand: function(){
+			expand: function(_callback){
 				if(!this.hasExpanded && this.childsData.length){
 					this.hasExpanded = true;
 					this.renderChilds(this.childsData, function(){
 						this.tree.updateListLastNodes();
 						this.tree.updateNodeCheckStates(this);
-						this.expand();
+						this.expand(_callback);
 					}.bind(this));
 					return ;
 				}
@@ -173,6 +175,7 @@ module.declare(function(require, exports, module){
 				E(this.iconId).style("backgroundPosition", "0 -20px");
 				this.expanded = true;
 				this.tree.fixRelativeEls();
+				_callback && _callback();
 			},
 
 			collapse: function(){
@@ -195,6 +198,21 @@ module.declare(function(require, exports, module){
 				this.container.display(bool);
 				if(this.dropDownLayer)
 					this.dropDownLayer.display(bool);
+			},
+
+			focus: function(){
+				var nameEl = E(this.namelinkId);
+				if(this.tree.selectionNode){
+					var lastNameEl = E(this.tree.selectionNode.namelinkId);
+					lastNameEl.delClass("selected");
+				}
+				this.tree.selectionNode = this;
+				nameEl.addClass("selected");
+				this.clickHandler(this.name);
+
+				var parent = this;
+				while(parent = parent.parent)
+					parent.expand && parent.expand();
 			},
 
 			setItsLast: function(bool){
@@ -231,7 +249,8 @@ module.declare(function(require, exports, module){
 							childsData: item.childs,
 							tree: this.tree,
 							expanded: item.expanded,
-							clickHandler: this.clickHandler
+							clickHandler: this.clickHandler,
+							nameRenderer: this.nameRenderer
 						});
 						nodeItem.parent = this;
 						nodeItem.render();
@@ -291,9 +310,8 @@ module.declare(function(require, exports, module){
 					}.bind(this),
 
 					click: function(){
-						if(!this.expanded){
+						if(!this.expanded)
 							this.expand();
-						}
 						this.clickHandler(this.name);
 					}.bind(this)
 				});
@@ -344,8 +362,10 @@ module.declare(function(require, exports, module){
 			this.data = conf.data;
 			this.enableCheckBox = typeof conf.enableCheckBox == "boolean" ?
 				conf.enableCheckBox : true;
-			this.clickHandler = conf.clickHandler || function(){};
+			this.clickHandler = conf.clickHandler;
+			this.nameRenderer = conf.nameRenderer;
 			this.nodes = [];
+			this.nodeMapping = {};
 			this.lists = [];
 
 			var formatedData = formatData(conf.data);
@@ -374,7 +394,8 @@ module.declare(function(require, exports, module){
 						childsData: item.childs,
 						tree: this,
 						expanded: item.expanded,
-						clickHandler: this.clickHandler
+						clickHandler: this.clickHandler,
+						nameRenderer: this.nameRenderer
 					});
 					nodeItem.parent = this;
 					nodeItem.render();
@@ -391,6 +412,34 @@ module.declare(function(require, exports, module){
 
 			getRoot: function(){
 				return this.nodes[0];
+			},
+
+			focusToKey: function(key){
+				var dataMapping = this.dataMapping;
+				var data = dataMapping[key];
+				var nodeMapping = this.nodeMapping;
+				var arr = [], pn;
+
+				var tp = data;
+				while(true){
+					tp = dataMapping[tp.p];
+					if(tp){
+						arr.unshift(tp.n);
+					}else{
+						break;
+					}
+				}
+
+				var expand = function(){
+					var d, n;
+					if(d = arr.shift()){
+						n = nodeMapping[d];
+						n.expand(expand);
+					}else if(d = nodeMapping[key]){
+						d.focus();
+					}
+				};
+				expand();
 			},
 
 			// 只更新 dataMapping 中某个节点的选中状态（会自动关联更新其它节点的更新状态），但界面上不作更新

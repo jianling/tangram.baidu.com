@@ -4,9 +4,15 @@ module.declare(function(require, exports, module){
 	var tree = require("./simpletree");
 	var E = Lichee.Element, Q = Lichee.queryElement;
 
+	{include includes/hash.js}
+
+	if(!window.Lichee)
+		window.Lichee = Lichee;
+
 	var apitree = E("apitree");
 	var data = [];
 	var treeInstance;
+	var toShowAPIHandle;
 
 	var api_name = E("api_name");
 	var api_desc = E("api_desc");
@@ -14,6 +20,7 @@ module.declare(function(require, exports, module){
 	var group_methods = E("group_methods");
 	var group_events = E("group_events");
 	var group_plugs = E("group_plugs");
+	var grammar = E(Q("#api_detail .grammar .center")[0]);
 
 	[group_options, group_methods, group_events, group_plugs].forEach(defineGroupEvent);
 
@@ -24,8 +31,14 @@ module.declare(function(require, exports, module){
 			"<td class='description'>@{desc}</td>",
 		"</tr>");
 
+	var tr2_template = new Lichee.Template(
+		"<tr class='@{trClass}'>",
+			"<td class='name'><a href='' onclick='Lichee.handle(@{handleId})(\"@{key}\");return false;'>@{name}</a></td>",
+			"<td class='description'>@{desc}</td>",
+		"</tr>");
+
 	var table_template = new Lichee.Template(
-		"<table cellspacing='0' cellpadding='0'>",
+		"<table cellspacing='0' cellpadding='0' width='100%'>",
 			"@{records}",
 		"</table>");
 
@@ -78,8 +91,15 @@ module.declare(function(require, exports, module){
 		var data = tangram_base_api.docMap[key] || tangram_component_api.docMap[key] || null;
 		if(!data)return ;
 
+		E("api_list").display(false);
+		E("api_detail").display(true);
+
 		api_name.html(key);
 		api_desc.html(data.desc);
+
+		if(data.grammar){
+			grammar.html(data.grammar.htmlEncode());
+		}
 
 		if(data.options){
 			setContent(group_options, data.options);
@@ -113,6 +133,38 @@ module.declare(function(require, exports, module){
 		E("api_demo_iframe").attr("src", "demo/demo-console.html?package=" + key);
 	}
 
+	function loadAPIList(key){
+		E("api_list").display(true);
+		E("api_detail").display(false);
+
+		var dataMapping = treeInstance.dataMapping;
+		var subs = dataMapping[key].childs;
+
+		var htmls = subs.map(function(node, index){
+			var name = node.n;
+			var data = tangram_base_api.docMap[name] || tangram_component_api.docMap[name] || null;
+			if(!data)
+				return "";
+			return tr2_template.apply({
+				handleId: toShowAPIHandle,
+				key: name,
+				trClass: index % 2 ? "dark" : "",
+				name: name,
+				desc: data.desc
+			});
+		});
+
+		htmls = table_template.apply({
+			records: htmls.join("")
+		});
+
+		E("api_list").html(htmls);
+	}
+
+	toShowAPIHandle = Lichee.handle(function(key){
+		treeInstance.focusToKey(key);
+	});
+
 	function start(){
 
 		if(typeof tangram_base_api != "undefined")
@@ -125,14 +177,26 @@ module.declare(function(require, exports, module){
 			data: data,
 			enableCheckBox: false,
 			clickHandler: function(key){
-				loadAPI(key);
+				if(location.hash != "#" + key)
+					location.hash = key;
+			},
+			nameRenderer: function(text){
+				text = text.split(".");
+				return text[text.length - 1];
 			}
 		});
 
 		treeInstance.render();
 		treeInstance.getRoot().expand();
 
-//		loadAPI("baidu.ui.Carousel");
-
+		hash(/[^|]+/, function(key){
+			var node = treeInstance.dataMapping[key];
+			if(node.nodeType == "folder"){
+				loadAPIList(key);
+			}else{
+				loadAPI(key);
+			}
+			treeInstance.focusToKey(key);
+		});
 	}
 });

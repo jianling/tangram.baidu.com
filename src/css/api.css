@@ -6,15 +6,37 @@
 
 .apipage .sidebar{
 	float: left;
-	width: 240px;
+	width: 180px;
 	overflow: hidden;
 	padding: 28px;
 }
 
 .apipage .content{
 	float: left;
-	width: 590px;
+	width: 650px;
 	padding: 28px;
+}
+
+#api_list table td{
+	border: 0;
+}
+
+#api_list table td.name{
+	width: 180px;
+}
+
+#api_list table td.name a{
+	font-weight: 700;
+	color: #064581;
+}
+
+#api_list table tr.dark td{
+	background-color: #f6f6f6;
+}
+
+#api_list,
+#api_detail{
+	display: none;
 }
 
 .apipage .content h2{
@@ -98,8 +120,8 @@
 }
 
 .apipage .content .group .group-content .name a{
-	color: #009;
 	font-weight: 700;
+	color: #064581;
 }
 
 .apipage .content .tab{
@@ -144,4 +166,8 @@
 	width: 100%;
 	height: 400px;
 	border: 0;
+}
+
+#api_jump a{
+	color: #064581;
 }
