@@ -126,6 +126,9 @@ var conf = {
 			event: {
 				eventName: 'onclick',
 				handler: function(k,v){
+					var k = newKey.value;
+					var v = newVal.value;
+
 					var opt={};opt[k]=v;
 					try{
 						var s = eval('s = '+v);

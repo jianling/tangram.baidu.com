@@ -52,7 +52,7 @@ var conf = {
                 eventName: 'onclick',
                 handler: 'hide'
             }
-        },
+        }
         
     },    
     groups: {
