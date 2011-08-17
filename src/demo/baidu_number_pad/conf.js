@@ -22,6 +22,7 @@ var conf = {
             maxlength: 80
         },
         formatBtn: {
+			isMain: true,
             type: 'button',
             defaultValue: '补齐处理',
             depend: ['param0', 'param1'],

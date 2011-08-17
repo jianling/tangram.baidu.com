@@ -13,7 +13,7 @@ var conf = {
         	label: '颜色：',
             type: 'text',
             defaultValue: 'red',
-            size: 30
+            size: 11
         },
         btn1: {
             type: 'button',

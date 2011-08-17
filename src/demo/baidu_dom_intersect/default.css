@@ -1,0 +1,28 @@
+#resultTextarea{margin:20px;}
+    .top{
+        width:100px;
+        height:100px;
+        border:2px solid red;
+        margin-top:10px;
+    }
+    .bottom{
+        width:80px;
+        height:80px;
+        border:2px solid blue;
+    }
+    #bottom4{
+        margin:0;
+    }
+    #bottom3{
+        margin:20px;
+    }
+    #bottom2{
+        margin:-20px 0 0 20px;
+    }
+    #bottom1{
+        margin:-90px 0 0 10px;
+    }
+    .demo{
+        margin:10px 20px 0 20px;
+        float:left;
+    }

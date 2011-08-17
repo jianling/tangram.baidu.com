@@ -1,0 +1,12 @@
+#demo{
+    margin-bottom:10px;
+}
+#demo td{
+    padding:10px;
+}
+.focus{
+    border:2px solid red;
+}
+.bold{
+    font-weight:bold;
+}

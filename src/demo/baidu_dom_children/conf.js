@@ -7,9 +7,10 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.dom.children'}],
     'default': {
         pageConf: {
-            html: '<div id="mydiv">baidu.dom.children</div><div id="holder">&lt;div id="holder"&gt;<div class="child">first</div><div class="child">prev</div><div class="child">single</div><div class="child">next</div><div class="child">last</div></div>&lt;/div&gt;<div id="out">out</div>'
+            html: '<div id="mydiv">baidu.dom.children</div><div id="holder">&lt;div id="holder"&gt;<div class="child">first</div><div class="child">prev</div><div class="child">single</div><div class="child">next</div><div class="child">last</div>&lt;/div&gt;</div><div id="out">out</div>'
 		},
         formatBtn: {
+			isMain: true,
             type: 'button',
             defaultValue: '添加样式',
             depend: [],

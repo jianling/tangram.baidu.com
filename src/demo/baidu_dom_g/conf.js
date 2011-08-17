@@ -10,6 +10,7 @@ var conf = {
             html: '<div id="test">测试元素</div>',
 		},
         formatBtn: {
+			isMain: true,
             type: 'button',
             defaultValue: '获取元素',
             depend: [],

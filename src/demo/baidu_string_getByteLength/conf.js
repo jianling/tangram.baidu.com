@@ -13,7 +13,7 @@ var conf = {
         	label: '字符串：',
             type: 'text',
             defaultValue: '中文English',
-            size: 30
+            size: 11
         },
         btn1: {
             type: 'button',

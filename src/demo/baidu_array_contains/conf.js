@@ -11,12 +11,12 @@ var conf = {
         },
         param0: {
             type: 'text',
-            defaultValue: "['百度','淘宝','盛大','腾讯']",
+            defaultValue: "['百科','贴吧','身边','新知']",
             size: 20
         },
         param1: {
             type: 'text',
-            defaultValue: "百度",
+            defaultValue: "贴吧",
             size: 10
         },
         formatBtn: {

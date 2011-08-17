@@ -13,13 +13,13 @@ var conf = {
         	label: '输入时间：',
             type: 'text',
             defaultValue: 'Tue Aug 09 2011 16:53:05 GMT+0800',
-            size: 30
+            size: 20
         },
         format: {
         	label: '时间格式：',
             type: 'text',
             defaultValue: 'yyyy年MM月dd日 HH时mm分ss秒',
-            size: 30
+            size: 20
         },
         btn1: {
             type: 'button',

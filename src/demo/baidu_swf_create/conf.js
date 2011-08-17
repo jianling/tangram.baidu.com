@@ -12,8 +12,8 @@ var conf = {
         dateInput: {
         	label: '输入配置：',
             type: 'text',
-            defaultValue: "{id: 'flash',url: './baidu_swf_create/test.swf',width:200,height:150}",
-            size: 40
+            defaultValue: "{id: 'flash',url: './baidu_swf_create/test.swf',width:360,height:270}",
+            size: 21
         },
         btn1: {
             type: 'button',

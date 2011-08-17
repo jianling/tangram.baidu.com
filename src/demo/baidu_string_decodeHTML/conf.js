@@ -14,7 +14,7 @@ var conf = {
         	label: '输入实体字符：',
             type: 'text',
             defaultValue: '',
-            size: 30
+            size: 21
         },
         btn1: {
             type: 'button',

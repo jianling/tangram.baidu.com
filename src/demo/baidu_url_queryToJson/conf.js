@@ -13,10 +13,11 @@ var conf = {
         param0: {
             type: 'text',
             defaultValue: 'name=John&age=30',
-            size: 60,
+            size: 21,
             maxlength: 80
         },
         formatBtn: {
+			isMain: true,
             type: 'button',
             defaultValue: 'Query到JSON',
             depend: ['param0'],

@@ -7,7 +7,7 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.event.stop'}],
     'default': {
         pageConf: {
-            html: '<div id="outer_box"><a id="mylink" href="http://www.baidu.com" target="_blank">百度一下，你就知道...</a></div><p><button id="mybutton">点击阻止链接的默认事件并阻止事件冒泡</button></p><div id="resultArea"></div>'
+            html: '<div id="outer_box"><a id="mylink" href="http://www.baidu.com" target="_blank">百度一下，你就知道...</a></div><p id="button"><button id="mybutton">点击阻止链接的默认事件并阻止事件冒泡</button></p><div id="resultArea"></div>'
         },
         btn1: {
             type: 'button',

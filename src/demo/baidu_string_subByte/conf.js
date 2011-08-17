@@ -13,7 +13,7 @@ var conf = {
         	label: '字符串：',
             type: 'text',
             defaultValue: '0中文English',
-            size: 30
+            size: 11
         },
         dateInput1: {
         	label: '截取长度：',

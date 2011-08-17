@@ -13,17 +13,18 @@ var conf = {
             type: 'text',
 			label: '最小值：',
             defaultValue: '2',
-            size: 16,
+            size: 9,
             maxlength: 80
         },
         param1: {
             type: 'text',
 			label: '最大值：',
             defaultValue: '20',
-            size: 16,
+            size: 9,
             maxlength: 80
         },
         formatBtn: {
+			isMain: true,
             type: 'button',
             defaultValue: '生成随机数',
             depend: ['param0', 'param1'],

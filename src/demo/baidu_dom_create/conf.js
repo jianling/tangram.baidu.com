@@ -10,6 +10,7 @@ var conf = {
             html: '<div id="resultTextarea"></div>'
 		},
         formatBtn0: {
+			isMain: true,
             type: 'button',
             defaultValue: '创建',
             depend: [],

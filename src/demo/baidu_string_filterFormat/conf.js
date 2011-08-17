@@ -14,13 +14,13 @@ var conf = {
         	label: '自定义格式：',
             type: 'text',
             defaultValue: '',
-            size: 30
+            size: 21
         },
         dateInput2: {
         	label: '数据源(可以为字符、数组、对象)：',
             type: 'text',
             defaultValue: "['2011年','5月','1日']",
-            size: 30
+            size: 21
         },
         btn1: {
             type: 'button',

@@ -1,6 +1,6 @@
     #container{
         width:150px;
-        margin:10px 0 10px 0;
+        margin:20px;
     }
     .contain{
         border:2px solid red;
@@ -11,3 +11,4 @@
         width:150px;
         padding:10px;
     }
+	#resultTextarea{margin:20px;}

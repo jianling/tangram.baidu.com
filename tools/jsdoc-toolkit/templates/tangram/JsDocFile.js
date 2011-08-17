@@ -2,7 +2,8 @@ function JsDocFile(){
     IO.include('../templates/tangram/tangram-conf.js');
     IO.include('../templates/tangram/tangram-filter.js');
     this._conf = conf;
-    this._filter = packageFilter;
+    this._csmap_filter = tangram_csmap_filter;
+    this._api_filter = tangram_aip_filter;
 }
 JsDocFile.prototype = {
     isJsFile: function(file){
@@ -76,11 +77,13 @@ JsDocFile.prototype = {
     },
     
     createDocJsonFile: function(symbolSet){
-        var conf = this._conf,
+        var _this = this,
+            conf = this._conf,
             template = new JSDOC.JsPlate(conf.tangram_docjson_template),
             fileName = this.getFileName(),
             list = symbolSet.toArray().filter(function(item){
-		        return /^(?:T|baidu)\.[^#:_\-]+$/.test(item.alias);
+		        return /^(?:T|baidu)\.[^#:_\-]+$/.test(item.alias)
+		          && !_this._api_filter[item.alias];
 		    }).sort(this.makeSortby("alias"));
         IO.mkPath(conf.tangram_docjson_out.split('/'));
         IO.saveFile(conf.tangram_docjson_out, fileName + '_api.js', template.process({ident: fileName, list: list}));
@@ -147,7 +150,7 @@ JsDocFile.prototype = {
                 resultSet,
                 {fileHandler: depend});
             resultSet.packages = resultSet.packages.filter(function(item){
-                return !_this._filter.hasOwnProperty(item.name);
+                return !_this._csmap_filter.hasOwnProperty(item.name);
             });
             IO.mkPath(conf.tangram_csTreeMap_out.split('/'));
             IO.saveFile(conf.tangram_csTreeMap_out, resultSet.type + '.js', template.process(resultSet));

@@ -4,7 +4,7 @@ var conf = {
         'method': 'baidu.page.createStyleSheet'
     },
     
-    demoType: [{key: 'default', val: 'baidu.page.createStyleSheet'}],
+    demoType: [{key: 'default', val: 'createStyleSheet'}],
     'default': {
         pageConf: {
             html: '<div id="resultArea">新载入的样式将此段文字设置为红色</div>'

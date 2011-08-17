@@ -7,7 +7,7 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.ajax.form'}],
     'default': {
         pageConf: {
-            html: '<form action="./baidu_ajax_form/request.php" method="post" id="testForm">' +
+            html: '<div id="abc"><form action="./baidu_ajax_form/request.php" method="post" id="testForm">' +
 					'<table>' +
 					    '<tr>' +
 					        '<td>用户名：</td>' +
@@ -18,7 +18,7 @@ var conf = {
 					        '<td><input type="text" name="y" value="12" /></td>' +
 					    '</tr>' +
 					    '</table>' +
-					'</form><div id="resultArea"></div>'
+					'</form></div><div id="resultArea"></div>'
         },
         btn1: {
             type: 'button',

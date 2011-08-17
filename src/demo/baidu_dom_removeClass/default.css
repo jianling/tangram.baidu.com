@@ -1,0 +1,11 @@
+#single{
+       margin:20px;
+       font-size:30px;
+}
+.red{
+color:red;
+}
+.bold{
+font-weight:bold;
+}
+#resultTextarea{margin:20px;}
