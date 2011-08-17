@@ -74,7 +74,7 @@ var conf = {
 		setDateVal: {
             type: 'input',
             label: '设置时间',
-            defaultValue: '2009-01-01',
+            defaultValue: '2009-01-01'
         },
 		setDateBtn: {
             type: 'button',
@@ -138,7 +138,7 @@ var conf = {
 		},
 		exponclickdate: {label:'<br />格式 - 单击事件：',defaultValue: "function(evt,dat){alert(dat.date)}",type:'text',size:30,
 			event: {eventName: 'onclick',handler:function(){ newVal.value = 'function(evt,dat){alert(dat.date)}' }}
-		},
+		}
     },
 
 	

@@ -15,7 +15,7 @@ var conf = {
         pageConf: {
             options: '{text: \'输入信息\', disabled:false,onfocus:function(evt){ if(evt.target.getBody().value==\'输入信息\'){evt.target.getBody().value=\'\'} },onblur: function(evt){ if(!evt.target.getBody().value){evt.target.getBody().value = \'输入信息\'}; }}',
 			target:'inputContent',
-			html:'<div id="inputContent"></div>'
+			html:'<div id="inputContent" style="margin:50px;"></div>'
         },
     //	控制台输出调试项
         console: {

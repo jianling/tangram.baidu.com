@@ -70,17 +70,16 @@
 		},
 		setValueBtn: {
 			type: 'button',
-			depend:  ['setValueIpt'],
 			defaultValue: '设置',
 			event: {
 				eventName: 'onclick',
-				handler: function(v){
-					this.setValue(v);
+				handler: function(){
+					this.setValue(setValueIpt.value);
 				}
 			}
-		},
+		}
 		
-    },    
+    }, 
     groups: {
         'default': [
             ['console'],
