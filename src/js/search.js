@@ -122,8 +122,8 @@
 	};
 	
 	T.dom.ready(function(){
-		var baseApiUrl = "./js/tangram_base_api.js",
-			componentApiUrl = "./js/tangram_component_api.js",
+		var baseApiUrl = "./js/tangram_base_api.js?t=" + new Date(),//添加时间戳，否则IE读取缓存数据，不能触发加载成功的事件
+			componentApiUrl = "./js/tangram_component_api.js?t=" + new Date(),
 			apiData = {
 				'mobile web 的未来' :{'name':'', 'desc':'', 'link':''},
 				'需要 jquery 吗' :{'name':'', 'desc':'', 'link':''},
