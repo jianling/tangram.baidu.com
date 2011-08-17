@@ -133,8 +133,8 @@
 		
 		//加载base
 		T.async.get(baseApiUrl).then(function(obj){
-			eval(obj.responseText.replace(/[\n\r]*ig, ''/));
-			apiData = baidu.object.merge(apiData, tangram_base.docMap);
+			eval(obj.responseText);
+			apiData = baidu.object.merge(apiData, tangram_base_api.docMap);
 			apiLoaded++;
 			if(apiLoaded == 2){
 				bindSearchInput(apiData);
@@ -143,8 +143,8 @@
 		
 		//加载component
 		T.async.get(componentApiUrl).then(function(obj){
-			eval(obj.responseText.replace(/[\n\r]*ig, ''/));
-			apiData = baidu.object.merge(apiData, tangram_component.docMap);
+			eval(obj.responseText.replace(/[\n\r]*/ig, ''));
+			apiData = baidu.object.merge(apiData, tangram_component_api.docMap);
 			apiLoaded++;
 			if(apiLoaded == 2){
 				bindSearchInput(apiData);
