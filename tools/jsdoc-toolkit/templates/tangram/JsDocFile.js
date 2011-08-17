@@ -86,7 +86,7 @@ JsDocFile.prototype = {
 		          && !_this._api_filter[item.alias];
 		    }).sort(this.makeSortby("alias"));
         IO.mkPath(conf.tangram_docjson_out.split('/'));
-        IO.saveFile(conf.tangram_docjson_out, fileName + '_api.js', template.process({ident: fileName, list: list}));
+        IO.saveFile(conf.tangram_docjson_out, fileName + '_api.js', template.process({ident: fileName, symbolSet: symbolSet, list: list}));
     },
     
     createPageJsonFile: function(){

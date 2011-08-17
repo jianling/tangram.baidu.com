@@ -236,7 +236,7 @@
                 content: pageConf.html || '<div id="demoId"></div>',
                 jscode: jsCode.join('\n')
             });
-            alert(code);
+            return code;
         }
     });
 })();
