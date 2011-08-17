@@ -3,6 +3,13 @@
  * TODO 三个数据来源单独查找，单独显示
  */
 (function(){
+	/**
+	 * 执行查找，返回查找结果
+	 * @function
+	 * @param {Object} apiData
+	 * @param {String} searchKey
+	 * @return {Object}
+	 */
 	var executeSearch = function(apiData, searchkey){
 		var result = [], count = 0, keyReg = new RegExp(searchkey, "gi");
 		for(key in apiData){
@@ -45,6 +52,13 @@
 		};
 	};//executeSearch()
 	
+	/**
+	 * 将查询结果渲染到页面
+	 * @function
+	 * @param {String} key
+	 * @param {Array} result
+	 * @param {Number} count
+	 */
 	var renderSearchResult = function(key, result, count){
 		var index = 0, //保存搜索结果条数
 			html = ['<h1>搜索结果[' + count + ']</h1>'],
@@ -74,6 +88,15 @@
 		baidu.dom.query(".search-result")[0].innerHTML = html.join('');
 	};
 	
+	/**
+	 * 还原页面显示
+	 * @function
+	 */
+	var masterDetective = function(){
+		baidu.dom.query(".search-result")[0].innerHTML = '';
+		baidu.dom.setStyle(baidu.dom.query(".search-result")[0], 'display', 'none');
+	};
+	
 	var bindSearchInput = function(apiData){
 		//console.log(apiData);
 		var searchInput = T.e(T.g('searchinput')),
@@ -81,8 +104,10 @@
 		searchInput.on("keyup", function(){
 			var key = this.value.replace(/^\s+|\s+$/g, '');
 			//console.log('需要查询的关键字为：' + key);
-			if(!key)
+			if(!key){
+				masterDetective();
 				return;
+			}
 			if(searchTimeout){
 				window.clearTimeout(searchTimeout);
 				//console.log('取消定时器...');
