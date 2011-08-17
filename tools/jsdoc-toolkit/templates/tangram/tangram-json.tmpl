@@ -49,12 +49,16 @@ function getJson(item){
     return '{' + array.join(', ') + '}';
 }
 var nameSpaceArray = [],
-	docMapArray = [];
+	docMapArray = [],
+	symbolSet = data.symbolSet;
 data.list.forEach(function(item){
-	var index = item.alias.lastIndexOf('.'),
-		par = index > -1 ? item.alias.substring(0, index) : null;
-	nameSpaceArray.push("{n: '"+ item.alias +"', p: '" +par+ "'}");
-	item.desc && docMapArray.push('\'' + item.alias + '\': ' +getJson(item));
+	var alias = item.alias,
+		index = alias.lastIndexOf('.'),
+		par = index > -1 ? alias.substring(0, index) : null,
+		symbol = symbolSet.getSymbol(par);
+	symbol && symbol.is("CONSTRUCTOR") && (par = par.substring(0, par.lastIndexOf('.')));/* tree, log */
+	nameSpaceArray.push("{n: '"+ alias +"', p: '" +par+ "'}");
+	item.desc && docMapArray.push('\'' + alias + '\': ' + getJson(item));
 });
 !}
 var {+ data.ident +}_api = {

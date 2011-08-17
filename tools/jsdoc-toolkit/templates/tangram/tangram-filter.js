@@ -21,7 +21,8 @@ var tangram_csmap_filter = {
         'baidu.ui.behavior.droppable': 1,
         'baidu.ui.behavior.posable': 1,
         'baidu.ui.behavior.posable.setPositionByElement': 1,
+        'baidu.ui.behavior.posable.setPositionByMouse': 1,
+        'baidu.ui.behavior.resizable': 1, 
         'baidu.ui.behavior.sortable': 1,
         'baidu.ui.behavior': 1
-//        'baidu.ui.behavior': 1
     }
