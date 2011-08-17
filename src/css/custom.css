@@ -104,3 +104,9 @@ div.custompage .sidebar .box .box-bottom{
 .btn-down{
 	background-position: 0 -60px;
 }
+.depend {
+    margin: 10px 5px
+}
+.hide {
+    display: none;
+}

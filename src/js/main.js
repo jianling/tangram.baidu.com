@@ -189,6 +189,7 @@ void function(){
 	if(pageConfig.script){
 		FlyScript.load(pageConfig.script, function(page){
 			page.start();
+			window.page = page;
 		});
 	}
 }();

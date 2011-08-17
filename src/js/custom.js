@@ -1,12 +1,42 @@
 module.declare(function(require, exports, module){
 	exports.start = start;
+	exports.toggleVersion = toggleVersion;
+	exports.printCode = printCode;
+	exports.importCode = importCode;
 
 	var Lichee = require("./lichee");
 	var E = Lichee.Element, Q = Lichee.queryElement;
 	var tree = require("./simpletree");
 	var treeInstance;
 	var filetree = E("filetree");
-
+    
+    
+    function toggleVersion(){
+        var form = document.myform,
+            combobox = document.myform.version;
+        if(combobox.value == 'Tangram-mobile'){
+            form.nobase.disabled = true;
+            form.nouibase.disabled = true;
+        }else{
+            form.simple.disabled = true;
+        }
+        E('simple_con')[combobox.value == 'Tangram-mobile' ? 'delClass' : 'addClass']('hide');
+        E('base_con')[combobox.value.indexOf('Tangram-component') > -1 ? 'delClass' : 'addClass']('hide');  
+    }
+    toggleVersion();//执行一次，防止刷新保留原值
+    function printCode(){
+        var form = document.myform;
+//        form.src.value = '///import baidu.ui.Carousel';
+        form.viewSource.value = '1';
+        document.myform.submit();
+    }
+    function importCode(){
+        var form = document.myform;
+//        form.src.value = '///import baidu.ui.Carousel';
+        form.viewSource.value = '0';
+        document.myform.submit();
+    }
+    
 	function setupSideBar(){
 		var exportBtn = E("export");
 		var viewcodeBtn = E("viewcode");

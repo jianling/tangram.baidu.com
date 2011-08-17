@@ -114,15 +114,15 @@ $version = $_REQUEST["version"];
 //选取的方法列表
 $src = $_REQUEST["src"];
 //NoBase、NoUIBase
-$nobase = $_REQUEST["nobase"] ? true : false;
+//$nobase = $_REQUEST["nobase"] ? true : false;
+$nobase = !isset($_REQUEST["nobase"]) || strtolower($_REQUEST["nobase"]) == "false" ? false : true;
 $nouibase = !isset($_REQUEST["nouibase"]) || strtolower($_REQUEST["nouibase"]) == "false" ? false : true;
 //压缩类型  yui  mini  pack  其他值为不压缩
 $compress = $_REQUEST["compress"];
 //是否导出资源包
 $isResource = $_REQUEST["resource"]?1:0;
 //是否查看源代码
-$viewSource = !isset($_REQUEST["viewSource"]) || strtolower($_REQUEST["viewSource"]) == "false" || $_REQUEST["viewSource"] === 0 ? false : true;
-
+$viewSource = $_REQUEST["viewSource"]-0 ? true :false ; 
 
 // 1.获取源代码
 // 2.带有资源文件信息的数组（如果isResource）
@@ -186,9 +186,9 @@ COPYRIGHT;
 }
 if ($viewSource){
 	header('Content-Type: text/html; charset=UTF-8');
-	echo '<html><head></head><body onload="sh_highlightDocument(\'assest/\', \'.js\');"><pre class="sh_javascript">';
+	echo '<html><head></head><body onload="sh_highlightDocument(\'../js/\', \'.js\');"><pre class="sh_javascript">';
 	echo $code;
-	echo '</pre><script src="assest/sh_main.min.js"></script><link rel="stylesheet" href="assest/sh_style.css"></body></html>';
+	echo '</pre><script src="../js/sh_main.min.js"></script><link rel="stylesheet" href="../css/sh_style.css"></body></html>';
 } else {
 	header('Content-Type: text/javascript; charset=UTF-8');
 	header("Content-Disposition: attachment; filename=\"tangram.js\"");
