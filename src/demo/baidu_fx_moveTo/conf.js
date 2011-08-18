@@ -14,15 +14,16 @@ var conf = {
         //    类实例化选项
         pageConf: {
             options: '',
-			html:' <div id="clown"><img src="images/fx1.jpg" id="doEl"></div><input type="button" value="运行" onclick="run()" /><div id="log"></div>',
+			html:' <div id="clown"><img src="images/fx1.jpg" id="doEl"></div><div id="log"></div>',
 			jsCode:'function run(){ T.fx.moveTo(baidu.dom.g("doEl"), [200,0] ,{onbeforestart:log,onafterfinish:log}) }function log(evt){  baidu.dom.g("log").innerHTML += new Date().getTime()+" - 事件 "+evt.type+" 触发<br />" }'
         },
-        disable: {
+        run: {
             type: 'button',
-            defaultValue: 'disable',
+            defaultValue: '运行',
             event: {
                 eventName: 'onclick',
                 handler: function(){
+					run();
 				}
             }
         }
@@ -31,7 +32,7 @@ var conf = {
     },    
     groups: {
         'default': [
-            //['disable']
+            ['run']
         ]
     }
 };
