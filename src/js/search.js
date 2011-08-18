@@ -2,7 +2,8 @@
  * API及文档查询
  * TODO 三个数据来源单独查找，单独显示
  */
-(function(){
+module.declare(function(require, exports, module){
+	exports.start = start;
 	/**
 	 * 执行查找，返回查找结果
 	 * @function
@@ -120,61 +121,62 @@
 			}, 500);
 		});
 	};
-	
-	T.dom.ready(function(){
-		var baseApiUrl = "./js/tangram_base_api.js?t=" + new Date(),//添加时间戳，否则IE读取缓存数据，不能触发加载成功的事件
-			componentApiUrl = "./js/tangram_component_api.js?t=" + new Date(),
-			apiData = {
-				'mobile web 的未来' :{'name':'', 'desc':'', 'link':''},
-				'需要 jquery 吗' :{'name':'', 'desc':'', 'link':''},
-				'链式调用' :{'name':'', 'desc':'', 'link':''},
-				'常用技巧' :{'name':'', 'desc':'', 'link':''},
-				'移动浏览器的 viewport' :{'name':'', 'desc':'', 'link':''},
-				'iframe 的问题' :{'name':'', 'desc':'', 'link':''},
-				'基础方法' :{'name':'', 'desc':'', 'link':''},
-				'UI 组件' :{'name':'', 'desc':'', 'link':''},
-				'事件处理(一)' :{'name':'', 'desc':'', 'link':''},
-				'事件处理(二)' :{'name':'', 'desc':'', 'link':''},
-				'事件处理(三)' :{'name':'', 'desc':'', 'link':''},
-				'动画效果(一)' :{'name':'', 'desc':'', 'link':''},
-				'动画效果(二)' :{'name':'', 'desc':'', 'link':''},
-				'离线存储(一)' :{'name':'', 'desc':'', 'link':''},
-				'离线存储(二)' :{'name':'', 'desc':'', 'link':''},
-				'本地存储' :{'name':'', 'desc':'', 'link':''},
-				'base入门' :{'name':'', 'desc':'', 'link':'./docs/Tangram-Base.html'},
-				'component入门' :{'name':'', 'desc':'', 'link':'./docs/Tangram-Component.html'},
-				'UI使用指导' :{'name':'', 'desc':'', 'link':'./docs/Tangram-UI.html'},
-				'UI组件体系' :{'name':'', 'desc':'', 'link':'./docs/Tangram-Component-UISys.html'},
-				'UIBase' :{'name':'', 'desc':'', 'link':'./docs/Tangram-Component-UIBase.html'},
-				'UI组件开发' :{'name':'', 'desc':'', 'link':'./docs/Tangram-Component-Colligate.html'},
-				'Component插件' :{'name':'', 'desc':'', 'link':'./docs/Tangram-Component-Plugins.html'},
-				'behavior' :{'name':'', 'desc':'', 'link':'./docs/Tangram-Component-Behavior.html'},
-				'base入门' :{'name':'', 'desc':'', 'link':''},
-				'新手入门' :{'name':'', 'desc':'', 'link':''},
-				'快捷方式' :{'name':'', 'desc':'', 'link':''},
-				'API参考手册' :{'name':'', 'desc':'', 'link':''}
-			},
-			apiLoaded = 0;
-		
-		//加载base
-		T.async.get(baseApiUrl).then(function(obj){
-			eval(obj.responseText);
-			apiData = baidu.object.merge(apiData, tangram_base_api.docMap);
-			apiLoaded++;
-			if(apiLoaded == 2){
-				bindSearchInput(apiData);
-			}
+	function start(){
+		T.dom.ready(function(){
+			var baseApiUrl = "./js/tangram_base_api.js?t=" + new Date(),//添加时间戳，否则IE读取缓存数据，不能触发加载成功的事件
+				componentApiUrl = "./js/tangram_component_api.js?t=" + new Date(),
+				apiData = {
+					'mobile web 的未来' :{'name':'', 'desc':'', 'link':''},
+					'需要 jquery 吗' :{'name':'', 'desc':'', 'link':''},
+					'链式调用' :{'name':'', 'desc':'', 'link':''},
+					'常用技巧' :{'name':'', 'desc':'', 'link':''},
+					'移动浏览器的 viewport' :{'name':'', 'desc':'', 'link':''},
+					'iframe 的问题' :{'name':'', 'desc':'', 'link':''},
+					'基础方法' :{'name':'', 'desc':'', 'link':''},
+					'UI 组件' :{'name':'', 'desc':'', 'link':''},
+					'事件处理(一)' :{'name':'', 'desc':'', 'link':''},
+					'事件处理(二)' :{'name':'', 'desc':'', 'link':''},
+					'事件处理(三)' :{'name':'', 'desc':'', 'link':''},
+					'动画效果(一)' :{'name':'', 'desc':'', 'link':''},
+					'动画效果(二)' :{'name':'', 'desc':'', 'link':''},
+					'离线存储(一)' :{'name':'', 'desc':'', 'link':''},
+					'离线存储(二)' :{'name':'', 'desc':'', 'link':''},
+					'本地存储' :{'name':'', 'desc':'', 'link':''},
+					'base入门' :{'name':'', 'desc':'', 'link':'./docs/Tangram-Base.html'},
+					'component入门' :{'name':'', 'desc':'', 'link':'./docs/Tangram-Component.html'},
+					'UI使用指导' :{'name':'', 'desc':'', 'link':'./docs/Tangram-UI.html'},
+					'UI组件体系' :{'name':'', 'desc':'', 'link':'./docs/Tangram-Component-UISys.html'},
+					'UIBase' :{'name':'', 'desc':'', 'link':'./docs/Tangram-Component-UIBase.html'},
+					'UI组件开发' :{'name':'', 'desc':'', 'link':'./docs/Tangram-Component-Colligate.html'},
+					'Component插件' :{'name':'', 'desc':'', 'link':'./docs/Tangram-Component-Plugins.html'},
+					'behavior' :{'name':'', 'desc':'', 'link':'./docs/Tangram-Component-Behavior.html'},
+					'base入门' :{'name':'', 'desc':'', 'link':''},
+					'新手入门' :{'name':'', 'desc':'', 'link':''},
+					'快捷方式' :{'name':'', 'desc':'', 'link':''},
+					'API参考手册' :{'name':'', 'desc':'', 'link':''}
+				},
+				apiLoaded = 0;
+			
+			//加载base
+			T.async.get(baseApiUrl).then(function(obj){
+				eval(obj.responseText);
+				apiData = baidu.object.merge(apiData, tangram_base_api.docMap);
+				apiLoaded++;
+				if(apiLoaded == 2){
+					bindSearchInput(apiData);
+				}
+			});
+			
+			//加载component
+			T.async.get(componentApiUrl).then(function(obj){
+				eval(obj.responseText.replace(/[\n\r]*/ig, ''));
+				apiData = baidu.object.merge(apiData, tangram_component_api.docMap);
+				apiLoaded++;
+				if(apiLoaded == 2){
+					bindSearchInput(apiData);
+				}
+			});
+			
 		});
-		
-		//加载component
-		T.async.get(componentApiUrl).then(function(obj){
-			eval(obj.responseText.replace(/[\n\r]*/ig, ''));
-			apiData = baidu.object.merge(apiData, tangram_component_api.docMap);
-			apiLoaded++;
-			if(apiLoaded == 2){
-				bindSearchInput(apiData);
-			}
-		});
-		
-	});
-})();
+	}
+});
