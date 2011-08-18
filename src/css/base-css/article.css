@@ -56,7 +56,7 @@ div.article p.noi{ text-indent: 0; }
 /* 代码框 */
 div.article pre{
 	display: block;
-	background-color: #000;
+	background-color: #EEE;
 	padding: 4px 10px;
 	white-space: pre-wrap;       /* CSS-3 */
 	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
