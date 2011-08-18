@@ -61,10 +61,6 @@ html,body{
     width: 185px;
     left: expression(eval(document.documentElement.scrollLeft + document.documentElement.clientWidth - this.offsetWidth - 10));
     top: expression(eval(document.documentElement.scrollTop + document.documentElement.clientHeight - this.offsetHeight - 10));
-    /*
-	top: expression(eval(document.documentElement.scrollTop + document.documentElement.clientHeight - 10));
-    left: expression(eval(document.documentElement.scrollLeft + document.documentElement.clientWidth - this.offsetWidth - 10));
-    */
 }
 .tangram-democonsole-formbutton {
     
@@ -83,11 +79,11 @@ form{
     var array = [],
         path = baidu.url.getQueryValue(location.href, 'package').replace(/\./g, '_');
     array.push('<link type="text/css" rel="stylesheet" href="'+ path +'/default.css"\/>');
-    array.push('<script type="text/javascript" src="../../src/demo/'+ path +'/conf.js"><\/script>');
+    array.push('<script type="text/javascript" src="'+ path +'/conf.js"><\/script>');
     document.writeln(array.join('\n'));
 })();
 </script>
-<script type='text/javascript' src='../../src/js/DemoConsole.js'></script>
+<script type='text/javascript' src='../js/DemoConsole.js'></script>
 </head>
 <body>
 <form name='myform' method='post' action='print.php' target='_blank'><input name='code' type='hidden'/></form>

@@ -20,7 +20,7 @@
                     'baidu.element.events': 'baidu.element'
                 }[defaultPackage];
             filter && (defaultPackage = filter);
-            return [filter].concat(me.clazz.dependPackages || []);
+            return [defaultPackage].concat(me.clazz.dependPackages || []);
         },
         
         getPanelString: function(){
