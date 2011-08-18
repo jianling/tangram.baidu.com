@@ -23,6 +23,7 @@
 
 #api_list table td.name{
 	width: 180px;
+	vertical-align: top;
 }
 
 #api_list table td.name a{
@@ -79,7 +80,7 @@
 }
 
 .apipage .content .grammar{
-	margin: 10px 0;
+	margin: 10px 0 0 0;
 }
 
 .apipage .content .grammar .center strong{
@@ -129,6 +130,52 @@
 	color: #064581;
 }
 
+#api_detail .group .group-content .name,
+#api_detail .group .group-content .type{
+	width: 140px;
+}
+
+#api_detail .group .group-content .name a{
+	text-decoration: none;
+	color: #000;
+	cursor: text;
+}
+
+#api_detail .group .group-content tr.expanded td{
+	background-color: #dadaff;
+}
+
+#api_detail .group .group-content tr.comboline .name a{
+	text-decoration: underline;
+	color: #064581;
+	cursor: pointer;
+}
+
+#api_detail .group .group-content tr.extend_tr{
+}
+
+#api_detail .group .group-content tr.extend_tr table{
+	width: 610px;
+	margin-left: 5px;
+}
+
+.method_grammar{
+	text-indent: 10px;
+	margin: auto 5px;
+	color: #000;
+	background-color: #ffffbf;
+	line-height: 24px;
+	border-bottom: 1px solid #ddd;
+}
+
+.method_grammar em{
+	font-style: italic;
+}
+
+.method_grammar strong{
+	font-weight: 700;
+}
+
 .apipage .content .tab{
 	width: auto;
 	margin-top: 10px;
@@ -175,4 +222,50 @@
 
 #api_jump a{
 	color: #064581;
+}
+
+.method_tip{
+	width: 620px;
+	overflow: hidden;
+}
+
+.method_tip_arr{
+	background: url(../images/api-method-detail-arr.gif) no-repeat center 0;
+	width: auto;
+	height: 6px;
+	position: relative;
+	top: 1px;
+	overflow: hidden;
+}
+.method_tip_top,
+.method_tip_content,
+.method_tip_bottom{
+	width: 620px;
+	background-image: url(../images/api-method-detail.gif);
+}
+
+.method_tip_top,
+.method_tip_bottom{
+	height: 4px;
+	overflow: hidden;
+}
+
+.method_tip_content{
+	background-position: -620px 0;
+}
+
+.method_tip_bottom{
+	background-position: -1240px 0;
+}
+
+#api_name{
+
+}
+
+#api_type{
+	font-style: italic;
+}
+
+#api_type_p{
+	margin: 0 0 10px 0;
 }

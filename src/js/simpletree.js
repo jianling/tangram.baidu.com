@@ -133,7 +133,7 @@ module.declare(function(require, exports, module){
 				var template = enableCheckBox ? nodeTemplate : nodeTemplate2;
 
 				this.container.html(template.apply({
-					name: this.nameRenderer(this.name).htmlEncode(),
+					name: this.nameRenderer(this.name, this.parent ? this.parent.name : ""),
 					iconId: this.iconId = Lichee.id(),
 					namelinkId: this.namelinkId = Lichee.id(),
 					expandedViewerId: this.expandedViewerId = Lichee.id(),
