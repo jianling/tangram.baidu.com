@@ -13,6 +13,8 @@ module.declare(function(require, exports, module){
 	var data = [];
 	var treeInstance;
 	var toShowAPIHandle;
+	var toShowMethodDetailHandle;
+	var nulHandle;
 
 	var api_name = E("api_name");
 	var api_desc = E("api_desc");
@@ -25,9 +27,9 @@ module.declare(function(require, exports, module){
 	[group_options, group_methods, group_events, group_plugs].forEach(defineGroupEvent);
 
 	var tr_template = new Lichee.Template(
-		"<tr class='@{trClass}'>",
+		"<tr class='@{trClass}' id='@{thisID}'>",
 			"<td class='type'>&lt;@{type}&gt;</td>",
-			"<td class='name'><a href='' onclick='return false;'>@{name}</a></td>",
+			"<td class='name'><a href='' onclick='Lichee.handle(@{handleId})(\"@{dropDownElId}\",\"@{thisID}\");return false;'>@{name}</a></td>",
 			"<td class='description'>@{desc}</td>",
 		"</tr>");
 
@@ -35,6 +37,21 @@ module.declare(function(require, exports, module){
 		"<tr class='@{trClass}'>",
 			"<td class='name'><a href='' onclick='Lichee.handle(@{handleId})(\"@{key}\");return false;'>@{name}</a></td>",
 			"<td class='description'>@{desc}</td>",
+		"</tr>");
+
+	var tr3_template = new Lichee.Template(
+		"<tr class='extend_tr' id='@{dropDownElId}' style='display: none;'>",
+			"<td colspan='3'>",
+				"<div class='method_tip'>",
+					"<div class='method_tip_arr'></div>",
+					"<div class='method_tip_top'></div>",
+					"<div class='method_tip_content'>",
+						"<div class='method_grammar'>语法: <em>instance</em>.<strong>@{methodName}</strong>(@{params});</div>",
+						"@{records}",
+					"</div>",
+					"<div class='method_tip_bottom'></div>",
+				"</div>",
+			"</td>",
 		"</tr>");
 
 	var table_template = new Lichee.Template(
@@ -45,15 +62,53 @@ module.declare(function(require, exports, module){
 	var jump_template = new Lichee.Template(
 		"<a href='' onclick='Lichee.Element(\"@{name}\",true).scrollIntoView(true); return false;'>@{text}</a>");
 
-	function setContent(el, data){
+	function setContent(el, data, contentType){
 		var groupContent = E(Q(".group-content", el.dom)[0]);
 		var htmls = data.map(function(data, index){
-			return tr_template.apply({
-				trClass: index % 2 ? "dark" : "",
+			var options = data.options;
+			var dropDownElId = Lichee.id();
+			var thisID = Lichee.id();
+			var name = data.name;
+			var afterName = "";
+
+			if(contentType == "method")
+				afterName = options ? "(<span style='font-size: 8px;'>...</span>)" : "()";
+
+			var line = tr_template.apply({
+				trClass: (index % 2 ? "dark" : "") + (options ? " comboline" : ""),
 				type: data.type || "void",
-				name: data.name || "",
-				desc: data.desc || ""
+				name: (name || "") + afterName,
+				desc: data.desc || "",
+				handleId: toShowMethodDetailHandle,
+				dropDownElId: dropDownElId,
+				thisID: thisID
 			});
+			if(options){
+				var params = [];
+				var subHtml = options.map(function(data, index){
+					params.push(data.name);
+					return tr_template.apply({
+						trClass: index % 2 ? "dark" : "",
+						type: data.type || "void",
+						name: data.name || "",
+						desc: data.desc || "",
+						handleId: nulHandle,
+						dropDownElId: Lichee.id(),
+						thisID: Lichee.id()
+					});
+				});
+				subHtml = table_template.apply({
+					records: subHtml.join("")
+				});
+				line += tr3_template.apply({
+					dropDownElId: dropDownElId,
+					thisID: thisID,
+					records: subHtml,
+					methodName: name,
+					params: params.join(", ")
+				});
+			}
+			return line;
 		});
 		htmls = table_template.apply({
 			records: htmls.join("")
@@ -97,6 +152,18 @@ module.declare(function(require, exports, module){
 		api_name.html(key);
 		api_desc.html(data.desc);
 
+		if(data.returns){
+			var returns = data.returns[0];
+			E("api_type").html(returns.type);
+			E("api_returns_desc").html(returns.desc);
+		}else if(data.methods){
+			E("api_type").html("instance");
+			E("api_returns_desc").html("实例对象");
+		}else{
+			E("api_type").html("void");
+			E("api_returns_desc").html("");
+		}
+
 		if(data.grammar){
 			grammar.html(grammarRenderer(data.grammar, key));
 		}else{
@@ -111,7 +178,7 @@ module.declare(function(require, exports, module){
 		}
 
 		if(data.methods){
-			setContent(group_methods, data.methods);
+			setContent(group_methods, data.methods, "method");
 			group_methods.display(true);
 		}else{
 			group_methods.display(false);
@@ -166,12 +233,29 @@ module.declare(function(require, exports, module){
 	function grammarRenderer(text, key){
 		text = text.htmlEncode();
 		text = text.replace(key, "<strong>" + key + "</strong>");
-		return text;
+		return "语法: " + text;
 	}
 
 	toShowAPIHandle = Lichee.handle(function(key){
 		treeInstance.focusToKey(key);
 	});
+
+	toShowMethodDetailHandle = Lichee.handle(function(dropDownElId, thisID){
+		var dropDown = E(dropDownElId);
+		var thiz = E(thisID);
+		if(dropDown){
+			var displayd = dropDown.displayd = !dropDown.displayd;
+			if(displayd){
+				thiz.addClass("expanded");
+				dropDown.style("display", "");
+			}else{
+				thiz.delClass("expanded");
+				dropDown.style("display", "none");
+			}
+		}
+	});
+
+	nulHandle = Lichee.handle(function(){});
 
 	function start(){
 
@@ -190,7 +274,7 @@ module.declare(function(require, exports, module){
 			},
 			nameRenderer: function(text){
 				text = text.split(".");
-				return text[text.length - 1];
+				return text[text.length - 1].htmlEncode();
 			}
 		});
 

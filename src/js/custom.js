@@ -44,11 +44,47 @@ module.declare(function(require, exports, module){
 		viewcodeBtn.useMouseAction("btn", "over,out,down,up");
 	}
 
+	function disposeData(data){
+		var mapping = {};
+		var sames = {};
+		var childsMap = {};
+
+		data.forEach(function(item){
+			var n = item.n, p = item.p;
+			if(n == p)
+				sames[n] = item;
+			else
+				mapping[n] = item;
+
+			if(p){
+				if(childsMap[p]){
+					childsMap[p].push(item);
+				}else{
+					childsMap[p] = [item];
+				}
+			}
+		});
+
+		var after = ":folder";
+
+		Lichee.each(sames, function(item){
+			var p = item.p;
+			if(childsMap[p]){
+				childsMap[p].forEach(function(item){
+					item.p += after;
+				});
+			}
+			mapping[p].n += after;
+		});
+	}
+
 	function start(){
 		setupSideBar();
 
 		var data = tangram_base_csmap.nameSpace.concat(
 			tangram_component_csmap.nameSpace);
+
+		disposeData(data);
 
 		data.filter(function(item){
 			return item.n == "baidu";
@@ -100,7 +136,16 @@ module.declare(function(require, exports, module){
 
 		treeInstance = new tree({
 			container: filetree,
-			data: data
+			data: data,
+			nameRenderer: function(name, parentName){
+				if(/:folder$/.test(name)){
+					return name.replace(/:folder$/, "").htmlEncode();
+				}else if(name + ":folder" == parentName){
+					return "<span style=\"color: #808080;\">core</span>";
+				}else{
+					return name.htmlEncode();
+				}
+			}
 		});
 
 		treeInstance.on("nodeCheck", function(name, value){
