@@ -4,14 +4,24 @@
         var me = this;
         me._toggleId = null;//
         me._instance = null;//
-        if(me.clazz.dependPackages){
-            document.writeln('<script type="text/javascript" src="../js/fragment/Tangram-component/src/import.php?f='+ me.clazz.dependPackages.join(',') +'"></script>');
-        }
+        document.writeln('<script type="text/javascript" src="../js/fragment/Tangram-component/src/import.php?f='+ me._getImportPackagesString().join(',') +'"></script>');
     }).extend({
         uiType: 'democonsole',
         tplPanel: '<div id="#{panelId}" class="#{panelClass}"></div>',
         tplDOM: '<div id="#{id}" class="#{class}"><div id="#{consoleId}" class="#{consoleClass}"><div align="center" class="#{comboboxClass}"><select id="#{demoType}" class="#{demoTypeClass}" onchange="#{handler}">#{content}</select></div>#{defaultContent}</div>#{panelContent}</div>',
         tplHTML: '<!DOCTYPE html>\n<html>\n<head>\n<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">\n<title>#{packages}</title>\n<link type="text/css" rel="stylesheet" href="#{cssPath}/default.css"/>\n<script type="text/javascript" src="../js/download/tangram-1.3.9.core.js"></script>\n<script type="text/javascript" src="../js/fragment/Tangram-component/src/import.php?f=#{packages}"></script>\n</head>\n<body>\n#{content}\n</body>\n<script type="text/javascript">\n#{jscode}\n</script>\n</html>',
+        
+        _getImportPackagesString: function(){
+            var me = this,
+                defaultPackage = me.clazz[me.clazz.type],
+                filter = {
+                    'baidu.element.each': 'baidu.element',
+                    'baidu.element.Element': 'baidu.element',
+                    'baidu.element.events': 'baidu.element'
+                }[defaultPackage];
+            filter && (defaultPackage = filter);
+            return [filter].concat(me.clazz.dependPackages || []);
+        },
         
         getPanelString: function(){
             var me = this;
@@ -41,10 +51,6 @@
                 content: array.join(''),
                 defaultContent: me.getDemoString(demoType[0].key),
                 panelContent: me.getPanelString()
-//                btnClass: me.getClass('btn'),
-//                codeHandler: me.getCallString('getCode'),
-//                infoWinVal: unescape('%u5728%u65B0%u7A97%u53E3%u6253%u5F00'),
-//                infoWinHandler: ''
             });
         },
 
@@ -231,7 +237,7 @@
                 });
             }
             code = baidu.string.format(me.tplHTML, {
-                packages: me.clazz.dependPackages ? [packages].concat(me.clazz.dependPackages).join(',') : packages,
+                packages: me._getImportPackagesString().join(','),
                 cssPath: packages.replace(/\./g, '_'),
                 content: pageConf.html || '<div id="demoId"></div>',
                 jscode: jsCode.join('\n')

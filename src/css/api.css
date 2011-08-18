@@ -201,7 +201,8 @@
 }
 
 .apipage .content .tab .tab-content{
-
+    border: #9d9e9f solid 1px;
+    border-top: none;
 }
 
 #apitree{

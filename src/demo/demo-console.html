@@ -77,19 +77,17 @@ form{
 }
 </style>
 <script type='text/javascript' src='../js/download/tangram.js'></script>
+<script type='text/javascript' src='../js/fragment/Tangram-component/src/import.php?f=baidu.ui.createUI'></script>
 <script type='text/javascript'>
 (function(){
     var array = [],
-        packages = baidu.url.getQueryValue(location.href, 'package'),
-        path = packages.replace(/\./g, '_');
+        path = baidu.url.getQueryValue(location.href, 'package').replace(/\./g, '_');
     array.push('<link type="text/css" rel="stylesheet" href="'+ path +'/default.css"\/>');
-    array.push('<script type="text/javascript" src="../demo/'+ path +'/conf.js"><\/script>');
-    array.push('<script type="text/javascript" src="../js/fragment/Tangram-component/src/import.php?f=baidu.ui.createUI,'+
-        packages + '"><\/script>');
+    array.push('<script type="text/javascript" src="../../src/demo/'+ path +'/conf.js"><\/script>');
     document.writeln(array.join('\n'));
 })();
 </script>
-<script type='text/javascript' src='../js/DemoConsole.js'></script>
+<script type='text/javascript' src='../../src/js/DemoConsole.js'></script>
 </head>
 <body>
 <form name='myform' method='post' action='print.php' target='_blank'><input name='code' type='hidden'/></form>
