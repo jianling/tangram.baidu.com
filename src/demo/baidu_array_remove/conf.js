@@ -7,7 +7,7 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.array.remove'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea">结果为：</div>'
+            html: '<div id="resultArea">数组为：["one", "two", "three", "four"]，remove元素为"three"</div>'
         },
         formatBtn: {
             type: 'button',
@@ -18,10 +18,8 @@ var conf = {
                 eventName: 'onclick',
                 handler: function(arg0, arg1){
                 	var array = ["one", "two", "three", "four"];
-					T.g("resultArea").innerHTML="array: " + array+"<br>";
 					T.array.remove(array, "three");
-					T.g("resultArea").innerHTML+="After remove...<br/>";
-					T.g("resultArea").innerHTML+="array: " + array;
+					baidu.dom.g('resultArea').innerHTML = "结果为：" + array.join(',');
                 }
             }
         }

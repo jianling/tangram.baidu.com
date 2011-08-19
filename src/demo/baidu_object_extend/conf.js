@@ -7,8 +7,14 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.object.extend'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea"></div>'
-        },
+            html: '<div class="Conmain">'+
+						'<div id="resultArea" style="">#resultArea</div>'+
+						'<div class="explain">'+
+						'拷贝一个对象属性到另一个对象中，目标对象{a:1}，继承对象{a:2,b:2}'+
+						'<br />JS代码<code>'+
+						'baidu.g("resultArea").innerHTML= baidu.json.encode ( baidu.object.extend({a:1},{a:2,b:2}) )'+
+						'</code></div>'+
+					'</div>'        },
         btn1: {
             type: 'button',
             defaultValue: '点击执行代码',
@@ -16,24 +22,7 @@ var conf = {
             event: {
             	eventName: 'onclick',
             	handler: function(){
-            		function Source(){
-				        this.name="source";
-						this.other="others";
-					}
-					function Target(){
-						this.name="target";
-					}
-				    Source.prototype.method = function(){
-				        return "It is the method of source!";
-				    }
-				    var source = new Source();
-					var target =new Target();
-					T.object.extend(target,source);
-					console.log(target);
-					T.g("resultArea").innerHTML = "after extends...<br />";
-					T.object.each(target,function(item,key){
-						T.g("resultArea").innerHTML+=key+":"+item+"<br/>";
-					});
+					baidu.g("resultArea").innerHTML= "结果："+baidu.json.encode ( baidu.object.extend({a:1},{a:2,b:2}) )
             	}
             }
         }

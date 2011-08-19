@@ -7,12 +7,12 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.dom.getParent'}],
     'default': {
         pageConf: {
-            html: '<div id="resultTextarea">获得元素的父节点</div><div id="holder"><div id="first" class="child">first</div></div>'
+            html: '<div id="resultTextarea">获得#first的父节点</div><div id="holder" style="background:red;border:1px #000 solid">#holder<div id="first" style="background:yellow;border:1px #FFF solid;margin:10px">#first</div></div>'
 		},
         formatBtn: {
 			isMain: true,
             type: 'button',
-            defaultValue: '获得元素的父节点',
+            defaultValue: '运行',
             depend: [],
             event: {
                 eventName: 'onclick',

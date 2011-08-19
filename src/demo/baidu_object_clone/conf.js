@@ -7,8 +7,20 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.object.clone'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea"></div>'
-        },
+            html: '<div class="Conmain">'+
+						'<div id="resultArea" style="">#resultArea</div>'+
+						'<div class="explain">'+
+						'深度克隆一个对象'+
+						'<br />JS代码<code>'+
+						
+            		'<p>var source = {name:"tangram",type:"js"}</p>'+
+					'<p>var clone =T.object.clone(source);</p>'+
+					'<p>clone.name = "tangram-base";</p>'+
+					'<p>T.g("resultArea").innerHTML = "source:"+ baidu.json.encode(source) +" ; new clone:"+baidu.json.encode(clone)</p>'+
+						
+						'</code></div>'+
+					'</div>'
+		},
         btn1: {
             type: 'button',
             defaultValue: '点击执行代码',
@@ -16,18 +28,10 @@ var conf = {
             event: {
             	eventName: 'onclick',
             	handler: function(){
-            		function Engineer(){
-				        this.name = "haijian"
-					}
-					Engineer.prototype.eat = function(){
-				        return "Not Enough!";
-					}
-					var source = new Engineer();    //source具有属性name="haijian"，以及方法eat。
-					T.g('resultArea').innerHTML = "source.name:"+source.name+"<br>";
-					T.g('resultArea').innerHTML += "source.eat():"+source.eat()+"<br>";
+            		var source = {name:"tangram",type:"js"}
 					var clone =T.object.clone(source);
-					T.g('resultArea').innerHTML += "<p id='prompt'>After T.object.clone...</p>";
-					T.g('resultArea').innerHTML += "clone.name:"+clone.name+"<br>";
+					clone.name = "tangram-base";
+					T.g('resultArea').innerHTML = "source:"+ baidu.json.encode(source) +" ; new clone:"+baidu.json.encode(clone)
             	}
             }
         }

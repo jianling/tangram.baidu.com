@@ -7,7 +7,7 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.array.unique'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea">结果为：</div>'
+            html: '<div id="resultArea">数组为：[1, 2, 1, 3,"arr","arr","obj","obj"]</div>'
         },
         formatBtn: {
             type: 'button',
@@ -17,10 +17,9 @@ var conf = {
             event: {
                 eventName: 'onclick',
                 handler: function(arg0, arg1){
-                	var input = [1, 2, 1, 3];
+                	var input = [1, 2, 1, 3,'arr','arr','obj','obj'];
 					var output = T.array.unique(input);
-					T.g("resultArea").innerHTML="input: " + input+"<br>";
-					T.g("resultArea").innerHTML+="output: " + output;
+					T.g("resultArea").innerHTML="结果为: " + output.join(',');
                 }
             }
         }
