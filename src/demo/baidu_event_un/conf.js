@@ -7,7 +7,8 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.event.un'}],
     'default': {
         pageConf: {
-            html: '<div id="buttonArea"></div><div id="resultArea"></div>'
+            html: '<div id="resultArea"><input id="buttonId" type="button" value="按钮"/><div id="divId">请点击上面的按钮看看是否已经有事件，再点击左边控制台的执行按钮来执行baidu.event.un来注销事件</div></div>',
+            jsCode: 'var handler = function(evt){baidu.g("divId").innerHTML += "<br/>hello world"}; baidu.event.on(baidu.g("buttonId"), "click", handler);'
         },
         btn1: {
             type: 'button',
@@ -16,19 +17,7 @@ var conf = {
             event: {
             	eventName: 'onclick',
             	handler: function(){
-					T.g('buttonArea').innerHTML = '<p><button id="button1">点击为按钮添加事件</button></p>' +
-													'<p><button id="button2">click me!</button></p>' +
-													'<p><button id="button3">点击为按钮解除事件</button></p>';
-					baidu.on("button1", "click", function(){
-						baidu.on("button2", "click", handler = function(){
-							T.g('resultArea').innerHTML += "您点击了按钮<br />";
-						});
-						T.g('resultArea').innerHTML += "给按钮添加事件...<br />";
-					});
-					baidu.on("button3", "click", function(){
-						baidu.un("button2", "click", handler);
-						T.g('resultArea').innerHTML += "给按钮解除事件...<br />";
-					});
+					baidu.event.un(baidu.g('buttonId'), 'click', handler);
             	}
             }
         }
