@@ -7,7 +7,7 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.array.every'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea">结果为：</div>'
+            html: '<div id="resultArea">数组内容为：["中文","sss"]，判断条件为 isNaN</div>'
         },
         formatBtn: {
             type: 'button',

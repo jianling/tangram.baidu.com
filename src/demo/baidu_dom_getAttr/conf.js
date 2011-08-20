@@ -17,7 +17,8 @@ var conf = {
             event: {
                 eventName: 'onclick',
                 handler: function(){
-					baidu.dom.g("resultTextarea").innerHTML='获取目标元素的value属性：'+baidu.dom.getAttr("test", "value")+"<br>";
+					var v = baidu.dom.getAttr("test", "value");
+					baidu.dom.g("resultTextarea").innerHTML='获取目标元素的value属性：'+v+"<br>";
                 }
             }
         }

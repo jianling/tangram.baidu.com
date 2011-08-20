@@ -26,7 +26,7 @@ var conf = {
             		var newObj = baidu.object.map(obj, function(item, key){
             			return key + 'is' + item;
             		});
-	            		T.g('resultArea').innerHTML += 'after map...<br />';
+	            		T.g('resultArea').innerHTML += '应用方法（key + "is" + item）转换后...<br />';
             		baidu.object.each(newObj, function(item, key){
 	            		T.g('resultArea').innerHTML += key + ":" + item + '<br />';
             		})

@@ -7,7 +7,7 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.array.filter'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea">结果为：</div>'
+            html: '<div id="resultArea">数组内容为： ["one", "two", "three"]，过滤条件为：item.length < 4 </div>'
         },
         formatBtn: {
             type: 'button',
@@ -19,7 +19,7 @@ var conf = {
                 handler: function(arg0, arg1){
                 	var input = ["one", "two", "three"];
 					var output = T.array.filter(input, function(item, i){
-					    return (item.length < 4 && i > 0);
+					    return (item.length < 4 );
 					});
                     baidu.dom.g('resultArea').innerHTML = "结果为：" + output;
                 }

@@ -7,7 +7,7 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.dom.insertBefore'}],
     'default': {
         pageConf: {
-            html: '<div id="resultTextarea"><div id="existElement">基准元素</div><hr><div id="newElement1" class="newElement">目标元素1</div><div id="newElement2" class="newElement">目标元素2</div></div>'
+            html: '<div id="resultTextarea"><p>将目标元素插入到基准元素之前</p><div id="existElement">基准元素</div><hr><div id="newElement1" class="newElement">目标元素</div><div id="newElement2" class="newElement">围观群众</div></div>'
 		},
         formatBtn0: {
 			isMain: true,
@@ -35,6 +35,6 @@ var conf = {
     },
     
     groups: {
-        'default': [['formatBtn0', 'formatBtn1']]
+        'default': [['formatBtn0']]
     }
 };

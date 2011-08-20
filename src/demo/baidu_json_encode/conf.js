@@ -13,7 +13,7 @@ var conf = {
     			],
     'default': {
         pageConf: {
-            html: '<div id="resultArea"></div>'
+            html: '<div id="resultArea">请从下拉框中先选择一个方法</div>'
         },
         dateInput: {
         	label: '字符串：',

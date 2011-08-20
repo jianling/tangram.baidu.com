@@ -7,7 +7,7 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.object.keys'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea"></div>'
+            html: '<div id="resultArea">对象为{name : "tom",age : 23}</div>'
         },
         btn1: {
             type: 'button',

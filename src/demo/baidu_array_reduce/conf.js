@@ -7,7 +7,7 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.array.reduce'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea">结果为：</div>'
+            html: '<div id="resultArea">数组为：[1,2,3,4,5]，应用方法为：T.array.reduce(input, function(end, item){return end + item;});</div>'
         },
         formatBtn: {
             type: 'button',
