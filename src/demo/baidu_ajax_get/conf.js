@@ -17,7 +17,7 @@ var conf = {
             	eventName: 'onclick',
             	handler: function(){
             		baidu.ajax.get('./baidu_ajax_get/request.php?x=5&y=2', function(xhr, msg){
-	            			T.g('resultArea').innerHTML = '状态 ：' + xhr.status + ' 信息：' + msg;
+	            		T.g('resultArea').innerHTML = unescape('%20%u4FE1%u606F%uFF1A') + xhr.status + unescape('%20%20%u4FE1%u606F%uFF1A') + msg;
             		});
             	}
             }

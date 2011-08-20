@@ -7,7 +7,7 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.fn.methodize'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea"></div>'
+            html: '<div id="resultArea">对一个函数进行方法化。示例代码：<br/>var instance = {<br/>name: "hello world",<br/>run: baidu.fn.methodize(function(c){alert(c); alert(this.name);}, "name")<br/>};<br/>instance.run();</div>'
         },
         btn1: {
             type: 'button',
@@ -16,11 +16,14 @@ var conf = {
             event: {
             	eventName: 'onclick',
             	handler: function(){
-            		var arr=[1,2,3,4,5];
-					function f(){}
-					var newf=T.fn.multize(f);
-					var output=newf(arr).length;
-					T.g('resultArea').innerHTML = "返回："+output+"<br>";
+            	    var instance = {
+            	        name: 'john',
+            	        run: baidu.fn.methodize(function(c){
+            	            alert(c);
+            	            alert(this.name)
+            	        }, 'name')
+            	    };
+            	    instance.run();
             	}
             }
         }

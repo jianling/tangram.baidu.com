@@ -7,7 +7,7 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.page.lazyLoadImage'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea"></div>'
+            html: '<div id="resultArea">该方法演示如何延迟加载图片，对于不处在页面可视区的图片将不会被加载</div>'
         },
         btn1: {
             type: 'button',
