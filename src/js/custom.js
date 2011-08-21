@@ -1,6 +1,6 @@
 module.declare(function(require, exports, module){
 	exports.start = start;
-	exports.toggleVersion = toggleVersion;
+//	exports.toggleVersion = toggleVersion;
 	exports.printCode = printCode;
 	exports.importCode = importCode;
 
@@ -9,34 +9,98 @@ module.declare(function(require, exports, module){
 	var tree = require("./simpletree");
 	var treeInstance;
 	var filetree = E("filetree");
-    
-    
-    function toggleVersion(){
-        var form = document.myform,
-            combobox = document.myform.version;
-        if(combobox.value == 'Tangram-mobile'){
-            form.nobase.disabled = true;
-            form.nouibase.disabled = true;
-        }else{
-            form.simple.disabled = true;
-        }
-        E('simple_con')[combobox.value == 'Tangram-mobile' ? 'delClass' : 'addClass']('hide');
-        E('base_con')[combobox.value.indexOf('Tangram-component') > -1 ? 'delClass' : 'addClass']('hide');  
-    }
-    toggleVersion();//执行一次，防止刷新保留原值
+	var checkedNodeByClick = {};
+
+	var relatedMapping1 = tangram_base_csmap.docMap;
+	var relatedMapping2 = tangram_component_csmap.docMap;
+
+	var currentRelating = {};
+	function currentRelatingAdd(who, whoInclude){
+		var item = currentRelatingGet(who);
+		if(!item.whoInclude[whoInclude]){
+			item.includeTimes ++;
+			item.whoInclude[whoInclude] = 1;
+		}
+	}
+
+	function currentRelatingRemove(who, whoInclude){
+		var item = currentRelatingGet(who);
+		if(item.whoInclude[whoInclude]){
+			item.includeTimes --;
+			delete item.whoInclude[whoInclude];
+		}
+	}
+
+	function currentRelatingGet(who){
+		var item;
+		if(item = currentRelating[who]){
+			return item;
+		}else{
+			return currentRelating[who] = { includeTimes: 0, whoInclude: {} };
+		}
+	}
+
+	function currentRelatingNumberGet(who){
+		var item = currentRelatingGet(who);
+		return item.includeTimes;
+	}
+
+	function currentRelatingModuleGet(who){
+		var item = currentRelatingGet(who);
+		var result = [];
+		Lichee.each(item.whoInclude, function(value, key){
+			result.push(key);
+		});
+		return result;
+	}
+
+//    function toggleVersion(){
+//        var form = document.myform,
+//            combobox = document.myform.version;
+//        if(combobox.value == 'Tangram-mobile'){
+//            form.nobase.disabled = true;
+//            form.nouibase.disabled = true;
+//        }else{
+//            form.simple.disabled = true;
+//        }
+//        E('simple_con')[combobox.value == 'Tangram-mobile' ? 'delClass' : 'addClass']('hide');
+//        E('base_con')[combobox.value.indexOf('Tangram-component') > -1 ? 'delClass' : 'addClass']('hide');
+//    }
+
+//    toggleVersion(); //执行一次，防止刷新保留原值
+
     function printCode(){
         var form = document.myform;
-//        form.src.value = '///import baidu.ui.Carousel';
-        form.viewSource.value = '1';
+        form.viewSource.value = "1";
+		form.src.value = getCheckedNode();
         document.myform.submit();
     }
+
     function importCode(){
         var form = document.myform;
-//        form.src.value = '///import baidu.ui.Carousel';
-        form.viewSource.value = '0';
+        form.viewSource.value = "0";
+		form.src.value = getCheckedNode();
         document.myform.submit();
     }
-    
+
+	function getCheckedNode(){
+		var result = {}, resultArr = [];
+		var getAllChilds = function(dataItem){
+			if(dataItem.nodeType == "normal"){
+				result["///import " + dataItem.n + ";"] = 1;
+			}else if(dataItem.nodeType == "folder"){
+				dataItem.childs.forEach(getAllChilds);
+			}
+		};
+		Lichee.each(checkedNodeByClick, function(dataItem){
+			getAllChilds(dataItem);
+		});
+		Lichee.each(result, function(value, key){
+			resultArr.push(key);
+		});
+		return resultArr.join("\r\n");
+	}
+
 	function setupSideBar(){
 		var exportBtn = E("export");
 		var viewcodeBtn = E("viewcode");
@@ -92,46 +156,68 @@ module.declare(function(require, exports, module){
 			item.expanded = true;
 		});
 
-		var relatedMapping1 = tangram_base_csmap.docMap;
-		var relatedMapping2 = tangram_component_csmap.docMap;
-
 		// 从一个 normal 节点搜索联系
+		var relatedWithNormalNode_cache = {};
 		var relatedWithNormalNode = function(dataItem, value){
-			var ret = [];
 			var n = dataItem.n;
-			var r1 = relatedMapping1[n];
-			var r2 = relatedMapping2[n];
 			var dataMapping = treeInstance.dataMapping;
-			if(r1)
-				ret = ret.concat(r1);
-			if(r2)
-				ret = ret.concat(r2);
+
+			var ret = relatedWithNormalNode_cache[n];
+
+			if(!ret){
+				ret = [];
+				var r1 = relatedMapping1[n];
+				var r2 = relatedMapping2[n];
+				if(r1)
+					ret = ret.concat(r1);
+				if(r2)
+					ret = ret.concat(r2);
+				relatedWithNormalNode_cache[n] = ret;
+			}
+
 			ret.forEach(function(r){
-				if(dataMapping[r].nodeType == "folder")
+				if(dataMapping[r] && dataMapping[r].nodeType == "folder")
 					return ;
 				if(value == 1){
-					treeInstance.setNodeCheckWithoutUpdate(r, 1);
+					currentRelatingAdd(r, n);
+					if(currentRelatingNumberGet(r) == 1){
+						treeInstance.setNodeCheckWithoutUpdate(r, 1);
+						// 递归搜索
+						relatedWithNormalNode({ n: r }, 1);
+					}
 				}else{
-					// TODO:
+					currentRelatingRemove(r, n);
+					if(currentRelatingNumberGet(r) == 0){
+						treeInstance.setNodeCheckWithoutUpdate(r, 0);
+						// 递归搜索
+						relatedWithNormalNode({ n: r }, 0);
+					}
 				}
 			});
 		};
 
 		// 从一个 folder 节点搜索联系
+		var relatedWithFolderNode_cache = {};
 		var relatedWithFolderNode = function(dataItem, value){
-			var normals = [];
-			var getChilds = function(data){
-				if(data.childs){
-					data.childs.forEach(function(c){
-						if(c.nodeType == "normal")
-							normals.push(c);
-						else if(c.nodeType == "folder")
-							getChilds(c);
-					});
-				}
-			};
-			getChilds(dataItem);
-			normals.forEach(relatedWithNormalNode);
+			var normals = relatedWithFolderNode_cache[dataItem.n];
+			if(!normals){
+				normals = [];
+				var getChilds = function(data){
+					if(data.childs){
+						data.childs.forEach(function(c){
+							if(c.nodeType == "normal")
+								normals.push(c);
+							else if(c.nodeType == "folder")
+								getChilds(c);
+						});
+					}
+				};
+				getChilds(dataItem);
+				relatedWithFolderNode_cache[dataItem.n] = normals;
+			}
+			normals.forEach(function(item){
+				relatedWithNormalNode(item, value);
+			});
 		};
 
 		treeInstance = new tree({
@@ -148,19 +234,46 @@ module.declare(function(require, exports, module){
 			}
 		});
 
-		treeInstance.on("nodeCheck", function(name, value){
+		treeInstance.on("beforeCheckBoxClick", function(nodeIns, value){
 			var dataMapping = this.dataMapping;
-			var dataItem = dataMapping[name];
+			var dataItem = dataMapping[nodeIns.name];
 
 			// 如果选中的节点是一个 folder
 			if(dataItem.nodeType == "folder"){
 				relatedWithFolderNode(dataItem, value);
+
 			// 如果选中的节点是一个正常节点
 			}else if(dataItem.nodeType == "normal"){
 				relatedWithNormalNode(dataItem, value);
 			}
 
+			if(value){
+				checkedNodeByClick[dataItem.n] = dataItem;
+			}else{
+				delete checkedNodeByClick[dataItem.n];
+			}
+
+			tree.updateCheckStates(nodeIns.tree.dataMapping, nodeIns.tree.dataMapping[nodeIns.name], value);
+//			this.updateNodeCheckStates(nodeIns);
 			this.updateNodeCheckStates();
+
+			setTimeout(function(){
+				switch(this.dataMapping["baidu"].checked){
+					case 0.5:
+					case 1:
+						E("export").dom.disabled =
+						E("viewcode").dom.disabled = false;
+						break;
+					case 0:
+						E("export").dom.disabled =
+						E("viewcode").dom.disabled = true;
+						break;
+				}
+			}.bind(this), 200);
+
+//			传统用法
+//			tree.updateCheckStates(nodeIns.tree.dataMapping, nodeIns.tree.dataMapping[nodeIns.name], value);
+//			this.updateNodeCheckStates(nodeIns);
 		});
 
 		treeInstance.render();

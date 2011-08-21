@@ -29,7 +29,10 @@ rmdir /s /q "%building%\"
 
 if "%1"=="debug" (goto end)
 
-
+	for /F "usebackq tokens=* delims=" %%i in (`dir /A-D /S /B "%output%\js\*.js"`) do (
+		echo compressing... %%i
+		java -jar "%YUICmprssr%" --type js --charset utf-8 -o "%%i" --nomunge "%%i"
+	)
 
 	echo.
 	echo.

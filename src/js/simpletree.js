@@ -45,6 +45,8 @@ module.declare(function(require, exports, module){
 
 	// 根据数据节点的状态，关联更新其它数据节点（与界面无关）
 	var updateCheckStates = function(dataMapping, dataItem, value, _dire){ // _dire: 1 向外 0 向里
+		if(!dataItem)return ;
+
 		dataItem.checked = value;
 
 		// 向里
@@ -105,6 +107,7 @@ module.declare(function(require, exports, module){
 		"<div class='icon' id='@{iconId}'></div>",
 		"<div class='name'><a id='@{namelinkId}' href='' onclick='return false;'>@{name} </a></div>");
 
+	// class node
 	var node = new Lichee.Class(
 		/* constructor */ function(conf){
 			this.container = E(conf.container);
@@ -263,25 +266,28 @@ module.declare(function(require, exports, module){
 			},
 
 			setViewChecked: function(){
-				var checkinput = E(this.checkinputId, true);
-				var checkedValue = this.tree.dataMapping[this.name].checked;
-				if(checkedValue == this.checked)
-					return ;
-				this.checked = checkedValue;
-				switch(checkedValue){
-					case 0:
-						checkinput.disabled = false;
-						checkinput.checked = false;
-						break;
-					case .5:
-						checkinput.disabled = true;
-						checkinput.checked = true;
-						break;
-					case 1:
-						checkinput.checked = true;
-						checkinput.disabled = false;
-						break;
-				}
+				clearTimeout(this.setViewCheckedTimer);
+				this.setViewCheckedTimer = setTimeout(function(){
+					var checkinput = E(this.checkinputId, true);
+					var checkedValue = this.tree.dataMapping[this.name].checked;
+					if(checkedValue == this.checked)
+						return ;
+					this.checked = checkedValue;
+					switch(checkedValue){
+						case 0:
+							checkinput.disabled = false;
+							checkinput.checked = false;
+							break;
+						case .5:
+							checkinput.disabled = true;
+							checkinput.checked = true;
+							break;
+						case 1:
+							checkinput.checked = true;
+							checkinput.disabled = false;
+							break;
+					}
+				}.bind(this), 10);
 			},
 
 			disposeEvent: function(){
@@ -333,10 +339,12 @@ module.declare(function(require, exports, module){
 							switch(checkValue){
 								case 0:
 								case .5:
-									this.setCheck(1);
+//									this.setCheck(1);
+									this.tree.fireEvent("beforeCheckBoxClick", [this, 1]);
 									break;
 								case 1:
-									this.setCheck(0);
+//									this.setCheck(0);
+									this.tree.fireEvent("beforeCheckBoxClick", [this, 0]);
 									break;
 							}
 						}.bind(this)
@@ -356,6 +364,7 @@ module.declare(function(require, exports, module){
 		}
 	);
 
+	// class tree
 	var tree = new Lichee.Class(
 		/* constructor */ function(conf){
 			this.container = E(conf.container);
@@ -371,6 +380,8 @@ module.declare(function(require, exports, module){
 			var formatedData = formatData(conf.data);
 			this.formatedData = formatedData[0];
 			this.dataMapping = formatedData[1];
+
+			this.setNodeCheckWithoutUpdateTimers = {};
 		},
 
 		/* methods */ {
@@ -444,35 +455,41 @@ module.declare(function(require, exports, module){
 
 			// 只更新 dataMapping 中某个节点的选中状态（会自动关联更新其它节点的更新状态），但界面上不作更新
 			setNodeCheckWithoutUpdate: function(name, value){
-				var dataMapping = this.dataMapping;
-				var dataItem = dataMapping[name];
-				updateCheckStates(dataMapping, dataItem, value);
+				clearTimeout(this.setNodeCheckWithoutUpdateTimers[name]);
+				this.setNodeCheckWithoutUpdateTimers[name] = setTimeout(function(){
+					var dataMapping = this.dataMapping;
+					var dataItem = dataMapping[name];
+					updateCheckStates(dataMapping, dataItem, value);
+				}.bind(this), 10);
 			},
 
 			// 根据 dataMapping 中记录的选中状态，更新界面，obj 为参考的节点实例，会根据 obj 来自动找出需要更新的节点的界面
 			// 如果没有 obj 参数，则更新所有已渲染的节点
 			updateNodeCheckStates: function(obj){
-				if(obj){
-					var nodes = [obj], p = obj;
-					var inwards = function(node){
-						if(node.childs){
-							nodes.push.apply(nodes, node.childs);
-							node.childs.forEach(function(node){
-								if(node.expanded)
-									inwards(node);
-							});
-						}
-					};
-					inwards(p);
-					while(p = p.parent)
-						nodes.push(p);
-				}else{
-					nodes = this.nodes;
-				}
+				clearTimeout(this.updateNodeCheckStatesTimer);
+				this.updateNodeCheckStatesTimer = setTimeout(function(){
+					if(obj){
+						var nodes = [obj], p = obj;
+						var inwards = function(node){
+							if(node.childs){
+								nodes.push.apply(nodes, node.childs);
+								node.childs.forEach(function(node){
+									if(node.expanded)
+										inwards(node);
+								});
+							}
+						};
+						inwards(p);
+						while(p = p.parent)
+							nodes.push(p);
+					}else{
+						nodes = this.nodes;
+					}
 
-				nodes.forEach(function(node, index){
-					node.setViewChecked && node.setViewChecked();
-				});
+					nodes.forEach(function(node, index){
+						node.setViewChecked && node.setViewChecked();
+					});
+				}.bind(this), 10);
 			},
 
 			// privates
@@ -509,6 +526,8 @@ module.declare(function(require, exports, module){
 			}
 		}
 	);
+
+	tree.updateCheckStates = updateCheckStates;
 
 	return tree;
 });
