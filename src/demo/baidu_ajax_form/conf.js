@@ -33,7 +33,7 @@ var conf = {
 					    	T.g("resultArea").innerHTML = responseText 
 					    },
 					    onfailure:function(xhr){ 
-					    	alert ("请求失败！");
+                            alert(unescape('%u8BF7%u6C42%u5931%u8D25%uFF01'));
 					    }
             		});
             	}

@@ -17,19 +17,42 @@ var conf = {
 			html:'<div id="sliderId" style="padding: 50px;"></div>',
 			target: 'sliderId'
         },
+        
+        getValue: {
+            type: 'button',
+            defaultValue: 'getValue()',
+            event: {
+                eventName: 'onclick',
+                handler: function(){
+                    alert(this.getValue());
+                }
+            }
+        },
+        
+        enable: {
+            type: 'button',
+            defaultValue: 'enable',
+            event: {
+                eventName: 'onclick',
+                handler: function(){
+                    this.enable();
+                }
+            }
+        },
+        
         disable: {
             type: 'button',
             defaultValue: 'disable',
             event: {
                 eventName: 'onclick',
                 handler: function(){
-                    
+                    this.disable();
 				}
             }
         }
         
     },    
     groups: {
-        'default': [['disable']]
+        'default': [['getValue'], ['enable', 'disable']]
     }
 };
