@@ -22,7 +22,7 @@ var conf = {
     clazz: {
         type: 'method',
         method: 'baidu.data.dataSource',
-        dependPackages: ['baidu.data.dataSource.local', 'baidu.data.dataSource.ajax', 'baidu.data.dataSource.sio']
+        dependPackages: ['baidu.data.dataSource.sio']
     },
     
     demoType: [{key: 'default', val: 'dataSource.local例子'}, {key: 'ajax', val: 'dataSource.ajax例子'}, {key: 'sio', val: 'dataSource.sio例子'}],

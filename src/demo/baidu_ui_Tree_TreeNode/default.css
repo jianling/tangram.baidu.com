@@ -1,0 +1,131 @@
+.tangram-tree {
+	font-size:12px;
+    width: 300px;
+	border:gray solid 1px;
+}
+	
+	.tangram-tree dl,dt,dd{
+		margin: 0;
+		padding: 0;
+	}
+
+	.tangram-tree a {
+		text-decoration : none;
+		cursor:default;
+	}
+
+	.tangram-tree span{
+		cursor:default;
+	}
+	.tangram-tree-node-blank,  .tangram-tree-node-Tplus, 
+	.tangram-tree-node-Lplus, .tangram-tree-node-Tminus,.tangram-tree-node-Lminus,.tangram-tree-node-open-trunk,
+	.tangram-tree-node-L,.tangram-tree-node-I,.tangram-tree-node-T
+	
+	{
+		background-position:center center;
+		background-repeat:no-repeat;
+		border:0 none;
+		height:18px;
+		margin:0;
+		padding:0;
+		vertical-align:top;
+		width:16px;
+		display:inline-block;
+	}
+
+.tangram-tree-node-leaf, .tangram-tree-node-trunk,.tangram-tree-node-checkbox,.tangram-tree-node-checkbox-check,.tangram-tree-node-checkbox-halfcheck{
+		background-position:center center;
+		background-repeat:no-repeat;
+		border:0 none;
+		height:18px;
+		margin:0;
+		padding:0;
+		vertical-align:top;
+		background-position:center;
+		width:16px;
+		display:inline-block;
+	
+}
+
+	.tangram-tree-node-blank {
+		background-image:url("image/blank.png");
+
+	}
+	.tangram-tree-node-T {
+		background-image:url("image/elbow.gif");
+
+	}
+	.tangram-tree-node-L {
+		background-image:url("image/elbow-end.gif");
+
+	}
+	.tangram-tree-node-I {
+		background-image:url("image/elbow-line.gif");
+
+	}
+	.tangram-tree-node-leaf {
+		background-image:url(image/leaf.gif);
+	}
+	.tangram-tree-node-trunk {
+		background-image:url(image/folder.gif);
+	}
+	.tangram-tree-node-open-trunk {
+		background-image:url(image/folder-open.gif);
+	}
+	.tangram-tree-node-Tplus {
+		background-image:url(image/elbow-plus.gif);
+	}
+	.tangram-tree-node-Lplus {
+		background-image:url(image/elbow-end-plus.gif);
+	}
+	.tangram-tree-node-Tminus {
+		background-image:url(image/elbow-minus.gif);
+	}
+	.tangram-tree-node-Lminus {
+		background-image:url(image/elbow-end-minus.gif);
+	}
+	.tangram-tree-node-checkbox {
+		background-image:url(image/checkbox.gif);
+	}
+	.tangram-tree-node-checkbox-check {
+		background-image:url(image/checkbox-check.gif);
+	}
+	.tangram-tree-node-checkbox-halfcheck {
+		background-image:url(image/checkbox-halfcheck.gif);
+	}
+	.tangram-tree-node-current{
+		color:white;
+		background-color:#2B4FDD;
+	}
+	.tangram-tree-node-over{
+		background-color:#ABB9F1;
+	}
+	.tangram-tree-node-text{
+		display:inline;
+		cursor:default;
+	}
+
+	.tangram-tree-proxy {
+		font-size : 12px;
+		position :absolute;
+		width: 18px;
+		height:12px;
+		border: 2px dotted black;
+	}
+	.tangram-tree-node-node{
+		zoom : 1;
+	}
+	.tangram-tree-node-input{
+		height:18px;
+	}
+
+	.tangram-tree-sort {
+		font-size:5px;
+		height:6px;
+		background-color:black;
+
+	}
+	.tangram-tree-sort-transparent {
+		font-size:5px;
+		height:6px;
+	}

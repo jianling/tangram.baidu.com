@@ -25,7 +25,7 @@ var conf = {
         dependPackages: ['baidu.data.dataSource.local', 'baidu.data.dataSource.ajax', 'baidu.data.dataSource.sio']
     },
     
-    demoType: [{key: 'ajax', val: 'dataSource.ajax例子'}],
+    demoType: [{key: 'default', val: 'dataSource.local例子'}],
     
     'default': {
         pageConf: {
@@ -92,6 +92,8 @@ var conf = {
     
     
     groups: {
-        ajax: [['ajax']]
+        'default': [['local']],
+        ajax: [['ajax']],
+        sio: [['sio']]
     }
 }

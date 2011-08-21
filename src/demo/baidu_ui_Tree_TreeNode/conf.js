@@ -35,7 +35,7 @@ var conf = {
         'class': 'baidu.ui.Tree'
     },
     
-    demoType: [{key: 'default', val: 'Tree核心例子'}],
+    demoType: [{key: 'treeNode', val: 'TreeNode（以\"节点-0\"为例）'}],
     'default': {
         pageConf: {
             options: '{data: '+ getNodes() +', onload: function(evt){evt.target.getRootNode().expandAll();}}',
