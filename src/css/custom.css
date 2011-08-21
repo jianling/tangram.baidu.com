@@ -110,3 +110,13 @@ div.custompage .sidebar .box .box-bottom{
 .hide {
     display: none;
 }
+
+#currentURL{
+	width: 200px;
+	height: 80px;
+}
+
+#currentURL-desc{
+	color: #808080;
+	line-height: 18px;
+}
