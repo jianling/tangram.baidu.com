@@ -45,7 +45,7 @@ var conf = {
         },
         getString: {
             type: 'button',
-            defaultValue: '获得Accordion的Html getString()',
+            defaultValue: 'getString()',
             event: {
                 eventName: 'onclick',
                 handler: function(){
@@ -63,7 +63,8 @@ var conf = {
             label: '<br />项目内容：',
             type: 'text',
             defaultValue: '<p>new body</p>',
-            size: 50
+            size: 5,
+            maxlength: 50
         },
         itemINDEX: {
             label: '<br />插入位置：',
