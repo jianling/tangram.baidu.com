@@ -7,7 +7,7 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.array.lastIindexOf'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea">结果为：</div>'
+            html: '<div id="resultArea">查找数组为["one", "two", "three", "four", "three"]，查找内容为："three"</div>'
         },
         formatBtn: {
             type: 'button',
@@ -17,8 +17,8 @@ var conf = {
             event: {
                 eventName: 'onclick',
                 handler: function(arg0, arg1){
-                	var input = ["one", "two", "three", "four"];
-					var output = T.array.indexOf(input, "three");
+                	var input = ["one", "two", "three", "four", "three"];
+					var output = T.array.lastIndexOf(input, "three");
                     baidu.dom.g('resultArea').innerHTML = "结果为：" + output;
                 }
             }

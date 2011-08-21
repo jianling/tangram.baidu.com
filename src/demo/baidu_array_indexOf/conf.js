@@ -7,7 +7,7 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.array.indexOf'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea">结果为：</div>'
+            html: '<div id="resultArea">查找数组为["one", "two", "three", "four"]，查找内容为："three"</div>'
         },
         formatBtn: {
             type: 'button',

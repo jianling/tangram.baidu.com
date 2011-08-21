@@ -7,7 +7,7 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.array.hash'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea">结果为：</div>'
+            html: '<div id="resultArea">KEY数组为：[1,2,3,4,5]，VAL数组为：["a","b","c","d","e"]，取得合并后的对象hashObj，中KEY为3的元素，</div>'
         },
         formatBtn: {
             type: 'button',

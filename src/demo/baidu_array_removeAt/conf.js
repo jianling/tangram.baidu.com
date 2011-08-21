@@ -7,7 +7,7 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.array.removeAt'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea">结果为：</div>'
+            html: '<div id="resultArea">数组为：["one", "two", "three", "four"]，remove索引项为：1</div>'
         },
         formatBtn: {
             type: 'button',
@@ -19,8 +19,7 @@ var conf = {
                 handler: function(arg0, arg1){
                 	var input = ["one", "two", "three", "four"];
 					var output = T.array.removeAt(input, 1);
-					T.g("resultArea").innerHTML="input: " + input+"<br>";
-					T.g("resultArea").innerHTML+="output: " + output;
+					T.g("resultArea").innerHTML="结果为："+output.join(',');
                 }
             }
         }

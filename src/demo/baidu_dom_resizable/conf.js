@@ -18,6 +18,7 @@ var conf = {
                 eventName: 'onclick',
                 handler: function(){
 					baidu.dom.resizable("target");
+					baidu.dom.resizable("target");
                 }
             }
         }

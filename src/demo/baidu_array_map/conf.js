@@ -7,7 +7,7 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.array.map'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea">结果为：</div>'
+            html: '<div id="resultArea">数组为：[1,2]，应用的方法为 item*10</div>'
         },
         formatBtn: {
             type: 'button',
@@ -17,11 +17,11 @@ var conf = {
             event: {
                 eventName: 'onclick',
                 handler: function(arg0, arg1){
-                	var input = [1,2,3,4,5];
+                	var input = [1,2];
 					var output = T.array.map(input, function(item, i){
-					    return item+10;
+					    return item*10;
 					});
-                    baidu.dom.g('resultArea').innerHTML = "结果为：" + output;
+                    baidu.dom.g('resultArea').innerHTML = "结果为：" + output.join(',');
                 }
             }
         }
