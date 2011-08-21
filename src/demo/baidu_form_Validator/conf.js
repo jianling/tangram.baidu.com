@@ -34,7 +34,7 @@ var conf = {
         
         addRule: {
             type: 'button',
-            defaultValue: 'addRule(name, callback, message)',
+            defaultValue: 'addRule(n, c, m)',
             depend: ['addRuleName', 'addRuleFn', 'addRuleMsg'],
             event: {
                 eventName: 'onclick',

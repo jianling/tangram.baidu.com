@@ -59,7 +59,7 @@ var conf = {
         
         match: {
             type: 'button',
-            defaultValue: 'match(name, value, callback, options)',
+            defaultValue: 'match(n, v, c, o)',
             depend: ['matchName', 'matchVal', 'matchFn', 'matchOpt'],
             isMain: true,
             event: {

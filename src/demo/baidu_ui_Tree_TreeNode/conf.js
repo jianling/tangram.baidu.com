@@ -201,7 +201,7 @@ var conf = {
         
         appendChild: {
             type: 'button',
-            defaultValue: 'appendChild(treeNode, index)',
+            defaultValue: 'appendChild(t, i)',
             event: {
                 eventName: 'onclick',
                 handler: function(){
