@@ -165,29 +165,32 @@
             me._disposeInstance();
             me._createInstance(val);
         },
+        
+        _getDependValue: function(depend){
+            var param = [];
+            depend && baidu.array.each(depend, function(item){
+                var array = document.getElementsByName(item);
+                    array.length <= 0 && (array = baidu.dom.g(item));
+                if(!array.tagName && array.length){
+                    var val = [];
+                    for(var i = 0; i < array.length; i++){
+                        array[i].checked && val.push(array[i].value);
+                    }
+                    param.push(val);
+                }else{
+                    param.push(array.value);
+                }
+            });
+            return param;
+        },
 
         _onEntityHandler: function(evt, typeId, key){
             var me = this,
                 entity = me[typeId][key],
                 handler = entity.event.handler,
-                depend = entity.depend,
                 isFn = (typeof handler == 'function'),
                 fn = isFn ? handler : (me._instance[handler] || eval(handler)),
-                param = [];
-            //取得参数
-            depend && baidu.array.each(depend, function(item){
-                var list = document.getElementsByName(item);
-					list.length <= 0 && (list = baidu.dom.g(item));
-                if(!list.tagName && list.length){
-                    var val = [];
-                    for(var i = 0; i < list.length; i++){
-                        list[i].checked && val.push(list[i].value);
-                    }
-                    param.push(val);
-                }else{
-                    param.push(list.value);
-                }
-            });
+                param = me._getDependValue(entity.depend);
             fn.apply(me._instance, param);
         },
 
@@ -228,8 +231,8 @@
             }else{
                 baidu.object.each(demoConf, function(item, key){
                     if(item.isMain){
-                        item.depend && baidu.array.each(item.depend, function(rsid){
-                            param.push('"'+ baidu.dom.g(rsid).value.replace(/"/g, '\\"') +'"');
+                        baidu.array.each(me._getDependValue(item.depend), function(item){
+                            param.push(item.join ? '[' + item.join(',') + ']' : "'" + item.replace(/'/g, "\"") + "'");
                         });
                         var fnStr = item.event.handler.toString().replace(/\\(u[\da-f]{2,4})/ig, function(a, b){//处理ff中自动将中文转义为unicode
                                 console.log(b);
