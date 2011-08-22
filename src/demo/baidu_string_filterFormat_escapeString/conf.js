@@ -23,6 +23,7 @@ var conf = {
             event: {
             	eventName: 'onclick',
             	handler: function(arg0){
+            	    alert(baidu.string.filterFormat.escapeString(arg0));
             		T.g('resultArea').innerHTML = '转义后为：' + baidu.string.filterFormat.escapeString(arg0);
             	}
             }
