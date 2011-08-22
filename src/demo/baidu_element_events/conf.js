@@ -16,7 +16,7 @@ var conf = {
             event: {
             	eventName: 'onclick',
             	handler: function(){
-            		T.e(T.dom.query('.important')).on("click", function(){
+            		T.e(T.dom.q('important')).on("click", function(){
             			alert('You click me');
             		});
             	}

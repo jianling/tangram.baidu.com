@@ -19,7 +19,7 @@ var conf = {
                 handler: function(arg0, arg1){
                 	var input = ["one", "two", "three", "four"];
 					var output = T.array.removeAt(input, 1);
-					T.g("resultArea").innerHTML="结果为："+output.join(',');
+					T.g("resultArea").innerHTML="结果为："+input.join(',');
                 }
             }
         }
