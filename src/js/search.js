@@ -52,7 +52,7 @@ module.declare(function(require, exports, module){
 			'resultCount': count
 		};
 	};//executeSearch()
-	
+
 	/**
 	 * 将查询结果渲染到页面
 	 * @function
@@ -89,7 +89,7 @@ module.declare(function(require, exports, module){
 		baidu.dom.query(".search-result")[0].innerHTML = html.join('');
 		baidu.dom.setStyle(baidu.dom.query(".search-result")[0], 'display', '');
 	};
-	
+
 	/**
 	 * 还原页面显示
 	 * @function
@@ -98,7 +98,7 @@ module.declare(function(require, exports, module){
 		baidu.dom.query(".search-result")[0].innerHTML = '';
 		baidu.dom.setStyle(baidu.dom.query(".search-result")[0], 'display', 'none');
 	};
-	
+
 	var bindSearchInput = function(apiData){
 		//console.log(apiData);
 		var searchInput = T.e(T.g('searchinput')),
@@ -158,21 +158,23 @@ module.declare(function(require, exports, module){
 					'API参考手册' :{'name':'', 'desc':'', 'link':''}
 				},
 				apiLoaded = 0;
-			
+
 			//加载base
 			T.async.get(baseApiUrl).then(function(obj){
+				var key;
 				eval(obj.responseText);
 				apiData = baidu.object.merge(apiData, tangram_base_api.docMap);
 				apiLoaded++;
 				if(apiLoaded == 2){
-				    if(baidu.url.getQueryValue(location.href,'key')){
-				        var result = executeSearch(apiData, baidu.url.getQueryValue(location.href,'key'));
+				    if(key = baidu.url.getQueryValue(location.href,'key')){
+						key = decodeURIComponent(key);
+				        var result = executeSearch(apiData, key);
                         renderSearchResult(result.searchKey, result.searchResult, result.resultCount);
 				    }
 					bindSearchInput(apiData);
 				}
 			});
-			
+
 			//加载component
 			T.async.get(componentApiUrl).then(function(obj){
 				eval(obj.responseText.replace(/[\n\r]*/ig, ''));
@@ -186,7 +188,7 @@ module.declare(function(require, exports, module){
 					bindSearchInput(apiData);
 				}
 			});
-			
+
 		});
 	}
 });

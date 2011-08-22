@@ -44,8 +44,8 @@
 								<input type="radio" id="nocompress" name="compress" value="source" /> <label for="nocompress">源代码 (utf-8)</label>
 							</p>
 							<p class="noi">
-								<input type="button" id="export" disabled="disabled" class="export" value="导 出" onclick="page.importCode();"/>
-								<input type="button" id="viewcode" disabled="disabled" class="viewcode" value="查看源码" onclick="page.printCode();"/>
+								<input type="button" id="export" disabled="disabled" class="export" value="导 出" onclick="page.statSend({name:'export'});page.importCode();"/>
+								<input type="button" id="viewcode" disabled="disabled" class="viewcode" value="查看源码" onclick="page.statSend({name:'viewcode'});page.printCode();"/>
 							</p>
 
     						<h3>我的选择</h3>
@@ -53,8 +53,8 @@
 								<textarea id="currentInfo" onfocus="this.select();"></textarea>
 							</p>
 							<p class="noi">
-								<input type="button" id="buildText" disabled="disabled" class="buildText" value="生成文本" onclick="page.buildText();"/>
-								<input type="button" id="restoreChoose" class="restoreChoose" value="载入选择" onclick="page.restoreChoose();"/>
+								<input type="button" id="buildText" disabled="disabled" class="buildText" value="生成文本" onclick="page.statSend({name:'buildText'});page.buildText();"/>
+								<input type="button" id="restoreChoose" class="restoreChoose" value="载入选择" onclick="page.statSend({name:'restoreChoose'});page.restoreChoose();"/>
 							</p>
 							<p class="noi p12">
 								保留好生成的文本信息，下次粘回到上方的框内以载入本次选择。

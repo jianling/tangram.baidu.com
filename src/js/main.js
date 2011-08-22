@@ -71,6 +71,12 @@ void function(){
 		searchinput.useMouseAction("searchinput", "over,out");
 		searchbutton.useMouseAction("searchbutton", "over,out,down,up");
 
+		var doSearch = function(text){
+			if(text = text.trim()){
+				window.open("./search.html?key=" + encodeURIComponent(text.trim()), "_self");
+			}
+		};
+
 		searchinput.addEvents({
 			focus: function(){
 				setTimeout(function(){
@@ -82,9 +88,7 @@ void function(){
 				e = Lichee.Event(e);
 				if(e.keyCode == 13){
 					searchbutton.addClass("searchbutton-down");
-				    if(this.value.replace(/^\s+|\s+$/g, '')){
-				        window.open("./search.html?key=" + this.value.replace(/^\s+|\s+$/g, ''));
-				    }
+					doSearch(this.value);
 				}
 			},
 
@@ -92,18 +96,14 @@ void function(){
 				e = Lichee.Event(e);
 				if(e.keyCode == 13){
 					searchbutton.delClass("searchbutton-down");
-					if(this.value.replace(/^\s+|\s+$/g, '')){
-                        window.open("./search.html?key=" + this.value.replace(/^\s+|\s+$/g, ''));
-                    }
+					doSearch(this.value);
 				}
 			}
 		});
-		
+
 		searchbutton.addEvents({
 		    click: function(e){
-		        if(searchinput.dom.value.replace(/^\s+|\s+$/g, '')){
-                    window.open("./search.html?key=" + searchinput.dom.value.replace(/^\s+|\s+$/g, ''));
-                }
+				doSearch(searchinput.dom.value);
 		    }
 		});
 	});
