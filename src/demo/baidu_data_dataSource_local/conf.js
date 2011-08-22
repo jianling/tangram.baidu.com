@@ -78,6 +78,7 @@ var conf = {
         sio: {
             type: 'button',
             defaultValue: 'sio(url, options)',
+			isMain:true,
             event: {
                 eventName: 'onclick',
                 handler: function(){

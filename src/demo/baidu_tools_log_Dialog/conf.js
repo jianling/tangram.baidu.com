@@ -15,6 +15,7 @@ var conf = {
         openBtn: {
             type: 'button',
             defaultValue: 'open()',
+			isMain:true,
             event: {
                 eventName: 'onclick',
                 handler: 'open'

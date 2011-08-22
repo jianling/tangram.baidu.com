@@ -15,14 +15,14 @@ var conf = {
         btn: {
             type: 'button',
             defaultValue: 'listen(callback)',
-            
+            isMain:true,
             event: {
                 eventName: 'onclick',
                 handler: function(){
                     baidu.history.listen(function(){
                         alert('callback hash = ' + location.hash);
                     });
-                    baidu.g('btn').disabled = true;
+                   // baidu.g('btn').disabled = true;
                 }
             }
         }
