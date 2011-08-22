@@ -11,8 +11,11 @@ h1 {
 }
 /*search result*/
 .search-result{
-	padding-left:15px;
+	padding: 0px 0px 10px 15px;
 	background-color: #FFFFFF;
+}
+.search-result h1 {
+    margin: 0;
 }
 .search-result h1 a{
    font-size:12px;
