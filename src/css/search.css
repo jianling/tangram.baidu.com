@@ -34,6 +34,9 @@ h1 {
     color:#06c;
     font:bold 16px/16px "Arial";
 }
+.search-result h3 a{
+    color:#06c;
+}
 .search-result h3 small {
     font-weight:normal;
 }

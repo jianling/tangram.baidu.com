@@ -78,7 +78,7 @@ void function(){
 					name: "search-key",
 					value: text
 				}, function(){
-					window.open("./search.html?key=" + text, "_self");
+					window.open(getpath("./search.html?key=" + text), "_self");
 				});
 			}
 		};
@@ -123,8 +123,8 @@ void function(){
 				referrerElement: "menu-down",
 				direction: "down",
 				datas: [
-					{ name: "常规下载", link: "download.html", target: "_self" },
-					{ name: "自定义下载", link: "custom.html", target: "_self" }
+					{ name: "常规下载", link: getpath("download.html"), target: "_self" },
+					{ name: "自定义下载", link: getpath("custom.html"), target: "_self" }
 				],
 				handle: function(conf){
 					conf.link && window.open(conf.link, conf.target);
@@ -214,5 +214,9 @@ void function(){
 			window.page = page;
 			page.statSend = statSend;
 		});
+	}else{
+		window.page = {
+			statSend: statSend
+		};
 	}
 }();

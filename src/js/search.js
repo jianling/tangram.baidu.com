@@ -155,7 +155,8 @@ module.declare(function(require, exports, module){
 					'base入门' :{'name':'', 'desc':'', 'link':''},
 					'新手入门' :{'name':'', 'desc':'', 'link':''},
 					'快捷方式' :{'name':'', 'desc':'', 'link':''},
-					'API参考手册' :{'name':'', 'desc':'', 'link':''}
+					'API参考手册' :{'name':'', 'desc':'', 'link':''},
+					"“荔枝”来了！新官网有木有？":{'name':'', 'desc':'', 'link':''}
 				},
 				apiLoaded = 0;
 
@@ -164,7 +165,7 @@ module.declare(function(require, exports, module){
 				var key;
 				eval(obj.responseText);
 				apiData = baidu.object.merge(apiData, tangram_base_api.docMap);
-				apiLoaded++;
+				apiLoaded ++;
 				if(apiLoaded == 2){
 				    if(key = baidu.url.getQueryValue(location.href,'key')){
 						key = decodeURIComponent(key);
@@ -177,12 +178,14 @@ module.declare(function(require, exports, module){
 
 			//加载component
 			T.async.get(componentApiUrl).then(function(obj){
+				var key;
 				eval(obj.responseText.replace(/[\n\r]*/ig, ''));
 				apiData = baidu.object.merge(apiData, tangram_component_api.docMap);
-				apiLoaded++;
+				apiLoaded ++;
 				if(apiLoaded == 2){
-				    if(baidu.url.getQueryValue(location.href,'key')){
-                        var result = executeSearch(apiData, baidu.url.getQueryValue(location.href,'key'));
+				    if(key = baidu.url.getQueryValue(location.href, 'key')){
+						key = decodeURIComponent(key);
+                        var result = executeSearch(apiData, key);
                         renderSearchResult(result.searchKey, result.searchResult, result.resultCount);
                     }
 					bindSearchInput(apiData);

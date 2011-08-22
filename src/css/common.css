@@ -19,6 +19,20 @@ html{
 .clearfix{
 	zoom: 1;
 }
+
+div.article h1,
+div.article h2,
+div.article h3,
+div.article h4,
+div.article h5,
+div.article h6{
+	color: #3c70a5;
+}
+
+div.article a{
+	color: #064581;
+}
+
 .Licheelite-basicslippage-layer{
 	overflow: hidden;
 	line-height: 0;

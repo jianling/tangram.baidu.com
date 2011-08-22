@@ -7,6 +7,7 @@
 html,body{
     height: 100%;
 	margin: 0px;
+	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
 }
 
 
@@ -21,7 +22,8 @@ html,body{
     left: 0px;
     width: 228px;
     height: 100%;
-    background: gainsboro;
+	background-color: #f9f9ff;
+	border-right: 1px solid #e0e0e0;
 }
 .tangram-democonsole-panel {
     overflow: hidden;
@@ -32,21 +34,22 @@ html,body{
 .tangram-democonsole-combobox {
     margin: 3px;
     padding: 10px;
-    border: white outset 2px;
-    background: #ddd;
+	background-color: #f9f9ff;
+	border: 1px solid #e0e0e0;
 }
 
 .tangram-democonsole-consolegroup {
     margin: 3px;
     padding: 3px;
     background: #eee;
-    border: white outset 2px;
+	background-color: #eff3ff;
 }
 .tangram-democonsole-consolegroup div {
-    text-align: center;
+    text-align: left;
     margin: 3px;
     padding: 5px;
-    border: lightsteelblue solid 1px;
+	background-color: #f9f9ff;
+	border: 1px solid #e0e0e0;
 }
 .code {
     position: fixed;
@@ -62,8 +65,36 @@ html,body{
     left: expression(eval(document.documentElement.scrollLeft + document.documentElement.clientWidth - this.offsetWidth - 10));
     top: expression(eval(document.documentElement.scrollTop + document.documentElement.clientHeight - this.offsetHeight - 10));
 }
+
 .tangram-democonsole-formbutton {
-    
+	margin: 1px;
+	background: transparent url(images/btn.gif) repeat-x 0 0;
+	*width: expression(eval(this.value.length * 6 + 10));
+	min-width: 0px;
+	height: 22px;
+	color: #3c70a5;
+	border: 1px solid #999;
+	border-left: 1px solid #ebebeb;
+	border-top: 1px solid #ebebeb;
+	-moz-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+.tangram-democonsole-formtext{
+	margin: 2px;
+	background-color: #fff;
+	width: 40px;
+	height: 20px;
+	border: 1px solid #ebebeb;
+	border-left: 1px solid #999;
+	border-top: 1px solid #999;
+	font-size: 14px;
+	padding-left: 2px;
+	-moz-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
 }
 
 form{
@@ -103,6 +134,6 @@ function openInWin(){
 var demo = new baidu.ui.DemoConsole(conf);
 baidu.event.on(window, 'load', function(){
     demo.render('demConsole');
-}); 
+});
 </script>
 </html>
