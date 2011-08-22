@@ -13,7 +13,7 @@ var conf = {
         	label: '输入字符：',
             type: 'text',
             defaultValue: '  前后各两个空白字符  ',
-            size: 30
+            size: 21
         },
         btn1: {
             type: 'button',

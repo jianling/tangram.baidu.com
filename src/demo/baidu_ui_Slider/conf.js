@@ -3,7 +3,8 @@ var conf = {
     //    class|method|field
     clazz: {
         type: 'class',
-        'class': 'baidu.ui.Slider'
+        'class': 'baidu.ui.Slider',
+        dependPackages: ['baidu.ui.behavior.decorator', 'baidu.ui.Slider.Slider$progressBar']
     },
     //    定义DEMO可选项
     demoType: [
@@ -13,25 +14,45 @@ var conf = {
     'default': {
         //    类实例化选项
         pageConf: {
-            options: '{ skin: "tangram-decorator",decorator: [{ type: "box", tpl: { box: "<div #{class}></div><div #{class} id=\'#{innerWrapId}\'></div><div#{class}></div>" } } ]}',
-			target:'sliderId',
-			html:'<div id="sliderId"></div>'
+			html:'<div id="sliderId" style="padding: 50px;"></div>',
+			target: 'sliderId'
         },
+        
+        getValue: {
+            type: 'button',
+            defaultValue: 'getValue()',
+            event: {
+                eventName: 'onclick',
+                handler: function(){
+                    alert(this.getValue());
+                }
+            }
+        },
+        
+        enable: {
+            type: 'button',
+            defaultValue: 'enable',
+            event: {
+                eventName: 'onclick',
+                handler: function(){
+                    this.enable();
+                }
+            }
+        },
+        
         disable: {
             type: 'button',
             defaultValue: 'disable',
             event: {
                 eventName: 'onclick',
                 handler: function(){
-					console.log(this)
+                    this.disable();
 				}
             }
         }
         
     },    
     groups: {
-        'default': [
-            ['disable']
-        ]
+        'default': [['getValue'], ['enable', 'disable']]
     }
 };

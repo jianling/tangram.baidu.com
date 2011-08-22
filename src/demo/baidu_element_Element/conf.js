@@ -1,26 +1,23 @@
 var conf = {
     clazz: {
         type: 'method',
-        'method': 'baidu.element.Element'
+        'method': 'baidu.element.Element',
+        dependPackages: ['baidu.dom.setStyle']
     },
     
     demoType: [{key: 'default', val: 'baidu.element.Element'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea"></div>'
+            html: '<div id="resultArea">所有扩展的链式调用的方法都会放在这个Element中，可以通过Element来做键式调用，示例代码baidu.element(baidu.g(id)).setStyle("background", "pink");<div id="elementId" style="border:gray solid 1px; width: 200px; height:50px; margin: 10px;">this is container</div></div>'
         },
         btn1: {
             type: 'button',
-            defaultValue: '扩展document.body',
+            defaultValue: 'Element示例',
             isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(){
-            		var el = new baidu.element.Element(document.body);
-    				T.g('resultArea').innerHTML = '扩展后的body拥有如下属性/方法:<br />';
-            		for(key in el){
-        				T.g('resultArea').innerHTML += key + '<br />';
-            		}
+            	    baidu.element('elementId').setStyle('background', 'pink');
             	}
             }
         }

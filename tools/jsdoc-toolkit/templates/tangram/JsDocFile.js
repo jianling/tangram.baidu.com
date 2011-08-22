@@ -1,6 +1,9 @@
 function JsDocFile(){
     IO.include('../templates/tangram/tangram-conf.js');
+    IO.include('../templates/tangram/tangram-filter.js');
     this._conf = conf;
+    this._csmap_filter = tangram_csmap_filter;
+    this._api_filter = tangram_aip_filter;
 }
 JsDocFile.prototype = {
     isJsFile: function(file){
@@ -11,7 +14,7 @@ JsDocFile.prototype = {
         if(resultSet.hash[entity.name]){return;}
         var _this = this,
             array = [],
-            packages = entity.name.replace(/\./g, '/') + '.js';
+            packages = entity.name.replace(/\./g, '/') + '.js',
             content = IO.readFile(this._conf[resultSet.type + '_in'] + '/' + packages)
                 .replace(/\/\/\/import\s([^;]+);/g, function(mc, c){
                     array.push(c);
@@ -74,14 +77,16 @@ JsDocFile.prototype = {
     },
     
     createDocJsonFile: function(symbolSet){
-        var conf = this._conf,
+        var _this = this,
+            conf = this._conf,
             template = new JSDOC.JsPlate(conf.tangram_docjson_template),
             fileName = this.getFileName(),
             list = symbolSet.toArray().filter(function(item){
-		        return /^(?:T|baidu)\.[^#:_\-]+$/.test(item.alias);
+		        return /^(?:T|baidu)\.[^#:_\-]+$/.test(item.alias)
+		          && !_this._api_filter[item.alias];
 		    }).sort(this.makeSortby("alias"));
         IO.mkPath(conf.tangram_docjson_out.split('/'));
-        IO.saveFile(conf.tangram_docjson_out, fileName + '.js', template.process({ident: fileName, list: list}));
+        IO.saveFile(conf.tangram_docjson_out, fileName + '_api.js', template.process({ident: fileName, symbolSet: symbolSet, list: list}));
     },
     
     createPageJsonFile: function(){
@@ -133,18 +138,20 @@ JsDocFile.prototype = {
                     array.push(c);
                     return '';//replace ///import to ''
                 });
+            content.indexOf('@class') > -1/*create (core) node*/
+                && resultSet.packages.push({name: entity.name, par: entity.name});
             resultSet.depend[entity.name] = array;
         }
         
         resultSet = {packages: [], depend: {}};
-        _this._recursion(new File(path + '/' + file.list()[0]+ '/' + 'src'),
-            resultSet,
-            {fileHandler: depend});
         file.list().forEach(function(item){
             resultSet = {type: item.toLowerCase().replace('-', '_') + '_csmap', packages: [], depend: {}};
             _this._recursion(new File(path + '/' + item+ '/' + 'src'),
                 resultSet,
                 {fileHandler: depend});
+            resultSet.packages = resultSet.packages.filter(function(item){
+                return !_this._csmap_filter.hasOwnProperty(item.name);
+            });
             IO.mkPath(conf.tangram_csTreeMap_out.split('/'));
             IO.saveFile(conf.tangram_csTreeMap_out, resultSet.type + '.js', template.process(resultSet));
         });

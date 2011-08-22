@@ -73,22 +73,10 @@ div.custompage .sidebar .box .box-bottom{
 	font-weight: 700;
 }
 
-.export{
-	width: 90px;
-	height: 30px;
-	border: 0;
-	font-size: 14px;
-	background: transparent url(../images/custom-btn.gif) no-repeat 0 0;
-}
-
-.viewcode{
-	width: 90px;
-	height: 30px;
-	border: 0;
-	font-size: 14px;
-	background: transparent url(../images/custom-btn.gif) no-repeat 0 0;
-}
-
+.export,
+.viewcode,
+.buildText,
+.restoreChoose,
 .btn{
 	width: 90px;
 	height: 30px;
@@ -103,4 +91,17 @@ div.custompage .sidebar .box .box-bottom{
 
 .btn-down{
 	background-position: 0 -60px;
+}
+.depend {
+    margin: 10px 5px
+}
+.hide {
+    display: none;
+}
+
+div.article .p12{ line-height: 18px; }
+
+#currentInfo{
+	width: 200px;
+	height: 80px;
 }

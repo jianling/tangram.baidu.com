@@ -1,6 +1,6 @@
 module.declare(function(require, exports, module){
 	var conf = require("./conf");
-	var Lichee = require("./Lichee");
+	var Lichee = require("./lichee");
 	var E = Lichee.Element, Q = Lichee.queryElement;
 
 	var variableElements = Q(".variable").map(function(dom){

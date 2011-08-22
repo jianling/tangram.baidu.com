@@ -1,0 +1,10 @@
+.tangram-progressbar {
+    width: 300px;
+    height: 23px;
+    border: red solid 1px;
+}
+
+.tangram-progressbar-bar {
+    background: yellow;
+    height: 100%;
+}

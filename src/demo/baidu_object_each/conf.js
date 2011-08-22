@@ -7,7 +7,7 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.object.each'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea"></div>'
+            html: '<div id="resultArea">原始对象：{a : 1,b : 1,c : 2,d : 2}</div>'
         },
         btn1: {
             type: 'button',
@@ -22,7 +22,8 @@ var conf = {
 			            c : 2,
 			            d : 2
 				    }
-				    T.object.each(data,function(item,key){T.g('resultArea').innerHTML += key+":"+item+"<br>";});
+					T.g('resultArea').innerHTML ="";
+				    T.object.each(data,function(item,key){T.g('resultArea').innerHTML += "键："+key+" - 值："+item+"<br>";});
             	}
             }
         }

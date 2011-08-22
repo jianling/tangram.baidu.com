@@ -1,4 +1,4 @@
-{include base-css/reset.css}
+﻿{include base-css/reset.css}
 {include base-css/article.css}
 
 html, body{
@@ -230,6 +230,7 @@ html{
 }
 
 .simplemenu-item a{
+	cursor: default;
 	display: block;
 	text-decoration: none;
 	text-indent: 5px;

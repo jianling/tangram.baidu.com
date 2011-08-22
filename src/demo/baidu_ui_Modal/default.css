@@ -1,0 +1,46 @@
+/*baidu.ui.Menubar*/
+.tangram-menubar {
+    font-size : 12px;
+    width : 170px!important;
+	background:#FFF;
+}
+.tangram-menubar ul {
+    padding : 0;
+    margin : 0;
+    list-style : none;
+    border : #edbb72 solid 1px;
+	background:#FFF;
+}
+.tangram-menubar ul li {
+    height : 18px;
+    margin : 1px;
+}
+.tangram-menubar-item {
+    height : 16px;
+    padding : 1px;
+    float : left;
+    clear : both;
+    width : 99%;
+    outline : 0 !important;
+    color : #666;
+    font-size : 12px;
+    text-decoration : none;
+    background : url(tangram-menubar.png) repeat-x 0 100px;
+}
+.tangram-menubar-item-hover {
+    padding : 0px;
+    border : #fad9ac solid 1px;
+    background-position : 0 0;
+}
+.tangram-menubar-item-press {
+    padding : 0px;
+    border : #edbb73 solid 1px;
+    background-position : 0 0;
+}
+.tangram-menubar-item-disabled {
+    color : gray;
+    cursor : default;
+}
+
+
+

@@ -12,7 +12,7 @@ var conf= {
     clazz: {
         type: 'class',//class|method|field
         'class': 'baidu.ui.Carousel',
-        dependPackages: ['baidu.ui.Carousel.Carousel$btn', 'baidu.ui.Carousel.Carousel$fx'],
+        dependPackages: ['baidu.ui.Carousel.Carousel$btn', 'baidu.ui.Carousel.Carousel$fx']
     },
     demoType: [{key: 'default', val: 'Carousel核心例子'}],
     'default': {

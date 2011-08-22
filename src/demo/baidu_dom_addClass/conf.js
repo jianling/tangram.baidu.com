@@ -10,6 +10,7 @@ var conf = {
             html: '<div id="mydiv">为目标元素添加className</div>'
 		},
         formatBtn0: {
+			isMain: true,
             type: 'button',
             defaultValue: '添加样式',
             depend: [],

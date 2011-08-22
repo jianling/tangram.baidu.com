@@ -32,11 +32,21 @@ module.declare(function(require, exports, module){
 				delete undefinedParentChilds[item.n];
 			}
 		});
+
+		Lichee.each(undefinedParentChilds, function(childs, name){
+			var item = { n: name, p: "", childs: childs, checked: 0, nodeType: "folder"  };
+			formatedData.push(item);
+			dataItemStates[name] = item;
+//			formatedData.push.apply(formatedData, childs);
+		});
+
 		return [formatedData, dataItemStates];
 	};
 
 	// 根据数据节点的状态，关联更新其它数据节点（与界面无关）
 	var updateCheckStates = function(dataMapping, dataItem, value, _dire){ // _dire: 1 向外 0 向里
+		if(!dataItem)return ;
+
 		dataItem.checked = value;
 
 		// 向里
@@ -88,24 +98,45 @@ module.declare(function(require, exports, module){
 			"<div class='selection-clicker' id='@{checkClickerId}'></div>",
 		"</div>",
 		"<div class='icon' id='@{iconId}'></div>",
+		"<div class='name'><a id='@{namelinkId}' href='' title='@{name}' onclick='return false;'>@{name} </a></div>");
+
+	var nodeTemplate2 = new Lichee.Template(
+		"<div class='relation' id='@{relationId}'>",
+			"<div class='expanded-viewer' id='@{expandedViewerId}'></div>",
+		"</div>",
+		"<div class='icon' id='@{iconId}'></div>",
 		"<div class='name'><a id='@{namelinkId}' href='' onclick='return false;'>@{name} </a></div>");
 
+	// class node
 	var node = new Lichee.Class(
 		/* constructor */ function(conf){
 			this.container = E(conf.container);
-			this.icon = conf.icon || "images/tree/etfolder.gif";
 			this.name = conf.name || "";
 			this.childsData = conf.childsData;
 			this.tree = conf.tree;
 			this.expanded = !! conf.expanded;
 			this.checked = 0;
 			this.tree.nodes.push(this);
+			this.tree.nodeMapping[this.name] = this;
+			this.clickHandler = conf.clickHandler || function(){};
+			this.nameRenderer = conf.nameRenderer || function(text){ return text; };
+
+			if(conf.icon){
+				this.icon = conf.icon;
+			}else if(this.childsData.length){
+				this.icon = "images/tree/etfolder.gif";
+			}else{
+				this.icon = "images/tree/etfile.gif";
+			}
 		},
 
 		/* methods */ {
 			render: function(){
-				this.container.html(nodeTemplate.apply({
-					name: this.name.htmlEncode(),
+				var enableCheckBox = this.tree.enableCheckBox;
+				var template = enableCheckBox ? nodeTemplate : nodeTemplate2;
+
+				this.container.html(template.apply({
+					name: this.nameRenderer(this.name, this.parent ? this.parent.name : ""),
 					iconId: this.iconId = Lichee.id(),
 					namelinkId: this.namelinkId = Lichee.id(),
 					expandedViewerId: this.expandedViewerId = Lichee.id(),
@@ -130,13 +161,13 @@ module.declare(function(require, exports, module){
 					this.expand();
 			},
 
-			expand: function(){
+			expand: function(_callback){
 				if(!this.hasExpanded && this.childsData.length){
 					this.hasExpanded = true;
 					this.renderChilds(this.childsData, function(){
 						this.tree.updateListLastNodes();
 						this.tree.updateNodeCheckStates(this);
-						this.expand();
+						this.expand(_callback);
 					}.bind(this));
 					return ;
 				}
@@ -144,14 +175,17 @@ module.declare(function(require, exports, module){
 				if(!this.dropDownLayer)return ;
 				this.dropDownLayer.display(true);
 				E(this.expandedViewerId).style("backgroundPosition", "0 -20px");
+				E(this.iconId).style("backgroundPosition", "0 -20px");
 				this.expanded = true;
 				this.tree.fixRelativeEls();
+				_callback && _callback();
 			},
 
 			collapse: function(){
 				if(!this.dropDownLayer)return ;
 				this.dropDownLayer.display(false);
 				E(this.expandedViewerId).style("backgroundPosition", "0 0");
+				E(this.iconId).style("backgroundPosition", "0 0");
 				this.expanded = false;
 				this.tree.fixRelativeEls();
 			},
@@ -167,6 +201,21 @@ module.declare(function(require, exports, module){
 				this.container.display(bool);
 				if(this.dropDownLayer)
 					this.dropDownLayer.display(bool);
+			},
+
+			focus: function(){
+				var nameEl = E(this.namelinkId);
+				if(this.tree.selectionNode){
+					var lastNameEl = E(this.tree.selectionNode.namelinkId);
+					lastNameEl.delClass("selected");
+				}
+				this.tree.selectionNode = this;
+				nameEl.addClass("selected");
+				this.clickHandler(this.name);
+
+				var parent = this;
+				while(parent = parent.parent)
+					parent.expand && parent.expand();
 			},
 
 			setItsLast: function(bool){
@@ -202,7 +251,9 @@ module.declare(function(require, exports, module){
 							name: item.n,
 							childsData: item.childs,
 							tree: this.tree,
-							expanded: item.expanded
+							expanded: item.expanded,
+							clickHandler: this.clickHandler,
+							nameRenderer: this.nameRenderer
 						});
 						nodeItem.parent = this;
 						nodeItem.render();
@@ -215,25 +266,28 @@ module.declare(function(require, exports, module){
 			},
 
 			setViewChecked: function(){
-				var checkinput = E(this.checkinputId, true);
-				var checkedValue = this.tree.dataMapping[this.name].checked;
-				if(checkedValue == this.checked)
-					return ;
-				this.checked = checkedValue;
-				switch(checkedValue){
-					case 0:
-						checkinput.disabled = false;
-						checkinput.checked = false;
-						break;
-					case .5:
-						checkinput.disabled = true;
-						checkinput.checked = true;
-						break;
-					case 1:
-						checkinput.checked = true;
-						checkinput.disabled = false;
-						break;
-				}
+				clearTimeout(this.setViewCheckedTimer);
+				this.setViewCheckedTimer = setTimeout(function(){
+					var checkinput = E(this.checkinputId, true);
+					var checkedValue = this.tree.dataMapping[this.name].checked;
+					if(checkedValue == this.checked)
+						return ;
+					this.checked = checkedValue;
+					switch(checkedValue){
+						case 0:
+							checkinput.disabled = false;
+							checkinput.checked = false;
+							break;
+						case .5:
+							checkinput.disabled = true;
+							checkinput.checked = true;
+							break;
+						case 1:
+							checkinput.checked = true;
+							checkinput.disabled = false;
+							break;
+					}
+				}.bind(this), 10);
 			},
 
 			disposeEvent: function(){
@@ -262,9 +316,9 @@ module.declare(function(require, exports, module){
 					}.bind(this),
 
 					click: function(){
-						if(!this.expanded){
+						if(!this.expanded)
 							this.expand();
-						}
+						this.clickHandler(this.name);
 					}.bind(this)
 				});
 
@@ -278,24 +332,29 @@ module.declare(function(require, exports, module){
 					}.bind(this)
 				});
 
-				checkClicker.addEvents({
-					click: function(){
-						var checkValue = this.tree.dataMapping[this.name].checked;
-						switch(checkValue){
-							case 0:
-							case .5:
-								this.setCheck(1);
-								break;
-							case 1:
-								this.setCheck(0);
-								break;
-						}
-					}.bind(this)
-				});
+				if(this.tree.enableCheckBox){
+					checkClicker.addEvents({
+						click: function(){
+							var checkValue = this.tree.dataMapping[this.name].checked;
+							switch(checkValue){
+								case 0:
+								case .5:
+//									this.setCheck(1);
+									this.tree.fireEvent("beforeCheckBoxClick", [this, 1]);
+									break;
+								case 1:
+//									this.setCheck(0);
+									this.tree.fireEvent("beforeCheckBoxClick", [this, 0]);
+									break;
+							}
+						}.bind(this)
+					});
+				}
 			},
 
 			// 修正 checkClicker 位置偏差问题
 			fixRelativeEls: function(step){
+				if(!this.tree.enableCheckBox)return ;
 				if(step == 1){
 					E(this.checkClickerId).style("top", "0");
 				}else if(step == 2){
@@ -305,16 +364,24 @@ module.declare(function(require, exports, module){
 		}
 	);
 
+	// class tree
 	var tree = new Lichee.Class(
 		/* constructor */ function(conf){
 			this.container = E(conf.container);
 			this.data = conf.data;
+			this.enableCheckBox = typeof conf.enableCheckBox == "boolean" ?
+				conf.enableCheckBox : true;
+			this.clickHandler = conf.clickHandler;
+			this.nameRenderer = conf.nameRenderer;
 			this.nodes = [];
+			this.nodeMapping = {};
 			this.lists = [];
 
 			var formatedData = formatData(conf.data);
 			this.formatedData = formatedData[0];
 			this.dataMapping = formatedData[1];
+
+			this.setNodeCheckWithoutUpdateTimers = {};
 		},
 
 		/* methods */ {
@@ -337,7 +404,9 @@ module.declare(function(require, exports, module){
 						name: item.n,
 						childsData: item.childs,
 						tree: this,
-						expanded: item.expanded
+						expanded: item.expanded,
+						clickHandler: this.clickHandler,
+						nameRenderer: this.nameRenderer
 					});
 					nodeItem.parent = this;
 					nodeItem.render();
@@ -349,40 +418,78 @@ module.declare(function(require, exports, module){
 			},
 
 			getCheckedData: function(){
+				// TODO:
+			},
 
+			getRoot: function(){
+				return this.nodes[0];
+			},
+
+			focusToKey: function(key){
+				var dataMapping = this.dataMapping;
+				var data = dataMapping[key];
+				var nodeMapping = this.nodeMapping;
+				var arr = [], pn;
+
+				var tp = data;
+				while(true){
+					tp = dataMapping[tp.p];
+					if(tp){
+						arr.unshift(tp.n);
+					}else{
+						break;
+					}
+				}
+
+				var expand = function(){
+					var d, n;
+					if(d = arr.shift()){
+						n = nodeMapping[d];
+						n.expand(expand);
+					}else if(d = nodeMapping[key]){
+						d.focus();
+					}
+				};
+				expand();
 			},
 
 			// 只更新 dataMapping 中某个节点的选中状态（会自动关联更新其它节点的更新状态），但界面上不作更新
 			setNodeCheckWithoutUpdate: function(name, value){
-				var dataMapping = this.dataMapping;
-				var dataItem = dataMapping[name];
-				updateCheckStates(dataMapping, dataItem, value);
+				clearTimeout(this.setNodeCheckWithoutUpdateTimers[name]);
+				this.setNodeCheckWithoutUpdateTimers[name] = setTimeout(function(){
+					var dataMapping = this.dataMapping;
+					var dataItem = dataMapping[name];
+					updateCheckStates(dataMapping, dataItem, value);
+				}.bind(this), 10);
 			},
 
 			// 根据 dataMapping 中记录的选中状态，更新界面，obj 为参考的节点实例，会根据 obj 来自动找出需要更新的节点的界面
 			// 如果没有 obj 参数，则更新所有已渲染的节点
 			updateNodeCheckStates: function(obj){
-				if(obj){
-					var nodes = [obj], p = obj;
-					var inwards = function(node){
-						if(node.childs){
-							nodes.push.apply(nodes, node.childs);
-							node.childs.forEach(function(node){
-								if(node.expanded)
-									inwards(node);
-							});
-						}
-					};
-					inwards(p);
-					while(p = p.parent)
-						nodes.push(p);
-				}else{
-					nodes = this.nodes;
-				}
+				clearTimeout(this.updateNodeCheckStatesTimer);
+				this.updateNodeCheckStatesTimer = setTimeout(function(){
+					if(obj){
+						var nodes = [obj], p = obj;
+						var inwards = function(node){
+							if(node.childs){
+								nodes.push.apply(nodes, node.childs);
+								node.childs.forEach(function(node){
+									if(node.expanded)
+										inwards(node);
+								});
+							}
+						};
+						inwards(p);
+						while(p = p.parent)
+							nodes.push(p);
+					}else{
+						nodes = this.nodes;
+					}
 
-				nodes.forEach(function(node, index){
-					node.setViewChecked && node.setViewChecked();
-				});
+					nodes.forEach(function(node, index){
+						node.setViewChecked && node.setViewChecked();
+					});
+				}.bind(this), 10);
 			},
 
 			// privates
@@ -419,6 +526,8 @@ module.declare(function(require, exports, module){
 			}
 		}
 	);
+
+	tree.updateCheckStates = updateCheckStates;
 
 	return tree;
 });

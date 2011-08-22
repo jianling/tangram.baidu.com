@@ -7,7 +7,7 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.element.extend'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea"><span class="important">测试元素</span></div>'
+            html: '<div id="resultArea">通过extend来在原有基础上做扩展，示例代码：baidu.element.extend({myFunction: function(){alert("hello world")}}); baidu.element(id).myFunction();<div id="containerId"></div></div>'
         },
         btn1: {
             type: 'button',
@@ -16,12 +16,12 @@ var conf = {
             event: {
             	eventName: 'onclick',
             	handler: function(){
-            		T.element.extend({
-				        "myFunction" : function(ele){
-				            T.g("resultArea").innerHTML = "This is the function defined by user.<br>";
-				        }
-				    });
-				    T.e(T.dom.query(".important")).myFunction();
+            		baidu.element.extend({
+            		    myFunction: function(){
+            		        alert('hello world');
+            		    }
+            		});
+            		baidu.element('containerId').myFunction();
             	}
             }
         }

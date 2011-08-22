@@ -1,0 +1,9 @@
+.border{border:1px solid blue;padding:10px;}
+.red{color:red}
+.level1{font-size:22px;}
+.level2{font-size:18px;}
+.level3{font-size:16px;}
+.level4{font-size:14px;}
+.bold{font-weight:bold;}
+input{margin-top:10px;}
+#resultTextarea,#dom1{margin:20px;}

@@ -1,7 +1,24 @@
 {!
 function parse(str){
-	return str.replace(/[\r\n\'\"]/g, function(m){
-		return m == '\r' || m == '\n' ? '' : '\\' + m;
+	return str.replace(/[\r\n\'\"\/]|\\/g, function(m){
+		var val = '';
+		switch(m){
+		    case '\r':
+		    case '\n':
+		      val = '';
+		      break;
+		    case '\'':
+		    case '"':
+		      val = "\\" + m;
+		      break;
+		    case "\\":
+		      val = "\\\\";
+		      break;
+		    default:
+		   	  val = m;
+		      break;
+		}
+		return val;
 	});
 }
 
@@ -10,6 +27,7 @@ function getJson(item){
     item.name && array.push("name: '" + parse(item.name) + "'");
     item.type && array.push("type: '" + item.type + "'");
     item.desc && array.push("desc: '" + parse(item.desc) + "'");
+    item.comment && array.push("grammar: '"+ item.comment.getTag('grammar') +"'");
     if(item.params && item.params.length > 0){
         item.params.forEach(function(it){
             options.push(getJson(it));
@@ -31,15 +49,19 @@ function getJson(item){
     return '{' + array.join(', ') + '}';
 }
 var nameSpaceArray = [],
-	docMapArray = [];
+	docMapArray = [],
+	symbolSet = data.symbolSet;
 data.list.forEach(function(item){
-	var index = item.alias.lastIndexOf('.'),
-		par = index > -1 ? item.alias.substring(0, index) : null;
-	nameSpaceArray.push("{n: '"+ item.alias +"', p: '" +par+ "'}");
-	item.desc && docMapArray.push('\'' + item.alias + '\': ' +getJson(item));
+	var alias = item.alias,
+		index = alias.lastIndexOf('.'),
+		par = index > -1 ? alias.substring(0, index) : null,
+		symbol = symbolSet.getSymbol(par);
+	symbol && symbol.is("CONSTRUCTOR") && (par = par.substring(0, par.lastIndexOf('.')));/* tree, log */
+	nameSpaceArray.push("{n: '"+ alias +"', p: '" +par+ "'}");
+	item.desc && docMapArray.push('\'' + alias + '\': ' + getJson(item));
 });
 !}
-var {+ data.ident +} = {
+var {+ data.ident +}_api = {
 	nameSpace: [{+ nameSpaceArray.join(', ') +}],
 	docMap: {{+ docMapArray.join(', ') +}}
 }

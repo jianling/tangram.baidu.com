@@ -1,6 +1,6 @@
 var conf = {
-    tangram_base_in: SYS.userDir + '/../../source/github/Tangram-base/src',
-    tangram_ui_in: SYS.userDir + '/../../source/github/Tangram-component/src',
+    tangram_base_in: SYS.userDir + '/../../../Tangram-base/src',
+    tangram_ui_in: SYS.userDir + '/../../../Tangram-component-dev/src',
     tangram_mobile_in: '',
     
     tangram_base_out: SYS.userDir + '/mycode',

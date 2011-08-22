@@ -19,7 +19,7 @@ var conf = {
             		baidu.ajax.request('./baidu_ajax_request/request.php', {
             			data: 'x=5&y=2',
             			onsuccess: function(xhr, msg){
-	            			T.g('resultArea').innerHTML = '状态 ：' + xhr.status + ' 信息：' + msg;
+	            			T.g('resultArea').innerHTML = ' 状态        1状态 ：' + xhr.status + ' 信息：' + msg;
 	            		} 
             		});
             	}

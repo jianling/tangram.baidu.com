@@ -1,6 +1,5 @@
 <?php
 define("MY_DIR", realpath("../js/fragment"));
-define("REC_DIR", realpath("../../source/github/"));
 
 class MergeSource {
     private $patten = "/\/\/\/\s*import\s+([^;]+);*/";
@@ -12,7 +11,7 @@ class MergeSource {
     public $nobase;
     
     public function __construct(){
-		$this->VERDIR['tangram-component_stable'] = 'nightly/Tangram-component/resources';
+		$this->VERDIR['Tangram-component'] = '/Tangram-component/resources';
     }
     
     public function merge($version, $src, $nobase,$nouibase = false,$isResource = false) {
@@ -264,7 +263,7 @@ class MergeSource {
 		$file = split('\.',$match[1]);
 		$ext = array_pop($file);
 		$fp =  join('/',$file ).'.'.$ext ;
-		$path = $this->filePathJoin(REC_DIR, $this->VERDIR[$this->version],$fp);
+		$path = $this->filePathJoin(MY_DIR, $this->VERDIR[$this->version],$fp);
 		if( file_exists($path) ){
 			array_push($this->mergedFile,$path);
 		}

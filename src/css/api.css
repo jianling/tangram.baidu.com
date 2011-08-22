@@ -1,91 +1,273 @@
-/**
- * 	api页面
- */
+{include base-css/tree.css}
 
-.page-api {
-	background-color: #FFF;
+.apipage{
+	background: #fff url(../images/api-bg.gif) repeat-y 0 0;
 }
-.col-sub {
-	width: 198px;
+
+.apipage .sidebar{
+	float: left;
+	width: 180px;
+	overflow: hidden;
+	padding: 28px;
+}
+
+.apipage .content{
+	float: left;
+	width: 650px;
+	padding: 28px;
+}
+
+#api_list table td{
+	border: 0;
+}
+
+#api_list table td.name{
+	width: 180px;
+	vertical-align: top;
+}
+
+#api_list table td.name a{
+	font-weight: 700;
+	color: #064581;
+}
+
+#api_list table tr.dark td{
+	background-color: #f6f6f6;
+}
+
+#api_list,
+#api_detail{
+	display: none;
+}
+
+.apipage .content h2{
+	font-size: 24px;
+	font-weight: 700;
+}
+
+.apipage .content p{
+	font-size: 12px;
+	line-height: 24px;
+}
+
+.apipage .content .grammar .left,
+.apipage .content .grammar .center,
+.apipage .content .grammar .right{
+	background-image: url(../images/api-grammar-bg.gif);
+	height: 30px;
 	float: left;
 }
-.col-main {
-	width: 750px;
-	float: left;
+
+.apipage .content .grammar .left,
+.apipage .content .grammar .right{
+	width: 5px;
 }
-.main-wrap {
-	padding-left: 20px;
+
+.apipage .content .grammar .left{
+
 }
-.main-wrap h2 {
-	font-size: 16px;
-	font-weight: bold;
-	margin: 15px 0 10px;
-	text-indent: -15px;
+
+.apipage .content .grammar .center{
+	background-position: 0 -30px;
+	line-height: 30px;
+	color: #333;
+	padding: 0 5px;
+	font-family: "Verdana";
 }
-.main-wrap h3,
-.main-wrap h3.tree-off{
+
+.apipage .content .grammar .right{
+	background-position: 0 -60px;
+}
+
+.apipage .content .grammar{
+	margin: 10px 0 0 0;
+}
+
+.apipage .content .grammar .center strong{
+	font-weight: 700;
+	color: #000;
+}
+
+.apipage .content .group{
+	margin-top: 10px;
+}
+
+.apipage .content .group .group-title{
+	background: transparent url(../images/api-group-switch.gif) no-repeat 0 0;
+	line-height: 23px;
+	text-decoration: none;
+	color: #000;
 	font-size: 14px;
-	font-weight: bold;
-	margin:15px 0 10px;
-	padding-left: 20px;
-	background: url("../images/tree.png") no-repeat 0 -42px;
-	cursor: pointer;
+	font-weight: 700;
+	padding-left: 24px;
 }
-.main-wrap h3.tree-off {
-	background-position: 0 7px;
+
+.apipage .content .group .group-title-close{
+	background-position: 0 -24px;
 }
-.main-wrap p.desc {
-	line-height: 2em;
-}
-.main-wrap i {
-	margin: 0 3px;
-}
-p.api-ayntax span {
-	border: 1px solid #333;
-	display: inline-block;
-	padding: 2px 10px;
-	margin: 10px 0;
-}
-p.quck-link a {
-	margin: 0 5px;
-}
-p.quck-link b {
-	display: inline-block;
-	height: 8px;
-	border-left: 1px solid #333;
-}
-span.definition {
-	color: #0000FF;
-	text-decoration: underline;
-	margin: 0 3px;
-}
-div.method-param,
-div.event-param {
-	margin: 10px 0 10px 40px;
-	padding: 10px;
-	width: 500px;
-	background-color: #E6E6E6;
-	position: relative;
-}
-div.method-param ul,
-div.event-param ul {
-	margin: 5px 0 10px 30px;
-}
-div.method-param  .hide-btn,
-div.event-param  .hide-btn {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	cursor: pointer;
-}
-.method-item .definition,
-.event-item .definition {
-	cursor: pointer;
-}
-.parameter-area,
-.method-area {
+
+.apipage .content .group .group-content{
 	margin-left: 10px;
 }
-#J_demo {
-	padding: 20px;
+
+.apipage .content .group .group-content td{
+	border: 0;
+	padding: 3px;
+	vertical-align: top;
+}
+
+.apipage .content .group .group-content tr.dark td{
+	background-color: #f6f6f6;
+}
+
+.apipage .content .group .group-content .type{
+	color: #999;
+	font-style: italic;
+}
+
+.apipage .content .group .group-content .name a{
+	font-weight: 700;
+	color: #064581;
+}
+
+#api_detail .group .group-content .name,
+#api_detail .group .group-content .type{
+	width: 140px;
+}
+
+#api_detail .group .group-content .name a{
+	text-decoration: none;
+	color: #000;
+	cursor: text;
+}
+
+#api_detail .group .group-content tr.expanded td{
+	background-color: #dadaff;
+}
+
+#api_detail .group .group-content tr.comboline .name a{
+	text-decoration: underline;
+	color: #064581;
+	cursor: pointer;
+}
+
+#api_detail .group .group-content tr.extend_tr{
+}
+
+#api_detail .group .group-content tr.extend_tr table{
+	width: 610px;
+	margin-left: 5px;
+}
+
+.method_grammar{
+	text-indent: 10px;
+	margin: auto 5px;
+	color: #000;
+	background-color: #ffffbf;
+	line-height: 24px;
+	border-bottom: 1px solid #ddd;
+}
+
+.method_grammar em{
+	font-style: italic;
+}
+
+.method_grammar strong{
+	font-weight: 700;
+}
+
+.apipage .content .tab{
+	width: auto;
+	margin-top: 10px;
+}
+
+.apipage .content .tab .tab-title{
+	width: auto;
+	height: 35px;
+	border-bottom: 1px solid #9d9e9f;
+	background-color: #e2eaff;
+}
+
+.apipage .content .tab .tab-title .item{
+	text-align: center;
+	font-size: 14px;
+	width: 73px;
+	height: 31px;
+	line-height: 31px;
+	background-image: url(../images/api-tab.gif);
+	position: relative;
+	top: 5px;
+	margin-left: 5px;
+}
+
+.apipage .content .tab .tab-content{
+    border: #9d9e9f solid 1px;
+    border-top: none;
+    height: 400px;
+}
+
+#apitree{
+	width: 600px;
+	margin: 0;
+	line-height: 20px;
+}
+
+#apitree a{
+	font-size: 14px;
+}
+
+#api_demo_iframe{
+	width: 100%;
+	height: 100%;
+	border: 0;
+}
+
+#api_jump a{
+	color: #064581;
+}
+
+.method_tip{
+	width: 620px;
+	overflow: hidden;
+}
+
+.method_tip_arr{
+	background: url(../images/api-method-detail-arr.gif) no-repeat center 0;
+	width: auto;
+	height: 6px;
+	position: relative;
+	top: 1px;
+	overflow: hidden;
+}
+.method_tip_top,
+.method_tip_content,
+.method_tip_bottom{
+	width: 620px;
+	background-image: url(../images/api-method-detail.gif);
+}
+
+.method_tip_top,
+.method_tip_bottom{
+	height: 4px;
+	overflow: hidden;
+}
+
+.method_tip_content{
+	background-position: -620px 0;
+}
+
+.method_tip_bottom{
+	background-position: -1240px 0;
+}
+
+#api_name{
+
+}
+
+#api_type{
+	font-style: italic;
+}
+
+#api_type_p{
+	margin: 0 0 10px 0;
 }

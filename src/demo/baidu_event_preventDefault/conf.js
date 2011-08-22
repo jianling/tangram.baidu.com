@@ -7,7 +7,7 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.event.preventDefault'}],
     'default': {
         pageConf: {
-            html: '<p><a href="http://www.baidu.com" target="_blank" id="mylink">我是链接</a></p><div id="resultArea"></div>'
+            html: '<p id="link"><a href="http://www.baidu.com" target="_blank" id="mylink">我是链接</a></p><div id="resultArea"></div>'
         },
         btn1: {
             type: 'button',

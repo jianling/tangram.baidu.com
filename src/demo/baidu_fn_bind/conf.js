@@ -7,7 +7,7 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.fn.bind'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea"></div>'
+            html: '<div id="resultArea">该实例演示对函数function doit(txt){alert(txt);}重新绑定作用域并执行的过程，示例代码：var fn = baidu.fn.bind(doit); fn("hello world");</div>'
         },
         btn1: {
             type: 'button',
@@ -16,13 +16,11 @@ var conf = {
             event: {
             	eventName: 'onclick',
             	handler: function(){
-            		function handler (argument){
-						return this.value + argument;
-					}
-					var _this = {value : 1},
-					    arg = 2;
-					var newHandler = T.fn.bind(handler, _this, arg);
-					T.g('resultArea').innerHTML = "返回："+newHandler()+"<br>";
+            	    function doit(txt){
+            	        alert(txt)
+            	    }
+            	    var fn = baidu.fn.bind(doit);
+            	    fn('hello world');
             	}
             }
         }

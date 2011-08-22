@@ -4,14 +4,24 @@
         var me = this;
         me._toggleId = null;//
         me._instance = null;//
-        if(me.clazz.dependPackages){
-            document.writeln('<script type="text/javascript" src="../js/fragment/Tangram-component/src/import.php?f='+ me.clazz.dependPackages.join(',') +'"></script>');
-        }
+        document.writeln('<script type="text/javascript" src="../js/fragment/Tangram-component/src/import.php?f='+ me._getImportPackagesString().join(',') +'"></script>');
     }).extend({
         uiType: 'democonsole',
         tplPanel: '<div id="#{panelId}" class="#{panelClass}"></div>',
-        tplDOM: '<div id="#{id}" class="#{class}"><div id="#{consoleId}" class="#{consoleClass}"><div align="center" class="#{comboboxClass}"><select id="#{demoType}" class="#{demoTypeClass}" onchange="#{handler}">#{content}</select></div>#{defaultContent}</div>#{panelContent}<div class="#{btnClass}"><input type="button" value="code" onclick="#{codeHandler}"/>&nbsp;<input type="button" value="#{infoWinVal}" onclick="#{infoWinHandler}"/></div></div>',
+        tplDOM: '<div id="#{id}" class="#{class}"><div id="#{consoleId}" class="#{consoleClass}"><div align="center" class="#{comboboxClass}"><select id="#{demoType}" class="#{demoTypeClass}" onchange="#{handler}">#{content}</select></div>#{defaultContent}</div>#{panelContent}</div>',
         tplHTML: '<!DOCTYPE html>\n<html>\n<head>\n<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">\n<title>#{packages}</title>\n<link type="text/css" rel="stylesheet" href="#{cssPath}/default.css"/>\n<script type="text/javascript" src="../js/download/tangram-1.3.9.core.js"></script>\n<script type="text/javascript" src="../js/fragment/Tangram-component/src/import.php?f=#{packages}"></script>\n</head>\n<body>\n#{content}\n</body>\n<script type="text/javascript">\n#{jscode}\n</script>\n</html>',
+        
+        _getImportPackagesString: function(){
+            var me = this,
+                defaultPackage = me.clazz[me.clazz.type],
+                filter = {
+                    'baidu.element.each': 'baidu.element',
+                    'baidu.element.Element': 'baidu.element',
+                    'baidu.element.events': 'baidu.element'
+                }[defaultPackage];
+            filter && (defaultPackage = filter);
+            return [defaultPackage].concat(me.clazz.dependPackages || []);
+        },
         
         getPanelString: function(){
             var me = this;
@@ -40,11 +50,7 @@
                 handler: me.getCallString('_onChangeHandler'),
                 content: array.join(''),
                 defaultContent: me.getDemoString(demoType[0].key),
-                panelContent: me.getPanelString(),
-                btnClass: me.getClass('btn'),
-                codeHandler: me.getCallString('getCode'),
-                infoWinVal: unescape('%u5728%u65B0%u7A97%u53E3%u6253%u5F00'),
-                infoWinHandler: ''
+                panelContent: me.getPanelString()
             });
         },
 
@@ -64,7 +70,7 @@
                     name: is ? '' : key,
                     type: is ? '' : 'type="'+ entity.type +'"',
                     val: data.key[index],
-                    checked: data.val[index] == entity.defaultValue ? (is ? 'selected' : 'checked') : '',
+                    checked: data.key[index] == entity.defaultValue ? (is ? 'selected' : 'checked') : '',
                     content: is ? data.val[index] : '',
                     foot: is ? '</options>' : ''
                 }));
@@ -113,11 +119,12 @@
                 pageConf = me[typeId].pageConf,
                 opts = pageConf.options ? eval('('+ pageConf.options +')') : {},
                 target;
-            pageConf.jsCode && (me.getScript().text = pageConf.jsCode);
             pageConf.html && (container.innerHTML = pageConf.html);
+            pageConf.jsCode && (me.getScript().text = pageConf.jsCode);
             if(me.clazz.type == 'class'){
                 me._instance = new clazz(opts);
-                !opts.autoRender && me._instance.render(pageConf.target || container);
+                !opts.autoRender && me._instance.render
+                    && me._instance.render(pageConf.target || container);
             }
         },
 
@@ -142,6 +149,7 @@
             script = null;
             baidu.dom.insertHTML(me.renderMain(target), 'beforeEnd', me.getString());
             me._createInstance(me.demoType[0].key);
+            me.dispatchEvent('onload');
         },
 
         _onChangeHandler: function(){
@@ -168,7 +176,17 @@
                 param = [];
             //取得参数
             depend && baidu.array.each(depend, function(item){
-                param.push(baidu.dom.g(item).value);
+                var list = document.getElementsByName(item);
+					list.length <= 0 && (list = baidu.dom.g(item));
+                if(!list.tagName && list.length){
+                    var val = [];
+                    for(var i = 0; i < list.length; i++){
+                        list[i].checked && val.push(list[i].value);
+                    }
+                    param.push(val);
+                }else{
+                    param.push(list.value);
+                }
             });
             fn.apply(me._instance, param);
         },
@@ -205,25 +223,30 @@
             if(me.clazz.type == 'class'){
                 opts = pageConf.options ? eval('(' + pageConf.options + ')') : {};
                 jsCode.push('var c = new '+ me.clazz[me.clazz.type] +'('+ (pageConf.options || '{}') +');');
-                !opts.autoRender && jsCode.push('c.render("'+ (pageConf.target || 'demoId') +'");');
+                !opts.autoRender && me._instance.render
+                    && jsCode.push('c.render("'+ (pageConf.target || 'demoId') +'");');
             }else{
                 baidu.object.each(demoConf, function(item, key){
-                    if(item.event){
+                    if(item.isMain){
                         item.depend && baidu.array.each(item.depend, function(rsid){
                             param.push('"'+ baidu.dom.g(rsid).value +'"');
                         });
-                        jsCode.push('var main = '+ item.event.handler +'\n main('+ param.join(',') +');');
+                        var fnStr = item.event.handler.toString().replace(/\\(u[\da-f]{2,4})/ig, function(a, b){//处理ff中自动将中文转义为unicode
+                                console.log(b);
+                                return '%' + b;
+                            });
+                        jsCode.push('var main = '+ unescape(fnStr) +'\n main('+ param.join(',') +');');
                         return false;
                     }
                 });
             }
             code = baidu.string.format(me.tplHTML, {
-                packages: me.clazz.dependPackages ? [packages].concat(me.clazz.dependPackages).join(',') : packages,
+                packages: me._getImportPackagesString().join(','),
                 cssPath: packages.replace(/\./g, '_'),
                 content: pageConf.html || '<div id="demoId"></div>',
                 jscode: jsCode.join('\n')
             });
-            alert(code);
+            return code;
         }
     });
 })();

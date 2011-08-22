@@ -121,7 +121,7 @@ void function(){
 					{ name: "自定义下载", link: "custom.html", target: "_self" }
 				],
 				handle: function(conf){
-					window.open(conf.link, conf.target);
+					conf.link && window.open(conf.link, conf.target);
 				}
 			});
 			downMenu.render();
@@ -130,30 +130,30 @@ void function(){
 				referrerElement: "menu-doc",
 				direction: "down",
 				datas: [
-					{ name: "mobile 开发系列", datas: [
-						{ name: "mobile web 的未来" },
-						{ name: "需要 jquery 吗" },
-						{ name: "链式调用" },
-						{ name: "常用技巧" },
-						{ name: "移动浏览器的 viewport" },
-						{ name: "iframe 的问题" },
-						{ name: "基础方法" },
-						{ name: "UI 组件" },
-						{ name: "事件处理", datas: [
-							{ name: "事件处理(一)" },
-							{ name: "事件处理(二)" },
-							{ name: "事件处理(三)" }
-						] },
-						{ name: "动画效果", datas: [
-							{ name: "动画效果(一)" },
-							{ name: "动画效果(二)" }
-						] },
-						{ name: "离线存储", datas: [
-							{ name: "离线存储(一)" },
-							{ name: "离线存储(二)" }
-						] },
-						{ name: "本地存储" }
-					] },
+//					{ name: "mobile 开发系列", datas: [
+//						{ name: "mobile web 的未来" },
+//						{ name: "需要 jquery 吗" },
+//						{ name: "链式调用" },
+//						{ name: "常用技巧" },
+//						{ name: "移动浏览器的 viewport" },
+//						{ name: "iframe 的问题" },
+//						{ name: "基础方法" },
+//						{ name: "UI 组件" },
+//						{ name: "事件处理", datas: [
+//							{ name: "事件处理(一)" },
+//							{ name: "事件处理(二)" },
+//							{ name: "事件处理(三)" }
+//						] },
+//						{ name: "动画效果", datas: [
+//							{ name: "动画效果(一)" },
+//							{ name: "动画效果(二)" }
+//						] },
+//						{ name: "离线存储", datas: [
+//							{ name: "离线存储(一)" },
+//							{ name: "离线存储(二)" }
+//						] },
+//						{ name: "本地存储" }
+//					] },
 					{ name: "tangram 最佳实践", datas: [
 						{ name: "Base 入门", link: getpath('docs/Tangram-Base.html'), target: '_self' },
 						{ name: "Component 入门", link: getpath('docs/Tangram-Component.html'), target: '_self' },
@@ -164,14 +164,13 @@ void function(){
 						{ name: "Component 插件", link: getpath('docs/Tangram-Component-Plugins.html'), target: '_self' },
 						{ name: "Behavior", link: getpath('docs/Tangram-Component-Behavior.html'), target: '_self' }
 					] },
-					{ name: "新手入门" },
-					{ name: "快捷方式" },
-					{ name: "Base 文档" },
-					{ name: "component 文档" },
-					{ name: "mobile 文档" }
+					{ name: "新手入门",link: getpath('docs/tutorial.html'), target: '_self'  },
+					{ name: "快捷方式",link: getpath('docs/short.html'), target: '_self'  },
+					{ name: "API 参考手册", link: getpath("api.html"), target: '_self' }
+//					{ name: "mobile 文档" }
 				],
 				handle: function(conf){
-					window.open(conf.link, conf.target);
+					conf.link && window.open(conf.link, conf.target);
 				}
 			});
 			docMenu.render();
@@ -180,12 +179,18 @@ void function(){
 				referrerElement: "menu-more",
 				direction: "down",
 				datas: [
-					{ name: "FAQ" },
-					{ name: "BLOG" },
-					{ name: "社区" },
-					{ name: "关于" },
-					{ name: "贡献" }
-				]
+					{ name: "FAQ"  ,link: getpath('docs/faq.html'), target: '_self'},
+					{ name: "BLOG" ,link: 'http://www.baiduux.com/tag/tangram/', target: '_blank' },
+					{ name: "社区" ,link: 'http://tieba.baidu.com/f?kw=tangram', target: '_blank' },
+					{ name: "关于" ,link: getpath('docs/about.html'), target: '_self'},
+					{ name: "贡献" ,datas:[
+						{ name: "贡献列表" ,link:  getpath('docs/contribution.html'), target: '_self'},
+						{ name: "贡献说明" ,link:  getpath('docs/contribution-notice.html'), target: '_self'}
+					]}
+				],
+				handle: function(conf){
+					conf.link && window.open(conf.link, conf.target);
+				}
 			});
 			moreMenu.render();
 		});
@@ -198,6 +203,7 @@ void function(){
 	if(pageConfig.script){
 		FlyScript.load(pageConfig.script, function(page){
 			page.start();
+			window.page = page;
 		});
 	}
 }();

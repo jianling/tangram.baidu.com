@@ -7,7 +7,7 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.page.loadJsFile'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea"></div>'
+            html: '<div id="resultArea">该实例将演示从服务器加载loadCssFileTest.js空文件，加载完成后将执行回调来表示已经加载完毕</div>'
         },
         btn1: {
             type: 'button',
