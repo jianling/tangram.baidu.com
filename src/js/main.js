@@ -107,7 +107,7 @@ void function(){
 					{ name: "自定义下载", link: "custom.html", target: "_self" }
 				],
 				handle: function(conf){
-					window.open(conf.link, conf.target);
+					conf.link && window.open(conf.link, conf.target);
 				}
 			});
 			downMenu.render();
@@ -156,7 +156,7 @@ void function(){
 //					{ name: "mobile 文档" }
 				],
 				handle: function(conf){
-					window.open(conf.link, conf.target);
+					conf.link && window.open(conf.link, conf.target);
 				}
 			});
 			docMenu.render();
@@ -175,7 +175,7 @@ void function(){
 					]}
 				],
 				handle: function(conf){
-					window.open(conf.link, conf.target);
+					conf.link && window.open(conf.link, conf.target);
 				}
 			});
 			moreMenu.render();

@@ -281,7 +281,11 @@ module.declare(function(require, exports, module){
 		treeInstance.render();
 		treeInstance.getRoot().expand();
 
-		hash(/^[^_]+$/, function(key){
+		hash(/^[^_]+$/, focusToKey);
+		if(!location.hash)
+			location.hash = "#baidu.ui";
+
+		function focusToKey(key){
 			var node = treeInstance.dataMapping[key];
 			if(node.nodeType == "folder"){
 				loadAPIList(key);
@@ -289,6 +293,6 @@ module.declare(function(require, exports, module){
 				loadAPI(key);
 			}
 			treeInstance.focusToKey(key);
-		});
+		}
 	}
 });

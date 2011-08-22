@@ -11,7 +11,7 @@
 			</div>
 			<div class="sidebar article">
 				<div class="box">
-					<form name="myform" action="codesearch/code.php" method="post" target="_self">
+					<form name="myform" action="codesearch/code.php" method="get" target="_self">
 				        <input name="src" type="hidden" value=""/>
                         <input name="viewSource" type="hidden">
 						<input name="version" type="hidden" value="Tangram-component" />
@@ -28,7 +28,7 @@
     							</select>
     						</p> -->
 
-    						<h3>导出时</h3>
+    						<h3>依赖</h3>
                             <div class="depend">
                                 <!-- <div id="simple_con" class="hide"><input type="checkbox" name="simple" id="simple" /> <label for="simple">精简版</label></div> -->
                                 <div id="base_con">
@@ -50,9 +50,15 @@
 
     						<h3>我的选择</h3>
 							<p class="noi">
-								<textarea id="currentURL" onfocus="this.select();"></textarea>
+								<textarea id="currentInfo" onfocus="this.select();"></textarea>
 							</p>
-							<p class="noi p12" id="currentURL-desc">上面这个地址，记住了您当前选择的模块，您下次可以直接用它打开。</p>
+							<p class="noi">
+								<input type="button" id="buildText" disabled="disabled" class="buildText" value="生成文本" onclick="page.buildText();"/>
+								<input type="button" id="restoreChoose" class="restoreChoose" value="载入选择" onclick="page.restoreChoose();"/>
+							</p>
+							<p class="noi p12">
+								保留好生成的文本信息，下次粘回到上方的框内以载入本次选择。
+							</p>
     					</div>
 					    <div class="box-bottom"></div>
                     </form>

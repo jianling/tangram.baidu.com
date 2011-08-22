@@ -3,13 +3,20 @@ module.declare(function(require, exports, module){
 //	exports.toggleVersion = toggleVersion;
 	exports.printCode = printCode;
 	exports.importCode = importCode;
+	exports.buildText = buildText;
+	exports.restoreChoose = restoreChoose;
 
 	var Lichee = require("./lichee");
 	var E = Lichee.Element, Q = Lichee.queryElement;
 	var tree = require("./simpletree");
 	var treeInstance;
 	var filetree = E("filetree");
+	var currentInfo = E("currentInfo");
 	var checkedNodeByClick = {};
+
+	currentInfo.setValue = function(value){
+		this.dom.value = value;
+	};
 
 	var relatedMapping1 = tangram_base_csmap.docMap;
 	var relatedMapping2 = tangram_component_csmap.docMap;
@@ -83,11 +90,52 @@ module.declare(function(require, exports, module){
         document.myform.submit();
     }
 
-	function getCheckedNode(){
+	function buildText(){
+		currentInfo.setValue("生成中...");
+		clearTimeout(buildText.timer);
+		buildText.timer = setTimeout(function(){
+			var choose = getCheckedNode(true);
+			currentInfo.setValue(choose.join(","));
+		}, 500);
+	}
+
+	function restoreChoose(){
+		var value = currentInfo.dom.value;
+		clearTimeout(restoreChoose.timer);
+
+		if(value == ""){
+			currentInfo.setValue("没有内容");
+			return restoreChoose.timer = setTimeout(function(){
+				currentInfo.setValue("");
+			}, 500);
+		}
+
+		currentInfo.setValue("解析中...");
+		restoreChoose.timer = setTimeout(function(){
+			var values = value.split(",");
+			values.forEach(function(value){
+				value = value.trim();
+				var dataItem = treeInstance.dataMapping[value];
+				if(dataItem){
+					treeInstance.setNodeCheckWithoutUpdate(value, 1);
+					relatedWithNormalNode(dataItem, 1);
+					checkedNodeByClick[value] = dataItem;
+				}
+			});
+			treeInstance.updateNodeCheckStates();
+			currentInfo.setValue("解析完成");
+			setTimeout(resetButton, 200);
+			setTimeout(function(){
+				currentInfo.setValue("");
+			}, 500);
+		}, 500);
+	}
+
+	function getCheckedNode(cleanly){
 		var result = {}, resultArr = [];
 		var getAllChilds = function(dataItem){
 			if(dataItem.nodeType == "normal"){
-				result["///import " + dataItem.n + ";"] = 1;
+				result[dataItem.n] = 1;
 			}else if(dataItem.nodeType == "folder"){
 				dataItem.childs.forEach(getAllChilds);
 			}
@@ -95,17 +143,26 @@ module.declare(function(require, exports, module){
 		Lichee.each(checkedNodeByClick, function(dataItem){
 			getAllChilds(dataItem);
 		});
-		Lichee.each(result, function(value, key){
-			resultArr.push(key);
-		});
-		return resultArr.join("\r\n");
+		Lichee.each(result, cleanly ?
+			function(value, key){
+				resultArr.push(key);
+			} :
+			function(value, key){
+				resultArr.push("///import " + key + ";");
+			}
+		);
+		return cleanly ? resultArr : resultArr.join("\r\n");
 	}
 
 	function setupSideBar(){
 		var exportBtn = E("export");
 		var viewcodeBtn = E("viewcode");
+		var buildTextBtn = E("buildText");
+		var restoreChooseBtn = E("restoreChoose");
 		exportBtn.useMouseAction("btn", "over,out,down,up");
 		viewcodeBtn.useMouseAction("btn", "over,out,down,up");
+		buildTextBtn.useMouseAction("btn", "over,out,down,up");
+		restoreChooseBtn.useMouseAction("btn", "over,out,down,up");
 	}
 
 	function disposeData(data){
@@ -142,6 +199,25 @@ module.declare(function(require, exports, module){
 		});
 	}
 
+	function resetButton(){
+		switch(treeInstance.dataMapping["baidu"].checked){
+			case 0.5:
+			case 1:
+				E("export").dom.disabled =
+				E("viewcode").dom.disabled =
+				E("buildText").dom.disabled = false;
+				break;
+			case 0:
+				E("export").dom.disabled =
+				E("viewcode").dom.disabled =
+				E("buildText").dom.disabled = true;
+				break;
+		}
+	}
+
+	var relatedWithFolderNode; // 从一个 folder 节点搜索联系
+	var relatedWithNormalNode; // 从一个 normal 节点搜索联系
+
 	function start(){
 		setupSideBar();
 
@@ -158,7 +234,7 @@ module.declare(function(require, exports, module){
 
 		// 从一个 normal 节点搜索联系
 		var relatedWithNormalNode_cache = {};
-		var relatedWithNormalNode = function(dataItem, value){
+			relatedWithNormalNode = function(dataItem, value){
 			var n = dataItem.n;
 			var dataMapping = treeInstance.dataMapping;
 
@@ -172,6 +248,8 @@ module.declare(function(require, exports, module){
 					ret = ret.concat(r1);
 				if(r2)
 					ret = ret.concat(r2);
+				if(ret.length == 0)
+					return ;
 				relatedWithNormalNode_cache[n] = ret;
 			}
 
@@ -198,7 +276,7 @@ module.declare(function(require, exports, module){
 
 		// 从一个 folder 节点搜索联系
 		var relatedWithFolderNode_cache = {};
-		var relatedWithFolderNode = function(dataItem, value){
+			relatedWithFolderNode = function(dataItem, value){
 			var normals = relatedWithFolderNode_cache[dataItem.n];
 			if(!normals){
 				normals = [];
@@ -257,19 +335,7 @@ module.declare(function(require, exports, module){
 //			this.updateNodeCheckStates(nodeIns);
 			this.updateNodeCheckStates();
 
-			setTimeout(function(){
-				switch(this.dataMapping["baidu"].checked){
-					case 0.5:
-					case 1:
-						E("export").dom.disabled =
-						E("viewcode").dom.disabled = false;
-						break;
-					case 0:
-						E("export").dom.disabled =
-						E("viewcode").dom.disabled = true;
-						break;
-				}
-			}.bind(this), 200);
+			setTimeout(resetButton, 200);
 
 //			传统用法
 //			tree.updateCheckStates(nodeIns.tree.dataMapping, nodeIns.tree.dataMapping[nodeIns.name], value);
