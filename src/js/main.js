@@ -73,7 +73,13 @@ void function(){
 
 		var doSearch = function(text){
 			if(text = text.trim()){
-				window.open("./search.html?key=" + encodeURIComponent(text.trim()), "_self");
+				text = encodeURIComponent(text);
+				page.statSend({
+					name: "search-key",
+					value: text
+				}, function(){
+					window.open("./search.html?key=" + text, "_self");
+				});
 			}
 		};
 
@@ -88,7 +94,7 @@ void function(){
 				e = Lichee.Event(e);
 				if(e.keyCode == 13){
 					searchbutton.addClass("searchbutton-down");
-					doSearch(this.value);
+//					doSearch(this.value);
 				}
 			},
 
