@@ -7,6 +7,7 @@ T.dom.ready(function(){
 		onsuccess:function(x,s){ 
 
 			window.apiData = eval(s.replace(/\n|\r|\n\r/ig,''));
+			
 			var shortstr = [];
 			for(var i=0;i<apiData.length;i++){
 				for(var ii=0;ii<apiData[i].interfaces.length;ii++){

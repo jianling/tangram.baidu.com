@@ -1,5 +1,4 @@
 {include ../header.inc}
-<!--include file="./header.inc"-->
 		<script type="text/javascript">
 			var pageConfig = { name: "docs", prepath: "docs/" };
 		</script>
@@ -9,7 +8,7 @@
                 <h2>入门</h2>
                 <p>Tangram是一个简单可依赖的开源js框架。它使用简单，功能丰富，容易扩展。它经过了Baidu专业QA的测试和百度各产品线巨大流量的考验，质量有充分的保障。使用它进行开发，除了能提高开发效率，减少工作量，还能减少bug数，提高代码质量。下面让我们开始tangram框架的入门之旅。
                 </p>
-                
+
                  <h2>建立一个测试页面</h2>
                 <p>
                 在我们开始一切工作之前，要有页面；你可以创建一个新的html，也可以在你已有的页面里面加上一句引入tangram的标签：
@@ -20,7 +19,7 @@
                 <p>
                 Tangram框架可以和任何已有的框架集成在一起，Tangram是友好的，不用担心它们发生冲突，让你已有的功能失效。<br>
                 现在，假设你已经建立了下面这样的一个页面：
-                
+
                 </p>
                <pre><code>&lt;!doctype html&gt;
 &lt;html&gt;
@@ -35,7 +34,7 @@
 	  &lt;/div&gt;
 	  &lt;/body&gt;
 &lt;/html&gt;</code></pre>
-                
+
                 <h2>获取一个dom节点</h2>
                 <p>
                 通常我们对页面上DOM节点的操作，都是从获取该节点的引用开始。 Tangram提供了常用的节点获取方法的封装。<br>
@@ -47,7 +46,7 @@
                 <p>
                 T.dom.query支持通过css选择符的方式获取节点，当然，如果是对有id或class的节点而言，用T.dom.g或T.dom.q会更快些。
                 </p>
-                
+
                 <h2>节点样式设置</h2>
                 <p>设置节点的样式也是我们经常做的操作，tangram也提供了支持；如果我们想把id为 byG的节点设置多种样式，那么我们可以直接使用：<br>
                <pre> <code>
@@ -58,7 +57,7 @@
                     left:100,<br>
                     opacity:.5<br>
                 });<br>
-                
+
                 </code></pre>
                 <br>px值、透明度的设置，直接使用数字就可以了，tangram会帮你处理好浏览器的差异。</p>
                 <h2>节点class名增删</h2>
@@ -69,7 +68,7 @@
                 } &lt;/style&gt;</code></pre>
                 <br>然后我们调用<br>
                <pre> <code>T.dom.addClass("byG","blue");</code></pre>
-                
+
                 <br>怎么样？ 有点难看？ 那好吧：<br>
                <pre> <code>T.dom.removeClass("byG","blue");</code></pre>
                 </p>
@@ -82,7 +81,7 @@
                 alert("在我地盘这你就得听我的");});</code></pre>
                 </p>
                 <h2>插入HTML</h2>
-                
+
                 <p>除了对已有节点的操作，我们也经常需要插入新的节点到DOM树里；方式有两种，一种是插入HTML字符串，另外就是创建DOM节点。 这里先说第一种，<br>
                 现在有这样一段文本：<br>
                <pre> <code>
@@ -92,7 +91,7 @@
                <pre> <code>T.dom.insertHTML("byG", "beforeEnd", htmlString);</code></pre>
                 <br>那么如果想插入到内部开头呢？ 将"beforeEnd"替换成"afterBegin"； 插在外部前面？换成"beforeBegin"； 外部后面？ "afterEnd"； 如果你熟悉IE的insertAdjacentHTML，那么这就是这个方法的浏览器兼容版。
                 </p>
-                
+
                 <h2>创建DOM节点并插入</h2>
                 <p>再说第二种方式，创建dom节点。同样，浏览T.dom包下的方法，你能大致猜出来实现这个功能的就是那个 T.dom.create。 <br>
                <pre> <code>var iframe = T.dom.create("IFRAME",{
@@ -102,20 +101,20 @@
                     frameborder:"none",<br>
                     src:"http://www.baidu.com"<br>
                 });</code></pre>
-                
+
                 <br>如此，再使用<br>
                <pre> <code>T.dom.insertAfter(iframe,"byG");</code></pre>
                 <br>就可以将它插入到页面中了。 <br>
                 当然，也可以选择T.dom.insertBefore，如果不清楚差别，请参考各自文档。
                 </p>
-                
+
                 <h2>Ajax请求</h2>
                 <p>
                 到此为止，对于如何渲染当前页面，我们已经有了大概的了解。 接下来我们了解一下如何进行AJAX请求。<br>
                <pre> <code>T.ajax.get("http://yourDomain.com/yourAjaxUrl",function(response){
                 <br>
                     alert("成功获取如下文本: " + response);<br>
-                
+
                 });</code></pre>
                 <br>如果是post请求，那么在上面搜索框中搜索post， T.ajax.post就是你要的方法。 如果需要复杂的处理，比如设置header，添加错误响应，甚至添加安全认证，那么可以直接使用 T.ajax.request，具体使用方法请参考文档页面描述。<br>
                     到此，你已经基本了解了tangram在DOM节点操作上的主要的方法，也可以使用进行一些页面的辅助编程了。下面，我们来了解一些更高级的应用，看看tangram还能做些什么。<br></p>
@@ -124,7 +123,6 @@
                 dom包只是tangram整个框架中一个很重要的包，除此之外，还有许多其他的有用的工具包。 <br>
                 查看 <a href="tutorial-advanced.html">Tangram入门指南 - 高级篇</a> 使用
                 </p>
-				
+
 </div>
 {include ../footer.inc}
-<!-- include file="footer.inc" -->
