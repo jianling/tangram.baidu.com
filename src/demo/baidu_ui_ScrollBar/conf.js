@@ -92,19 +92,19 @@ var conf = {
 				}
             }
 		},
-		exporientation: {label:'格式-滑块方向：',defaultValue: 'horizontal|vertical 默认值：vertical',type:'text',size:40,
+		exporientation: {label:'格式-滑块方向：',defaultValue: 'horizontal|vertical 默认值：vertical',type:'text',size:20,
 			event: {eventName: 'onclick',handler:function(){ newVal.value = 'horizontal' }}
 		},
-		expvalue: {label:'<br />格式-滑块位置：',defaultValue: '定义域(0, 100)',type:'text',size:40,
+		expvalue: {label:'<br />格式-滑块位置：',defaultValue: '定义域(0, 100)',type:'text',size:20,
 			event: {eventName: 'onclick',handler:function(){ newVal.value = Math.ceil( Math.random()*80 ) }}
 		},
-		expdimension: {label:'<br />格式-滑块高度：',defaultValue: '滑块占总高的百分比，定义域(0, 100)',type:'text',size:40,
+		expdimension: {label:'<br />格式-滑块高度：',defaultValue: '滑块占总高的百分比，定义域(0, 100)',type:'text',size:20,
 			event: {eventName: 'onclick',handler:function(){ newVal.value =  Math.ceil( Math.random()*20 ) }}
 		},
-		expstep: {label:'<br />格式-单次位移：',defaultValue: '点击滚动按钮时移动的百分比，定义域(0, 100)',type:'text',size:40,
+		expstep: {label:'<br />格式-单次位移：',defaultValue: '点击滚动按钮时移动的百分比，定义域(0, 100)',type:'text',size:20,
 			event: {eventName: 'onclick',handler:function(){ newVal.value = Math.ceil( Math.random()*10 ) }}
 		},
-		exponscroll: {label:'<br />格式-滚动事件：',defaultValue: '当滚动时触发该事件，function(evt){}',type:'text',size:40,
+		exponscroll: {label:'<br />格式-滚动事件：',defaultValue: '当滚动时触发该事件，function(evt){}',type:'text',size:20,
 			event: {eventName: 'onclick',handler:function(){ newVal.value = 'function(evt){alert(evt.value)}' }}
 		},
 		
@@ -117,7 +117,7 @@ var conf = {
 				}
 		},
 		newVal:{
-			type:'text',size:35
+			type:'text',size:20
 		},
 		newBtn:{
 			type:'button',
@@ -166,7 +166,6 @@ var conf = {
     
     groups: {
         'default': [
-            ['console'],
             ['getSize','open','close','isVisible'],
             ['per','scrollTo'],
             ['fper','fbkh','flushUI'],

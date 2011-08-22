@@ -36,7 +36,7 @@
 		},
 		getArrow: {
 			type: 'button',
-			defaultValue: '获取下拉箭头元素 getArrow().id',
+			defaultValue: 'getArrow()',
 			event: {
 				eventName: 'onclick',
 				handler: function(){
@@ -46,7 +46,7 @@
 		},
 		getInput: {
 			type: 'button',
-			defaultValue: '获取input元素 getInput().id',
+			defaultValue: 'getInput()',
 			event: {
 				eventName: 'onclick',
 				handler: function(){
@@ -82,7 +82,6 @@
     }, 
     groups: {
         'default': [
-            ['console'],
             ['getArrow','getInput'],
             ['setValueIpt','setValueBtn','getInputVal'],
             ['dispose']

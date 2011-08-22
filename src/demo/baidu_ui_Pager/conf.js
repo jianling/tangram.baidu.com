@@ -35,7 +35,7 @@ var conf = {
 				}
 		},
 		newVal:{
-			type:'text',size:35
+			type:'text',size:20
 		},
 		newBtn:{
 			type:'button',
@@ -72,7 +72,6 @@ var conf = {
     
     groups: {
         'default': [
-            ['console'],
             ['newKey','newVal','newBtn'],
 			['dispose']
         ]

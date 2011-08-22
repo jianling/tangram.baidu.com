@@ -8,7 +8,7 @@ var conf = {
     },
     //    定义DEMO可选项
     demoType: [
-        {key: 'default', val: 'Input核心示例'}
+        {key: 'default', val: 'Modal核心示例'}
     ],
     //    默认可选项的配置
     'default': {
@@ -46,7 +46,7 @@ var conf = {
         },
 		getWindowHandle: {
             type: 'button',
-            defaultValue: 'window的resize、scroll事件调用的函数 getWindowHandle()',
+            defaultValue: 'getWindowHandle()',
             event: {
                 eventName: 'onclick',
                 handler: function(){
@@ -56,7 +56,7 @@ var conf = {
         },
 		getContainer: {
             type: 'button',
-            defaultValue: '获取modal渲染到的容器 getContainer().id',
+            defaultValue: 'getContainer()',
             event: {
                 eventName: 'onclick',
                 handler: function(){
@@ -75,7 +75,7 @@ var conf = {
 				}
 		},
 		newVal:{
-			type:'text',size:35
+			type:'text',size:20
 		},
 		newBtn:{
 			type:'button',
@@ -111,7 +111,6 @@ var conf = {
     
     groups: {
         'default': [
-            ['console'],
             ['show','hide'],
 			['getContainer','getWindowHandle'],
             //['newKey','newVal','newBtn'],

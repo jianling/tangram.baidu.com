@@ -13,9 +13,9 @@ var conf = {
     'default': {
         //    类实例化选项
         pageConf: {
-            options: '{calendarOptions: { highlightDates: [new Date("2011-5-1")], disableDates: [new Date("2011-4-3"), new Date("2011-4-5"), {start: new Date("2011-4-21"), end: new Date("2011-4-27")} ]}}',
+            options: '{calendarOptions: { highlightDates: [new Date("2011/5/1")], disableDates: [new Date("2011/4/3"), new Date("2011/4/5"), {start: new Date("2011/4/21"), end: new Date("2011/4/27")} ]}}',
 			target:'showPicker',
-			html:'<h5>input获得焦点时弹出DatePicker，点击日期后更新input的属性</h5>  <input name="showpicker" id="showPicker" /> '
+			html:'<div style="margin:50px;"><h5>input获得焦点时弹出DatePicker，点击日期后更新input的属性</h5>  <input name="showpicker" id="showPicker" /> </div>'
         },
 		//	控制台输出调试项
         console: {
@@ -57,7 +57,6 @@ var conf = {
     },    
     groups: {
         'default': [
-            ['console'],
             ['show','hide'],
             ['dispose']
         ]

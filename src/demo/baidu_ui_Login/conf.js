@@ -39,7 +39,6 @@ var conf = {
     
     groups: {
         'default': [
-            ['console'],
             ['open']
         ]
     }

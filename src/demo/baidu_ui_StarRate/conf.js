@@ -89,7 +89,6 @@ var conf = {
     
     groups: {
         'default': [
-            ['console'],
             ['disable','enable'],
             ['num','hoverAt','clickAt','starAt'],
 			['dispose']

@@ -75,7 +75,6 @@ var conf = {
     
     groups: {
         'default': [
-            ['console'],
             ['enable','disable','isDisabled','getText'],
 			['dispose']
         ]

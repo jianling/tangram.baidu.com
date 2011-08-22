@@ -4,7 +4,7 @@ var conf = {
     clazz: {
         type: 'class',
         'class': 'baidu.ui.Dialog',
-		dependPackages:['baidu.ui.Dialog.Dialog$button','baidu.ui.Dialog.Dialog$closeButton','baidu.ui.Dialog.Dialog$coverable','baidu.ui.Dialog.Dialog$draggable','baidu.ui.Dialog.Dialog$iframe','baidu.ui.Dialog.Dialog$keyboard','baidu.ui.Dialog.Dialog$modal','baidu.ui.Dialog.Dialog$resizable']
+		dependPackages:[/*'baidu.ui.Dialog.Dialog$button',*/'baidu.ui.Dialog.Dialog$closeButton','baidu.ui.Dialog.Dialog$coverable','baidu.ui.Dialog.Dialog$draggable','baidu.ui.Dialog.Dialog$iframe','baidu.ui.Dialog.Dialog$keyboard','baidu.ui.Dialog.Dialog$modal','baidu.ui.Dialog.Dialog$resizable']
     },
     //    定义DEMO可选项
     demoType: [
@@ -69,7 +69,7 @@ var conf = {
 				}
 		},
 		newVal:{
-			type:'text',size:35
+			type:'text',size:20
 		},
 		newBtn:{
 			type:'button',
@@ -91,7 +91,6 @@ var conf = {
     },    
     groups: {
         'default': [
-            ['console'],
             ['open','close','isShown'],
             ['newKey','newVal','newBtn'],
             ['dispose']

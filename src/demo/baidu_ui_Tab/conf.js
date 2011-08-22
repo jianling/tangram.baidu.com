@@ -27,10 +27,10 @@ var conf = {
             }
         },
 		idx:{type:'text',size:1,defaultValue:'0',label:'索引'},
-		con:{type:'text',size:50,defaultValue:'在项目中插入内容'},
+		con:{type:'text',size:20,defaultValue:'在项目中插入内容'},
 		insertContentHTML: {
             type: 'button',
-            defaultValue: '插入内容 insertContentHTML()',
+            defaultValue: 'insertContentHTML()',
             event: {
                 eventName: 'onclick',
                 handler: function(){
@@ -39,10 +39,10 @@ var conf = {
             }
         },
 		idx2:{type:'text',size:1,defaultValue:'0',label:'索引'},
-		con2:{type:'text',size:50,defaultValue:'{head:\'新项\',body:\'新项内容\'}'},
+		con2:{type:'text',size:20,defaultValue:'{head:\'新项\',body:\'新项内容\'}'},
 		insertItemHTML: {
             type: 'button',
-            defaultValue: '插入新项 insertItemHTML()',
+            defaultValue: 'insertItemHTML()',
             event: {
                 eventName: 'onclick',
                 handler: function(){
@@ -65,7 +65,6 @@ var conf = {
     
     groups: {
         'default': [
-            ['console'],
             ['idx','con','insertContentHTML'],
             ['idx2','con2','insertItemHTML'],
 			['dispose']
