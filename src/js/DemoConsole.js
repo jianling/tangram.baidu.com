@@ -169,8 +169,8 @@
         _getDependValue: function(depend){
             var param = [];
             depend && baidu.array.each(depend, function(item){
-                var array = document.getElementsByName(item);
-                    array.length <= 0 && (array = baidu.dom.g(item));
+                var array = baidu.dom.g(item);
+                    !array && (array = document.getElementsByName(item));
                 if(!array.tagName && array.length){
                     var val = [];
                     for(var i = 0; i < array.length; i++){
