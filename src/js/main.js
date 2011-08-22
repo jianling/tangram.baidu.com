@@ -199,11 +199,14 @@ void function(){
 	// 变量替换处理
 	FlyScript.load(getpath("js/variable"));
 
+	{include stat.js}
+
 	// 加载页面逻辑
 	if(pageConfig.script){
 		FlyScript.load(pageConfig.script, function(page){
 			page.start();
 			window.page = page;
+			page.statSend = statSend;
 		});
 	}
 }();
