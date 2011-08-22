@@ -7,8 +7,8 @@ var conf = {
     demoType: [{key: 'default', val: 'Validator核心例子'}],
     'default': {
         pageConf: {
-            html: '<form id="myform" name="myform" method="post" action="javascript:alert(\'成功提交啦！\')"><div style="padding:5px;"><span style="color:red;">*</span>&nbsp;<label>姓名：（文本域名称：userName）</label><input id="userName" name="userName" type="text"/></div><div style="padding:5px;"><span style="color:red;">*</span>&nbsp;<label>年龄：（文本域名称：age）</label><input id="age" name="age" type="text"/></div><div style="padding:5px;"><label>email：（文本域名称：email）</label><input id="email" name="email" type="text"/></div><div style="padding:5px;"><input type="submit" value="提交"/></div></form>',
-            jsCode: 'var validator = new baidu.form.Validator("myform", {userName: {rule: {required: {message: "姓名不能为空"}, }}, age: {rule: {required: {message: "年龄不能为空"}, number: {message: "请填写数字"}}}, email: {rule: {email: {message: "email不合法"}}}});'
+            html: '<form id="myformtest" name="myformtest" method="post" action="javascript:alert(\'成功提交啦！\')"><div style="padding:5px;"><span style="color:red;">*</span>&nbsp;<label>姓名：（文本域名称：userName）</label><input id="userName" name="userName" type="text"/></div><div style="padding:5px;"><span style="color:red;">*</span>&nbsp;<label>年龄：（文本域名称：age）</label><input id="age" name="age" type="text"/></div><div style="padding:5px;"><label>email：（文本域名称：email）</label><input id="email" name="email" type="text"/></div><div style="padding:5px;"><input type="submit" value="提交"/></div></form>',
+            jsCode: 'var validator = new baidu.form.Validator("myformtest", {userName: {rule: {required: {message: "姓名不能为空"}, }}, age: {rule: {required: {message: "年龄不能为空"}, number: {message: "请填写数字"}}}, email: {rule: {email: {message: "email不合法"}}}});'
         },
         
         addRuleName: {
