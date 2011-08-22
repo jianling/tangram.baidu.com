@@ -1,9 +1,6 @@
 /**
  * 	搜索结果页面
  */
-.page-search {
-	background-color: #FFFFFF;
-}
 h1 {
 	background: url("../images/title_bg.gif") no-repeat scroll 0 50% transparent;
     border-bottom: 1px dotted #CDCDCD;
@@ -14,7 +11,11 @@ h1 {
 }
 /*search result*/
 .search-result{
-	padding-left:15px;
+	padding: 0px 0px 10px 15px;
+	background-color: #FFFFFF;
+}
+.search-result h1 {
+    margin: 0;
 }
 .search-result h1 a{
    font-size:12px;

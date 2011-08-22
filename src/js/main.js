@@ -82,6 +82,9 @@ void function(){
 				e = Lichee.Event(e);
 				if(e.keyCode == 13){
 					searchbutton.addClass("searchbutton-down");
+				    if(this.value.replace(/^\s+|\s+$/g, '')){
+				        window.open("./search.html?key=" + this.value.replace(/^\s+|\s+$/g, ''));
+				    }
 				}
 			},
 
@@ -89,8 +92,19 @@ void function(){
 				e = Lichee.Event(e);
 				if(e.keyCode == 13){
 					searchbutton.delClass("searchbutton-down");
+					if(this.value.replace(/^\s+|\s+$/g, '')){
+                        window.open("./search.html?key=" + this.value.replace(/^\s+|\s+$/g, ''));
+                    }
 				}
 			}
+		});
+		
+		searchbutton.addEvents({
+		    click: function(e){
+		        if(searchinput.dom.value.replace(/^\s+|\s+$/g, '')){
+                    window.open("./search.html?key=" + searchinput.dom.value.replace(/^\s+|\s+$/g, ''));
+                }
+		    }
 		});
 	});
 
