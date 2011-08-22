@@ -87,6 +87,7 @@ module.declare(function(require, exports, module){
 			}
 		}
 		baidu.dom.query(".search-result")[0].innerHTML = html.join('');
+		baidu.dom.setStyle(baidu.dom.query(".search-result")[0], 'display', '');
 	};
 	
 	/**
@@ -105,13 +106,13 @@ module.declare(function(require, exports, module){
 		searchInput.on("keyup", function(){
 			var key = this.value.replace(/^\s+|\s+$/g, '');
 			//console.log('需要查询的关键字为：' + key);
-			if(!key){
-				masterDetective();
-				return;
-			}
 			if(searchTimeout){
 				window.clearTimeout(searchTimeout);
 				//console.log('取消定时器...');
+			}
+			if(!key){
+				masterDetective();
+				return;
 			}
 			//console.log('设定定时器...');
 			searchTimeout = window.setTimeout(function(){
@@ -123,8 +124,9 @@ module.declare(function(require, exports, module){
 	};
 	function start(){
 		T.dom.ready(function(){
-			var baseApiUrl = "./js/tangram_base_api.js?t=" + new Date(),//添加时间戳，否则IE读取缓存数据，不能触发加载成功的事件
-				componentApiUrl = "./js/tangram_component_api.js?t=" + new Date(),
+		    var timestamp = baidu.date.format(new Date(), 'yyyyMMddHHmmss');
+			var baseApiUrl = "./js/tangram_base_api.js?t=" + timestamp,//添加时间戳，否则IE读取缓存数据，不能触发加载成功的事件
+				componentApiUrl = "./js/tangram_component_api.js?t=" + timestamp,
 				apiData = {
 					'mobile web 的未来' :{'name':'', 'desc':'', 'link':''},
 					'需要 jquery 吗' :{'name':'', 'desc':'', 'link':''},
@@ -163,6 +165,10 @@ module.declare(function(require, exports, module){
 				apiData = baidu.object.merge(apiData, tangram_base_api.docMap);
 				apiLoaded++;
 				if(apiLoaded == 2){
+				    if(baidu.url.getQueryValue(location.href,'key')){
+				        var result = executeSearch(apiData, baidu.url.getQueryValue(location.href,'key'));
+                        renderSearchResult(result.searchKey, result.searchResult, result.resultCount);
+				    }
 					bindSearchInput(apiData);
 				}
 			});
@@ -173,6 +179,10 @@ module.declare(function(require, exports, module){
 				apiData = baidu.object.merge(apiData, tangram_component_api.docMap);
 				apiLoaded++;
 				if(apiLoaded == 2){
+				    if(baidu.url.getQueryValue(location.href,'key')){
+                        var result = executeSearch(apiData, baidu.url.getQueryValue(location.href,'key'));
+                        renderSearchResult(result.searchKey, result.searchResult, result.resultCount);
+                    }
 					bindSearchInput(apiData);
 				}
 			});
