@@ -20,6 +20,7 @@ var conf = {
         run: {
             type: 'button',
             defaultValue: '运行',
+			isMain:true,
             event: {
                 eventName: 'onclick',
                 handler: function(){

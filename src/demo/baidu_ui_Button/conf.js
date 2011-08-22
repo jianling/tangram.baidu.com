@@ -72,7 +72,8 @@ var conf = {
 				}
 		},
 		newVal:{
-			type:'text',size:35
+			type: 'text',
+			size: 20
 		},
 		
 		ch: {
@@ -105,13 +106,25 @@ var conf = {
 		},
 
 
-		expcontent: {label:'格式-内容：',defaultValue: '<span class=\'tangram-button-label\'>不确定</span>',type:'text',size:50,
+		expcontent: {
+		    label:'格式-内容：',
+		    defaultValue: '<span class=\'tangram-button-label\'>不确定</span>',
+		    type:'text',
+		    size: 20,
 			event: {eventName: 'onclick',handler:function(){ newVal.value = expcontent.value }}
 		},
-		expdisable: {label:'<br />格式-禁用状态：',defaultValue: 'false',type:'text',size:50,
+		expdisable: {
+		    label:'<br />格式-禁用状态：',
+		    defaultValue: 'false',
+		    type:'text',
+		    size:20,
 			event: {eventName: 'onclick',handler:function(){ newVal.value = expdisable.value }}
 		},
-		expevent: {label:'<br />格式-事件设置：',defaultValue: 'function(){ alert(\'Something happened!\') }',type:'text',size:50,
+		expevent: {
+		    label:'<br />格式-事件设置：',
+		    defaultValue: 'function(){ alert(\'Something happened!\') }',
+		    type:'text',
+		    size: 20,
 			event: {eventName: 'onclick',handler:function(){ newVal.value = expevent.value }}
 		}
 		
@@ -121,7 +134,6 @@ var conf = {
     
     groups: {
         'default': [
-            ['console'],
             ['disable','enable','isDisabled'],
             ['ch', 'newKey','newVal','newBtn'],
             ['expcontent','expdisable','expevent'],

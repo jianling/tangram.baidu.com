@@ -63,7 +63,7 @@ var conf = {
             label: '<br />项目内容：',
             type: 'text',
             defaultValue: '<p>new body</p>',
-            size: 5,
+            size: 20,
             maxlength: 50
         },
         itemINDEX: {
@@ -87,7 +87,6 @@ var conf = {
     
     groups: {
         'default': [
-            ['console'],
             ['collapse','dispose','getString'],
             ['itemHTMLHEAD','itemHTMLBODY','itemINDEX','insertItemHTML']
         ]

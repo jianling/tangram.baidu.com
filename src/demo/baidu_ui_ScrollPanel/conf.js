@@ -15,7 +15,7 @@ var conf = {
         pageConf: {
             options: '{container: "scrollPanel", element: "scrollPanel"}',
 			target:'scrollPanel',
-			html:'<div style="padding:50px"><div id="scrollPanel" style="width:120px; height:200px; overflow:hidden;background:#FFF;"> scrollPanel         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         </div> <hr /><div id="scrollPanelB" style="width:120px; height:200px; overflow:hidden;background:#FFF;"> scrollPanelB       ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         </div></div>'
+			html:'<div style="padding:50px"><div id="scrollPanel" style="width:120px; height:200px; overflow:hidden;background:#FFF;"> scrollPanel         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         ABCDEFG,HIJKLMN,OPQ,RST,UVW,XYZ<br/>         </div> </div>'
         },
         //	控制台输出调试项
         console: {
@@ -49,7 +49,7 @@ var conf = {
         },
 		getContainer:{
             type: 'button',
-            defaultValue: '传入的container对象 getContainer().id',
+            defaultValue: 'getContainer()',
             event: {
                 eventName: 'onclick',
                 handler: function(){
@@ -59,7 +59,7 @@ var conf = {
 		},
 		getPanel:{
             type: 'button',
-            defaultValue: 'panel的dom节点 getPanel().id',
+            defaultValue: 'getPanel()',
             event: {
                 eventName: 'onclick',
                 handler: function(){
@@ -69,7 +69,7 @@ var conf = {
 		},
 		getScrollBar:{
             type: 'button',
-            defaultValue: 'x轴滚动条对象 getScrollBar(\'x\').mainId',
+            defaultValue: 'getScrollBar(\'x\')',
             event: {
                 eventName: 'onclick',
                 handler: function(){
@@ -79,7 +79,7 @@ var conf = {
 		},
 		getTarget:{
             type: 'button',
-            defaultValue: '传入的目标元素对象 getTarget().id',
+            defaultValue: 'getTarget()',
             event: {
                 eventName: 'onclick',
                 handler: function(){
@@ -91,7 +91,7 @@ var conf = {
 		
 		isVisible:{
             type: 'button',
-            defaultValue: 'x轴滚动条是否显示 isVisible(\'x\')',
+            defaultValue: 'isVisible("x")',
             event: {
                 eventName: 'onclick',
                 handler: function(){
@@ -144,7 +144,6 @@ var conf = {
     
     groups: {
         'default': [
-            ['console'],
             ['open','close','isVisible','getContainer','getPanel','getScrollBar','getTarget'],
             ['newKey','newVal','newBtn'],
 			['dispose']

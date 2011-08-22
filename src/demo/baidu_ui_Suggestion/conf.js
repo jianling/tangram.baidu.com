@@ -40,7 +40,7 @@ var conf = {
 		
 		getTargetValue: {
             type: 'button',
-            defaultValue: '获得输入框的值 getTargetValue()',
+            defaultValue: 'getTargetValue()',
             event: {
                 eventName: 'onclick',
                 handler: function(){
@@ -51,7 +51,7 @@ var conf = {
 		
 		getTarget: {
             type: 'button',
-            defaultValue: '获得输入框元素 getTarget().id',
+            defaultValue: 'getTarget()',
             event: {
                 eventName: 'onclick',
                 handler: function(){
@@ -61,7 +61,7 @@ var conf = {
         },
 
 		str:{type:'text',size:1,defaultValue:'A',label:'触发字符串'},
-		dat:{type:'text',size:50,defaultValue:'[\'AAA\',\'BBB\',\'CCC\',\'ABC\']',label:'<br />数据'},
+		dat:{type:'text',size:20,defaultValue:'[\'AAA\',\'BBB\',\'CCC\',\'ABC\']',label:'<br />数据'},
 		iss:{type:'text',size:2,defaultValue:'false',label:'<br />是否强制展现'},
 		show:{
             type: 'button',
@@ -119,7 +119,7 @@ var conf = {
 		},
 		dehighLight:{
             type: 'button',
-            defaultValue: '延迟5s触发，请在输入框中输入A，等待高亮触发',
+            defaultValue: '输入A后延迟5s触发高亮',
             event: {
                 eventName: 'onclick',
                 handler:function(){					
@@ -156,7 +156,6 @@ var conf = {
     
     groups: {
         'default': [
-            ['console'],
             ['hide','getTarget','getTargetValue'],
             ['str','dat','iss','show'],
             ['num','pick'],

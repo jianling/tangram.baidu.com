@@ -42,7 +42,7 @@ var conf = {
 		
 		getHue: {
             type: 'button',
-            defaultValue: '取得色相hue、饱和度saturation、明度brightness',
+            defaultValue: '色相饱和度明度',
             event: {
                 eventName: 'onclick',
                 handler: function(){
@@ -67,7 +67,6 @@ var conf = {
     
     groups: {
         'default': [
-            ['console'],
             ['getColor','getHue'],
 			['dispose']
         ]

@@ -8,7 +8,7 @@ var conf = {
     },
     //    定义DEMO可选项
     demoType: [
-        {key: 'default', val: 'Input核心示例'}
+        {key: 'default', val: 'Menubar核心示例'}
     ],
     //    默认可选项的配置
     'default': {
@@ -55,7 +55,7 @@ var conf = {
         },
 		getBranchId: {
             type: 'button',
-            defaultValue: '索引项容器ID getBranchId()',
+            defaultValue: 'getBranchId()',
             event: {
                 eventName: 'onclick',
                 handler: function(){
@@ -65,7 +65,7 @@ var conf = {
         },
 		getItem: {
             type: 'button',
-            defaultValue: '索引项元素 getItem()',
+            defaultValue: 'getItem()',
             event: {
                 eventName: 'onclick',
                 handler: function(){
@@ -76,7 +76,7 @@ var conf = {
         },
 		getItemData: {
             type: 'button',
-            defaultValue: '索引项条目数据 getItemData()',
+            defaultValue: 'getItemData()',
             event: {
                 eventName: 'onclick',
                 handler: function(){
@@ -86,7 +86,7 @@ var conf = {
         },
 		getItemEventData: {
             type: 'button',
-            defaultValue: '索引项事件触发数据 getItemEventData()',
+            defaultValue: 'getItemEventData()',
             event: {
                 eventName: 'onclick',
                 handler: function(){
@@ -96,7 +96,7 @@ var conf = {
         },
 		getItemId: {
             type: 'button',
-            defaultValue: '索引项条目的元素ID getItemId()',
+            defaultValue: 'getItemId()',
             event: {
                 eventName: 'onclick',
                 handler: function(){
@@ -114,7 +114,7 @@ var conf = {
 				}
 		},
 		newVal:{
-			type:'text',size:35
+			type:'text',size:20
 		},
 		newBtn:{
 			type:'button',
@@ -140,7 +140,7 @@ var conf = {
 		},
 		dispose: {
             type: 'button',
-            defaultValue: '销毁dispose()',
+            defaultValue: 'dispose()',
             event: {
                 eventName: 'onclick',
                 handler: 'dispose'
@@ -153,7 +153,6 @@ var conf = {
     
     groups: {
         'default': [
-            ['console'],
             ['open','close'],
             ['idx','getBranchId','getItem','getItemData','getItemEventData','getItemId'],
             ['newKey','newVal','newBtn'],

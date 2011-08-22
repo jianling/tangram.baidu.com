@@ -19,6 +19,7 @@ var conf = {
         },
         run: {
             type: 'button',
+			isMain:true,
             defaultValue: '运行',
             event: {
                 eventName: 'onclick',

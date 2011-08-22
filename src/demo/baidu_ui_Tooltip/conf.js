@@ -69,7 +69,7 @@ var conf = {
 				}
 		},
 		newVal:{
-			type:'text',size:35
+			type:'text',size:20
 		},
 		newBtn:{
 			type:'button',
@@ -104,7 +104,6 @@ var conf = {
     
     groups: {
         'default': [
-            ['console'],
             ['open','open2','close'],
             ['newKey','newVal','newBtn'],
 
