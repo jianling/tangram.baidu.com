@@ -1,6 +1,6 @@
 T.dom.ready(function(){
 	
-	url = 'tangram/api.js';
+	url = '../js/base-short-api.js';
 	T.ajax.request(url,
 	{
 
@@ -13,12 +13,13 @@ T.dom.ready(function(){
 				for(var ii=0;ii<apiData[i].interfaces.length;ii++){
 					if(apiData[i].interfaces[ii].meta!='' && typeof apiData[i].interfaces[ii].meta == 'string'){
 						var n = apiData[i].interfaces[ii];
-						shortstr.push(	'<tr><td><a href="tangram/'+n.name.split('.').join('_')+'.html">'+n.name+'</td><td>'+n.desc+'</td></tr>'	)
+						var ln = 'baidu.'+n.name.split('.').slice(1).join('.');
+						shortstr.push(	'<tr><td><a href="../api.html#'+ln+'">'+n.name+'</td><td>'+n.desc+'</td></tr>'	)
 					}
 				}
 			}
 			var html = "<table class='headtable'><thead><tr><th>接口名称</th><th>接口说明</th></tr></thead><tbody>"+shortstr.join('')+"</table>";
-			T.g('Content').innerHTML = "<h1>核心接口(core)</h1><p>在核心版中提供的接口</p>"+html;
+			T.g('Content').innerHTML = html;
 
 	}
 
