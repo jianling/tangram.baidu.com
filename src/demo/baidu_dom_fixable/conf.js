@@ -19,29 +19,30 @@ var conf = {
 			jsCode:''
         },
 		
-		vertival:{type:'text',size:8,label:'垂直方向',defaultValue:'top'},
-		horizontal:{type:'text',size:8,label:'水平方向',defaultValue:'left'},
-		offset:{type:'text',size:15,label:'偏移',defaultValue:'{x:500,y:10}'},
-		autofix:{type:'text',size:15,label:'固定',defaultValue:'true'},
-		onrender:{type:'text',size:15,label:'渲染',defaultValue:'function(){ alert(\'when render\') }'},
-		onupdate:{type:'text',size:15,label:'更新',defaultValue:'function(){ alert(\'when update\') }'},
-		onrelease:{type:'text',size:15,label:'释放',defaultValue:'function(){ alert(\'when release\') }'},
+		vertival:{type:'text',size:8,label:'垂直方向：',defaultValue:'top'},
+		horizontal:{type:'text',size:8,label:'<p>水平方向：',defaultValue:'left'},
+		offset:{type:'text',size:15,label:'<p>偏移：',defaultValue:'{x:300,y:30}'},
+		autofix:{type:'text',size:15,label:'<p>固定：',defaultValue:'true'},
+		onrender:{type:'text',size:15,label:'<p>渲染：',defaultValue:'function(){ alert(\'when render\') }'},
+		onupdate:{type:'text',size:15,label:'<p>更新：',defaultValue:'function(){ alert(\'when update\') }'},
+		onrelease:{type:'text',size:15,label:'<p>释放：',defaultValue:'function(){ alert(\'when release\') }'},
 		
         fixable: {
             type: 'button',
             defaultValue: '设置',
+			depend:  ['vertival','horizontal','offset','autofix','onrender','onupdate','onrelease'],
             event: {
                 eventName: 'onclick',
-                handler: function(){
+                handler: function(vertival,horizontal,offset,autofix,onrender,onupdate,onrelease){
 					var opt = {}
-					if(vertival.value.length)		{opt.vertival=vertival.value;}
-					if(horizontal.value.length) 	{opt.horizontal=horizontal.value;}
+					if(vertival)		{opt.vertival=vertival;}
+					if(horizontal) 	{opt.horizontal=horizontal;}
 					
-					if(typeof eval('('+offset.value+')') == 'object')	{opt.offset=eval('('+offset.value+')');}
+					if(typeof eval('('+offset+')') == 'object')	{opt.offset=eval('('+offset+')');}
 					
-					if(typeof eval('('+onrender.value+')') == 'function')	{opt.onrender=eval('('+onrender.value+')');}
-					if(typeof eval('('+onupdate.value+')') == 'function')	{opt.onrelease=eval('('+onupdate.value+')');}
-					if(typeof eval('('+onrelease.value+')') == 'function')	{opt.onrelease=eval('('+onrelease.value+')');}
+					if(typeof eval('('+onrender+')') == 'function')	{opt.onrender=eval('('+onrender+')');}
+					if(typeof eval('('+onupdate+')') == 'function')	{opt.onrelease=eval('('+onupdate+')');}
+					if(typeof eval('('+onrelease+')') == 'function')	{opt.onrelease=eval('('+onrelease+')');}
 					console.log(opt)
 					
 					this.fixableDemo = baidu.dom.fixable('testDiv',opt);
@@ -93,8 +94,8 @@ var conf = {
     },    
     groups: {
         'default': [
-           ['vertival','horizontal','offset','autofix','onrender','onupdate','onrelease','fixable'],
-           ['release'],
+           ['vertival','horizontal','offset','autofix','onrender','onupdate','onrelease'],
+           ['fixable','release'],
            //['newKey','newVal','newBtn']
 
         ]

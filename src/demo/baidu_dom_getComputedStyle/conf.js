@@ -25,10 +25,11 @@ var conf = {
 		getComputedStyle:{
 			type:'button',
 			defaultValue: '获得样式',
+            depend: ['style'],
 			event: {
 				eventName: 'onclick',
-				handler: function(){
-					alert(baidu.dom.getComputedStyle('testDiv',style.value))
+				handler: function(arg){
+					alert(baidu.dom.getComputedStyle('testDiv',arg))
 				}
 			}
 		}
@@ -38,7 +39,7 @@ var conf = {
     },    
     groups: {
         'default': [
-           ['style','getComputedStyle']
+           ['style'],['getComputedStyle']
 
         ]
     }
