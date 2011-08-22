@@ -231,7 +231,11 @@
                         item.depend && baidu.array.each(item.depend, function(rsid){
                             param.push('"'+ baidu.dom.g(rsid).value +'"');
                         });
-                        jsCode.push('var main = '+ item.event.handler +'\n main('+ param.join(',') +');');
+                        var fnStr = item.event.handler.toString().replace(/\\(u[\da-f]{2,4})/ig, function(a, b){//处理ff中自动将中文转义为unicode
+                                console.log(b);
+                                return '%' + b;
+                            });
+                        jsCode.push('var main = '+ unescape(fnStr) +'\n main('+ param.join(',') +');');
                         return false;
                     }
                 });
