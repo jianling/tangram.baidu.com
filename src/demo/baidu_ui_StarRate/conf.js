@@ -15,7 +15,7 @@ var conf = {
         pageConf: {
             options: '{total:10,current:5}',
 			target:'starId',
-			html:'<div id="starId"></div>'
+			html:'<div style="margin:20px"> <div id="starId"></div> </div>'
         },
         //	控制台输出调试项
         console: {

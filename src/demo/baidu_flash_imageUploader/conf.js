@@ -36,7 +36,7 @@ var conf = {
 					up.pause();
 				}
             }
-        },
+        }
         
 		
     },    

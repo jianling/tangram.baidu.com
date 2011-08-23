@@ -89,7 +89,7 @@ var conf = {
 						var s = eval('s = '+v);
 						if(typeof s=='function' || typeof s=='boolean' || typeof s=='object'){opt[k]=s};
 					}catch(e){}
-					if( newKey.value=='initDate' ){
+					if( k=='initDate' ){
 						opt[k]=new Date(v);
 					}
 					this.update(opt)
