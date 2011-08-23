@@ -29,13 +29,13 @@ var conf = {
             event: {
             	eventName: 'onclick',
             	handler: function(arg0, arg1){
-            		var value = eval('(' + arg1 + ')')
+            		var value = eval('(' + arg1 + ')');
             		T.g('resultArea').innerHTML = '格式化后返回：' + baidu.string.format(arg0, value);
             		T.g('resultArea').innerHTML += '<br /><br /><br /><ul><li>自定义格式#{0}中的数字"0"表示数据源(数组)中的第0个元素</li>' + 
 												   '<li>如果数据源是一个json而不是array的话可以用#{key}这样的格式获取数据</li>' + 
 												   '例如(斜体部分为实际代码)<br />' + 
 												   '模式: my name is #{name}<br />' + 
-												   '数据: {name:\'tom\'}';
+												   '数据: {name:"tom"}';
             	}
             }
         }
