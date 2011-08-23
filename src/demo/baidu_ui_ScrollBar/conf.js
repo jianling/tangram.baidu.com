@@ -126,16 +126,13 @@ var conf = {
 			event: {
 				eventName: 'onclick',
 				handler: function(k,v){
-					var k = newKey.value;
-					var v = newVal.value;
-
 					var opt={};opt[k]=v;
 					try{
 						var s = eval('s = '+v);
 						if(typeof s=='function' || typeof s=='boolean' || typeof s=='object'){opt[k]=s};
 					}catch(e){}
 					
-					if( newKey.value=='orientation' && 0){
+					if( k=='orientation' && 0){
 						//暂时不支持直接水平切换，因为无法更新 skin
 						//alert('切换水平模式还需要切换组件的CSS样式前缀以及render元素的宽和高');
 						var cfg = {

@@ -14,7 +14,7 @@ var conf = {
 						'<br />JS代码'+
 						'<code>'+
 						
-						'<p>baidu.async.post("images/ajaxRequest.php","x=5&y=2").then(</p>'+
+						'<p>baidu.async.post( "images/ajaxRequest.php", 1"x=5&y=2").then(</p>'+
 							'<p>  function(obj){T.g("resultArea").innerHTML = obj.responseText;},</p>'+
 							'<p>  function(obj){T.g("resultArea").innerHTML = "请求失败";}</p>'+
 						'<p>);</p>'+

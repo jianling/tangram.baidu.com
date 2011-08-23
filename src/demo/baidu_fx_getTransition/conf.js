@@ -23,13 +23,13 @@ var conf = {
 			isMain: true,
             type: 'button',
             defaultValue: '获取',
-            depend: [],
+            depend: ['key'],
             event: {
                 eventName: 'onclick',
-                handler: function(){
-					var k = baidu.dom.g('key').value;
+                handler: function(k){
+					//var k = baidu.dom.g('key').value;
 					var s = baidu.fx.getTransition(k);
-					var t = baidu.dom.getText( baidu.dom.query('option[value='+baidu.dom.g('key').value+']',baidu.dom.g('key'))[0] );
+					var t = baidu.dom.getText( baidu.dom.query('option[value='+k+']',baidu.dom.g('key'))[0] );
 					baidu.dom.g('resourtArea').innerHTML += '<p style="font-weight:bold">'+t+'</p><pre>'+s+'</pre>';
 					
                 }

@@ -69,17 +69,16 @@ var conf = {
 		newBtn:{
 			type:'button',
 			defaultValue: '更新',
+			depend:  ['newKey','newVal'],
 			event: {
 				eventName: 'onclick',
 				handler: function(){
-					var k = newKey.value;
-					var v = newVal.value;
 					var opt={};opt[k]=v;
 					try{
 						var s = eval('s = '+v);
 						if(typeof s=='function' || typeof s=='boolean' || typeof s=='object'){opt[k]=s};
 					}catch(e){}
-					if( newKey.value=='initDate' ){
+					if( k=='initDate' ){
 						opt[k]=new Date(v);
 					}
 					this.update(opt)

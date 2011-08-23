@@ -76,31 +76,20 @@ var conf = {
 			size: 20
 		},
 		
-		ch: {
-			type: 'checkbox',
-			data: {
-				key: ['1', '2', '3', '4'],
-				val: ['a', 'b', 'c', 'd']
-			}
-		},
-		
 		newBtn:{
 			type:'button',
 			defaultValue: '更新',
-			depend:  ['ch', 'newKey','newVal'],
+			depend:  ['newKey','newVal'],
 			event: {
 				eventName: 'onclick',
-				handler: function(k,v){
-					alert(k);
-					/*
+				handler: function(c,k,v){
+					alert(k)
 					var opt={};opt[k]=v;
 					try{
 						var s = eval('s = '+v);
 						if(typeof s=='function' || typeof s=='boolean'){opt[k]=s};
 					}catch(e){}
 					this.update(opt)
-					console.log(opt)
-					*/
 				}
 			}
 		},
