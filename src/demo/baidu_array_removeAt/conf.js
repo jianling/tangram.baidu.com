@@ -1,4 +1,4 @@
-var conf = {
+﻿var conf = {
     clazz: {
         type: 'method',
         'method': 'baidu.array.removeAt'
@@ -18,8 +18,8 @@ var conf = {
                 eventName: 'onclick',
                 handler: function(arg0, arg1){
                 	var input = ["one", "two", "three", "four"];
-					var output = baidu.array.removeAt(input, 1);
-					baidu.dom.g("result").innerHTML="结果为："+output;
+					var output = T.array.removeAt(input, 1);
+					T.g("resultArea").innerHTML="结果为："+input.join(',');
                 }
             }
         }

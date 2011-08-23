@@ -7,13 +7,12 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.string.encodeHTML'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea">编码后返回：</div>',
-            jsCode: 'T.g("dateInput").value = "<div class=\\"notest\\">notest</div>"'
+            html: '<div id="resultArea">编码后返回：</div>'
         },
         dateInput: {
         	label: '输入HTML字符：',
             type: 'text',
-            defaultValue: '',
+            defaultValue: '<div class=\'notest\'>notest</div>',
             size: 21
         },
         btn1: {

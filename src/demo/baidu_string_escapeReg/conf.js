@@ -7,13 +7,12 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.string.escapeReg'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea">转义后返回：</div>',
-            jsCode: 'T.g("dateInput").value = "abc\\\\def/ghi*&^?jkl123"'
+            html: '<div id="resultArea">转义后返回：</div>'
         },
         dateInput: {
         	label: '输入字符串：',
             type: 'text',
-            defaultValue: '',
+            defaultValue: 'abc\\\\def/ghi*&^?jkl123',
             size: 21
         },
         btn1: {
