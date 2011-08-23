@@ -7,13 +7,12 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.string.format'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea"></div>',
-            jsCode: 'T.g("dateInput1").value = "#{0}-#{1}-#{2}"'
+            html: '<div id="resultArea"></div>'
         },
         dateInput1: {
         	label: '自定义格式：',
             type: 'text',
-            defaultValue: '',
+            defaultValue: '#{0}-#{1}-#{2}',
             size: 21
         },
         dateInput2: {

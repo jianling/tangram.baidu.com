@@ -34,7 +34,7 @@ var conf = {
         ajax: {
             type: 'button',
             defaultValue: 'ajax(url, options)',
-			isMain:true;
+			isMain:true,
             event: {
                 eventName: 'onclick',
                 handler: function(){

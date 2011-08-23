@@ -7,7 +7,7 @@ var conf = {
     demoType: [{key: 'default', val: 'getMousePosition'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea"></div>',
+            html: '<div id="resultArea">点击页面获取鼠标坐标</div>',
             jsCode: 'baidu.event.on(document, "click", function(){T.g("resultArea").innerHTML = "x:" + baidu.page.getMousePosition().x + ",y:" + baidu.page.getMousePosition().y})'
         },
         btn1: {
