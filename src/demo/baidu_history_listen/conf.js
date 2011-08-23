@@ -15,7 +15,7 @@ var conf = {
         btn: {
             type: 'button',
             defaultValue: 'listen(callback)',
-            
+            isMain:true,
             event: {
                 eventName: 'onclick',
                 handler: function(){

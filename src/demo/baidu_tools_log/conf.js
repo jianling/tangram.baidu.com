@@ -104,6 +104,7 @@ var conf = {
         enableDialog: {
             type: 'button',
             defaultValue: 'enableDialog()',
+			isMain:true,
             event: {
                 eventName: 'onclick',
                 handler: function(){
@@ -145,6 +146,6 @@ var conf = {
     },
     
     groups: {
-        'default': [['errorTxt', 'errorBtn'], ['infoTxt', 'infoBtn'], ['warnTxt', 'warnBtn'], ['timeTxt', 'timeBtn', 'timeEndBtn'], ['enableDialog', 'disableDialog'], ['setTimeIntervalTxt', 'setTimeIntervalBtn']]
+        'default': [['enableDialog', 'disableDialog'], ['errorTxt', 'errorBtn'], ['infoTxt', 'infoBtn'], ['warnTxt', 'warnBtn'], ['timeTxt', 'timeBtn', 'timeEndBtn'], ['setTimeIntervalTxt', 'setTimeIntervalBtn']]
     }
 }

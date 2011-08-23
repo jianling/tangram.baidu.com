@@ -65,7 +65,7 @@ var conf = {
             event: {
                 eventName: 'onclick',
                 handler: function(a, b, c, d){
-                    var invoke = eval('('+ c +')') || function(){},
+                    var invoke = new Function('return ' + (c || 'function(){}'))(),
                         opt = eval('('+ d +')') || {};
                     valid.match(a, b, invoke, opt);
                 }
@@ -83,7 +83,7 @@ var conf = {
             type: 'text',
             defaultValue: 'function(val, options){return val==1}',
             size: 2,
-            maxlength: 1024,
+            maxlength: 255
         },
         addRule: {
             type: 'button',
@@ -92,7 +92,7 @@ var conf = {
             event: {
                 eventName: 'onclick',
                 handler: function(a, b){
-                    valid.addRule(a, eval('('+ b +')'));
+                    valid.addRule(a, new Function('return ' + (b || 'function(){}'))());
                     baidu.dom.g('matchName').options.add(new Option(a, a));//'text, value'
                     alert('已经添加到上面的选择域中');
                 }

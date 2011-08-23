@@ -1,5 +1,4 @@
 {include header.inc}
-<!--include file="./header.inc"-->
 		<script type="text/javascript">
 			var pageConfig = { name: "download", script: "js/download" };
 		</script>
@@ -10,19 +9,19 @@
 			<p class="noi">
 				<table class="m1" cellspacing="0" cellpadding="0">
 					<tr>
-						<td width="350"><a class="download-link" href="" target="_blank">完全版</a> (压缩后) <a class="variable" name="fullVersionSize"></a>&#160;(gzip: <a class="variable" name="fullVersionGzipSize"></a>)</td>
+						<td width="350"><a class="download-link" href="" target="_blank" onclick="page.statSend({action:'download',version:'full'});">完全版</a> (压缩后) <a class="variable" name="fullVersionSize"></a>&#160;(gzip: <a class="variable" name="fullVersionGzipSize"></a>)</td>
 						<td width="420">MD5: <a class="variable" name="fullVersionMd5"></a></td>
 					</tr>
 					<tr>
-						<td><a class="download-link" href="" target="_blank">完全版</a> (源文件)</td>
+						<td><a class="download-link" href="" target="_blank" onclick="page.statSend({action:'download',version:'full-src'});">完全版</a> (源文件)</td>
 						<td>MD5: <a class="variable" name="fullVersionSrcMd5"></a></td>
 					</tr>
 					<tr>
-						<td><a class="download-link" href="" target="_blank">核心版</a> (压缩后) <a class="variable" name="coreVersionSize"></a>&#160;(gzip: <a class="variable" name="coreVersionGzipSize"></a>)</td>
+						<td><a class="download-link" href="" target="_blank" onclick="page.statSend({action:'download',version:'core'});">核心版</a> (压缩后) <a class="variable" name="coreVersionSize"></a>&#160;(gzip: <a class="variable" name="coreVersionGzipSize"></a>)</td>
 						<td>MD5: <a class="variable" name="coreVersionMd5"></a></td>
 					</tr>
 					<tr>
-						<td><a class="download-link" href="" target="_blank">核心版</a> (源文件)</td>
+						<td><a class="download-link" href="" target="_blank" onclick="page.statSend({action:'download',version:'core-src'});">核心版</a> (源文件)</td>
 						<td>MD5: <a class="variable" name="coreVersionSrcMd5"></a></td>
 					</tr>
 				</table>
@@ -57,9 +56,8 @@
 			<h5>其它资源</h5>
 			<p class="noi">
 				<ul class="m1 img">
-					<li><a href="http://tangram.baidu.com/download/CheatSheet.pdf" target="_blank">Cheat Sheet</a></li>
+					<li><a href="http://tangram.baidu.com/download/CheatSheet.pdf" target="_blank" onclick="page.statSend({action:'download',version:'cheat-sheet'});">Cheat Sheet</a></li>
 				</ul>
 			</p>
 		</div>
 {include footer.inc}
-<!-- include file="footer.inc" -->

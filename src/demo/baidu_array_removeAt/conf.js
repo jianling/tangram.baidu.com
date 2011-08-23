@@ -1,4 +1,4 @@
-var conf = {
+﻿var conf = {
     clazz: {
         type: 'method',
         'method': 'baidu.array.removeAt'
@@ -7,7 +7,7 @@ var conf = {
     demoType: [{key: 'default', val: 'baidu.array.removeAt'}],
     'default': {
         pageConf: {
-            html: '<div id="resultArea">数组为：["one", "two", "three", "four"]，remove索引项为：1</div>'
+            html: '<div id="resultArea">数组为：["one", "two", "three", "four"]，remove索引项为：1</div><div id="result"></div>'
         },
         formatBtn: {
             type: 'button',

@@ -10,6 +10,7 @@ var conf = {
             html: '<div id="test">测试元素</div>'
 		},
         formatBtn0: {
+			isMain: true,
             type: 'button',
             defaultValue: '移除元素',
             depend: [],

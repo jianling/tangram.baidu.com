@@ -21,6 +21,7 @@ var conf = {
         get: {
             type: 'button',
             defaultValue: 'get(key, handler)',
+			isMain:true,
             depend: ['getKey'],
             event: {
                 eventName: 'onclick',

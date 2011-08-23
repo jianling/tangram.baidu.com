@@ -71,6 +71,18 @@ void function(){
 		searchinput.useMouseAction("searchinput", "over,out");
 		searchbutton.useMouseAction("searchbutton", "over,out,down,up");
 
+		var doSearch = function(text){
+			if(text = text.trim()){
+				text = encodeURIComponent(text);
+				page.statSend({
+					name: "search-key",
+					value: text
+				}, function(){
+					window.open(getpath("./search.html?key=" + text), "_self");
+				});
+			}
+		};
+
 		searchinput.addEvents({
 			focus: function(){
 				setTimeout(function(){
@@ -82,9 +94,7 @@ void function(){
 				e = Lichee.Event(e);
 				if(e.keyCode == 13){
 					searchbutton.addClass("searchbutton-down");
-				    if(this.value.replace(/^\s+|\s+$/g, '')){
-				        window.open("./search.html?key=" + this.value.replace(/^\s+|\s+$/g, ''));
-				    }
+//					doSearch(this.value);
 				}
 			},
 
@@ -92,18 +102,14 @@ void function(){
 				e = Lichee.Event(e);
 				if(e.keyCode == 13){
 					searchbutton.delClass("searchbutton-down");
-					if(this.value.replace(/^\s+|\s+$/g, '')){
-                        window.open("./search.html?key=" + this.value.replace(/^\s+|\s+$/g, ''));
-                    }
+					doSearch(this.value);
 				}
 			}
 		});
-		
+
 		searchbutton.addEvents({
 		    click: function(e){
-		        if(searchinput.dom.value.replace(/^\s+|\s+$/g, '')){
-                    window.open("./search.html?key=" + searchinput.dom.value.replace(/^\s+|\s+$/g, ''));
-                }
+				doSearch(searchinput.dom.value);
 		    }
 		});
 	});
@@ -117,8 +123,8 @@ void function(){
 				referrerElement: "menu-down",
 				direction: "down",
 				datas: [
-					{ name: "常规下载", link: "download.html", target: "_self" },
-					{ name: "自定义下载", link: "custom.html", target: "_self" }
+					{ name: "常规下载", link: getpath("download.html"), target: "_self" },
+					{ name: "自定义下载", link: getpath("custom.html"), target: "_self" }
 				],
 				handle: function(conf){
 					conf.link && window.open(conf.link, conf.target);
@@ -199,11 +205,18 @@ void function(){
 	// 变量替换处理
 	FlyScript.load(getpath("js/variable"));
 
+	{include stat.js}
+
 	// 加载页面逻辑
 	if(pageConfig.script){
 		FlyScript.load(pageConfig.script, function(page){
 			page.start();
 			window.page = page;
+			page.statSend = statSend;
 		});
+	}else{
+		window.page = {
+			statSend: statSend
+		};
 	}
 }();

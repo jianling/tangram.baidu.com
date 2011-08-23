@@ -5,16 +5,11 @@ var conf = {
     },
     
     demoType: [
-    			{key: 'default', val: 'baidu.cookie'},
-    			{key: 'set', val: 'baidu.cookie.set'},
-    			{key: 'setRaw', val: 'baidu.cookie.setRaw'},
-    			{key: 'get', val: 'baidu.cookie.get'},
-    			{key: 'getRaw', val: 'baidu.cookie.getRaw'},
-    			{key: 'remove', val: 'baidu.cookie.remove'}
+    			{key: 'default', val: 'baidu.cookie'}
     			],
     'default': {
         pageConf: {
-            html: '<div id="resultArea"></div>'
+            html: '<div id="resultArea">Cookie测试<br /></div>'
         },
         param0: {
         	label: '键：',
@@ -27,17 +22,11 @@ var conf = {
             type: 'text',
             defaultValue: '这是一个Cookie测试值',
             size: 20
-        }
-    },
-    set: {
-    	pageConf: {
-    		html: '<div id="resultArea"></div>'
         },
     	btn1: {
             type: 'button',
             defaultValue: 'set',
             depend: ['param0', 'param1'],
-            isMain: true,
             event: {
             	eventName: 'onclick',
             	handler: function(arg0, arg1){
@@ -47,11 +36,6 @@ var conf = {
 					T.g('resultArea').innerHTML += '设置' + key + '的值为：' + value + '<br />';
             	}
             }
-        }
-    },
-    setRaw: {
-    	pageConf: {
-    		html: '<div id="resultArea"></div>'
         },
     	btn2: {
             type: 'button',
@@ -66,11 +50,6 @@ var conf = {
 					T.g('resultArea').innerHTML += '设置' + key + '的值为：' + value + '<br />';
             	}
             }
-        }
-    },
-    get: {
-    	pageConf: {
-    		html: '<div id="resultArea"></div>'
         },
     	btn3: {
             type: 'button',
@@ -84,11 +63,6 @@ var conf = {
 					T.g('resultArea').innerHTML += key + '的值为：' + value + '<br />';
             	}
             }
-        }
-    },
-    getRaw: {
-    	pageConf: {
-    		html: '<div id="resultArea"></div>'
         },
     	btn4: {
             type: 'button',
@@ -102,13 +76,9 @@ var conf = {
 					T.g('resultArea').innerHTML += key + '的值为：' + value + '<br />';
             	}
             }
-        }
-    },
-    remove: {
-    	pageConf: {
-    		html: '<div id="resultArea"></div>'
         },
     	btn5: {
+			isMain: true,
             type: 'button',
             defaultValue: 'remove',
             depend: ['param0', 'param1'],
@@ -124,11 +94,6 @@ var conf = {
     },
     
     groups: {
-        'default': [['param0'], ['param1']],
-        'set': [['btn1']],
-        'setRaw': [['btn2']],
-        'get': [['btn3']],
-        'getRaw': [['btn4']],
-        'remove': [['btn5']]
+        'default': [['param0'], ['param1'], ['btn1', 'btn2'], ['btn3', 'btn4'], ['btn5']]
     }
 };
