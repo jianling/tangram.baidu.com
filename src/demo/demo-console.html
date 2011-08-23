@@ -66,29 +66,31 @@ html,body{
     top: expression(eval(document.documentElement.scrollTop + document.documentElement.clientHeight - this.offsetHeight - 10));
 }
 
+.code input,
 .tangram-democonsole-formbutton {
 	margin: 1px;
-	background: transparent url(images/btn.gif) repeat-x 0 0;
-	*width: expression(eval(this.value.length * 6 + 10));
+	color: #17191e;
+	background: #cad8ff url(images/btn.gif) repeat-x 0 0;
+	*width: expression(eval(baidu.string.getByteLength(this.value) * 7 + 12));
 	min-width: 0px;
-	height: 22px;
-	color: #3c70a5;
-	border: 1px solid #999;
-	border-left: 1px solid #ebebeb;
-	border-top: 1px solid #ebebeb;
+	height: 24px;
+	border-width: 1px;
 	-moz-border-radius: 3px;
 	-khtml-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
+	font-family: "Arial";
+	font-size: 14px;
+	padding: 0 6px 0 6px;
+	border-color: #cad8ff #cad8ff #cad8ff #cad8ff;
+	*border-color: #f2f5ff #cad8ff #cad8ff #f2f5ff;
 }
 .tangram-democonsole-formtext{
 	margin: 2px;
 	background-color: #fff;
 	width: 40px;
-	height: 20px;
-	border: 1px solid #ebebeb;
-	border-left: 1px solid #999;
-	border-top: 1px solid #999;
+	height: 21px;
+	border: 1px solid #999;
 	font-size: 14px;
 	padding-left: 2px;
 	-moz-border-radius: 3px;
