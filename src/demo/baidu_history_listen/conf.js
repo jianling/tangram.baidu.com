@@ -22,7 +22,7 @@ var conf = {
                     baidu.history.listen(function(){
                         alert('callback hash = ' + location.hash);
                     });
-                   // baidu.g('btn').disabled = true;
+                    baidu.g('btn').disabled = true;
                 }
             }
         }

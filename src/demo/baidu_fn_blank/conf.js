@@ -8,7 +8,7 @@ var conf = {
     
     'default': {
         pageConf: {
-            html: 'baidu.fn.blank返回一个空函数'
+            html: '<div style="margin:20px">baidu.fn.blank返回一个空函数</div>'
         },
         
         blank: {
