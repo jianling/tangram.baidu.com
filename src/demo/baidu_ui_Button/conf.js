@@ -124,7 +124,7 @@ var conf = {
     groups: {
         'default': [
             ['disable','enable','isDisabled'],
-            ['ch', 'newKey','newVal','newBtn'],
+            ['newKey','newVal','newBtn'],
             ['expcontent','expdisable','expevent'],
 			['dispose']
         ]

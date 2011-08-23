@@ -18,7 +18,7 @@ var conf = {
 			jsCode:'var info = baidu.g("info");'+
 			'var options = {'+
 				'width: "100px",height: "100px",'+
-				'selectiFile:function(f){console.log(f);var fs=f,fl=fs.length,html=[];for(var i=0;i<fl;i++){var c= fs[i];'+
+				'selectiFile:function(f){var fs=f,fl=fs.length,html=[];for(var i=0;i<fl;i++){var c= fs[i];'+
 					'html[html.length]="<p>["+c.index+"] name:"+c.name+" size:"+c.size+"</p>"'+
 				'}baidu.dom.g("info").innerHTML += html.join("");console.log(html)},'+
 				'createOptions:{'+
@@ -43,7 +43,7 @@ var conf = {
             type: 'input',
 			label:'文件索引号',
             defaultValue: '0',size:1
-        },
+        }
         
 		
     },    

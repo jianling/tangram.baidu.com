@@ -45,7 +45,7 @@ var conf = {
 					up.pause();
 				}
             }
-        },
+        }
         
 		
     },    
