@@ -9,7 +9,7 @@ var conf = {
     			],
     'default': {
         pageConf: {
-            html: '<div id="resultArea">baidu.json.decode</div>'
+            html: '<div id="resultArea">baidu.json.decode<br /></div>'
         },
         dateInput: {
         	label: '字符串：',
@@ -36,6 +36,6 @@ var conf = {
     },
     
     groups: {
-        'default': [['dateInput'],['btn1']],
+        'default': [['dateInput'],['btn1']]
     }
 };

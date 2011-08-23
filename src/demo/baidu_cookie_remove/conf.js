@@ -1,11 +1,11 @@
 var conf = {
     clazz: {
         type: 'method',
-        'method': 'baidu.cookie'
+        'method': 'baidu.cookie.remove'
     },
     
     demoType: [
-    			{key: 'default', val: 'baidu.cookie'}
+    			{key: 'default', val: 'baidu.cookie.remove'}
     			],
     'default': {
         pageConf: {
